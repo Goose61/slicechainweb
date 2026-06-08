@@ -19,7 +19,12 @@ export function LandingTeam() {
           {team.members.map((member) => (
             <article key={member.name} className="team-card">
               <div className="team-photo">
-                <img src={member.photo} alt={member.name} loading="lazy" />
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  loading="lazy"
+                  style={{ objectPosition: member.photoPosition || "center top" }}
+                />
               </div>
               <div className="team-info">
                 <h3>{member.name}</h3>

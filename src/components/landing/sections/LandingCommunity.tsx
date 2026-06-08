@@ -16,7 +16,7 @@ export function LandingCommunity() {
               <p className="kicker">
                 Register your business, onboard staff, or open the portal to run payments and track commissions.
               </p>
-              <div style={{ display: "flex", gap: 12, marginTop: 36, flexWrap: "wrap" }}>
+              <div className="crew-cta">
                 <a href="/" className="btn btn-gold">
                   Business signup <span className="arrow">→</span>
                 </a>
@@ -54,11 +54,11 @@ export function LandingCommunity() {
                 <div className="sub">Fees subject to change</div>
               </div>
               <div className="crew-num">
-                <div className="lbl">Payouts</div>
+                <div className="lbl">Stablecoins</div>
                 <div className="val">
                   <em>USDC</em>
                 </div>
-                <div className="sub">On Solana</div>
+                <div className="sub">USDC & USDT</div>
               </div>
             </div>
           </div>

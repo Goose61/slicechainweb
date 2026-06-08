@@ -6,7 +6,36 @@ export const portalPath = "/portal";
 export const landingMeta = {
   title: "SlicePay · Crypto Payments for Small Business",
   description:
-    "SlicePay is an alternative payment provider for small and medium businesses. Accept crypto from any wallet, reward customers with SLICE, and pay out in USDC on Solana.",
+    "SlicePay is an alternative payment provider for small and medium businesses. Accept crypto from any wallet across supported chains, reward customers with SLICE, and settle in USDC and USDT.",
+};
+
+export const supportedChainLogos = [
+  { name: "Ethereum", logo: `${A}/chains/ethereum.png` },
+  { name: "Solana", logo: `${A}/chains/solana.png` },
+  { name: "Monad", logo: `${A}/chains/monad.png` },
+  { name: "Stellar", logo: `${A}/chains/stellar.png` },
+  { name: "Polygon", logo: `${A}/chains/polygon.png` },
+  { name: "Avalanche", logo: `${A}/chains/avalanche.png` },
+  { name: "Arbitrum", logo: `${A}/chains/arbitrum.png` },
+  { name: "Base", logo: `${A}/chains/base.png` },
+  { name: "Optimism", logo: `${A}/chains/optimism.png` },
+  { name: "HyperEVM", logo: `${A}/chains/hyperevm.png` },
+  { name: "BNB Chain", logo: `${A}/chains/bnb.png` },
+  { name: "Linea", logo: `${A}/chains/linea.png` },
+];
+
+/** @deprecated Use supportedChainLogos */
+export const supportedChains = supportedChainLogos.map((c) => c.name);
+
+export const crossChain = {
+  subtitle: "Cross-chain",
+  title: "Cross-chain compliant",
+  tagline: "Seamless. Secure. Compliant. Everywhere.",
+  image: `${A}/multi-chain.jpg`,
+  imageAlt:
+    "SlicePay cross-chain compliance supporting Ethereum, Solana, Monad, Stellar, Polygon, Avalanche, Arbitrum, Base, Optimism, HyperEVM, BNB Chain, and Linea with USDC and USDT",
+  stablecoins: "USDC & USDT on all compliant chains",
+  footer: "One compliance layer. Multiple chains. Unlimited possibilities.",
 };
 
 export const brandName = "SlicePay";
@@ -42,7 +71,7 @@ export const heroSlides = [
   {
     subtitle: "Built for Main Street",
     titleHtml: 'Lower fees,<span class="it"> real</span><br>loyalty rewards',
-    text: "1.9% total fee with automatic USDC payouts for owners and staff on Solana.",
+    text: "1.9% total fee with automatic stablecoin payouts for owners and staff.",
     bg: `${A}/hero-slider-2.jpg`,
   },
   {
@@ -61,9 +90,9 @@ export const heroStats = {
 export const marqueeItems = [
   "SlicePay QR Payments",
   "Pay with Any Wallet",
-  "Top 27 EVM Chains + SOL Memecoins",
+  "Cross-Chain Compliant",
+  "USDC & USDT Supported",
   "SLICE Loyalty Rewards",
-  "USDC Payouts on Solana",
   "1.9% Business Fee",
   "Employee Commissions",
   "Built for SMB Retail",
@@ -83,24 +112,24 @@ export const platformPillars = [
   {
     n: "III.",
     title: "Staff incentives",
-    body: "Employees who facilitate a transaction earn 0.3% of the 1.9% platform fee, paid in USDC on Solana.",
+    body: "Employees who facilitate a transaction earn 0.3% of the 1.9% platform fee, paid in supported stablecoins.",
   },
   {
     n: "IV.",
     title: "Owner payouts",
-    body: "Business owners receive USDC on Solana with transparent pricing and no hidden settlement delays.",
+    body: "Business owners receive USDC and USDT payouts with transparent pricing and no hidden settlement delays.",
   },
   {
     n: "V.",
     title: "Multi-chain support",
-    body: "Accept payments across top EVM chains plus memecoins on Ethereum and Solana from a single QR flow.",
+    body: "Accept payments across Ethereum, Solana, Monad, Stellar, Polygon, Avalanche, Arbitrum, Base, Optimism, HyperEVM, BNB Chain, and Linea from a single QR flow.",
   },
 ];
 
 export const slicePaySection = {
   subtitle: "Payment Platform",
   title: "Real Payments for Real Businesses",
-  text: "SlicePay is an alternative payment provider built for small and medium businesses. Customers pay using any wallet with a QR code scanner. Top 27 EVM chains plus memecoins on ETH and SOL are supported. Customers receive SLICE loyalty tokens for discounts on future purchases. Employees who facilitate a transaction earn 0.3% of the 1.9% business fee. Both employees and business owners are paid out in USDC on Solana.",
+  text: "SlicePay is an alternative payment provider built for small and medium businesses. Customers pay using any wallet with a QR code scanner across our supported cross-chain network. USDC and USDT are supported on all compliant chains. Customers receive SLICE loyalty tokens for discounts on future purchases. Employees who facilitate a transaction earn 0.3% of the 1.9% business fee. Both employees and business owners receive stablecoin payouts.",
   cta: { label: "Open SlicePay Portal", href: portalPath },
 };
 
@@ -119,8 +148,8 @@ export const howSteps = [
   },
   {
     step: "Step 03 · Payout",
-    title: "USDC on Solana",
-    body: "Business owners and facilitating employees receive USDC payouts on Solana. Total business fee is 1.9%, with 0.3% going to the employee who processed the sale.",
+    title: "Stablecoin payouts",
+    body: "Business owners and facilitating employees receive USDC and USDT payouts across supported chains. Total business fee is 1.9%, with 0.3% going to the employee who processed the sale.",
     cta: { label: "Register Now", href: portalPath },
   },
 ];
@@ -135,7 +164,7 @@ export const mission = {
     },
     {
       title: "Our vision",
-      body: "Become the trusted payment layer for food, retail, and service businesses that want flexible checkout, loyalty built in, and settlement in USDC on Solana.",
+      body: "Become the trusted payment layer for food, retail, and service businesses that want flexible checkout, loyalty built in, and cross-chain stablecoin settlement.",
     },
   ],
 };
@@ -155,12 +184,14 @@ export const team = {
       name: "Aseem Bhardwaj",
       role: "Founder & CEO",
       photo: `${A}/ab-headshot.jpg`,
+      photoPosition: "center top",
       linkedin: "https://www.linkedin.com/in/aseemmba",
     },
     {
       name: "Gustav Eigenhuis",
       role: "Co-Founder & CTO",
       photo: `${A}/gustav-headshot.jpg`,
+      photoPosition: "center top",
       linkedin: "https://www.linkedin.com/in/gustav-eigenhuis-b28a712a9",
     },
   ],
@@ -218,13 +249,13 @@ export const communityCards = [
 
 export const businesses = {
   titleHtml: 'Accept payments with <span class="it">SlicePay</span><br>Keep more <span class="it">margin</span>',
-  lede: "SlicePay is built for restaurants, food trucks, and retailers. Let customers pay from any wallet while you receive USDC on Solana with a simple 1.9% total fee.",
+  lede: "SlicePay is built for restaurants, food trucks, and retailers. Let customers pay from any wallet on supported chains while you receive stablecoin payouts with a simple 1.9% total fee.",
   cta: { label: "Register on SlicePay", href: portalPath },
   rows: [
-    { n: "01", t: "Any Wallet, Any Coin", d: "Top 27 EVM chains plus memecoins on ETH and SOL. Customers scan your QR and pay.", tag: "Live" },
+    { n: "01", t: "Cross-chain payments", d: "Ethereum, Solana, Polygon, Base, Arbitrum, and more. Customers scan your QR and pay from any supported wallet.", tag: "Live" },
     { n: "02", t: "SLICE Loyalty", d: "Customers earn SLICE tokens for discounts on future purchases at your business.", tag: "Live" },
     { n: "03", t: "1.9% Total Fee", d: "Simple pricing for businesses. 0.3% of the fee goes to the employee who facilitated the transaction.", tag: "Live" },
-    { n: "04", t: "USDC Payouts", d: "Business owners and employees receive USDC payouts on Solana.", tag: "Live" },
+    { n: "04", t: "USDC & USDT payouts", d: "Business owners and employees receive stablecoin payouts on all compliant chains.", tag: "Live" },
     { n: "05", t: "Employee Commissions", d: "Staff who process payments earn automatically from each qualifying transaction.", tag: "Live" },
   ],
 };

@@ -63,8 +63,8 @@ export default function EmployeeDashboard() {
       }
       const employeeId = localStorage.getItem("employeeId") || "";
       const employeeName = localStorage.getItem("employeeFullName") || "";
-      const qrBase = typeof window !== "undefined" && window.location.hostname === "app.pizzabit.io"
-        ? "https://qr.pizzabit.io" : "http://localhost:3002";
+      const qrBase = typeof window !== "undefined" && window.location.hostname.endsWith("slicechain.io")
+        ? "https://qr.slicechain.io" : "http://localhost:3002";
       let url = `${qrBase}?businessId=${encodeURIComponent(data.businessId)}&businessName=${encodeURIComponent(data.businessName)}&businessWallet=${encodeURIComponent(data.businessWallet)}&token=${encodeURIComponent(token)}`;
       if (employeeId) url += `&employeeId=${encodeURIComponent(employeeId)}`;
       if (employeeName) url += `&employeeName=${encodeURIComponent(employeeName)}`;

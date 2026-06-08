@@ -58,6 +58,14 @@ export function LandingFooter() {
           <span className="foot-bot-side">{footer.copyright}</span>
           <p className="foot-disclaimer">
             Payment platform · Not a bank or money transmitter
+            <br />
+            <a href="/terms" style={{ color: "inherit", textDecoration: "underline" }}>
+              Terms and Conditions
+            </a>
+            {" · "}
+            <a href="/privacy" style={{ color: "inherit", textDecoration: "underline" }}>
+              Privacy Policy
+            </a>
           </p>
           <span className="foot-bot-side foot-bot-end">SlicePay · Built for merchants</span>
         </div>

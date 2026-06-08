@@ -7,26 +7,42 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { customerApi } from "@/lib/api";
+import { TurnstileWidget } from "@/components/turnstile-widget";
+import { useTurnstile } from "@/hooks/useTurnstile";
 import { toast } from "sonner";
 import { Loader2, CheckCircle } from "lucide-react";
+import { TermsConsentCheckbox } from "@/components/legal/TermsConsentCheckbox";
 
 export default function CustomerRegisterPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ fullName: "", email: "", password: "", confirmPassword: "" });
+  const [form, setForm] = useState({ fullName: "", email: "", password: "", confirmPassword: "", acceptTerms: false });
+  const { siteKey, token, turnstileRequired, onVerify, onExpire, onError, resetToken } = useTurnstile();
 
   function update(f: string, v: string) { setForm((p) => ({ ...p, [f]: v })); }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!form.acceptTerms) {
+      toast.error("You must confirm that you understand the Terms and Conditions and Privacy Policy.");
+      return;
+    }
     if (form.password !== form.confirmPassword) { toast.error("Passwords don't match."); return; }
+    if (turnstileRequired && !token) {
+      toast.error("Please complete the security check.");
+      return;
+    }
     setLoading(true);
     try {
-      await customerApi.register({ fullName: form.fullName, email: form.email, password: form.password });
+      await customerApi.register(
+        { fullName: form.fullName, email: form.email, password: form.password },
+        token || undefined
+      );
       setSubmitted(true);
       toast.success("Account created!");
     } catch (err: unknown) {
+      resetToken();
       toast.error(err instanceof Error ? err.message : "Registration failed.");
     } finally {
       setLoading(false);
@@ -46,7 +62,7 @@ export default function CustomerRegisterPage() {
   }
 
   return (
-    <AuthCard title="Create Account" description="Join the Pizza Platform" gradient="from-orange-500 to-rose-500" backHref="/customer/login" backLabel="← Already have an account? Sign in">
+    <AuthCard title="Create Account" description="Join SlicePay" gradient="from-orange-500 to-rose-500" backHref="/customer/login" backLabel="← Already have an account? Sign in">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="fullName" className="text-white">Full Name</Label>
@@ -66,6 +82,13 @@ export default function CustomerRegisterPage() {
             <Input type="password" placeholder="••••••••" value={form.confirmPassword} onChange={(e) => update("confirmPassword", e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-slate-400" required />
           </div>
         </div>
+        <TermsConsentCheckbox
+          checked={form.acceptTerms}
+          onChange={(checked) => setForm((p) => ({ ...p, acceptTerms: checked }))}
+        />
+        {siteKey ? (
+          <TurnstileWidget siteKey={siteKey} onVerify={onVerify} onExpire={onExpire} onError={onError} />
+        ) : null}
         <Button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-orange-500 to-rose-500 text-white border-0">
           {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Creating…</> : "Create Account"}
         </Button>

@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { customerApi } from "@/lib/api";
+import { TurnstileWidget } from "@/components/turnstile-widget";
+import { useTurnstile } from "@/hooks/useTurnstile";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
@@ -20,19 +22,25 @@ export default function CustomerLoginPage() {
   const [loading, setLoading] = useState(false);
   const [forgotMode, setForgotMode] = useState(false);
   const [forgotLoading, setForgotLoading] = useState(false);
+  const { siteKey, token, turnstileRequired, onVerify, onExpire, onError, resetToken } = useTurnstile();
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     if (!email || !password) { toast.error("Please enter your email and password."); return; }
+    if (turnstileRequired && !token) {
+      toast.error("Please complete the security check.");
+      return;
+    }
     setLoading(true);
     try {
-      const data = await customerApi.login(email, password);
+      const data = await customerApi.login(email, password, token || undefined);
       const store = remember ? localStorage : sessionStorage;
       store.setItem("customerToken", data.token);
       if (remember) store.setItem("customerRemember", "true");
       toast.success("Welcome back!");
       router.push("/customer/dashboard");
     } catch (err: unknown) {
+      resetToken();
       toast.error(err instanceof Error ? err.message : "Login failed.");
     } finally {
       setLoading(false);
@@ -94,6 +102,9 @@ export default function CustomerLoginPage() {
             <input id="remember" type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="rounded" />
             <Label htmlFor="remember" className="text-slate-300 text-sm font-normal cursor-pointer">Remember me</Label>
           </div>
+          {siteKey ? (
+            <TurnstileWidget siteKey={siteKey} onVerify={onVerify} onExpire={onExpire} onError={onError} />
+          ) : null}
           <Button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-orange-500 to-rose-500 hover:opacity-90 text-white border-0">
             {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Signing in…</> : "Sign In"}
           </Button>

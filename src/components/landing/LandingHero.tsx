@@ -13,7 +13,7 @@ export function LandingHero() {
           {brandName}
         </div>
         <div className="mid" data-reveal style={{ ["--d" as string]: "200ms" }}>
-          <span className="eyebrow">QR payments · USDC on Solana</span>
+          <span className="eyebrow">QR payments · Cross-chain compliant</span>
         </div>
         <div className="right" data-reveal style={{ ["--d" as string]: "300ms" }}>
           <div className="mono">24/7 · Always on</div>

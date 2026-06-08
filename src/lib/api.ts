@@ -60,18 +60,23 @@ export async function apiFetch<T = unknown>(
 
 // --- Typed API calls ---
 
+export const configApi = {
+  getTurnstileKey: () =>
+    apiFetch<{ siteKey: string }>("/config/turnstile"),
+};
+
 // Business
 export const businessApi = {
-  login: (email: string, password: string) =>
+  login: (email: string, password: string, turnstileToken?: string) =>
     apiFetch<{ token: string; business: BusinessProfile }>("/business/login", {
       method: "POST",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, turnstileToken }),
     }),
 
-  signupRequest: (data: Record<string, unknown>) =>
+  signupRequest: (data: Record<string, unknown>, turnstileToken?: string) =>
     apiFetch("/business/signup-request", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, turnstileToken }),
     }),
 
   getProfile: (token: string) =>
@@ -151,10 +156,10 @@ export const employeeApi = {
 
 // Admin
 export const adminApi = {
-  login: (username: string, password: string) =>
+  login: (username: string, password: string, turnstileToken?: string) =>
     apiFetch<{ token: string }>("/admin/login", {
       method: "POST",
-      body: JSON.stringify({ username, password, recaptchaToken: "browser-client" }),
+      body: JSON.stringify({ username, password, turnstileToken }),
     }),
 
   getTransactionStats: (token: string) =>
@@ -166,10 +171,10 @@ export const adminApi = {
 
 // Customer
 export const customerApi = {
-  login: (email: string, password: string) =>
+  login: (email: string, password: string, turnstileToken?: string) =>
     apiFetch<{ token: string; user: Customer }>("/customer/login", {
       method: "POST",
-      body: JSON.stringify({ email, password, recaptchaToken: "browser-client" }),
+      body: JSON.stringify({ email, password, turnstileToken }),
     }),
 
   forgotPassword: (email: string) =>
@@ -178,14 +183,13 @@ export const customerApi = {
       body: JSON.stringify({ email }),
     }),
 
-  register: (data: Record<string, unknown>) =>
+  register: (data: Record<string, unknown>, turnstileToken?: string) =>
     apiFetch("/customer/register", {
       method: "POST",
-      body: JSON.stringify({ ...data, recaptchaToken: "browser-client" }),
+      body: JSON.stringify({ ...data, turnstileToken }),
     }),
 
-  getRecaptchaKey: () =>
-    apiFetch<{ siteKey: string }>("/config/recaptcha"),
+  getTurnstileKey: () => configApi.getTurnstileKey(),
 };
 
 // Blockchain / Payments

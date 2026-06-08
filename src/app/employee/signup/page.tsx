@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { employeeApi } from "@/lib/api";
 import { toast } from "sonner";
 import { Loader2, CheckCircle } from "lucide-react";
+import { TermsConsentCheckbox } from "@/components/legal/TermsConsentCheckbox";
 
 export default function EmployeeSignupPage() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function EmployeeSignupPage() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     fullName: "", email: "", password: "", confirmPassword: "",
-    businessId: "", solanaAddress: "",
+    businessId: "", solanaAddress: "", acceptTerms: false,
   });
 
   function update(field: string, value: string) {
@@ -25,6 +26,10 @@ export default function EmployeeSignupPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!form.acceptTerms) {
+      toast.error("You must confirm that you understand the Terms and Conditions and Privacy Policy.");
+      return;
+    }
     if (form.password !== form.confirmPassword) { toast.error("Passwords don't match."); return; }
     if (!form.businessId) { toast.error("Business ID is required."); return; }
     setLoading(true);
@@ -92,6 +97,10 @@ export default function EmployeeSignupPage() {
           <Label htmlFor="solanaAddress" className="text-white">Solana Wallet (for commission payouts)</Label>
           <Input id="solanaAddress" placeholder="Your Solana address" value={form.solanaAddress} onChange={(e) => update("solanaAddress", e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 font-mono text-sm" />
         </div>
+        <TermsConsentCheckbox
+          checked={form.acceptTerms}
+          onChange={(checked) => setForm((p) => ({ ...p, acceptTerms: checked }))}
+        />
         <Button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-orange-500 to-rose-500 hover:opacity-90 text-white border-0">
           {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Creating account…</> : "Create Account"}
         </Button>

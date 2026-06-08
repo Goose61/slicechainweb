@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { businessApi } from "@/lib/api";
+import { TurnstileWidget } from "@/components/turnstile-widget";
+import { useTurnstile } from "@/hooks/useTurnstile";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
@@ -18,6 +20,7 @@ export default function BusinessLoginPage() {
   const [showPw, setShowPw] = useState(false);
   const [remember, setRemember] = useState(true);
   const [loading, setLoading] = useState(false);
+  const { siteKey, token, loading: turnstileLoading, loadError, turnstileRequired, onVerify, onExpire, onError, resetToken } = useTurnstile();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,9 +28,13 @@ export default function BusinessLoginPage() {
       toast.error("Please enter your email and password.");
       return;
     }
+    if (turnstileRequired && !token) {
+      toast.error("Please complete the security check.");
+      return;
+    }
     setLoading(true);
     try {
-      const data = await businessApi.login(email, password);
+      const data = await businessApi.login(email, password, token || undefined);
       const store = remember ? localStorage : sessionStorage;
       store.setItem("businessToken", data.token);
       if (data.business) {
@@ -38,6 +45,7 @@ export default function BusinessLoginPage() {
       toast.success("Welcome back!");
       router.push("/business/dashboard");
     } catch (err: unknown) {
+      resetToken();
       toast.error(err instanceof Error ? err.message : "Login failed. Check your credentials.");
     } finally {
       setLoading(false);
@@ -99,6 +107,14 @@ export default function BusinessLoginPage() {
             Remember me
           </Label>
         </div>
+
+        {turnstileLoading ? (
+          <p className="text-slate-400 text-sm text-center">Loading security check…</p>
+        ) : siteKey ? (
+          <TurnstileWidget siteKey={siteKey} onVerify={onVerify} onExpire={onExpire} onError={onError} />
+        ) : loadError ? (
+          <p className="text-rose-400 text-sm text-center">Security check unavailable. Please refresh and try again.</p>
+        ) : null}
 
         <Button
           type="submit"

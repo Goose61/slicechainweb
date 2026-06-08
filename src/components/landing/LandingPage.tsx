@@ -10,6 +10,7 @@ import { LandingMarquee } from "./sections/LandingMarquee";
 import { LandingManifesto } from "./sections/LandingManifesto";
 import { LandingTeam } from "./sections/LandingTeam";
 import { LandingHow } from "./sections/LandingHow";
+import { LandingMultiChain } from "./sections/LandingMultiChain";
 import { LandingBusinesses } from "./sections/LandingBusinesses";
 import { LandingRoadmap } from "./sections/LandingRoadmap";
 import { LandingCommunity } from "./sections/LandingCommunity";
@@ -30,6 +31,7 @@ export function LandingPage() {
       <LandingManifesto />
       <LandingTeam />
       <LandingHow />
+      <LandingMultiChain />
       <LandingBusinesses />
       <CampaignGallery />
       <LandingRoadmap />

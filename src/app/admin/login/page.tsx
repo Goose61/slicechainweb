@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { adminApi } from "@/lib/api";
+import { TurnstileWidget } from "@/components/turnstile-widget";
+import { useTurnstile } from "@/hooks/useTurnstile";
 import { toast } from "sonner";
 import { Eye, EyeOff, Loader2, Shield } from "lucide-react";
 
@@ -17,18 +19,24 @@ export default function AdminLoginPage() {
   const [showPw, setShowPw] = useState(false);
   const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { siteKey, token, turnstileRequired, onVerify, onExpire, onError, resetToken } = useTurnstile();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!username || !password) { toast.error("Please enter username and password."); return; }
+    if (turnstileRequired && !token) {
+      toast.error("Please complete the security check.");
+      return;
+    }
     setLoading(true);
     try {
-      const data = await adminApi.login(username, password);
+      const data = await adminApi.login(username, password, token || undefined);
       const store = remember ? localStorage : sessionStorage;
       store.setItem("adminToken", data.token);
       toast.success("Admin access granted.");
       router.push("/admin/dashboard");
     } catch (err: unknown) {
+      resetToken();
       toast.error(err instanceof Error ? err.message : "Login failed.");
     } finally {
       setLoading(false);
@@ -80,6 +88,9 @@ export default function AdminLoginPage() {
           <input id="remember" type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="rounded" />
           <Label htmlFor="remember" className="text-slate-300 text-sm font-normal cursor-pointer">Remember on this device</Label>
         </div>
+        {siteKey ? (
+          <TurnstileWidget siteKey={siteKey} onVerify={onVerify} onExpire={onExpire} onError={onError} />
+        ) : null}
         <Button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-slate-600 to-slate-800 hover:opacity-90 text-white border-0">
           {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Verifying…</> : "Sign In"}
         </Button>

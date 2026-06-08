@@ -225,8 +225,8 @@ export default function BusinessDashboard() {
     const wallet = business.businessWallet?.publicKey || business.walletAddress;
     if (!wallet) { toast.error("Set a wallet address first."); return; }
     const t = token || "";
-    const qrBase = typeof window !== "undefined" && window.location.hostname === "app.pizzabit.io"
-      ? "https://qr.pizzabit.io"
+    const qrBase = typeof window !== "undefined" && window.location.hostname.endsWith("slicechain.io")
+      ? "https://qr.slicechain.io"
       : "http://localhost:3002";
     const url = `${qrBase}?businessId=${business._id}&businessName=${encodeURIComponent(business.businessName)}&businessWallet=${encodeURIComponent(wallet)}&token=${encodeURIComponent(t)}`;
     window.open(url, "_blank", "width=900,height=1000");

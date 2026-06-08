@@ -12,6 +12,9 @@ import {
   Briefcase, MapPin, User, Receipt, Wallet, ListChecks,
   ShieldCheck, CheckCircle, Loader2, Building2, Pizza,
 } from "lucide-react";
+import { TermsConsentCheckbox } from "@/components/legal/TermsConsentCheckbox";
+import { TurnstileWidget } from "@/components/turnstile-widget";
+import { useTurnstile } from "@/hooks/useTurnstile";
 
 function UserTieIcon(props: React.ComponentProps<typeof User>) {
   return <User {...props} />;
@@ -117,6 +120,7 @@ export default function BusinessSignupPage() {
   const [form, setForm] = useState<FormData>(EMPTY);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { siteKey, token, loading: turnstileLoading, loadError, turnstileRequired, onVerify, onExpire, onError, resetToken } = useTurnstile();
 
   function set(field: keyof FormData, value: string | boolean) {
     setForm((p) => ({ ...p, [field]: value }));
@@ -135,7 +139,7 @@ export default function BusinessSignupPage() {
     e.preventDefault();
 
     if (!form.acceptTerms) {
-      toast.error("You must agree to the Terms and Privacy Policy.");
+      toast.error("You must confirm that you understand the Terms and Conditions and Privacy Policy.");
       return;
     }
     if (form.password !== form.confirmPassword) {
@@ -144,6 +148,10 @@ export default function BusinessSignupPage() {
     }
     if (form.password.length < 8) {
       toast.error("Password must be at least 8 characters.");
+      return;
+    }
+    if (turnstileRequired && !token) {
+      toast.error("Please complete the security check.");
       return;
     }
 
@@ -197,10 +205,11 @@ export default function BusinessSignupPage() {
         phone: form.primaryContactPhone,
         password: form.password,
         businessType: "CN",
-      });
+      }, token || undefined);
       setSubmitted(true);
       toast.success("Registration submitted! Our team will review your application.");
     } catch (err: unknown) {
+      resetToken();
       toast.error(err instanceof Error ? err.message : "Submission failed. Please try again.");
     } finally {
       setLoading(false);
@@ -434,8 +443,8 @@ export default function BusinessSignupPage() {
           {/* Section 7 — Declaration */}
           <SectionCard icon={ShieldCheck} number={7} title="Declaration & Consent">
             <p className="text-slate-400 text-xs mb-4">
-              By submitting this form, I confirm that the information provided is accurate and I agree to the
-              Terms and Privacy Policy of the Pizza Platform.
+              By submitting this form, I confirm that the information provided is accurate and that I understand
+              the Terms and Conditions and Privacy Policy of SlicePay.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <Field label="Authorized Representative Name" required>
@@ -481,20 +490,22 @@ export default function BusinessSignupPage() {
               </div>
             </div>
 
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={form.acceptTerms}
-                onChange={(e) => set("acceptTerms", e.target.checked)}
-                className={`${checkboxCls} mt-0.5`}
-                required
-              />
-              <span className="text-slate-300 text-sm">
-                I agree to the Terms and Privacy Policy.{" "}
-                <span className="text-rose-400">*</span>
-              </span>
-            </label>
+            <TermsConsentCheckbox
+              checked={form.acceptTerms}
+              onChange={(checked) => set("acceptTerms", checked)}
+            />
           </SectionCard>
+
+          {/* Security verification */}
+          <div className="mb-5 flex justify-center">
+            {turnstileLoading ? (
+              <p className="text-slate-400 text-sm">Loading security check…</p>
+            ) : siteKey ? (
+              <TurnstileWidget siteKey={siteKey} onVerify={onVerify} onExpire={onExpire} onError={onError} />
+            ) : loadError ? (
+              <p className="text-rose-400 text-sm">Security check unavailable. Please refresh and try again.</p>
+            ) : null}
+          </div>
 
           {/* Footer */}
           <div className="flex items-center justify-between gap-4 flex-wrap mt-2">

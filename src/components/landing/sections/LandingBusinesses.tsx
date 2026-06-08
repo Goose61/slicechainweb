@@ -42,7 +42,7 @@ export function LandingBusinesses() {
               <div className="biz-stat">
                 <div className="v">USDC</div>
                 <div className="l">
-                  Solana
+                  + USDT
                   <br />
                   Payouts
                 </div>

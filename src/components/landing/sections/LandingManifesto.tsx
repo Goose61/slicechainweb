@@ -69,7 +69,7 @@ export function LandingManifesto() {
 
             <div className="oath-sign" data-reveal style={{ ["--d" as string]: "350ms" }}>
               <span className="sig">SlicePay</span>
-              <span>USDC payouts on Solana</span>
+              <span>USDC & USDT cross-chain payouts</span>
               <span>SLICE loyalty rewards</span>
             </div>
 
