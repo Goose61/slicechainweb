@@ -1,7 +1,35 @@
 /**
- * API client - all requests go through Next.js rewrites to the backend
+ * API client — resolves backend URL from hostname.
+ * Static hosts (slicechain.io on GitHub Pages) have no /api rewrite; call api.slicechain.io directly.
  */
 
+const PRODUCTION_API = "https://api.slicechain.io";
+
+export function getApiBase(): string {
+  if (typeof window === "undefined") {
+    return "/api";
+  }
+
+  const hostname = window.location.hostname;
+
+  if (
+    hostname === "slicechain.io" ||
+    hostname === "www.slicechain.io" ||
+    hostname === "app.slicechain.io" ||
+    hostname === "qr.slicechain.io" ||
+    (hostname.endsWith(".slicechain.io") && hostname !== "api.slicechain.io")
+  ) {
+    return `${PRODUCTION_API}/api`;
+  }
+
+  if (hostname === "localhost" || hostname === "127.0.0.1") {
+    return "http://localhost:7000/api";
+  }
+
+  return "/api";
+}
+
+/** @deprecated Use getApiBase() — kept for any legacy imports */
 export const API_BASE = "/api";
 
 type TokenKey = "businessToken" | "employeeToken" | "adminToken" | "customerToken";
@@ -45,7 +73,7 @@ export async function apiFetch<T = unknown>(
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_BASE}${path}`, {
+  const res = await fetch(`${getApiBase()}${path}`, {
     ...fetchOptions,
     headers,
   });
