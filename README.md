@@ -1,44 +1,36 @@
-# SliceChain Web
+# slicechainweb
 
-Marketing site for [SlicePay](https://slicechain.io) — built with Next.js.
+Source for [slicechain.io](https://slicechain.io) (SlicePay marketing site).
 
-## Development
+The live site is the **built Next.js export** (`out/`), deployed by GitHub Actions — not this README.
+
+## GitHub Pages settings (required once)
+
+In the repo **Settings → Pages**:
+
+1. **Source:** Deploy from a branch
+2. **Branch:** `gh-pages` / `/ (root)`
+3. **Custom domain:** `slicechain.io` (CNAME is in `public/CNAME`)
+
+After each push to `main`, the workflow builds and updates `gh-pages` with `index.html` and assets only.
+
+If you see this README on slicechain.io, Pages is pointed at `main` instead of `gh-pages` — change the branch above.
+
+## Local development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3069](http://localhost:3069).
+Open http://localhost:3069
 
-## GitHub Pages (slicechain.io)
-
-Static export is enabled via `GITHUB_PAGES=true`.
+## Build static export
 
 ```bash
 npm run build:pages
 ```
 
-The `out/` directory contains the static site. GitHub Actions deploys automatically on push to `main` or `master`.
+Output in `out/` (gitignored). Portal links target `https://app.slicechain.io` when `GITHUB_PAGES=true`.
 
-### Custom domain DNS
-
-Point `slicechain.io` to GitHub Pages:
-
-| Type | Name | Value |
-|------|------|-------|
-| A | `@` | `185.199.108.153` |
-| A | `@` | `185.199.109.153` |
-| A | `@` | `185.199.110.153` |
-| A | `@` | `185.199.111.153` |
-| CNAME | `www` | `goose61.github.io` |
-
-Then in the repo **Settings → Pages**, set the custom domain to `slicechain.io` and enable HTTPS.
-
-`public/CNAME` is included for GitHub Pages.
-
-### Portal links → live demo app
-
-Marketing CTAs point to **`https://app.slicechain.io`** (self-hosted via Cloudflare tunnel), not relative `/portal` on GitHub Pages. Built automatically when `GITHUB_PAGES=true` (`npm run build:pages`).
-
-Do **not** route `slicechain.io` / `www` through your Cloudflare tunnel — only `app`, `api`, and `qr` subdomains. See `app/docs/DEMO_HOSTING.md`.
+See `../app/docs/DEMO_HOSTING.md` for the full demo stack (app / api / qr on your server).
