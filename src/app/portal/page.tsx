@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { DEMO_APP_ORIGIN, shouldRedirectToDemoApp } from "@/lib/appUrl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +13,12 @@ const LOGO = "/landing-assets/images/pizza/pizzaimages/main_logo.png";
 
 export default function PortalIndex() {
   const router = useRouter();
+
+  useEffect(() => {
+    if (shouldRedirectToDemoApp()) {
+      window.location.replace(`${DEMO_APP_ORIGIN}/portal`);
+    }
+  }, []);
 
   const portals = [
     {

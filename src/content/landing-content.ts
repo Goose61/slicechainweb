@@ -1,7 +1,12 @@
+import { appUrl } from "@/lib/appUrl";
+
 const A = "/landing-assets/images";
 
-/** Platform login / signup entry (not the marketing home). */
-export const portalPath = "/portal";
+/** Platform login / signup entry — live demo at app.slicechain.io from GitHub Pages. */
+export const portalPath = appUrl("/portal");
+export const businessLoginPath = appUrl("/business/login");
+export const businessSignupPath = appUrl("/business/signup");
+export const employeeLoginPath = appUrl("/employee/login");
 
 export const landingMeta = {
   title: "SlicePay · Crypto Payments for Small Business",
@@ -237,14 +242,14 @@ export const galleryImages = [
 
 export const communityCards = [
   { href: portalPath, img: `${A}/event-1.jpg`, subtitle: "Business", title: "Register your business on SlicePay" },
-  { href: "/employee/login", img: `${A}/event-2.jpg`, subtitle: "Employee", title: "Staff: generate QR codes and earn commission" },
+  { href: employeeLoginPath, img: `${A}/event-2.jpg`, subtitle: "Employee", title: "Staff: generate QR codes and earn commission" },
   {
     href: portalPath,
     img: `${A}/photo_2025-08-05_18-45-59.jpg`,
     subtitle: "Payments",
     title: "Start accepting wallet payments today",
   },
-  { href: "/business/login", img: `${A}/photo_2025-08-05_18-45-58.jpg`, subtitle: "Dashboard", title: "Open your business dashboard" },
+  { href: businessLoginPath, img: `${A}/photo_2025-08-05_18-45-58.jpg`, subtitle: "Dashboard", title: "Open your business dashboard" },
 ];
 
 export const businesses = {

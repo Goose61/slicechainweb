@@ -36,3 +36,9 @@ Point `slicechain.io` to GitHub Pages:
 Then in the repo **Settings → Pages**, set the custom domain to `slicechain.io` and enable HTTPS.
 
 `public/CNAME` is included for GitHub Pages.
+
+### Portal links → live demo app
+
+Marketing CTAs point to **`https://app.slicechain.io`** (self-hosted via Cloudflare tunnel), not relative `/portal` on GitHub Pages. Built automatically when `GITHUB_PAGES=true` (`npm run build:pages`).
+
+Do **not** route `slicechain.io` / `www` through your Cloudflare tunnel — only `app`, `api`, and `qr` subdomains. See `app/docs/DEMO_HOSTING.md`.

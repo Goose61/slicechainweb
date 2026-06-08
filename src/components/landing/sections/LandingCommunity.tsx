@@ -1,4 +1,4 @@
-import { communityCards, social } from "@/content/landing-content";
+import { communityCards, employeeLoginPath, portalPath, social } from "@/content/landing-content";
 
 export function LandingCommunity() {
   return (
@@ -17,10 +17,10 @@ export function LandingCommunity() {
                 Register your business, onboard staff, or open the portal to run payments and track commissions.
               </p>
               <div className="crew-cta">
-                <a href="/" className="btn btn-gold">
+                <a href={portalPath} className="btn btn-gold">
                   Business signup <span className="arrow">→</span>
                 </a>
-                <a href="/employee/login" className="btn">
+                <a href={employeeLoginPath} className="btn">
                   Employee login <span className="arrow">→</span>
                 </a>
                 <a href={social.email} className="btn">
