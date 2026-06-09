@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { getApiBase } from "@/lib/api";
 import { ACTIVE_PARTNER_COUNT, updateLandingStatsOnPage } from "@/lib/pizza-map-data";
 
 type LandingStats = {
@@ -14,7 +15,7 @@ export function useLandingStats() {
 
     async function load() {
       try {
-        const res = await fetch("/api/public/landing-stats");
+        const res = await fetch(`${getApiBase()}/public/landing-stats`);
         if (!res.ok) throw new Error("Stats unavailable");
         const data: LandingStats = await res.json();
         if (!cancelled) {

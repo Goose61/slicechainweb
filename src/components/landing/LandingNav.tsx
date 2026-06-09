@@ -61,7 +61,7 @@ export function LandingNav() {
             <span className="brand-wordmark">{brandName}</span>
           </div>
           <button type="button" className="nav-drawer-close" onClick={closeMenu} aria-label="Close menu">
-            ×
+            <span className="nav-drawer-close-icon" aria-hidden="true">×</span>
           </button>
         </div>
         <nav className="nav-drawer-links">

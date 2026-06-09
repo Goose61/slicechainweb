@@ -75,9 +75,23 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
 .nav-drawer-close{
   width:44px;height:44px;
   border:1px solid var(--line-strong);border-radius:10px;
-  font-size:28px;line-height:1;color:var(--bone-dim);
-  display:flex;align-items:center;justify-content:center;
+  padding:0;margin:0;
+  background:transparent;
+  color:var(--bone-dim);
+  display:inline-flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  cursor:pointer;
   transition:border-color .3s,color .3s;
+  -webkit-tap-highlight-color:transparent;
+}
+.nav-drawer-close-icon{
+  display:block;
+  font-size:26px;
+  font-weight:300;
+  line-height:1;
+  font-family:system-ui,-apple-system,sans-serif;
+  transform:translateY(-1px);
+  pointer-events:none;
 }
 .nav-drawer-close:hover{border-color:var(--gold);color:var(--gold)}
 

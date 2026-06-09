@@ -1,3 +1,6 @@
+/** Marketing site on GitHub Pages. */
+export const MARKETING_SITE_ORIGIN = "https://slicechain.io";
+
 /** Live demo app — portals, logins, dashboards (self-hosted via Cloudflare tunnel). */
 export const DEMO_APP_ORIGIN = "https://app.slicechain.io";
 
@@ -34,4 +37,10 @@ export function appUrl(path: string): string {
 export function shouldRedirectToDemoApp(): boolean {
   if (typeof window === "undefined") return false;
   return isMarketingHost(window.location.hostname);
+}
+
+/** Link to the public marketing site (slicechain.io on GitHub Pages). */
+export function marketingUrl(path = ""): string {
+  const normalized = path ? (path.startsWith("/") ? path : `/${path}`) : "";
+  return `${MARKETING_SITE_ORIGIN}${normalized}`;
 }
