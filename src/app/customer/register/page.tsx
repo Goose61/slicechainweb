@@ -7,8 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { customerApi } from "@/lib/api";
-import { TurnstileWidget } from "@/components/turnstile-widget";
-import { useTurnstile } from "@/hooks/useTurnstile";
 import { toast } from "sonner";
 import { Loader2, CheckCircle } from "lucide-react";
 import { TermsConsentCheckbox } from "@/components/legal/TermsConsentCheckbox";
@@ -18,7 +16,6 @@ export default function CustomerRegisterPage() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ fullName: "", email: "", password: "", confirmPassword: "", acceptTerms: false });
-  const { siteKey, token, turnstileRequired, onVerify, onExpire, onError, resetToken } = useTurnstile();
 
   function update(f: string, v: string) { setForm((p) => ({ ...p, [f]: v })); }
 
@@ -29,20 +26,12 @@ export default function CustomerRegisterPage() {
       return;
     }
     if (form.password !== form.confirmPassword) { toast.error("Passwords don't match."); return; }
-    if (turnstileRequired && !token) {
-      toast.error("Please complete the security check.");
-      return;
-    }
     setLoading(true);
     try {
-      await customerApi.register(
-        { fullName: form.fullName, email: form.email, password: form.password },
-        token || undefined
-      );
+      await customerApi.register({ fullName: form.fullName, email: form.email, password: form.password });
       setSubmitted(true);
       toast.success("Account created!");
     } catch (err: unknown) {
-      resetToken();
       toast.error(err instanceof Error ? err.message : "Registration failed.");
     } finally {
       setLoading(false);
@@ -86,9 +75,6 @@ export default function CustomerRegisterPage() {
           checked={form.acceptTerms}
           onChange={(checked) => setForm((p) => ({ ...p, acceptTerms: checked }))}
         />
-        {siteKey ? (
-          <TurnstileWidget siteKey={siteKey} onVerify={onVerify} onExpire={onExpire} onError={onError} />
-        ) : null}
         <Button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-orange-500 to-rose-500 text-white border-0">
           {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Creating…</> : "Create Account"}
         </Button>

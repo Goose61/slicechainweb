@@ -128,7 +128,7 @@ export default function BusinessLoginPage() {
           <p className="text-slate-400 text-sm">
             Don&apos;t have an account?{" "}
             <Link href="/business/signup" className="text-blue-400 hover:text-blue-300 font-medium">
-              Request Access
+              Sign up
             </Link>
           </p>
         </div>

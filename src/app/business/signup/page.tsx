@@ -13,8 +13,6 @@ import {
   ShieldCheck, CheckCircle, Loader2, Building2, Pizza,
 } from "lucide-react";
 import { TermsConsentCheckbox } from "@/components/legal/TermsConsentCheckbox";
-import { TurnstileWidget } from "@/components/turnstile-widget";
-import { useTurnstile } from "@/hooks/useTurnstile";
 
 function UserTieIcon(props: React.ComponentProps<typeof User>) {
   return <User {...props} />;
@@ -111,8 +109,8 @@ function Field({ label, required, children, hint }: {
   );
 }
 
-const inputCls = "bg-white/8 border-white/15 text-white placeholder:text-slate-500 focus:border-orange-400/70 focus:ring-orange-400/20";
-const selectCls = `${inputCls} [&>option]:bg-slate-900 [&>option]:text-white`;
+const inputCls = "bg-white border-slate-200 text-slate-900 placeholder:text-slate-500 focus:border-orange-400 focus:ring-orange-400/20";
+const selectCls = `${inputCls} [&>option]:bg-white [&>option]:text-slate-900`;
 const checkboxCls = "w-4 h-4 rounded accent-orange-500 cursor-pointer";
 
 export default function BusinessSignupPage() {
@@ -120,8 +118,6 @@ export default function BusinessSignupPage() {
   const [form, setForm] = useState<FormData>(EMPTY);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const { siteKey, token, loading: turnstileLoading, loadError, turnstileRequired, onVerify, onExpire, onError, resetToken } = useTurnstile();
-
   function set(field: keyof FormData, value: string | boolean) {
     setForm((p) => ({ ...p, [field]: value }));
   }
@@ -150,11 +146,6 @@ export default function BusinessSignupPage() {
       toast.error("Password must be at least 8 characters.");
       return;
     }
-    if (turnstileRequired && !token) {
-      toast.error("Please complete the security check.");
-      return;
-    }
-
     setLoading(true);
     try {
       await businessApi.signupRequest({
@@ -205,11 +196,10 @@ export default function BusinessSignupPage() {
         phone: form.primaryContactPhone,
         password: form.password,
         businessType: "CN",
-      }, token || undefined);
+      });
       setSubmitted(true);
       toast.success("Registration submitted! Our team will review your application.");
     } catch (err: unknown) {
-      resetToken();
       toast.error(err instanceof Error ? err.message : "Submission failed. Please try again.");
     } finally {
       setLoading(false);
@@ -495,17 +485,6 @@ export default function BusinessSignupPage() {
               onChange={(checked) => set("acceptTerms", checked)}
             />
           </SectionCard>
-
-          {/* Security verification */}
-          <div className="mb-5 flex justify-center">
-            {turnstileLoading ? (
-              <p className="text-slate-400 text-sm">Loading security check…</p>
-            ) : siteKey ? (
-              <TurnstileWidget siteKey={siteKey} onVerify={onVerify} onExpire={onExpire} onError={onError} />
-            ) : loadError ? (
-              <p className="text-rose-400 text-sm">Security check unavailable. Please refresh and try again.</p>
-            ) : null}
-          </div>
 
           {/* Footer */}
           <div className="flex items-center justify-between gap-4 flex-wrap mt-2">

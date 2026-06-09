@@ -1,4 +1,4 @@
-import { communityCards, employeeLoginPath, portalPath, social } from "@/content/landing-content";
+import { employeeLoginPath, portalPath, social } from "@/content/landing-content";
 
 export function LandingCommunity() {
   return (
@@ -61,27 +61,6 @@ export function LandingCommunity() {
                 <div className="sub">USDC & USDT</div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section" style={{ paddingTop: 0, background: "var(--bg-2)" }}>
-        <div className="wrap">
-          <p className="eyebrow" data-reveal>
-            Get started
-          </p>
-          <div className="community-grid" data-reveal style={{ ["--d" as string]: "100ms" }}>
-            {communityCards.map((card) => (
-              <a key={card.title} href={card.href} className="community-card">
-                <div className="card-banner">
-                  <img src={card.img} alt={card.title} loading="lazy" />
-                </div>
-                <div className="card-content">
-                  <p className="eyebrow">{card.subtitle}</p>
-                  <h3 className="card-title">{card.title}</h3>
-                </div>
-              </a>
-            ))}
           </div>
         </div>
       </section>
