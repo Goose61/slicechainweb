@@ -37,7 +37,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://challenges.cloudflare.com",
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: https:",
-      "connect-src 'self' http://localhost:7000 https://api.slicechain.io https://challenges.cloudflare.com https://cloudflareinsights.com https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com",
+      "connect-src 'self' http://localhost:7000 https://api.slicechain.io https://challenges.cloudflare.com https://cloudflareinsights.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://www.googletagmanager.com",
       "frame-src 'self' https://challenges.cloudflare.com",
       "child-src https://challenges.cloudflare.com",
       "frame-ancestors 'none'",

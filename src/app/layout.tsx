@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { GoogleAnalyticsPageView } from "@/components/GoogleAnalyticsPageView";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -28,6 +30,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
       </head>
       <body className="antialiased font-sans">
+        <Suspense fallback={null}>
+          <GoogleAnalyticsPageView />
+        </Suspense>
         <TooltipProvider>
           {children}
           <Toaster richColors position="top-right" />
