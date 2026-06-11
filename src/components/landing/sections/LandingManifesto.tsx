@@ -61,7 +61,7 @@ export function LandingManifesto() {
               {platformPillars.map((rule) => (
                 <div key={rule.n} className="oath-rule">
                   <div className="n">{rule.n}</div>
-                  <h4>{rule.title}</h4>
+                  <h3>{rule.title}</h3>
                   <p>{rule.body}</p>
                 </div>
               ))}
@@ -77,7 +77,7 @@ export function LandingManifesto() {
               <div className="about-banner" style={{ maxWidth: 580, margin: "0 auto" }}>
                 <img
                   src={aboutSlicePay.banner}
-                  alt="SlicePay merchants and customers"
+                  alt={aboutSlicePay.bannerAlt}
                   style={{ width: "100%", borderRadius: 8 }}
                 />
               </div>

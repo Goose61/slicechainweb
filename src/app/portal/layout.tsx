@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import { pageSeo } from "@/content/seo-metadata";
 
 export const metadata: Metadata = {
-  title: "SlicePay Portal",
-  description: "Employee and business portals for SlicePay — Solana USDC payments and commissions.",
+  ...pageSeo.portal,
   icons: {
     icon: "/landing-assets/images/pizza/pizzaimages/main_logo.png",
     apple: "/landing-assets/images/pizza/pizzaimages/main_logo.png",

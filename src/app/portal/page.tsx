@@ -57,11 +57,12 @@ export default function PortalIndex() {
     <div className="min-h-screen bg-gradient-to-br from-[#0b1428] via-[#101d3d] to-[#0b1428] flex flex-col items-center justify-center p-6">
       <div className="text-center mb-12 space-y-4">
         <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-[#0f2247]/80 border border-sky-500/20 shadow-2xl shadow-sky-900/40 mb-4 p-2">
-          <Image src={LOGO} alt="SlicePay" width={80} height={80} className="w-full h-auto object-contain" priority />
+          <Image src={LOGO} alt="SlicePay crypto payment gateway logo" width={80} height={80} className="w-full h-auto object-contain" priority />
         </div>
-        <h1 className="text-5xl font-bold text-white tracking-tight">SlicePay</h1>
-        <p className="text-xl text-sky-200/90 font-medium">Crypto payments for small business</p>
-        <p className="text-slate-400 text-sm">Choose your portal to continue</p>
+        <h1 className="text-5xl font-bold text-white tracking-tight">SlicePay Portal</h1>
+        <p className="text-xl text-sky-200/90 font-medium max-w-2xl mx-auto leading-relaxed">
+          Access your crypto payment gateway dashboard to accept cryptocurrency payments, generate QR code crypto payments, and manage USDC payments for business. Choose the employee or business portal to continue.
+        </p>
         <a
           href="/"
           className="text-sky-300/80 hover:text-white text-sm underline-offset-4 hover:underline transition-colors"
@@ -70,6 +71,7 @@ export default function PortalIndex() {
         </a>
       </div>
 
+      <h2 className="sr-only">Employee and business crypto payment portals</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
         {portals.map((portal) => {
           const Icon = portal.icon;

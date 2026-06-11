@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { LegalDocumentPage } from "@/components/legal/LegalDocumentPage";
-import { legalMeta, termsAndConditions } from "@/content/legal-content";
+import { termsAndConditions } from "@/content/legal-content";
+import { pageSeo } from "@/content/seo-metadata";
 
-export const metadata: Metadata = {
-  title: `Terms and Conditions · ${legalMeta.product}`,
-  description: `Terms governing use of ${legalMeta.product}, operated by ${legalMeta.company}.`,
-};
+export const metadata: Metadata = pageSeo.terms;
 
 export default function TermsPage() {
   return (

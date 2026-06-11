@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { LegalDocumentPage } from "@/components/legal/LegalDocumentPage";
-import { legalMeta, privacyPolicy } from "@/content/legal-content";
+import { privacyPolicy } from "@/content/legal-content";
+import { pageSeo } from "@/content/seo-metadata";
 
-export const metadata: Metadata = {
-  title: `Privacy Policy · ${legalMeta.product}`,
-  description: `How ${legalMeta.company} collects, uses, and protects personal information on ${legalMeta.product}.`,
-};
+export const metadata: Metadata = pageSeo.privacy;
 
 export default function PrivacyPage() {
   return (

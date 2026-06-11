@@ -1,4 +1,4 @@
-import { brandName, heroSlides, heroStats, portalPath, social } from "@/content/landing-content";
+import { brandName, heroLead, heroSlides, heroStats, portalPath, social } from "@/content/landing-content";
 
 export function LandingHero() {
   return (
@@ -22,12 +22,19 @@ export function LandingHero() {
 
       <div className="hero-headline" data-reveal style={{ ["--d" as string]: "400ms" }}>
         <div className="slot" id="headline-slot">
-          {heroSlides.map((slide, i) => (
-            <h1 key={i} className={i === 0 ? "active" : undefined} dangerouslySetInnerHTML={{ __html: slide.titleHtml }} />
-          ))}
+          {heroSlides.map((slide, i) => {
+            const Tag = i === 0 ? "h1" : "h2";
+            return (
+              <Tag
+                key={i}
+                className={`headline-slide${i === 0 ? " active" : ""}`}
+                dangerouslySetInnerHTML={{ __html: slide.titleHtml }}
+              />
+            );
+          })}
         </div>
         <p className="sub serif" data-reveal style={{ ["--d" as string]: "550ms" }}>
-          {heroSlides[0].text}
+          {heroLead}
         </p>
         <div className="headline-dots" data-reveal style={{ ["--d" as string]: "650ms" }} id="h-dots">
           {heroSlides.map((_, i) => (

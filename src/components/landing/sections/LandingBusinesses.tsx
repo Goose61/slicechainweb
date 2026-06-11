@@ -54,7 +54,7 @@ export function LandingBusinesses() {
             <div className="corner-tr"></div>
             <div className="corner-bl"></div>
             <div className="corner-br"></div>
-            <h4>Why Your Business Joins SlicePay</h4>
+            <h3>Why Your Business Joins SlicePay</h3>
             <div className="biz-list">
               {businesses.rows.map((row) => (
                 <div key={row.n} className="biz-row">

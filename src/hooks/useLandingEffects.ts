@@ -24,7 +24,7 @@ export function useLandingEffects() {
     revealMut.observe(document.body, { childList: true, subtree: true });
     const revealTimers = [400, 1200].map((ms) => setTimeout(observeReveals, ms));
 
-    const headlines = document.querySelectorAll("#headline-slot h1");
+    const headlines = document.querySelectorAll("#headline-slot .headline-slide");
     const dots = document.querySelectorAll("#h-dots button");
     let activeH = 0;
 

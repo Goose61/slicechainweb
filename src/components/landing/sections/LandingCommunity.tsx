@@ -14,7 +14,7 @@ export function LandingCommunity() {
                 Start with <span className="it">SlicePay</span>
               </h2>
               <p className="kicker">
-                Register your business, onboard staff, or open the portal to run payments and track commissions.
+                Register your business to accept cryptocurrency payments, onboard staff for QR code crypto payments, and open the portal to manage USDC payments for business.
               </p>
               <div className="crew-cta">
                 <a href={portalPath} className="btn btn-gold">

@@ -8,7 +8,7 @@ export function LandingFooter() {
         <div className="foot-grid">
           <div className="foot-col">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <img src={logo} alt={brandName} style={{ height: 36, filter: "drop-shadow(0 0 12px rgba(59,158,255,.35))" }} />
+              <img src={logo} alt={`${brandName} crypto payment gateway logo`} style={{ height: 36, filter: "drop-shadow(0 0 12px rgba(59,158,255,.35))" }} />
               <span style={{ fontFamily: "var(--display)", fontSize: 22, letterSpacing: ".1em", textTransform: "uppercase" }}>
                 {brandName}
               </span>

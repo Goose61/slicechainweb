@@ -30,7 +30,7 @@ export function LandingNav() {
           <div className="nav-top">
             <a href="#home" className="nav-left brand-link">
               <div className="brand">
-                <img src={logo} alt={brandName} />
+                <img src={logo} alt={`${brandName} crypto payment gateway logo`} />
                 <span className="brand-wordmark">{brandName}</span>
               </div>
             </a>

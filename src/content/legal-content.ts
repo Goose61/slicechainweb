@@ -12,7 +12,7 @@ export const privacyPolicy = {
   sections: [
     {
       heading: "1. Introduction",
-      body: `SliceChain Holdings Inc. ("SliceChain," "we," "us," or "our") operates SlicePay, a business payment and loyalty platform that helps merchants accept wallet-based payments and manage related operations. This Privacy Policy explains how we collect, use, disclose, and protect personal information when you visit our websites, create an account, or use SlicePay services.
+      body: `SliceChain Holdings Inc. ("SliceChain," "we," "us," or "our") operates SlicePay, a crypto payment gateway and blockchain payment processor that helps merchants accept cryptocurrency payments, QR code crypto checkout, and USDC payments for business. This Privacy Policy explains how we collect, use, disclose, and protect personal information when you visit our websites, create an account, or use SlicePay multi-chain crypto payment services.
 
 By registering for or using SlicePay, you acknowledge this Privacy Policy. If you do not agree, do not use the platform.`,
     },
@@ -130,9 +130,9 @@ export const termsAndConditions = {
   sections: [
     {
       heading: "1. Agreement to Terms",
-      body: `These Terms and Conditions ("Terms") govern access to and use of SlicePay, operated by SliceChain Holdings Inc. ("SliceChain," "we," "us," or "our"). By creating an account, registering a business, or using any SlicePay service, you agree to these Terms and our Privacy Policy.
+      body: `These Terms and Conditions ("Terms") govern access to and use of SlicePay, a crypto payment gateway operated by SliceChain Holdings Inc. ("SliceChain," "we," "us," or "our"). By creating an account, registering a business, or using any SlicePay service to accept cryptocurrency payments or QR code crypto payments, you agree to these Terms and our Privacy Policy.
 
-If you are using SlicePay on behalf of a business, you represent that you have authority to bind that business to these Terms.`,
+If you are using SlicePay on behalf of a business, you represent that you have authority to bind that business to these Terms for USDC payments, multi-chain crypto payments, and related blockchain payment processor features.`,
     },
     {
       heading: "2. Description of Service",

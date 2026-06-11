@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { landingMeta } from "@/content/landing-content";
+import { pageSeo } from "@/content/seo-metadata";
 import "leaflet/dist/leaflet.css";
 import "@/styles/landing-menos-gusto.css";
 import "@/styles/landing-inline.css";
 
 export const metadata: Metadata = {
-  title: landingMeta.title,
-  description: landingMeta.description,
+  ...pageSeo.home,
   icons: {
     icon: "/landing-assets/images/pizza/pizzaimages/main_logo.png",
     apple: "/landing-assets/images/pizza/pizzaimages/main_logo.png",

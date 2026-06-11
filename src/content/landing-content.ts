@@ -9,10 +9,14 @@ export const businessSignupPath = appUrl("/business/signup");
 export const employeeLoginPath = appUrl("/employee/login");
 
 export const landingMeta = {
-  title: "SlicePay · Crypto Payments for Small Business",
+  title: "SlicePay | Crypto Payment Gateway for Small Business",
   description:
-    "SlicePay is an alternative payment provider for small and medium businesses. Accept crypto from any wallet across supported chains, reward customers with SLICE, and settle in USDC and USDT.",
+    "SlicePay is a crypto payment gateway for restaurants and retailers. Accept cryptocurrency payments via QR codes, USDC payments for business, and multi-chain settlement.",
 };
+
+/** Keyword-rich hero intro (~100 words) — primary on-page content below H1. */
+export const heroLead =
+  "SlicePay is a crypto payment gateway built for restaurants, food trucks, and retailers that need to accept cryptocurrency payments at checkout. Our blockchain payment processor powers QR code crypto payments from any compatible wallet, with USDC payments for business and employee payouts on every sale. Whether you need multi-chain crypto payments across Ethereum, Solana, Polygon, Base, and more, SlicePay gives you one simple flow to accept crypto with transparent 1.9% pricing, SLICE loyalty rewards, and stablecoin settlement in USDC and USDT.";
 
 export const supportedChainLogos = [
   { name: "Ethereum", logo: `${A}/chains/ethereum.png` },
@@ -38,7 +42,7 @@ export const crossChain = {
   tagline: "Seamless. Secure. Compliant. Everywhere.",
   image: `${A}/multi-chain.jpg`,
   imageAlt:
-    "SlicePay cross-chain compliance supporting Ethereum, Solana, Monad, Stellar, Polygon, Avalanche, Arbitrum, Base, Optimism, HyperEVM, BNB Chain, and Linea with USDC and USDT",
+    "Multi-chain crypto payments diagram showing SlicePay blockchain payment processor supporting QR code crypto payments and USDC payments for business",
   stablecoins: "USDC & USDT on all compliant chains",
   footer: "One compliance layer. Multiple chains. Unlimited possibilities.",
 };
@@ -67,23 +71,26 @@ export const navLinks = [
 
 export const heroSlides = [
   {
-    subtitle: "Alternative payments",
-    titleHtml: 'Pay with <span class="it">any wallet</span>,<br>get paid in USDC',
-    text: "SlicePay helps restaurants and retailers accept crypto at checkout with a simple QR code.",
+    subtitle: "Crypto payment gateway",
+    titleHtml: 'Accept <span class="it">cryptocurrency</span><br>payments in USDC',
+    text: "QR code crypto payments for restaurants and retailers — accept crypto from any supported wallet.",
     cta: { label: "Open Portal", href: portalPath },
     bg: `${A}/hero-slider-1.jpg`,
+    bgAlt: "Restaurant accepting QR code crypto payments with SlicePay crypto payment gateway",
   },
   {
     subtitle: "Built for Main Street",
-    titleHtml: 'Lower fees,<span class="it"> real</span><br>loyalty rewards',
-    text: "1.9% total fee with automatic stablecoin payouts for owners and staff.",
+    titleHtml: 'USDC payments<br>for <span class="it">business</span>',
+    text: "1.9% total fee with automatic USDC and USDT payouts for owners and staff.",
     bg: `${A}/hero-slider-2.jpg`,
+    bgAlt: "Small business owner receiving USDC payments for business through SlicePay",
   },
   {
     subtitle: "Customers & staff win",
-    titleHtml: 'SLICE rewards<br>on every <span class="it">sale</span>',
-    text: "Shoppers earn SLICE for future discounts. Employees earn 0.3% when they facilitate a payment.",
+    titleHtml: 'Multi-chain crypto<br>payments <span class="it">made simple</span>',
+    text: "Shoppers earn SLICE rewards. Employees earn 0.3% when they facilitate a blockchain payment.",
     bg: `${A}/hero-slider-3.jpg`,
+    bgAlt: "Employee generating multi-chain crypto payments QR code at SlicePay checkout",
   },
 ];
 
@@ -107,7 +114,7 @@ export const platformPillars = [
   {
     n: "I.",
     title: "Scan & Pay",
-    body: "Customers scan your SlicePay QR code and pay from any compatible wallet with supported coins.",
+    body: "Customers scan your SlicePay QR code crypto payment and pay from any compatible wallet to accept cryptocurrency payments at checkout.",
   },
   {
     n: "II.",
@@ -133,8 +140,8 @@ export const platformPillars = [
 
 export const slicePaySection = {
   subtitle: "Payment Platform",
-  title: "Real Payments for Real Businesses",
-  text: "SlicePay is an alternative payment provider built for small and medium businesses. Customers pay using any wallet with a QR code scanner across our supported cross-chain network. USDC and USDT are supported on all compliant chains. Customers receive SLICE loyalty tokens for discounts on future purchases. Employees who facilitate a transaction earn 0.3% of the 1.9% business fee. Both employees and business owners receive stablecoin payouts.",
+  title: "How Our Crypto Payment Gateway Works",
+  text: "SlicePay is a blockchain payment processor built for small and medium businesses that want to accept cryptocurrency payments without complexity. Customers scan a QR code crypto payment at checkout and pay from any compatible wallet across our multi-chain crypto payments network. USDC payments for business and employee commissions settle in USDC and USDT on supported chains. Shoppers earn SLICE loyalty tokens; staff earn 0.3% when they facilitate a sale.",
   cta: { label: "Open SlicePay Portal", href: portalPath },
 };
 
@@ -165,7 +172,7 @@ export const mission = {
   blocks: [
     {
       title: "Our mission",
-      body: "Give small and medium businesses a practical way to accept crypto, reward repeat customers, and pay staff fairly from every sale.",
+      body: "Give small and medium businesses a practical crypto payment gateway to accept cryptocurrency payments, reward repeat customers with SLICE, and pay staff fairly from every QR code crypto sale.",
     },
     {
       title: "Our vision",
@@ -177,8 +184,9 @@ export const mission = {
 export const aboutSlicePay = {
   subtitle: "About SlicePay",
   title: "Built for businesses that want to move faster.",
-  text: "We created SlicePay — SliceChain Holdings flagship product to simplify how modern businesses manage payments, operations, and growth without adding complexity. Our platform helps companies deliver seamless customer experiences while keeping their existing workflows intact.",
+  text: "We created SlicePay — SliceChain Holdings flagship blockchain payment processor — to help merchants accept cryptocurrency payments, run QR code crypto checkout, and receive USDC payments for business without replacing existing workflows.",
   banner: `${A}/about-banner.jpg`,
+  bannerAlt: "Merchants using SlicePay crypto payment gateway to accept cryptocurrency payments at checkout",
 };
 
 export const team = {
@@ -233,28 +241,29 @@ export const gallery = {
 
 /** Add new gallery images here after placing files in public/landing-assets/images/pizza/campaign-gallery/ */
 export const galleryImages = [
-  { src: `${A}/pizza/campaign-gallery/photo_1_2025-08-01_12-08-13.jpg`, alt: "SlicePay checkout at a local partner" },
-  { src: `${A}/pizza/campaign-gallery/photo_2_2025-08-01_12-08-13.jpg`, alt: "Merchant onboarding event" },
-  { src: `${A}/pizza/campaign-gallery/photo_5_2025-08-01_12-08-13.jpg`, alt: "Celebrating a new SlicePay location" },
-  { src: `${A}/pizza/campaign-gallery/photo_6_2025-08-01_12-08-13.jpg`, alt: "Community payment drive" },
-  { src: `${A}/pizza/campaign-gallery/image-11.jpg`, alt: "SlicePay campaign highlight" },
+  { src: `${A}/pizza/campaign-gallery/photo_1_2025-08-01_12-08-13.jpg`, alt: "Customer using QR code crypto payments at a SlicePay merchant partner" },
+  { src: `${A}/pizza/campaign-gallery/photo_2_2025-08-01_12-08-13.jpg`, alt: "Merchant onboarding to accept cryptocurrency payments with SlicePay" },
+  { src: `${A}/pizza/campaign-gallery/photo_5_2025-08-01_12-08-13.jpg`, alt: "New SlicePay location celebrating USDC payments for business" },
+  { src: `${A}/pizza/campaign-gallery/photo_6_2025-08-01_12-08-13.jpg`, alt: "Community event promoting multi-chain crypto payments with SlicePay" },
+  { src: `${A}/pizza/campaign-gallery/image-11.jpg`, alt: "SlicePay crypto payment gateway campaign at a local business" },
 ];
 
 export const communityCards = [
-  { href: portalPath, img: `${A}/event-1.jpg`, subtitle: "Business", title: "Register your business on SlicePay" },
-  { href: employeeLoginPath, img: `${A}/event-2.jpg`, subtitle: "Employee", title: "Staff: generate QR codes and earn commission" },
+  { href: portalPath, img: `${A}/event-1.jpg`, alt: "Business owner registering to accept cryptocurrency payments on SlicePay", subtitle: "Business", title: "Register your business on SlicePay" },
+  { href: employeeLoginPath, img: `${A}/event-2.jpg`, alt: "Employee generating QR code crypto payments for USDC checkout", subtitle: "Employee", title: "Staff: generate QR codes and earn commission" },
   {
     href: portalPath,
     img: `${A}/photo_2025-08-05_18-45-59.jpg`,
+    alt: "Customer completing multi-chain crypto payments with SlicePay blockchain payment processor",
     subtitle: "Payments",
     title: "Start accepting wallet payments today",
   },
-  { href: businessLoginPath, img: `${A}/photo_2025-08-05_18-45-58.jpg`, subtitle: "Dashboard", title: "Open your business dashboard" },
+  { href: businessLoginPath, img: `${A}/photo_2025-08-05_18-45-58.jpg`, alt: "SlicePay business dashboard for USDC payments and crypto payment analytics", subtitle: "Dashboard", title: "Open your business dashboard" },
 ];
 
 export const businesses = {
   titleHtml: 'Accept payments with <span class="it">SlicePay</span><br>Keep more <span class="it">margin</span>',
-  lede: "SlicePay is built for restaurants, food trucks, and retailers. Let customers pay from any wallet on supported chains while you receive stablecoin payouts with a simple 1.9% total fee.",
+  lede: "SlicePay is the crypto payment gateway built for restaurants, food trucks, and retailers. Let customers accept cryptocurrency payments from any wallet on supported chains while you receive USDC payments for business with a simple 1.9% total fee and QR code crypto payments at the counter.",
   cta: { label: "Register on SlicePay", href: portalPath },
   rows: [
     { n: "01", t: "Cross-chain payments", d: "Ethereum, Solana, Polygon, Base, Arbitrum, and more. Customers scan your QR and pay from any supported wallet.", tag: "Live" },
