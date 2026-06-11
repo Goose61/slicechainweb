@@ -16,7 +16,7 @@ export const landingMeta = {
 
 /** Keyword-rich hero intro (~100 words) — primary on-page content below H1. */
 export const heroLead =
-  "SlicePay is a crypto payment gateway built for restaurants, food trucks, and retailers that need to accept cryptocurrency payments at checkout. Our blockchain payment processor powers QR code crypto payments from any compatible wallet, with USDC payments for business and employee payouts on every sale. Whether you need multi-chain crypto payments across Ethereum, Solana, Polygon, Base, and more, SlicePay gives you one simple flow to accept crypto with transparent 1.9% pricing, SLICE loyalty rewards, and stablecoin settlement in USDC and USDT.";
+  "SlicePay is a crypto payment gateway built for small and medium businesses that need to accept cryptocurrency payments at checkout. Our blockchain payment processor powers QR code crypto payments from any compatible wallet, with USDC payments for business and employee payouts on every sale. Whether you need multi-chain crypto payments across Ethereum, Solana, Polygon, Base, and more, SlicePay gives you one simple flow to accept crypto with transparent 1.9% pricing, SLICE loyalty rewards, and stablecoin settlement in USDC and USDT.";
 
 export const supportedChainLogos = [
   { name: "Ethereum", logo: `${A}/chains/ethereum.png` },
@@ -80,7 +80,7 @@ export const heroSlides = [
   },
   {
     subtitle: "Built for Main Street",
-    titleHtml: 'USDC payments<br>for <span class="it">business</span>',
+    titleHtml: 'USDC payouts<br>for <span class="it">businesses</span>',
     text: "1.9% total fee with automatic USDC and USDT payouts for owners and staff.",
     bg: `${A}/hero-slider-2.jpg`,
     bgAlt: "Small business owner receiving USDC payments for business through SlicePay",
