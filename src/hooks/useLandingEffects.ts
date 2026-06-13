@@ -42,6 +42,21 @@ export function useLandingEffects() {
     );
     const cycle = setInterval(() => setHeadline((activeH + 1) % headlines.length), 5000);
 
+    const headlineSlot = document.getElementById("headline-slot");
+    let touchStartX = 0;
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX = e.changedTouches[0]?.clientX ?? 0;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      const touchEndX = e.changedTouches[0]?.clientX ?? 0;
+      const delta = touchEndX - touchStartX;
+      if (Math.abs(delta) < 48 || !headlines.length) return;
+      if (delta < 0) setHeadline((activeH + 1) % headlines.length);
+      else setHeadline((activeH - 1 + headlines.length) % headlines.length);
+    };
+    headlineSlot?.addEventListener("touchstart", onTouchStart, { passive: true });
+    headlineSlot?.addEventListener("touchend", onTouchEnd, { passive: true });
+
     document.querySelectorAll('a[href^="#"]').forEach((a) => {
       a.addEventListener("click", (e) => {
         const href = a.getAttribute("href");
@@ -61,6 +76,8 @@ export function useLandingEffects() {
       revealMut.disconnect();
       revealTimers.forEach(clearTimeout);
       clearInterval(cycle);
+      headlineSlot?.removeEventListener("touchstart", onTouchStart);
+      headlineSlot?.removeEventListener("touchend", onTouchEnd);
     };
   }, []);
 }

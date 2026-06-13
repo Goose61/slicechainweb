@@ -216,7 +216,8 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
   0%{background-position:-200% center}
   100%{background-position:200% center}
 }
-.hero-headline h1 .it{
+.hero-headline h1 .it,
+.hero-headline h2.headline-slide .it{
   background:linear-gradient(90deg, var(--gold) 0%, var(--gold-hi) 30%, #fffbe8 50%, var(--gold-hi) 70%, var(--gold) 100%);
   background-size:200% auto;
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
@@ -467,6 +468,21 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
 }
 
 @media(max-width:640px){
+  .landing-page .hero{
+    padding-top:88px;
+    padding-bottom:28px;
+  }
+  .landing-page .hero-headline h1,
+  .landing-page .hero-headline h2.headline-slide{
+    font-size:clamp(26px,8.2vw,38px);
+  }
+  .landing-page .hero-headline .sub{
+    font-size:13.5px;
+    line-height:1.7;
+  }
+  .landing-page .hero-stats{
+    gap:10px;
+  }
   .landing-page .cross-chain-visual{max-width:100%}
   .landing-page .chain-logo-item{width:92px;padding:12px 10px}
   .landing-page .chain-logo-item img{width:36px;height:36px}

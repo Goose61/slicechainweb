@@ -44,13 +44,23 @@ export function LandingHero() {
       </div>
 
       <div className="hero-bottom" style={{ width: "100%" }}>
-        <div className="hero-stat" data-reveal style={{ ["--d" as string]: "700ms" }}>
-          <span className="mono">{heroStats.left.label}</span>
-          <b className="stat-glow">
-            {heroStats.left.value}
-            <sup className="fee-asterisk">*</sup>
-          </b>
-          <span className="fee-disclaimer">Fees subject to change</span>
+        <div className="hero-stats">
+          <div className="hero-stat" data-reveal style={{ ["--d" as string]: "700ms" }}>
+            <span className="mono">{heroStats.left.label}</span>
+            <b className="stat-glow">
+              {heroStats.left.value}
+              <sup className="fee-asterisk">*</sup>
+            </b>
+            <span className="fee-disclaimer">Fees subject to change</span>
+          </div>
+          <div className="hero-stat right" data-reveal style={{ ["--d" as string]: "720ms" }}>
+            <span className="mono">{heroStats.right.label}</span>
+            <b className="stat-glow">
+              {heroStats.right.value}
+              <sup className="fee-asterisk">*</sup>
+            </b>
+            <span className="fee-disclaimer">Fees subject to change</span>
+          </div>
         </div>
         <div className="hero-cta" data-reveal style={{ ["--d" as string]: "800ms" }}>
           <a href={portalPath} className="btn btn-gold">
@@ -62,14 +72,6 @@ export function LandingHero() {
           <a href={social.email} className="btn btn-blood">
             Contact us
           </a>
-        </div>
-        <div className="hero-stat right" data-reveal style={{ ["--d" as string]: "700ms" }}>
-          <span className="mono">{heroStats.right.label}</span>
-          <b className="stat-glow">
-            {heroStats.right.value}
-            <sup className="fee-asterisk">*</sup>
-          </b>
-          <span className="fee-disclaimer">Fees subject to change</span>
         </div>
       </div>
 
