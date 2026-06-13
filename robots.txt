@@ -1,0 +1,10 @@
+User-Agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /business/dashboard/
+Disallow: /customer/dashboard/
+Disallow: /employee/dashboard/
+Disallow: /transactions/
+Disallow: /vendor-payment/
+
+Sitemap: https://slicechain.io/sitemap.xml
