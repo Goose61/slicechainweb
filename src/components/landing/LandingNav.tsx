@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { brandName, logo, navLinks, portalPath, social } from "@/content/landing-content";
+import { brandName, logo, navLinks, portalPath, businessDemoPath, social } from "@/content/landing-content";
 
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,17 +34,27 @@ export function LandingNav() {
                 <span className="brand-wordmark">{brandName}</span>
               </div>
             </a>
-            <button
-              type="button"
-              className="nav-menu-btn"
-              onClick={() => setMenuOpen(true)}
-              aria-label="Open menu"
-              aria-expanded={menuOpen}
-            >
-              <span />
-              <span />
-              <span />
-            </button>
+            <div className="nav-top-actions">
+              <a
+                href={businessDemoPath}
+                className="btn btn-gold nav-demo-btn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Try Demo
+              </a>
+              <button
+                type="button"
+                className="nav-menu-btn"
+                onClick={() => setMenuOpen(true)}
+                aria-label="Open menu"
+                aria-expanded={menuOpen}
+              >
+                <span />
+                <span />
+                <span />
+              </button>
+            </div>
           </div>
         </nav>
       </header>
@@ -73,6 +83,15 @@ export function LandingNav() {
           ))}
         </nav>
         <div className="nav-drawer-actions">
+          <a
+            href={businessDemoPath}
+            className="btn btn-gold"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeMenu}
+          >
+            Try Demo <span className="arrow">→</span>
+          </a>
           <a href={portalPath} className="btn btn-ghost" onClick={closeMenu}>
             Portal <span className="arrow">→</span>
           </a>

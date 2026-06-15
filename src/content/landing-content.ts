@@ -4,6 +4,7 @@ const A = "/landing-assets/images";
 
 /** Platform login / signup entry — live demo at app.slicechain.io from GitHub Pages. */
 export const portalPath = appUrl("/portal");
+export const businessDemoPath = appUrl("/business/demo");
 export const businessLoginPath = appUrl("/business/login");
 export const businessSignupPath = appUrl("/business/signup");
 export const employeeLoginPath = appUrl("/employee/login");

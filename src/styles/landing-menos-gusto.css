@@ -95,6 +95,11 @@ body::after{
 }
 .nav.scrolled{background:rgba(11,20,40,.82);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);border-bottom-color:var(--line)}
 .nav-top{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%}
+.nav-top-actions{display:flex;align-items:center;gap:10px}
+.nav-demo-btn{padding:10px 16px;font-size:11px;letter-spacing:.08em;white-space:nowrap}
+@media (max-width:480px){
+  .nav-demo-btn{padding:8px 12px;font-size:10px}
+}
 .nav-left,.nav-right{display:flex;align-items:center;gap:20px;flex-shrink:0}
 .nav-right{margin-left:auto}
 .brand-link{flex-shrink:0;text-decoration:none}
