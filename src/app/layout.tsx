@@ -8,7 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   title: "SlicePay",
-  description: "Crypto payments for small business — accept any wallet across supported chains with USDC and USDT settlement.",
+  description: "Crypto payments for small business - accept any wallet across supported chains with USDC and USDT settlement.",
   icons: {
     icon: "/landing-assets/images/pizza/pizzaimages/main_logo.png",
     apple: "/landing-assets/images/pizza/pizzaimages/main_logo.png",

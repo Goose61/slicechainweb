@@ -63,10 +63,10 @@ We do not collect traditional payment card numbers (PAN) for card processing thr
       heading: "5. Legal Bases for Processing",
       body: `Where applicable privacy laws require a legal basis, we rely on:
 
-- **Performance of a contract** — to provide SlicePay services you request
-- **Legitimate interests** — to secure the platform, prevent fraud, and improve our services
-- **Legal obligation** — to comply with applicable law, regulatory requests, and recordkeeping requirements
-- **Consent** — where required, such as for optional marketing communications or certain verification flows`,
+- **Performance of a contract** - to provide SlicePay services you request
+- **Legitimate interests** - to secure the platform, prevent fraud, and improve our services
+- **Legal obligation** - to comply with applicable law, regulatory requests, and recordkeeping requirements
+- **Consent** - where required, such as for optional marketing communications or certain verification flows`,
     },
     {
       heading: "6. How We Share Information",

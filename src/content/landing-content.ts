@@ -74,7 +74,7 @@ export const heroSlides = [
   {
     subtitle: "Crypto payment gateway",
     titleHtml: 'Accept <span class="it">cryptocurrency</span><br>payments in USDC',
-    text: "QR code crypto payments for restaurants and retailers — accept crypto from any supported wallet.",
+    text: "QR code crypto payments for restaurants and retailers - accept crypto from any supported wallet.",
     cta: { label: "Open Portal", href: portalPath },
     bg: `${A}/hero-slider-1.jpg`,
     bgAlt: "Restaurant accepting QR code crypto payments with SlicePay crypto payment gateway",
@@ -185,7 +185,7 @@ export const mission = {
 export const aboutSlicePay = {
   subtitle: "About SlicePay",
   title: "Built for businesses that want to move faster.",
-  text: "We created SlicePay — SliceChain Holdings flagship blockchain payment processor — to help merchants accept cryptocurrency payments, run QR code crypto checkout, and receive USDC payments for business without replacing existing workflows.",
+  text: "We created SlicePay - SliceChain Holdings flagship blockchain payment processor - to help merchants accept cryptocurrency payments, run QR code crypto checkout, and receive USDC payments for business without replacing existing workflows.",
   banner: `${A}/about-banner.jpg`,
   bannerAlt: "Merchants using SlicePay crypto payment gateway to accept cryptocurrency payments at checkout",
 };

@@ -197,7 +197,7 @@ export default function AdminDashboard() {
                         <TableCell className="font-mono text-xs">{tx._id.slice(0, 10)}…</TableCell>
                         <TableCell className="font-semibold">${(tx.amount || 0).toFixed(2)}</TableCell>
                         <TableCell><StatusBadge status={tx.status} /></TableCell>
-                        <TableCell className="font-mono text-xs">{tx.walletAddress ? shortAddress(tx.walletAddress) : "—"}</TableCell>
+                        <TableCell className="font-mono text-xs">{tx.walletAddress ? shortAddress(tx.walletAddress) : "-"}</TableCell>
                         <TableCell className="text-xs">${(tx.fees?.platformFee || 0).toFixed(2)}</TableCell>
                       </TableRow>
                     ))

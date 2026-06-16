@@ -169,7 +169,7 @@ export default function BusinessDashboard() {
       setQrSvg(json.svgQRCode);
       setQrPaymentUrl(json.solanaPayUrl);
       setQrRef(reference);
-      toast.success("QR code ready — select a wallet to display");
+      toast.success("QR code ready - select a wallet to display");
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : "QR generation failed");
     } finally {
@@ -435,7 +435,7 @@ export default function BusinessDashboard() {
                         <TableCell className="font-mono text-xs">{tx._id.slice(0, 8)}…</TableCell>
                         <TableCell className="font-semibold">${(tx.amount || 0).toFixed(2)}</TableCell>
                         <TableCell><StatusBadge status={tx.status} /></TableCell>
-                        <TableCell className="font-mono text-xs">{tx.walletAddress ? shortAddress(tx.walletAddress) : "—"}</TableCell>
+                        <TableCell className="font-mono text-xs">{tx.walletAddress ? shortAddress(tx.walletAddress) : "-"}</TableCell>
                         <TableCell className="text-xs">${(tx.fees?.platformFee || 0).toFixed(2)}</TableCell>
                         <TableCell>
                           <Button variant="ghost" size="sm" onClick={() => setSelectedTx(tx)}>
@@ -502,11 +502,11 @@ export default function BusinessDashboard() {
                       <TableRow key={emp.employeeId}>
                         <TableCell className="font-mono text-xs">{emp.employeeId}</TableCell>
                         <TableCell>{emp.fullName}</TableCell>
-                        <TableCell className="font-mono text-xs">{emp.wallet?.usdcAddress ? shortAddress(emp.wallet.usdcAddress) : "—"}</TableCell>
+                        <TableCell className="font-mono text-xs">{emp.wallet?.usdcAddress ? shortAddress(emp.wallet.usdcAddress) : "-"}</TableCell>
                         <TableCell>{emp.stats?.totalTransactionsFacilitated || 0}</TableCell>
                         <TableCell className="font-medium text-green-600">{formatCurrency(emp.commission?.totalEarned || 0)}</TableCell>
                         <TableCell className="text-amber-600">{formatCurrency(emp.commission?.pending || 0)}</TableCell>
-                        <TableCell className="text-xs text-muted-foreground">{emp.commission?.lastPayoutAt ? new Date(emp.commission.lastPayoutAt).toLocaleDateString() : "—"}</TableCell>
+                        <TableCell className="text-xs text-muted-foreground">{emp.commission?.lastPayoutAt ? new Date(emp.commission.lastPayoutAt).toLocaleDateString() : "-"}</TableCell>
                       </TableRow>
                     ))
                   )}
@@ -748,7 +748,7 @@ export default function BusinessDashboard() {
                 ["Amount", `${(selectedTx.amount || 0).toFixed(2)} ${selectedTx.inputToken?.symbol || "USDC"}`],
                 ["Status", <StatusBadge key="status" status={selectedTx.status} />],
                 ["Date", new Date(selectedTx.createdAt).toLocaleString()],
-                ["Customer Wallet", selectedTx.walletAddress ? shortAddress(selectedTx.walletAddress) : "—"],
+                ["Customer Wallet", selectedTx.walletAddress ? shortAddress(selectedTx.walletAddress) : "-"],
                 ["Platform Fee", formatCurrency(selectedTx.fees?.platformFee || 0)],
                 ["Reward", selectedTx.rewards?.pizzarRewardsDistributed
                   ? `${selectedTx.rewards.pizzarRewardsDistributed.toFixed(2)} SLICE`

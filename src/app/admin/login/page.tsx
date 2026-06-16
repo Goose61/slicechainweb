@@ -46,7 +46,7 @@ export default function AdminLoginPage() {
   return (
     <AuthCard
       title="Platform Admin"
-      description="Super admin access — restricted"
+      description="Super admin access - restricted"
       gradient="from-slate-600 to-slate-800"
       backHref="/"
     >
