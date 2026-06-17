@@ -12,12 +12,12 @@ export const employeeLoginPath = appUrl("/employee/login");
 export const landingMeta = {
   title: "Slice Chain & SlicePay | Crypto Payment Gateway for Small Business",
   description:
-    "Slice Chain powers SlicePay (Slice Pay), a crypto payment gateway for restaurants and retailers. Accept cryptocurrency payments via QR codes, USDC payments for business, and multi-chain settlement.",
+    "Slice Chain powers SlicePay (Slice Pay) for crypto payments and multi chain payments. Accept crypto payments for businesses via QR codes, stablecoin settlement, and USDC payouts.",
 };
 
 /** Keyword-rich hero intro (~100 words) — primary on-page content below H1. */
 export const heroLead =
-  "Slice Chain powers SlicePay (Slice Pay), a crypto payment gateway built for small and medium businesses that need to accept cryptocurrency payments at checkout. Our blockchain payment processor powers QR code crypto payments from any compatible wallet, with USDC payments for business and employee payouts on every sale. Whether you need multi-chain crypto payments across Ethereum, Solana, Polygon, Base, and more, SlicePay gives you one simple flow to accept crypto with transparent 1.9% pricing, SLICE loyalty rewards, and stablecoin settlement in USDC and USDT.";
+  "Slice Chain powers SlicePay (Slice Pay), a crypto payment gateway built for small and medium businesses that need crypto payments for businesses at checkout. Our blockchain payment processor powers QR code crypto payments from any compatible wallet, with USDC payments for business and employee payouts on every sale. Whether you need multi chain payments across Ethereum, Solana, Polygon, Base, and more, SlicePay gives you one simple flow to accept crypto payments and pay with crypto — transparent 1.9% pricing, SLICE loyalty rewards, and stablecoin settlement in USDC and USDT.";
 
 export const supportedChainLogos = [
   { name: "Ethereum", logo: `${A}/chains/ethereum.png` },
@@ -45,7 +45,7 @@ export const crossChain = {
   imageAlt:
     "Multi-chain crypto payments diagram showing SlicePay blockchain payment processor supporting QR code crypto payments and USDC payments for business",
   stablecoins: "USDC & USDT on all compliant chains",
-  footer: "One compliance layer. Multiple chains. Unlimited possibilities.",
+  footer: "Multi chain payments with one compliance layer. Multiple chains. Unlimited possibilities.",
 };
 
 export const brandName = "SlicePay";
@@ -75,7 +75,7 @@ export const heroSlides = [
   {
     subtitle: "Crypto payment gateway",
     titleHtml: 'Accept <span class="it">cryptocurrency</span><br>payments in USDC',
-    text: "QR code crypto payments for restaurants and retailers - accept crypto from any supported wallet.",
+    text: "Crypto payments for businesses at the counter — QR code checkout lets customers pay with crypto from any supported wallet.",
     cta: { label: "Open Portal", href: portalPath },
     bg: `${A}/hero-slider-1.jpg`,
     bgAlt: "Restaurant accepting QR code crypto payments with SlicePay crypto payment gateway",
@@ -103,6 +103,8 @@ export const heroStats = {
 
 export const marqueeItems = [
   "SlicePay QR Payments",
+  "Crypto Payments for Businesses",
+  "Multi Chain Payments",
   "Pay with Any Wallet",
   "Cross-Chain Compliant",
   "USDC & USDT Supported",
@@ -143,7 +145,7 @@ export const platformPillars = [
 export const slicePaySection = {
   subtitle: "Payment Platform",
   title: "How Our Crypto Payment Gateway Works",
-  text: "SlicePay is a blockchain payment processor built for small and medium businesses that want to accept cryptocurrency payments without complexity. Customers scan a QR code crypto payment at checkout and pay from any compatible wallet across our multi-chain crypto payments network. USDC payments for business and employee commissions settle in USDC and USDT on supported chains. Shoppers earn SLICE loyalty tokens; staff earn 0.3% when they facilitate a sale.",
+  text: "SlicePay is a blockchain payment processor built for small and medium businesses that want to accept crypto payments without complexity. Customers scan a QR code crypto payment at checkout and pay with crypto from any compatible wallet across our multi chain payments network. USDC payments for business and employee commissions settle in USDC and USDT on supported chains. Shoppers earn SLICE loyalty tokens; staff earn 0.3% when they facilitate a sale.",
   cta: { label: "Open SlicePay Portal", href: portalPath },
 };
 
@@ -174,11 +176,11 @@ export const mission = {
   blocks: [
     {
       title: "Our mission",
-      body: "Give small and medium businesses a practical crypto payment gateway to accept cryptocurrency payments, reward repeat customers with SLICE, and pay staff fairly from every QR code crypto sale.",
+      body: "Give small and medium businesses a practical crypto payment gateway for crypto payments at checkout — reward repeat customers with SLICE and pay staff fairly from every QR code crypto sale.",
     },
     {
       title: "Our vision",
-      body: "Become the trusted payment layer for food, retail, and service businesses that want flexible checkout, loyalty built in, and cross-chain stablecoin settlement.",
+      body: "Become the trusted payment layer for food, retail, and service businesses that want flexible crypto checkout, loyalty built in, and cross-chain stablecoin payments.",
     },
   ],
 };
@@ -265,10 +267,10 @@ export const communityCards = [
 
 export const businesses = {
   titleHtml: 'Accept payments with <span class="it">SlicePay®</span><br>Keep more <span class="it">margin</span>',
-  lede: "SlicePay is the crypto payment gateway built for restaurants, food trucks, and retailers. Let customers accept cryptocurrency payments from any wallet on supported chains while you receive USDC payments for business with a simple 1.9% total fee and QR code crypto payments at the counter.",
+  lede: "SlicePay is the crypto payment gateway built for restaurants, food trucks, and retailers that need crypto payments for businesses. Let customers pay with crypto from any wallet on supported chains while you receive USDC payments for business with a simple 1.9% total fee and QR code crypto payments at the counter.",
   cta: { label: "Register on SlicePay", href: portalPath },
   rows: [
-    { n: "01", t: "Cross-chain payments", d: "Ethereum, Solana, Polygon, Base, Arbitrum, and more. Customers scan your QR and pay from any supported wallet.", tag: "Live" },
+    { n: "01", t: "Multi chain payments", d: "Ethereum, Solana, Polygon, Base, Arbitrum, and more. Customers scan your QR and pay with crypto from any supported wallet.", tag: "Live" },
     { n: "02", t: "SLICE Loyalty", d: "Customers earn SLICE tokens for discounts on future purchases at your business.", tag: "Live" },
     { n: "03", t: "1.9% Total Fee", d: "Simple pricing for businesses. 0.3% of the fee goes to the employee who facilitated the transaction.", tag: "Live" },
     { n: "04", t: "USDC & USDT payouts", d: "Business owners and employees receive stablecoin payouts on all compliant chains.", tag: "Live" },

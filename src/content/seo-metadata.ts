@@ -8,19 +8,36 @@ export const SITE_TITLE_DEFAULT =
 export const SITE_TITLE_TEMPLATE = "%s | Slice Chain · SlicePay";
 
 export const SITE_DESCRIPTION =
-  "Slice Chain powers SlicePay (Slice Pay), a crypto payment gateway for restaurants and retailers. Accept cryptocurrency payments via QR codes, USDC settlement, and multi-chain checkout.";
+  "Slice Chain powers SlicePay (Slice Pay) for crypto payments and multi chain payments. Accept crypto payments for businesses via QR checkout, stablecoin settlement, and USDC payouts.";
 
 export const SITE_KEYWORDS = [
   "Slice Chain",
   "SliceChain",
   "SlicePay",
   "Slice Pay",
-  "crypto payment gateway",
+  "crypto payments",
+  "crypto payments for businesses",
+  "cryptocurrency payments",
+  "accept crypto payments",
   "accept cryptocurrency payments",
-  "QR code crypto payments",
-  "USDC payments for business",
-  "blockchain payment processor",
+  "pay with crypto",
+  "multi chain payments",
+  "multi-chain payments",
   "multi-chain crypto payments",
+  "cross-chain payments",
+  "crypto payment gateway",
+  "blockchain payment processor",
+  "business crypto payments",
+  "merchant crypto payments",
+  "restaurant crypto payments",
+  "small business crypto payments",
+  "crypto checkout",
+  "QR code payments",
+  "QR code crypto payments",
+  "stablecoin payments",
+  "USDC payments",
+  "USDC payments for business",
+  "wallet crypto payments",
 ];
 
 export const siteSeoBase: Metadata = {
@@ -82,15 +99,15 @@ export const pageSeo = {
   ),
   portal: buildPageSeo(
     "Portal",
-    "Access the SlicePay portal by Slice Chain to accept cryptocurrency payments, generate QR code crypto payments, and manage USDC payouts for your business.",
+    "Access the SlicePay portal for crypto payments and multi chain payments. Accept crypto payments for businesses, generate QR checkout, and manage USDC payouts.",
   ),
   businessLogin: buildPageSeo(
     "Business Login",
-    "Sign in to your SlicePay business dashboard to accept cryptocurrency payments, track USDC settlements, and manage QR code crypto checkout.",
+    "Sign in to your SlicePay dashboard for crypto payments for businesses — track USDC settlements, accept crypto payments, and manage QR code checkout.",
   ),
   businessSignup: buildPageSeo(
     "Business Sign Up",
-    "Register your business on SlicePay by Slice Chain to accept cryptocurrency payments, enable QR code crypto payments, and receive USDC payments for business.",
+    "Register your business to accept crypto payments for businesses on SlicePay. Enable multi chain payments, QR checkout, and USDC stablecoin payouts.",
   ),
   customerLogin: buildPageSeo(
     "Customer Login",
@@ -110,6 +127,6 @@ export const pageSeo = {
   ),
   vendorPayment: buildPageSeo(
     "QR Payment Generator",
-    "Generate SlicePay QR code crypto payments for customers. Accept cryptocurrency payments and USDC checkout from any supported wallet.",
+    "Generate QR code payments for crypto checkout. Accept crypto payments and stablecoin payments from any supported wallet at your business.",
   ),
 };
