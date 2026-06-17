@@ -10,14 +10,14 @@ export const businessSignupPath = appUrl("/business/signup");
 export const employeeLoginPath = appUrl("/employee/login");
 
 export const landingMeta = {
-  title: "SlicePay | Crypto Payment Gateway for Small Business",
+  title: "Slice Chain & SlicePay | Crypto Payment Gateway for Small Business",
   description:
-    "SlicePay is a crypto payment gateway for restaurants and retailers. Accept cryptocurrency payments via QR codes, USDC payments for business, and multi-chain settlement.",
+    "Slice Chain powers SlicePay (Slice Pay), a crypto payment gateway for restaurants and retailers. Accept cryptocurrency payments via QR codes, USDC payments for business, and multi-chain settlement.",
 };
 
 /** Keyword-rich hero intro (~100 words) — primary on-page content below H1. */
 export const heroLead =
-  "SlicePay is a crypto payment gateway built for small and medium businesses that need to accept cryptocurrency payments at checkout. Our blockchain payment processor powers QR code crypto payments from any compatible wallet, with USDC payments for business and employee payouts on every sale. Whether you need multi-chain crypto payments across Ethereum, Solana, Polygon, Base, and more, SlicePay gives you one simple flow to accept crypto with transparent 1.9% pricing, SLICE loyalty rewards, and stablecoin settlement in USDC and USDT.";
+  "Slice Chain powers SlicePay (Slice Pay), a crypto payment gateway built for small and medium businesses that need to accept cryptocurrency payments at checkout. Our blockchain payment processor powers QR code crypto payments from any compatible wallet, with USDC payments for business and employee payouts on every sale. Whether you need multi-chain crypto payments across Ethereum, Solana, Polygon, Base, and more, SlicePay gives you one simple flow to accept crypto with transparent 1.9% pricing, SLICE loyalty rewards, and stablecoin settlement in USDC and USDT.";
 
 export const supportedChainLogos = [
   { name: "Ethereum", logo: `${A}/chains/ethereum.png` },
@@ -186,7 +186,7 @@ export const mission = {
 export const aboutSlicePay = {
   subtitle: "About SlicePay",
   title: "Built for businesses that want to move faster.",
-  text: "We created SlicePay - SliceChain Holdings flagship blockchain payment processor - to help merchants accept cryptocurrency payments, run QR code crypto checkout, and receive USDC payments for business without replacing existing workflows.",
+  text: "We created SlicePay — the Slice Chain flagship blockchain payment processor from SliceChain Holdings — to help merchants accept cryptocurrency payments, run QR code crypto checkout, and receive USDC payments for business without replacing existing workflows.",
   banner: `${A}/about-banner.jpg`,
   bannerAlt: "Merchants using SlicePay crypto payment gateway to accept cryptocurrency payments at checkout",
 };

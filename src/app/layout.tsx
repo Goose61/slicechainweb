@@ -5,10 +5,10 @@ import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { GoogleAnalyticsPageView } from "@/components/GoogleAnalyticsPageView";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { siteSeoBase } from "@/content/seo-metadata";
 
 export const metadata: Metadata = {
-  title: "SlicePay®",
-  description: "Crypto payments for small business - accept any wallet across supported chains with USDC and USDT settlement.",
+  ...siteSeoBase,
   icons: {
     icon: "/landing-assets/images/pizza/pizzaimages/main_logo.png",
     apple: "/landing-assets/images/pizza/pizzaimages/main_logo.png",
