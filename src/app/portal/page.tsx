@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { brandMark } from "@/content/landing-content";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { DEMO_APP_ORIGIN, shouldRedirectToDemoApp } from "@/lib/appUrl";
@@ -59,7 +60,7 @@ export default function PortalIndex() {
         <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-[#0f2247]/80 border border-sky-500/20 shadow-2xl shadow-sky-900/40 mb-4 p-2">
           <Image src={LOGO} alt="SlicePay crypto payment gateway logo" width={80} height={80} className="w-full h-auto object-contain" priority />
         </div>
-        <h1 className="text-5xl font-bold text-white tracking-tight">SlicePay Portal</h1>
+        <h1 className="text-5xl font-bold text-white tracking-tight">{brandMark} Portal</h1>
         <p className="text-xl text-sky-200/90 font-medium max-w-2xl mx-auto leading-relaxed">
           Access your crypto payment gateway dashboard to accept cryptocurrency payments, generate QR code crypto payments, and manage USDC payments for business. Choose the employee or business portal to continue.
         </p>
@@ -67,7 +68,7 @@ export default function PortalIndex() {
           href="/"
           className="text-sky-300/80 hover:text-white text-sm underline-offset-4 hover:underline transition-colors"
         >
-          ← Back to SlicePay home
+          ← Back to {brandMark} home
         </a>
       </div>
 

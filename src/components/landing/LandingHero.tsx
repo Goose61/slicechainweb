@@ -1,4 +1,4 @@
-import { brandName, heroLead, heroSlides, heroStats, portalPath, social } from "@/content/landing-content";
+import { brandMark, heroLead, heroSlides, heroStats, portalPath, social } from "@/content/landing-content";
 
 export function LandingHero() {
   return (
@@ -10,7 +10,7 @@ export function LandingHero() {
 
       <div className="hero-top wrap" style={{ width: "100%", maxWidth: "none", padding: 0 }}>
         <div className="mono" data-reveal style={{ ["--d" as string]: "100ms" }}>
-          {brandName}
+          {brandMark}
         </div>
         <div className="mid" data-reveal style={{ ["--d" as string]: "200ms" }}>
           <span className="eyebrow">QR payments · Cross-chain compliant</span>

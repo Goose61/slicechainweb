@@ -1,4 +1,4 @@
-import { aboutSlicePay, mission, platformPillars } from "@/content/landing-content";
+import { aboutSlicePay, brandMark, mission, platformPillars } from "@/content/landing-content";
 
 export function LandingManifesto() {
   return (
@@ -68,17 +68,17 @@ export function LandingManifesto() {
             </div>
 
             <div className="oath-sign" data-reveal style={{ ["--d" as string]: "350ms" }}>
-              <span className="sig">SlicePay</span>
+              <span className="sig">{brandMark}</span>
               <span>USDC & USDT cross-chain payouts</span>
               <span>SLICE loyalty rewards</span>
             </div>
 
             <div data-reveal style={{ ["--d" as string]: "400ms", textAlign: "center", marginTop: 48 }}>
-              <div className="about-banner" style={{ maxWidth: 580, margin: "0 auto" }}>
+              <div className="about-banner">
                 <img
                   src={aboutSlicePay.banner}
                   alt={aboutSlicePay.bannerAlt}
-                  style={{ width: "100%", borderRadius: 8 }}
+                  loading="lazy"
                 />
               </div>
             </div>

@@ -3,6 +3,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { brandMark } from "@/content/landing-content";
 import "./oven-loader.css";
 import { initOvenLoader } from "./oven-loader";
 
@@ -90,7 +91,7 @@ export function OvenLoader() {
 
         <div className="oven-bottom">
           <span className="big">Loading</span>
-          SlicePay
+          {brandMark}
         </div>
 
         <div className="oven-progress">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { brandName, logo, navLinks, portalPath, businessDemoPath, social } from "@/content/landing-content";
+import { brandMark, logo, navLinks, portalPath, businessDemoPath, social } from "@/content/landing-content";
 
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,8 +30,8 @@ export function LandingNav() {
           <div className="nav-top">
             <a href="#home" className="nav-left brand-link">
               <div className="brand">
-                <img src={logo} alt={`${brandName} crypto payment gateway logo`} />
-                <span className="brand-wordmark">{brandName}</span>
+                <img src={logo} alt="SlicePay crypto payment gateway logo" />
+                <span className="brand-wordmark">{brandMark}</span>
               </div>
             </a>
             <div className="nav-top-actions">
@@ -67,8 +67,8 @@ export function LandingNav() {
       <aside className={`nav-drawer${menuOpen ? " open" : ""}`} aria-hidden={!menuOpen}>
         <div className="nav-drawer-head">
           <div className="brand">
-            <img src={logo} alt={brandName} />
-            <span className="brand-wordmark">{brandName}</span>
+            <img src={logo} alt="SlicePay crypto payment gateway logo" />
+            <span className="brand-wordmark">{brandMark}</span>
           </div>
           <button type="button" className="nav-drawer-close" onClick={closeMenu} aria-label="Close menu">
             <span className="nav-drawer-close-icon" aria-hidden="true">×</span>

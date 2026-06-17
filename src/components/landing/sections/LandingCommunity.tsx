@@ -1,4 +1,4 @@
-import { employeeLoginPath, portalPath, social } from "@/content/landing-content";
+import { brandMark, employeeLoginPath, portalPath, social } from "@/content/landing-content";
 
 export function LandingCommunity() {
   return (
@@ -11,7 +11,7 @@ export function LandingCommunity() {
           <div className="crew-wrap">
             <div data-reveal>
               <h2>
-                Start with <span className="it">SlicePay</span>
+                Start with <span className="it">{brandMark}</span>
               </h2>
               <p className="kicker">
                 Register your business to accept cryptocurrency payments, onboard staff for QR code crypto payments, and open the portal to manage USDC payments for business.

@@ -49,6 +49,7 @@ export const crossChain = {
 };
 
 export const brandName = "SlicePay";
+export const brandMark = "SlicePay®";
 export const logo = `${A}/pizza/pizzaimages/main_logo.png`;
 
 export const social = {
@@ -263,7 +264,7 @@ export const communityCards = [
 ];
 
 export const businesses = {
-  titleHtml: 'Accept payments with <span class="it">SlicePay</span><br>Keep more <span class="it">margin</span>',
+  titleHtml: 'Accept payments with <span class="it">SlicePay®</span><br>Keep more <span class="it">margin</span>',
   lede: "SlicePay is the crypto payment gateway built for restaurants, food trucks, and retailers. Let customers accept cryptocurrency payments from any wallet on supported chains while you receive USDC payments for business with a simple 1.9% total fee and QR code crypto payments at the counter.",
   cta: { label: "Register on SlicePay", href: portalPath },
   rows: [
@@ -309,6 +310,6 @@ export const roadmap = {
 };
 
 export const footer = {
-  address: "SlicePay · Payments for growing businesses",
+  address: "SlicePay® · Payments for growing businesses",
   copyright: "© 2025 SliceChain Holdings Inc. All rights reserved.",
 };

@@ -1,11 +1,11 @@
-import { businesses } from "@/content/landing-content";
+import { brandMark, businesses } from "@/content/landing-content";
 
 export function LandingBusinesses() {
   return (
     <section className="section biz" id="businesses">
       <div className="wrap">
         <div className="section-num" data-reveal>
-          06 · SlicePay for Businesses
+          06 · {brandMark} for Businesses
         </div>
         <div className="biz-grid" data-reveal style={{ ["--d" as string]: "100ms" }}>
           <div className="biz-left">
@@ -54,7 +54,7 @@ export function LandingBusinesses() {
             <div className="corner-tr"></div>
             <div className="corner-bl"></div>
             <div className="corner-br"></div>
-            <h3>Why Your Business Joins SlicePay</h3>
+            <h3>Why Your Business Joins {brandMark}</h3>
             <div className="biz-list">
               {businesses.rows.map((row) => (
                 <div key={row.n} className="biz-row">

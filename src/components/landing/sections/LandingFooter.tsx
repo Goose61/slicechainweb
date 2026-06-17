@@ -1,16 +1,16 @@
-import { brandName, businessLoginPath, employeeLoginPath, footer, logo, navLinks, portalPath, social } from "@/content/landing-content";
+import { brandMark, businessLoginPath, employeeLoginPath, footer, logo, navLinks, portalPath, social } from "@/content/landing-content";
 
 export function LandingFooter() {
   return (
     <footer className="foot" id="footer">
-      <div className="foot-big">SlicePay</div>
+      <div className="foot-big">{brandMark}</div>
       <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
         <div className="foot-grid">
           <div className="foot-col">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <img src={logo} alt={`${brandName} crypto payment gateway logo`} style={{ height: 36, filter: "drop-shadow(0 0 12px rgba(59,158,255,.35))" }} />
+              <img src={logo} alt="SlicePay crypto payment gateway logo" style={{ height: 36, filter: "drop-shadow(0 0 12px rgba(59,158,255,.35))" }} />
               <span style={{ fontFamily: "var(--display)", fontSize: 22, letterSpacing: ".1em", textTransform: "uppercase" }}>
-                {brandName}
+                {brandMark}
               </span>
             </div>
             <p>{footer.address}</p>
@@ -67,7 +67,7 @@ export function LandingFooter() {
               Privacy Policy
             </a>
           </p>
-          <span className="foot-bot-side foot-bot-end">SlicePay · Built for merchants</span>
+          <span className="foot-bot-side foot-bot-end">{brandMark} · Built for merchants</span>
         </div>
       </div>
     </footer>
