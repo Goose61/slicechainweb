@@ -229,23 +229,16 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
   width:min(630px,100%);
   max-width:630px;
   margin:0 auto;
+  overflow:visible;
 }
 .landing-page .about-banner img{
   display:block;
-  width:630px;
-  max-width:100%;
-  height:724px;
-  max-height:none;
-  object-fit:cover;
+  width:100%;
+  max-width:630px;
+  height:auto;
+  object-fit:contain;
   border-radius:8px;
   box-shadow:0 12px 40px rgba(0,0,0,.28);
-}
-@media(max-width:768px){
-  .landing-page .about-banner img{
-    width:100%;
-    height:auto;
-    aspect-ratio:630 / 724;
-  }
 }
 
 /* Pizza legacy widgets scoped to landing */
