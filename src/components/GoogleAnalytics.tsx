@@ -1,14 +1,16 @@
-import Script from "next/script";
+"use client";
+
 import { GA_MEASUREMENT_ID } from "@/lib/gtag";
+import Script from "next/script";
 
 export function GoogleAnalytics() {
   return (
     <>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="google-analytics" strategy="afterInteractive">
+      <Script id="google-analytics" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

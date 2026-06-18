@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import "./globals.css";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
-import { GoogleAnalyticsPageView } from "@/components/GoogleAnalyticsPageView";
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { siteSeoBase } from "@/content/seo-metadata";
 import { fontClassNames } from "@/lib/fonts";
 
@@ -25,13 +20,7 @@ export default function RootLayout({
     <html lang="en" className={`dark ${fontClassNames}`} suppressHydrationWarning>
       <body className="antialiased font-sans">
         <GoogleAnalytics />
-        <Suspense fallback={null}>
-          <GoogleAnalyticsPageView />
-        </Suspense>
-        <TooltipProvider>
-          {children}
-          <Toaster richColors position="top-right" />
-        </TooltipProvider>
+        {children}
       </body>
     </html>
   );

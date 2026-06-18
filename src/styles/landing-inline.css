@@ -241,6 +241,10 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
   box-shadow:0 12px 40px rgba(0,0,0,.28);
 }
 
+.landing-page section[id]{
+  scroll-margin-top:92px;
+}
+
 /* Defer rendering of below-the-fold sections on mobile */
 @media(max-width:768px){
   .landing-page .section:not(.hero),

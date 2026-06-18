@@ -1,5 +1,5 @@
 import { crossChain } from "@/content/landing-content";
-import { ChainLogoCarousel } from "../widgets/ChainLogoCarousel";
+import { DeferredChainCarousel } from "../DeferredChainCarousel";
 
 export function LandingMultiChain() {
   return (
@@ -21,7 +21,7 @@ export function LandingMultiChain() {
         </div>
 
         <div data-reveal style={{ ["--d" as string]: "300ms" }}>
-          <ChainLogoCarousel />
+          <DeferredChainCarousel />
         </div>
 
         <p className="cross-chain-footer mono" data-reveal style={{ ["--d" as string]: "400ms" }}>

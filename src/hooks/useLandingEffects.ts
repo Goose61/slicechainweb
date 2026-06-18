@@ -4,28 +4,31 @@ import { useEffect } from "react";
 
 export function useLandingEffects() {
   useEffect(() => {
+    const root = document.querySelector("[data-landing-root]");
+    if (!root) return;
+
     const revealObs = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            revealObs.unobserve(e.target);
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            revealObs.unobserve(entry.target);
           }
-        });
+        }
       },
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
+
     const observeReveals = () => {
-      document.querySelectorAll("[data-reveal]:not(.in)").forEach((el) => revealObs.observe(el));
+      root.querySelectorAll("[data-reveal]:not(.in)").forEach((el) => revealObs.observe(el));
     };
     observeReveals();
 
     const revealMut = new MutationObserver(() => observeReveals());
-    revealMut.observe(document.body, { childList: true, subtree: true });
-    const revealTimers = [400, 1200].map((ms) => setTimeout(observeReveals, ms));
+    revealMut.observe(root, { childList: true, subtree: true });
 
-    const headlines = document.querySelectorAll("#headline-slot .headline-slide");
-    const dots = document.querySelectorAll("#h-dots button");
+    const headlines = root.querySelectorAll("#headline-slot .headline-slide");
+    const dots = root.querySelectorAll("#h-dots button");
     let activeH = 0;
 
     function setHeadline(idx: number) {
@@ -42,7 +45,7 @@ export function useLandingEffects() {
     );
     const cycle = setInterval(() => setHeadline((activeH + 1) % headlines.length), 5000);
 
-    const headlineSlot = document.getElementById("headline-slot");
+    const headlineSlot = root.querySelector("#headline-slot");
     let touchStartX = 0;
     const onTouchStart = (e: TouchEvent) => {
       touchStartX = e.changedTouches[0]?.clientX ?? 0;
@@ -54,19 +57,17 @@ export function useLandingEffects() {
       if (delta < 0) setHeadline((activeH + 1) % headlines.length);
       else setHeadline((activeH - 1 + headlines.length) % headlines.length);
     };
-    headlineSlot?.addEventListener("touchstart", onTouchStart, { passive: true });
-    headlineSlot?.addEventListener("touchend", onTouchEnd, { passive: true });
+    headlineSlot?.addEventListener("touchstart", onTouchStart as EventListener, { passive: true });
+    headlineSlot?.addEventListener("touchend", onTouchEnd as EventListener, { passive: true });
 
-    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    root.querySelectorAll('a[href^="#"]').forEach((a) => {
       a.addEventListener("click", (e) => {
         const href = a.getAttribute("href");
         if (!href || href === "#") return;
-        const target = document.querySelector(href);
+        const target = root.querySelector(href);
         if (target) {
           e.preventDefault();
-          const header = document.getElementById("landing-header");
-          const offset = (header?.offsetHeight ?? 80) + 12;
-          window.scrollTo({ top: (target as HTMLElement).offsetTop - offset, behavior: "smooth" });
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
     });
@@ -74,10 +75,9 @@ export function useLandingEffects() {
     return () => {
       revealObs.disconnect();
       revealMut.disconnect();
-      revealTimers.forEach(clearTimeout);
       clearInterval(cycle);
-      headlineSlot?.removeEventListener("touchstart", onTouchStart);
-      headlineSlot?.removeEventListener("touchend", onTouchEnd);
+      headlineSlot?.removeEventListener("touchstart", onTouchStart as EventListener);
+      headlineSlot?.removeEventListener("touchend", onTouchEnd as EventListener);
     };
   }, []);
 }

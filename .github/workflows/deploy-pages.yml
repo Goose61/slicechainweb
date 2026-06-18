@@ -34,6 +34,7 @@ jobs:
         run: |
           test -f out/index.html
           test -f out/CNAME
+          test -f out/_headers
           ! test -f out/README.md
 
       - name: Publish to gh-pages branch
