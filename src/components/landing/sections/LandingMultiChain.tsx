@@ -17,7 +17,7 @@ export function LandingMultiChain() {
         </div>
 
         <div className="cross-chain-visual" data-reveal style={{ ["--d" as string]: "200ms" }}>
-          <img src={crossChain.image} alt={crossChain.imageAlt} loading="lazy" />
+          <img src={crossChain.image} alt={crossChain.imageAlt} loading="lazy" decoding="async" />
         </div>
 
         <div data-reveal style={{ ["--d" as string]: "300ms" }}>

@@ -16,11 +16,11 @@
   --line:rgba(241,245,249,0.1);
   --line-strong:rgba(241,245,249,0.18);
 
-  --serif: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  --display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  --sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --gothic: "Plus Jakarta Sans", system-ui, sans-serif;
+  --serif: var(--font-sans), system-ui, sans-serif;
+  --display: var(--font-sans), system-ui, sans-serif;
+  --sans: var(--font-sans), system-ui, sans-serif;
+  --mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --gothic: var(--font-sans), system-ui, sans-serif;
 
   --pad: clamp(20px, 4vw, 64px);
 }
@@ -29,8 +29,8 @@
 :root[data-type="neighborhood"],
 :root[data-type="gothic"],
 :root[data-type="tabloid"]{
-  --display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  --serif: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --display: var(--font-sans), system-ui, sans-serif;
+  --serif: var(--font-sans), system-ui, sans-serif;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}

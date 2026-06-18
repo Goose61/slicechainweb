@@ -79,6 +79,7 @@ export function LandingManifesto() {
                   src={aboutSlicePay.banner}
                   alt={aboutSlicePay.bannerAlt}
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

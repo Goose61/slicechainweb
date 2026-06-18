@@ -6,6 +6,7 @@ import { GoogleAnalyticsPageView } from "@/components/GoogleAnalyticsPageView";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { siteSeoBase } from "@/content/seo-metadata";
+import { fontClassNames } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   ...siteSeoBase,
@@ -21,15 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <head>
-        <GoogleAnalytics />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://challenges.cloudflare.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-      </head>
+    <html lang="en" className={`dark ${fontClassNames}`} suppressHydrationWarning>
       <body className="antialiased font-sans">
+        <GoogleAnalytics />
         <Suspense fallback={null}>
           <GoogleAnalyticsPageView />
         </Suspense>

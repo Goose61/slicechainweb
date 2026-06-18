@@ -30,7 +30,13 @@ export function LandingNav() {
           <div className="nav-top">
             <a href="#home" className="nav-left brand-link">
               <div className="brand">
-                <img src={logo} alt="SlicePay crypto payment gateway logo" />
+                <img
+                  src={logo}
+                  alt="SlicePay crypto payment gateway logo"
+                  width={36}
+                  height={36}
+                  decoding="async"
+                />
                 <span className="brand-wordmark">{brandMark}</span>
               </div>
             </a>
@@ -67,7 +73,13 @@ export function LandingNav() {
       <aside className={`nav-drawer${menuOpen ? " open" : ""}`} aria-hidden={!menuOpen}>
         <div className="nav-drawer-head">
           <div className="brand">
-            <img src={logo} alt="SlicePay crypto payment gateway logo" />
+            <img
+              src={logo}
+              alt="SlicePay crypto payment gateway logo"
+              width={36}
+              height={36}
+              decoding="async"
+            />
             <span className="brand-wordmark">{brandMark}</span>
           </div>
           <button type="button" className="nav-drawer-close" onClick={closeMenu} aria-label="Close menu">

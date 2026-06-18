@@ -48,15 +48,15 @@ export function CampaignGallery() {
           </button>
 
           <div className="campaign-slideshow-stage">
-            {galleryImages.map((item, index) => (
-              <img
-                key={item.src}
-                src={item.src}
-                alt={item.alt}
-                className={index === active ? "is-active" : undefined}
-                style={{ transitionDuration: `${FADE_MS}ms` }}
-              />
-            ))}
+            <img
+              key={galleryImages[active].src}
+              src={galleryImages[active].src}
+              alt={galleryImages[active].alt}
+              className="is-active"
+              style={{ transitionDuration: `${FADE_MS}ms` }}
+              loading="lazy"
+              decoding="async"
+            />
             <p className="campaign-slideshow-caption">{galleryImages[active].alt}</p>
           </div>
 

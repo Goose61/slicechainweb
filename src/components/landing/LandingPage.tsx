@@ -1,9 +1,6 @@
-"use client";
-
-import dynamic from "next/dynamic";
-import { useLandingEffects } from "@/hooks/useLandingEffects";
-import { useLandingStats } from "@/hooks/useLandingStats";
 import { LandingSetup } from "./LandingSetup";
+import { LandingClientShell } from "./LandingClientShell";
+import { LandingGallery } from "./LandingGallery";
 import { LandingNav } from "./LandingNav";
 import { LandingHero } from "./LandingHero";
 import { LandingMarquee } from "./sections/LandingMarquee";
@@ -16,15 +13,11 @@ import { LandingRoadmap } from "./sections/LandingRoadmap";
 import { LandingCommunity } from "./sections/LandingCommunity";
 import { LandingFooter } from "./sections/LandingFooter";
 
-const CampaignGallery = dynamic(() => import("./widgets/CampaignGallery").then((m) => m.CampaignGallery), { ssr: false });
-
 export function LandingPage() {
-  useLandingEffects();
-  useLandingStats();
-
   return (
     <>
       <LandingSetup />
+      <LandingClientShell />
       <LandingNav />
       <LandingHero />
       <LandingMarquee />
@@ -33,7 +26,7 @@ export function LandingPage() {
       <LandingHow />
       <LandingMultiChain />
       <LandingBusinesses />
-      <CampaignGallery />
+      <LandingGallery />
       <LandingRoadmap />
       <LandingCommunity />
       <LandingFooter />

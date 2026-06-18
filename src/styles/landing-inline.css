@@ -241,6 +241,16 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
   box-shadow:0 12px 40px rgba(0,0,0,.28);
 }
 
+/* Defer rendering of below-the-fold sections on mobile */
+@media(max-width:768px){
+  .landing-page .section:not(.hero),
+  .landing-page .crew,
+  .landing-page .foot{
+    content-visibility:auto;
+    contain-intrinsic-size:auto 720px;
+  }
+}
+
 /* Pizza legacy widgets scoped to landing */
 .landing-page .video-container{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden}
 .landing-page .video-container iframe{position:absolute;top:0;left:0;width:100%!important;height:100%!important;border:none}

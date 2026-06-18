@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { pageSeo } from "@/content/seo-metadata";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
-import "leaflet/dist/leaflet.css";
 import "@/styles/landing-menos-gusto.css";
 import "@/styles/landing-inline.css";
 

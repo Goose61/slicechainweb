@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { getApiBase } from "@/lib/api";
-import { ACTIVE_PARTNER_COUNT, updateLandingStatsOnPage } from "@/lib/pizza-map-data";
 
 type LandingStats = {
   totalTransactions: number;
@@ -15,6 +13,8 @@ export function useLandingStats() {
 
     async function load() {
       try {
+        const { getApiBase } = await import("@/lib/api");
+        const { ACTIVE_PARTNER_COUNT, updateLandingStatsOnPage } = await import("@/lib/pizza-map-data");
         const res = await fetch(`${getApiBase()}/public/landing-stats`);
         if (!res.ok) throw new Error("Stats unavailable");
         const data: LandingStats = await res.json();
@@ -27,6 +27,7 @@ export function useLandingStats() {
       } catch (err) {
         console.warn("Landing stats fetch failed:", err);
         if (!cancelled) {
+          const { ACTIVE_PARTNER_COUNT, updateLandingStatsOnPage } = await import("@/lib/pizza-map-data");
           updateLandingStatsOnPage({
             totalTransactions: 0,
             activePartners: ACTIVE_PARTNER_COUNT,
@@ -35,12 +36,29 @@ export function useLandingStats() {
       }
     }
 
-    load();
-    const interval = setInterval(load, 5 * 60 * 1000);
+    const startPolling = () => {
+      load();
+      return setInterval(load, 5 * 60 * 1000);
+    };
+
+    let interval: ReturnType<typeof setInterval> | undefined;
+    const idleId =
+      typeof window.requestIdleCallback === "function"
+        ? window.requestIdleCallback(() => {
+            interval = startPolling();
+          })
+        : window.setTimeout(() => {
+            interval = startPolling();
+          }, 1500);
 
     return () => {
       cancelled = true;
-      clearInterval(interval);
+      if (typeof window.cancelIdleCallback === "function" && typeof idleId === "number") {
+        window.cancelIdleCallback(idleId);
+      } else {
+        window.clearTimeout(idleId);
+      }
+      if (interval) clearInterval(interval);
     };
   }, []);
 }
