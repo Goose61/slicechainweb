@@ -33,10 +33,10 @@ export function LandingHero() {
             );
           })}
         </div>
-        <p className="sub serif" data-reveal style={{ ["--d" as string]: "550ms" }}>
+        <p className="sub serif">
           {heroLead}
         </p>
-        <div className="headline-dots" data-reveal style={{ ["--d" as string]: "650ms" }} id="h-dots">
+        <div className="headline-dots" id="h-dots">
           {heroSlides.map((_, i) => (
             <button key={i} className={i === 0 ? "active" : undefined} data-h={i} type="button" aria-label={`Slide ${i + 1}`}></button>
           ))}

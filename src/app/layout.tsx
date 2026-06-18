@@ -18,6 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`dark ${fontClassNames}`} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://api.slicechain.io" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://api.slicechain.io" />
+      </head>
       <body className="antialiased font-sans">
         <GoogleAnalytics />
         {children}
