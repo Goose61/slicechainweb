@@ -1,4 +1,5 @@
-import { brandMark, heroLead, heroSlides, heroStats, portalPath, social } from "@/content/landing-content";
+import { brandMark, heroLead, heroSlides, heroStats, portalPath } from "@/content/landing-content";
+import { ContactLink } from "./ContactLink";
 
 export function LandingHero() {
   return (
@@ -69,9 +70,9 @@ export function LandingHero() {
           <a href="#marketing" className="btn btn-ghost">
             How it works
           </a>
-          <a href={social.email} className="btn btn-blood">
+          <ContactLink className="btn btn-blood">
             Contact us
-          </a>
+          </ContactLink>
         </div>
       </div>
 

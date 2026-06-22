@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { brandMark, logo, navLinks, portalPath, businessDemoPath, social } from "@/content/landing-content";
+import { brandMark, logo, navLinks, portalPath, businessDemoPath } from "@/content/landing-content";
+import { ContactLink } from "./ContactLink";
 
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -115,9 +116,9 @@ export function LandingNav() {
           <a href={portalPath} className="btn btn-ghost" onClick={closeMenu}>
             Portal <span className="arrow">→</span>
           </a>
-          <a href={social.email} className="btn btn-gold" onClick={closeMenu}>
+          <ContactLink className="btn btn-gold" onClick={closeMenu}>
             Contact <span className="arrow">→</span>
-          </a>
+          </ContactLink>
         </div>
       </aside>
     </>

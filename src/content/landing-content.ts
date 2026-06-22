@@ -50,11 +50,16 @@ export const crossChain = {
 
 export const brandName = "SlicePay";
 export const brandMark = "SlicePay®";
-export const logo = `${A}/pizza/pizzaimages/main_logo.png`;
+export const logo = `${A}/pizza/pizzaimages/main_logo.webp`;
 
 export const social = {
   telegram: "https://t.me/+PrL-wbxrW39kODBk",
   twitter: "https://x.com/slice__pay",
+  // Split into parts so the literal address never appears in the static HTML.
+  // This stops Cloudflare Email Obfuscation from injecting email-decode.min.js
+  // into the landing page's critical request chain. Assembled client-side by ContactLink.
+  emailUser: "slicepay",
+  emailDomain: "pizzabit.io",
   email: "mailto:slicepay@pizzabit.io",
   emailDisplay: "slicepay@pizzabit.io",
 };
@@ -189,7 +194,7 @@ export const aboutSlicePay = {
   subtitle: "About SlicePay",
   title: "Built for businesses that want to move faster.",
   text: "We created SlicePay — the Slice Chain flagship blockchain payment processor from SliceChain Holdings — to help merchants accept cryptocurrency payments, run QR code crypto checkout, and receive USDC payments for business without replacing existing workflows.",
-  banner: `${A}/about-banner.jpg`,
+  banner: `${A}/about-banner.webp`,
   bannerAlt: "Merchants using SlicePay crypto payment gateway to accept cryptocurrency payments at checkout",
 };
 

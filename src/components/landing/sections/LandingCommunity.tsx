@@ -1,4 +1,5 @@
-import { brandMark, employeeLoginPath, portalPath, social } from "@/content/landing-content";
+import { brandMark, employeeLoginPath, portalPath } from "@/content/landing-content";
+import { ContactLink } from "../ContactLink";
 
 export function LandingCommunity() {
   return (
@@ -23,9 +24,9 @@ export function LandingCommunity() {
                 <a href={employeeLoginPath} className="btn">
                   Employee login <span className="arrow">→</span>
                 </a>
-                <a href={social.email} className="btn">
+                <ContactLink className="btn">
                   Contact sales <span className="arrow">→</span>
-                </a>
+                </ContactLink>
               </div>
             </div>
             <div className="crew-nums" data-reveal style={{ ["--d" as string]: "200ms" }}>

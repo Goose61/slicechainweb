@@ -1,4 +1,5 @@
 import { brandMark, businessLoginPath, employeeLoginPath, footer, logo, navLinks, portalPath, social } from "@/content/landing-content";
+import { ContactLink } from "../ContactLink";
 
 export function LandingFooter() {
   return (
@@ -27,7 +28,7 @@ export function LandingFooter() {
               </a>
             </div>
             <p style={{ marginTop: 16, fontSize: 13, color: "var(--bone-dim)" }}>
-              <a href={social.email}>{social.emailDisplay}</a>
+              <ContactLink />
             </p>
           </div>
           <div className="foot-col">
@@ -43,7 +44,7 @@ export function LandingFooter() {
             <a href={portalPath}>Business signup</a>
             <a href={businessLoginPath}>Business login</a>
             <a href={employeeLoginPath}>Employee login</a>
-            <a href={social.email}>Support</a>
+            <ContactLink>Support</ContactLink>
           </div>
           <div className="foot-col">
             <h5>Platform</h5>

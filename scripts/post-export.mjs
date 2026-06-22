@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import { execSync } from "node:child_process";
 
 const root = process.cwd();
 const outDir = path.resolve(root, "out");
@@ -32,25 +31,6 @@ if (fs.existsSync(headersSource)) {
 const noJekyll = path.join(outDir, ".nojekyll");
 if (!fs.existsSync(noJekyll)) {
   fs.writeFileSync(noJekyll, "");
-}
-
-const bannerPath = path.resolve(root, "public/landing-assets/images/about-banner.jpg");
-const bannerOut = path.join(outDir, "landing-assets/images/about-banner.jpg");
-if (fs.existsSync(bannerPath)) {
-  const tmpBanner = path.join(outDir, ".about-banner-opt.jpg");
-  try {
-    execSync(
-      `convert "${bannerPath}" -strip -resize 1200x800\\> -interlace Plane -quality 76 -sampling-factor 4:2:0 "${tmpBanner}"`,
-      { stdio: "pipe" }
-    );
-    fs.copyFileSync(tmpBanner, bannerPath);
-    if (fs.existsSync(bannerOut)) {
-      fs.copyFileSync(tmpBanner, bannerOut);
-    }
-    fs.rmSync(tmpBanner, { force: true });
-  } catch {
-    console.warn("post-export: about-banner compression skipped");
-  }
 }
 
 console.log("post-export: landing bundle, cache headers, and static artifacts verified");
