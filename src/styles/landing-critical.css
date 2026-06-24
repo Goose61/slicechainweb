@@ -54,7 +54,16 @@ img{max-width:100%;display:block}
 .hero-stat b{display:block;font-family:var(--display);font-size:clamp(28px,3.5vw,44px);color:var(--bone);letter-spacing:0;text-transform:none;line-height:1;font-weight:500;margin-top:6px}
 .hero-stat.right{text-align:right}
 /* LCP: hero copy paints immediately without waiting for hydration */
-.hero [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}
+.hero [data-reveal],.fm-hero [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}
+.fm-hero{position:relative;min-height:100vh;padding:100px var(--pad) 64px;overflow:hidden;isolation:isolate;color:var(--bone)}
+.fm-hero-bg{position:absolute;inset:0;z-index:-2;background:center/cover no-repeat}
+.fm-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(11,20,40,.94) 0%,rgba(11,20,40,.82) 48%,rgba(11,20,40,.35) 100%)}
+.fm-hero-inner{position:relative;z-index:1}
+.fm-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.85fr);gap:clamp(28px,4vw,48px);align-items:start}
+.fm-title{font-size:clamp(40px,6.5vw,88px);line-height:.94;font-weight:500;max-width:720px}
+.fm-title .it{font-weight:600;color:var(--gold-hi)}
+.fm-subhead{margin-top:20px;max-width:620px;font-size:clamp(17px,2vw,22px);line-height:1.45;color:var(--bone);font-weight:500}
+.fm-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
 [data-reveal]{opacity:0;transform:translateY(28px)}
 [data-reveal].in{opacity:1;transform:none}
 @media (max-width:768px){

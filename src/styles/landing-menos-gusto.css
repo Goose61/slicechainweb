@@ -585,8 +585,13 @@ body::after{
 }
 .fm-modal-close{
   position:absolute;top:14px;right:16px;width:36px;height:36px;border-radius:999px;
-  border:1px solid var(--line);color:var(--bone-dim);font-size:22px;line-height:1;
-  display:grid;place-items:center;transition:color .2s,border-color .2s;
+  border:1px solid var(--line);color:var(--bone-dim);padding:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .2s,border-color .2s;line-height:0;
+}
+.fm-modal-close-icon{
+  display:block;font-size:22px;line-height:1;font-weight:400;
+  transform:translateY(-1px);
 }
 .fm-modal-close:hover{color:var(--bone);border-color:var(--bone-dim)}
 .fm-modal-head h2{font-size:clamp(28px,4vw,36px);line-height:1;margin:10px 0 8px;font-weight:500}
@@ -605,6 +610,21 @@ body::after{
   width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);
   background:rgba(241,245,249,.04);color:var(--bone);font:inherit;font-size:14px;
 }
+.fm-modal-form select.fm-select,.fm-modal-form select{
+  color:var(--bone);
+  color-scheme:dark;
+}
+.fm-modal-form select option{
+  color:#0b1428;background:#ffffff;
+}
+.fm-calculator-skeleton .fm-calc-body-skeleton{
+  min-height:320px;
+  background:linear-gradient(90deg,rgba(241,245,249,.04) 25%,rgba(241,245,249,.08) 50%,rgba(241,245,249,.04) 75%);
+  background-size:200% 100%;
+  animation:fm-shimmer 1.2s ease-in-out infinite;
+  border-radius:10px;
+}
+@keyframes fm-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .fm-modal-form input:focus,.fm-modal-form select:focus{
   outline:none;border-color:var(--gold);box-shadow:0 0 0 2px rgba(59,158,255,.2);
 }

@@ -384,7 +384,8 @@ export interface FoundingMerchantSignupData {
   contactName: string;
   email: string;
   phone?: string;
-  businessType?: string;
+  businessType: string;
+  country: string;
   city?: string;
   state?: string;
   monthlyVolume?: number;

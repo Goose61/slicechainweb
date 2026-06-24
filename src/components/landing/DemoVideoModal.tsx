@@ -34,7 +34,7 @@ export function DemoVideoModal({ open, onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         <button type="button" className="fm-modal-close" onClick={onClose} aria-label="Close">
-          ×
+          <span className="fm-modal-close-icon" aria-hidden="true">×</span>
         </button>
 
         <div className="fm-demo-head">

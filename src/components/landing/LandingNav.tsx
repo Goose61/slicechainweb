@@ -2,11 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { brandMark, logo, navLinks, portalPath, businessDemoPath } from "@/content/landing-content";
+import { appUrl } from "@/lib/appUrl";
 import { ContactLink } from "./ContactLink";
 
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [demoHref, setDemoHref] = useState(businessDemoPath);
+
+  useEffect(() => {
+    setDemoHref(appUrl(businessDemoPath));
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -51,7 +57,7 @@ export function LandingNav() {
             </a>
             <div className="nav-top-actions">
               <a
-                href={businessDemoPath}
+                href={demoHref}
                 className="btn btn-gold nav-demo-btn"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -105,7 +111,7 @@ export function LandingNav() {
         </nav>
         <div className="nav-drawer-actions">
           <a
-            href={businessDemoPath}
+            href={demoHref}
             className="btn btn-gold"
             target="_blank"
             rel="noopener noreferrer"

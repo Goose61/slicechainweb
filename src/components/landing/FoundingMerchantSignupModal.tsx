@@ -21,6 +21,18 @@ const BUSINESS_TYPES = [
   "Other",
 ];
 
+const COUNTRIES = [
+  "United States",
+  "Canada",
+  "United Kingdom",
+  "Australia",
+  "Germany",
+  "France",
+  "Netherlands",
+  "Mexico",
+  "Other",
+];
+
 export function FoundingMerchantSignupModal({
   open,
   onClose,
@@ -33,6 +45,7 @@ export function FoundingMerchantSignupModal({
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [businessType, setBusinessType] = useState("");
+  const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -62,25 +75,38 @@ export function FoundingMerchantSignupModal({
 
   if (!open) return null;
 
+  function validateForm(): string | null {
+    if (!businessName.trim()) return "Business name is required.";
+    if (!contactName.trim()) return "Contact name is required.";
+    if (!email.trim()) return "Email is required.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return "Enter a valid email address.";
+    if (!businessType) return "Please select a business type.";
+    if (!country) return "Please select a country.";
+    if (!acceptTerms) return "Please accept the Terms and Privacy Policy to continue.";
+    return null;
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
 
-    if (!acceptTerms) {
-      setError("Please accept the Terms and Privacy Policy to continue.");
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
     setLoading(true);
     try {
       await foundingMerchantApi.signup({
-        businessName,
-        contactName,
-        email,
-        phone: phone || undefined,
-        businessType: businessType || undefined,
-        city: city || undefined,
-        state: state || undefined,
+        businessName: businessName.trim(),
+        contactName: contactName.trim(),
+        email: email.trim(),
+        phone: phone.trim() || undefined,
+        businessType,
+        country,
+        city: city.trim() || undefined,
+        state: state.trim() || undefined,
         monthlyVolume: defaultVolume,
         traditionalFeeRate: defaultTraditionalFee,
       });
@@ -102,7 +128,7 @@ export function FoundingMerchantSignupModal({
         onClick={(e) => e.stopPropagation()}
       >
         <button type="button" className="fm-modal-close" onClick={onClose} aria-label="Close">
-          ×
+          <span className="fm-modal-close-icon" aria-hidden="true">×</span>
         </button>
 
         {submitted ? (
@@ -133,7 +159,7 @@ export function FoundingMerchantSignupModal({
               ))}
             </ul>
 
-            <form className="fm-modal-form" onSubmit={handleSubmit} noValidate>
+            <form className="fm-modal-form" onSubmit={handleSubmit}>
               <div className="fm-form-grid">
                 <label>
                   <span>Business name *</span>
@@ -175,11 +201,30 @@ export function FoundingMerchantSignupModal({
                   />
                 </label>
                 <label>
-                  <span>Business type</span>
-                  <select value={businessType} onChange={(e) => setBusinessType(e.target.value)}>
+                  <span>Business type *</span>
+                  <select
+                    value={businessType}
+                    onChange={(e) => setBusinessType(e.target.value)}
+                    required
+                    className="fm-select"
+                  >
                     <option value="">Select type</option>
                     {BUSINESS_TYPES.map((t) => (
                       <option key={t} value={t}>{t}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  <span>Country *</span>
+                  <select
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    required
+                    className="fm-select"
+                  >
+                    <option value="">Select country</option>
+                    {COUNTRIES.map((c) => (
+                      <option key={c} value={c}>{c}</option>
                     ))}
                   </select>
                 </label>
