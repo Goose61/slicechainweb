@@ -55,65 +55,76 @@ export function RoiCalculator({
     <aside className="fm-calculator" id="calculator" aria-label="SlicePay ROI calculator">
       <div className="fm-calc-top">
         <p className="mono">SlicePay ROI Calculator</p>
-        <h2 className="display">Payment fees, transparent at their purest form</h2>
+        <h2 className="display fm-calc-title">Payment fees, transparent at their purest form</h2>
       </div>
 
       <div className="fm-calc-body">
-        <div className="fm-field-head">
-          <label htmlFor="fm-volume">You process</label>
-          <output id="fm-volume-output" htmlFor="fm-volume">
-            {dollars.format(volume)} / month
-          </output>
-        </div>
-        <input
-          id="fm-volume"
-          type="range"
-          min={VOLUME_MIN}
-          max={VOLUME_MAX}
-          step={VOLUME_STEP}
-          value={volume}
-          onChange={(e) => onVolumeChange(Number(e.target.value))}
-        />
-        <div className="fm-range-meta" aria-hidden="true">
-          <span>$1k</span>
-          <span>$75k</span>
+        <div className="fm-volume-field">
+          <div className="fm-field-head">
+            <label htmlFor="fm-volume">You process</label>
+            <output id="fm-volume-output" htmlFor="fm-volume" className="fm-volume-value">
+              {dollars.format(volume)}<span className="fm-volume-period"> / month</span>
+            </output>
+          </div>
+          <div className="fm-range-wrap">
+            <input
+              id="fm-volume"
+              className="fm-volume-slider"
+              type="range"
+              min={VOLUME_MIN}
+              max={VOLUME_MAX}
+              step={VOLUME_STEP}
+              value={volume}
+              aria-valuemin={VOLUME_MIN}
+              aria-valuemax={VOLUME_MAX}
+              aria-valuenow={volume}
+              aria-valuetext={`${dollars.format(volume)} per month`}
+              onChange={(e) => onVolumeChange(Number(e.target.value))}
+            />
+            <div className="fm-range-meta" aria-hidden="true">
+              <span>$1k</span>
+              <span>$75k</span>
+            </div>
+          </div>
         </div>
 
-        <p className="fm-option-title mono">Compare current fees</p>
-        <div className="fm-fee-options" role="radiogroup" aria-label="Traditional fee rate">
-          {FEE_OPTIONS.map((opt) => (
-            <div key={opt.id}>
-              <input
-                id={opt.id}
-                name="traditionalFee"
-                type="radio"
-                value={opt.value}
-                checked={traditionalFee === opt.value}
-                onChange={() => onTraditionalFeeChange(opt.value)}
-              />
-              <label htmlFor={opt.id}>{opt.label}</label>
-            </div>
-          ))}
-        </div>
+        <fieldset className="fm-fee-fieldset">
+          <legend className="fm-option-title mono">Compare current fees</legend>
+          <div className="fm-fee-options" role="radiogroup" aria-label="Traditional fee rate">
+            {FEE_OPTIONS.map((opt) => (
+              <div key={opt.id} className="fm-fee-option">
+                <input
+                  id={opt.id}
+                  name="traditionalFee"
+                  type="radio"
+                  value={opt.value}
+                  checked={traditionalFee === opt.value}
+                  onChange={() => onTraditionalFeeChange(opt.value)}
+                />
+                <label htmlFor={opt.id}>{opt.label}</label>
+              </div>
+            ))}
+          </div>
+        </fieldset>
 
         <div className="fm-fee-table">
           <div className="fm-fee-row">
-            <div>
+            <div className="fm-fee-row-copy">
               <strong>Traditional fees</strong>
               <span>{displayRate(traditionalFee)}</span>
             </div>
-            <b>{dollars.format(traditionalCost)}</b>
+            <b className="fm-fee-amount">{dollars.format(traditionalCost)}</b>
           </div>
           <div className="fm-fee-row fm-fee-row-slice">
-            <div>
+            <div className="fm-fee-row-copy">
               <strong>SlicePay</strong>
               <span>1.9%</span>
             </div>
-            <b>{dollars.format(sliceCost)}</b>
+            <b className="fm-fee-amount">{dollars.format(sliceCost)}</b>
           </div>
         </div>
 
-        <div className="fm-roi">
+        <div className="fm-roi" aria-live="polite" aria-atomic="true">
           <p className="fm-roi-title mono">Your savings estimate</p>
           <div className="fm-roi-grid">
             <div className="fm-roi-card">

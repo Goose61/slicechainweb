@@ -17,7 +17,7 @@ const RoiCalculator = dynamic(
       <aside className="fm-calculator fm-calculator-skeleton" aria-label="Loading ROI calculator">
         <div className="fm-calc-top">
           <p className="mono">SlicePay ROI Calculator</p>
-          <h2 className="display">Payment fees, transparent at their purest form</h2>
+          <h2 className="display fm-calc-title">Payment fees, transparent at their purest form</h2>
         </div>
         <div className="fm-calc-body fm-calc-body-skeleton" />
       </aside>
