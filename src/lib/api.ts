@@ -405,6 +405,7 @@ export const foundingMerchantApi = {
     apiFetch<{ success: boolean; message: string; email: string }>("/founding-merchant/signup", {
       method: "POST",
       body: JSON.stringify(data),
+      signal: AbortSignal.timeout(20000),
     }),
 };
 

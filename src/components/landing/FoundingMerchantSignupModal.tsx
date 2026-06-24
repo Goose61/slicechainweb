@@ -121,10 +121,10 @@ export function FoundingMerchantSignupModal({
 
         {submitted ? (
           <div className="fm-modal-success">
-            <h2 id="fm-modal-title" className="display">Check your email</h2>
+            <h2 id="fm-modal-title" className="display">Application received</h2>
             <p>
-              We sent a verification link to <strong>{email}</strong>. Click the link to confirm
-              your Founding Merchant application and secure your spot.
+              We sent a confirmation email to <strong>{email}</strong>. Open it to confirm your address
+              and secure your founding merchant spot. Our team at SlicePay will follow up soon.
             </p>
             <p className="fm-modal-hint mono">
               {foundingMerchant.availabilityNote}
