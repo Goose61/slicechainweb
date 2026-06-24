@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev -p 3069",
     "build": "next build",
-    "build:pages": "GITHUB_PAGES=true next build && node scripts/post-export.mjs",
+    "build:pages": "npm run css:landing && GITHUB_PAGES=true next build && node scripts/post-export.mjs",
+    "css:landing": "node scripts/build-landing-css.mjs",
     "start": "next start -p 3069",
     "lint": "next lint"
   },

@@ -73,7 +73,7 @@ export function LandingFoundingMerchant() {
           style={{ backgroundImage: `url(${foundingMerchantHeroImage})` }}
           aria-hidden="true"
         />
-        <div className="fm-hero-inner wrap">
+        <div className="fm-hero-inner">
           <div className="fm-hero-grid">
             <div className="fm-hero-copy" id="founding-merchant">
               {verifiedBanner && (
@@ -131,7 +131,7 @@ export function LandingFoundingMerchant() {
             />
           )}
 
-          <div className="fm-benefits wrap-inner">
+          <div className="fm-benefits">
             <div className="fm-benefits-head">
               <span className="eyebrow">Founding Merchant Program</span>
               <h2 className="display">Exclusive benefits for early partners</h2>
