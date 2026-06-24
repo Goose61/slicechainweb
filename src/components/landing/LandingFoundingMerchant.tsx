@@ -6,6 +6,7 @@ import { foundingMerchant, foundingMerchantHeroImage } from "@/content/landing-c
 import { foundingMerchantApi } from "@/lib/api";
 import { FoundingMerchantSignupModal } from "./FoundingMerchantSignupModal";
 import { DemoVideoModal } from "./DemoVideoModal";
+import { FoundingSpotsBanner } from "./FoundingSpotsBanner";
 import { getDefaultRoiVolume, getDefaultTraditionalFee } from "./RoiCalculator";
 
 const RoiCalculator = dynamic(
@@ -30,32 +31,39 @@ export function LandingFoundingMerchant() {
   const [signupOpen, setSignupOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
   const [remainingSpots, setRemainingSpots] = useState<number | null>(null);
+  const [claimedSpots, setClaimedSpots] = useState<number>(0);
   const [verifiedBanner, setVerifiedBanner] = useState(false);
   const [verifyError, setVerifyError] = useState(false);
 
   const openSignup = useCallback(() => setSignupOpen(true), []);
   const openDemo = useCallback(() => setDemoOpen(true), []);
 
-  useEffect(() => {
+  const refreshAvailability = useCallback(() => {
     foundingMerchantApi.getAvailability().then((data) => {
       setRemainingSpots(data.remainingSpots);
+      setClaimedSpots(data.claimedSpots);
     }).catch(() => {
       setRemainingSpots(null);
     });
   }, []);
 
   useEffect(() => {
+    refreshAvailability();
+  }, [refreshAvailability]);
+
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const verified = params.get("founding-verified");
     if (verified === "true") {
       setVerifiedBanner(true);
+      refreshAvailability();
       window.history.replaceState({}, "", window.location.pathname + window.location.hash);
     } else if (verified === "error") {
       setVerifyError(true);
       openSignup();
       window.history.replaceState({}, "", window.location.pathname + window.location.hash);
     }
-  }, [openSignup]);
+  }, [openSignup, refreshAvailability]);
 
   return (
     <>
@@ -104,12 +112,6 @@ export function LandingFoundingMerchant() {
                   </div>
                 ))}
               </div>
-
-              {remainingSpots !== null && (
-                <p className="fm-spots mono">
-                  {remainingSpots} of {foundingMerchant.maxSpots} founding spots remaining
-                </p>
-              )}
             </div>
 
             <RoiCalculator
@@ -120,6 +122,14 @@ export function LandingFoundingMerchant() {
               onTraditionalFeeChange={setTraditionalFee}
             />
           </div>
+
+          {remainingSpots !== null && (
+            <FoundingSpotsBanner
+              remainingSpots={remainingSpots}
+              maxSpots={foundingMerchant.maxSpots}
+              claimedSpots={claimedSpots}
+            />
+          )}
 
           <div className="fm-benefits wrap-inner">
             <div className="fm-benefits-head">
