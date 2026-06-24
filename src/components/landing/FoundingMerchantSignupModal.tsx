@@ -21,18 +21,6 @@ const BUSINESS_TYPES = [
   "Other",
 ];
 
-const COUNTRIES = [
-  "United States",
-  "Canada",
-  "United Kingdom",
-  "Australia",
-  "Germany",
-  "France",
-  "Netherlands",
-  "Mexico",
-  "Other",
-];
-
 export function FoundingMerchantSignupModal({
   open,
   onClose,
@@ -81,7 +69,7 @@ export function FoundingMerchantSignupModal({
     if (!email.trim()) return "Email is required.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return "Enter a valid email address.";
     if (!businessType) return "Please select a business type.";
-    if (!country) return "Please select a country.";
+    if (!country.trim()) return "Country is required.";
     if (!acceptTerms) return "Please accept the Terms and Privacy Policy to continue.";
     return null;
   }
@@ -104,7 +92,7 @@ export function FoundingMerchantSignupModal({
         email: email.trim(),
         phone: phone.trim() || undefined,
         businessType,
-        country,
+        country: country.trim(),
         city: city.trim() || undefined,
         state: state.trim() || undefined,
         monthlyVolume: defaultVolume,
@@ -216,17 +204,13 @@ export function FoundingMerchantSignupModal({
                 </label>
                 <label>
                   <span>Country *</span>
-                  <select
+                  <input
+                    type="text"
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
                     required
-                    className="fm-select"
-                  >
-                    <option value="">Select country</option>
-                    {COUNTRIES.map((c) => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
+                    placeholder="United States"
+                  />
                 </label>
                 <label>
                   <span>City</span>
