@@ -379,6 +379,34 @@ export function calcAnalytics(transactions: Transaction[]) {
   return { totalTransactions, totalAmount, totalRevenue, totalPlatformFees, totalVaultContribution };
 }
 
+export interface FoundingMerchantSignupData {
+  businessName: string;
+  contactName: string;
+  email: string;
+  phone?: string;
+  businessType?: string;
+  city?: string;
+  state?: string;
+  monthlyVolume?: number;
+  traditionalFeeRate?: number;
+}
+
+export const foundingMerchantApi = {
+  getAvailability: () =>
+    apiFetch<{
+      maxSpots: number;
+      claimedSpots: number;
+      remainingSpots: number;
+      isOpen: boolean;
+    }>("/founding-merchant/availability"),
+
+  signup: (data: FoundingMerchantSignupData) =>
+    apiFetch<{ success: boolean; message: string; email: string }>("/founding-merchant/signup", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+};
+
 export function formatCurrency(amount: number) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
 }

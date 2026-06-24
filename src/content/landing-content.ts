@@ -1,13 +1,11 @@
-import { appUrl } from "@/lib/appUrl";
-
 const A = "/landing-assets/images";
 
-/** Platform login / signup entry — live demo at app.slicechain.io from GitHub Pages. */
-export const portalPath = appUrl("/portal");
-export const businessDemoPath = appUrl("/business/demo");
-export const businessLoginPath = appUrl("/business/login");
-export const businessSignupPath = appUrl("/business/signup");
-export const employeeLoginPath = appUrl("/employee/login");
+/** Platform login / signup entry (not the marketing home). */
+export const portalPath = "/portal";
+export const businessDemoPath = "/business/demo";
+export const businessLoginPath = "/business/login";
+export const businessSignupPath = "/business/signup";
+export const employeeLoginPath = "/employee/login";
 
 export const landingMeta = {
   title: "Slice Chain & SlicePay | Crypto Payment Gateway for Small Business",
@@ -64,16 +62,55 @@ export const social = {
   emailDisplay: "slicepay@pizzabit.io",
 };
 
+export const foundingMerchantHeroImage = `${A}/slicepay-merchant-hero.png`;
+
+export const foundingMerchant = {
+  eyebrow: "Founding merchant program now open",
+  titleHtml: 'Accept Crypto.<br>Keep More <span class="it">Revenue</span>.',
+  subhead: "Save up to 50%+ on payment processing fees while settling instantly in USDC.",
+  copy: "Built for restaurants, retailers, food trucks, service businesses, and merchants who want faster payments and higher margins.",
+  maxSpots: 500,
+  benefits: [
+    "Lifetime Founding Merchant Status",
+    "50% off platform subscription fees for life",
+    "Locked-in 1.9% processing fee",
+    "Zero setup and onboarding fees",
+    "Priority support access",
+    "Double SLICE loyalty rewards during the first year",
+    "Early access to new features",
+    "Merchant referral rewards",
+    "Founding Merchant Badge",
+    "Product roadmap influence",
+    "Preferred pricing on future SliceChain products",
+    "Featured marketing opportunities",
+  ],
+  availabilityNote: "Limited availability: first 500 businesses only",
+  cta: "Become a Founding Merchant",
+  demoCta: "Watch 60 Second Demo",
+  trustCards: [
+    { value: "1.9%", label: "Transparent SlicePay processing rate" },
+    { value: "USDC", label: "Fast stablecoin settlement for merchants" },
+    { value: "QR", label: "Simple checkout for in-person payments" },
+  ],
+  merchantFit: [
+    { title: "Restaurants", body: "Protect margins on dine-in, takeout, catering, and repeat customer volume." },
+    { title: "Retailers", body: "Give crypto-ready customers a simple QR checkout while reducing card fee drag." },
+    { title: "Food Trucks", body: "Accept fast in-person payments with lower fees and a lighter checkout flow." },
+    { title: "Service Businesses", body: "Improve payment speed for appointments, invoices, deposits, and local services." },
+  ],
+};
+
 export const navLinks = [
   { href: "#home", label: "Home", num: "01" },
-  { href: "#mission", label: "Mission & Vision", num: "02" },
-  { href: "#about", label: "About", num: "03" },
-  { href: "#team", label: "Team", num: "04" },
-  { href: "#marketing", label: "How It Works", num: "05" },
-  { href: "#businesses", label: "For Businesses", num: "06" },
-  { href: "#gallery", label: "Gallery", num: "07" },
-  { href: "#plan", label: "Roadmap", num: "08" },
-  { href: "#community", label: "Get Started", num: "09" },
+  { href: "#founding-merchant", label: "Founding Merchant", num: "02" },
+  { href: "#mission", label: "Mission & Vision", num: "03" },
+  { href: "#about", label: "About", num: "04" },
+  { href: "#team", label: "Team", num: "05" },
+  { href: "#marketing", label: "How It Works", num: "06" },
+  { href: "#businesses", label: "For Businesses", num: "07" },
+  { href: "#gallery", label: "Gallery", num: "08" },
+  { href: "#plan", label: "Roadmap", num: "09" },
+  { href: "#community", label: "Get Started", num: "10" },
 ];
 
 export const heroSlides = [
@@ -258,16 +295,15 @@ export const galleryImages = [
 ];
 
 export const communityCards = [
-  { href: portalPath, img: `${A}/event-1.jpg`, alt: "Business owner registering to accept cryptocurrency payments on SlicePay", subtitle: "Business", title: "Register your business on SlicePay" },
-  { href: employeeLoginPath, img: `${A}/event-2.jpg`, alt: "Employee generating QR code crypto payments for USDC checkout", subtitle: "Employee", title: "Staff: generate QR codes and earn commission" },
+  { href: portalPath, img: `${A}/event-1.jpg`, subtitle: "Business", title: "Register your business on SlicePay" },
+  { href: "/employee/login", img: `${A}/event-2.jpg`, subtitle: "Employee", title: "Staff: generate QR codes and earn commission" },
   {
     href: portalPath,
     img: `${A}/photo_2025-08-05_18-45-59.jpg`,
-    alt: "Customer completing multi-chain crypto payments with SlicePay blockchain payment processor",
     subtitle: "Payments",
     title: "Start accepting wallet payments today",
   },
-  { href: businessLoginPath, img: `${A}/photo_2025-08-05_18-45-58.jpg`, alt: "SlicePay business dashboard for USDC payments and crypto payment analytics", subtitle: "Dashboard", title: "Open your business dashboard" },
+  { href: "/business/login", img: `${A}/photo_2025-08-05_18-45-58.jpg`, subtitle: "Dashboard", title: "Open your business dashboard" },
 ];
 
 export const businesses = {
