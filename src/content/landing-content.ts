@@ -57,7 +57,7 @@ export const social = {
   // This stops Cloudflare Email Obfuscation from injecting email-decode.min.js
   // into the landing page's critical request chain. Assembled client-side by ContactLink.
   emailUser: "slicepay",
-  emailDomain: "pizzabit.io",
+  emailDomain: "slicechain.io",
   email: "mailto:slicepay@slicechain.io",
   emailDisplay: "slicepay@slicechain.io",
 };
