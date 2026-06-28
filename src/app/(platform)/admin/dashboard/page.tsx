@@ -12,7 +12,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
-import { Pizza, Shield, LogOut, RefreshCw, TrendingUp, DollarSign, Receipt, AlertCircle, CheckCircle, Clock, Loader2, Search } from "lucide-react";
+import { Pizza, Shield, LogOut, RefreshCw, TrendingUp, DollarSign, Receipt, AlertCircle, CheckCircle, Clock, Loader2, Search, Mail, Store } from "lucide-react";
+import { NewsletterTab } from "@/components/admin/NewsletterTab";
+import { FoundingMerchantTab } from "@/components/admin/FoundingMerchantTab";
 
 function StatusBadge({ status }: { status: string }) {
   const map: Record<string, string> = { completed: "bg-green-100 text-green-700", pending: "bg-yellow-100 text-yellow-700", failed: "bg-red-100 text-red-700" };
@@ -134,6 +136,8 @@ export default function AdminDashboard() {
           <TabsList>
             <TabsTrigger value="transactions" className="flex items-center gap-1.5"><Receipt className="w-3.5 h-3.5" />Transactions</TabsTrigger>
             <TabsTrigger value="analytics" className="flex items-center gap-1.5"><TrendingUp className="w-3.5 h-3.5" />Analytics</TabsTrigger>
+            <TabsTrigger value="newsletter" className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" />Newsletter</TabsTrigger>
+            <TabsTrigger value="founding-merchants" className="flex items-center gap-1.5"><Store className="w-3.5 h-3.5" />Founding Merchants</TabsTrigger>
           </TabsList>
 
           <TabsContent value="transactions" className="space-y-4 mt-4">
@@ -250,6 +254,17 @@ export default function AdminDashboard() {
               </Card>
             </div>
           </TabsContent>
+
+          {token ? (
+            <>
+              <TabsContent value="newsletter">
+                <NewsletterTab token={token} />
+              </TabsContent>
+              <TabsContent value="founding-merchants">
+                <FoundingMerchantTab token={token} />
+              </TabsContent>
+            </>
+          ) : null}
         </Tabs>
       </div>
     </div>

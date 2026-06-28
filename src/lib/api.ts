@@ -195,6 +195,59 @@ export const adminApi = {
 
   getTransactions: (token: string, params?: Record<string, string>) =>
     apiFetch<{ transactions: Transaction[]; total: number }>(`/admin/transactions?${new URLSearchParams(params)}`, { token }),
+
+  getNewsletterSubscriberStats: (token: string) =>
+    apiFetch<NewsletterSubscriberStats>("/admin/newsletter/subscriber-stats", { token }),
+
+  listNewsletterIssues: (token: string, params?: Record<string, string>) =>
+    apiFetch<{
+      issues: NewsletterIssue[];
+      pagination: { currentPage: number; totalPages: number; totalCount: number };
+    }>(`/admin/newsletter/issues?${new URLSearchParams(params || {})}`, { token }),
+
+  createNewsletterIssue: (token: string, data: NewsletterIssueInput) =>
+    apiFetch<{ issue: NewsletterIssue }>("/admin/newsletter/issues", {
+      method: "POST",
+      token,
+      body: JSON.stringify(data),
+    }),
+
+  updateNewsletterIssue: (token: string, issueId: string, data: Partial<NewsletterIssueInput>) =>
+    apiFetch<{ issue: NewsletterIssue }>(`/admin/newsletter/issues/${issueId}`, {
+      method: "PUT",
+      token,
+      body: JSON.stringify(data),
+    }),
+
+  publishNewsletterIssue: (token: string, issueId: string, actionPassword: string) =>
+    apiFetch<{ issue: NewsletterIssue; message: string }>(`/admin/newsletter/issues/${issueId}/publish`, {
+      method: "POST",
+      token,
+      body: JSON.stringify({ actionPassword }),
+    }),
+
+  getFoundingMerchantStats: (token: string) =>
+    apiFetch<FoundingMerchantStats>("/admin/founding-merchants/stats", { token }),
+
+  listFoundingMerchants: (token: string, params?: Record<string, string>) =>
+    apiFetch<{
+      leads: FoundingMerchantLead[];
+      pagination: { currentPage: number; totalPages: number; totalCount: number };
+    }>(`/admin/founding-merchants?${new URLSearchParams(params || {})}`, { token }),
+
+  updateFoundingMerchantStatus: (token: string, leadId: string, status: string, actionPassword: string) =>
+    apiFetch<{ lead: FoundingMerchantLead; message: string }>(`/admin/founding-merchants/${leadId}/status`, {
+      method: "PATCH",
+      token,
+      body: JSON.stringify({ status, actionPassword }),
+    }),
+
+  removeFoundingMerchant: (token: string, leadId: string, actionPassword: string) =>
+    apiFetch<{ removed: boolean; message: string }>(`/admin/founding-merchants/${leadId}`, {
+      method: "DELETE",
+      token,
+      body: JSON.stringify({ actionPassword }),
+    }),
 };
 
 // Customer
@@ -325,6 +378,63 @@ export interface TransactionStats {
   completed: number;
   pending: number;
   failed: number;
+}
+
+export interface NewsletterSubscriberStats {
+  totalSubscribers: number;
+  activeSubscribers: number;
+}
+
+export interface NewsletterIssueInput {
+  title?: string;
+  subject: string;
+  preheader?: string;
+  htmlBody: string;
+  textBody?: string;
+}
+
+export interface NewsletterIssue {
+  _id: string;
+  title: string;
+  subject: string;
+  preheader?: string;
+  htmlBody: string;
+  textBody?: string;
+  status: "draft" | "published";
+  publishedAt?: string;
+  publishedByUsername?: string;
+  recipientCount?: number;
+  sendStats?: { sent: number; failed: number };
+  lastEditedByUsername?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FoundingMerchantStats {
+  total: number;
+  activeCount: number;
+  remainingSpots: number;
+  maxSpots: number;
+  byStatus: Record<string, number>;
+}
+
+export interface FoundingMerchantLead {
+  _id: string;
+  businessName: string;
+  contactName: string;
+  email: string;
+  phone?: string;
+  businessType?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  monthlyVolume?: number;
+  traditionalFeeRate?: number;
+  isEmailVerified: boolean;
+  status: "pending_verification" | "verified" | "contacted" | "onboarded" | "declined";
+  source?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface LoyaltyData {
