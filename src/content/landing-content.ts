@@ -58,8 +58,8 @@ export const social = {
   // into the landing page's critical request chain. Assembled client-side by ContactLink.
   emailUser: "slicepay",
   emailDomain: "pizzabit.io",
-  email: "mailto:slicepay@pizzabit.io",
-  emailDisplay: "slicepay@pizzabit.io",
+  email: "mailto:slicepay@slicechain.io",
+  emailDisplay: "slicepay@slicechain.io",
 };
 
 export const foundingMerchantHeroImage = `${A}/slicepay-merchant-hero.png`;
