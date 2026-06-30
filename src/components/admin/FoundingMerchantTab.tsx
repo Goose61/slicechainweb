@@ -44,17 +44,26 @@ type PendingAction =
   | { type: "remove"; lead: FoundingMerchantLead };
 
 const STATUS_LABELS: Record<string, string> = {
-  pending_verification: "Pending verification",
-  verified: "Verified",
+  pending_verification: "Pending email confirmation",
+  email_verified: "Email confirmed — awaiting review",
+  verified: "Approved",
   contacted: "Contacted",
   onboarded: "Onboarded",
   declined: "Declined",
 };
 
+function isApprovedStatus(status: string) {
+  return status === "verified" || status === "contacted" || status === "onboarded";
+}
+
+function canAdminApprove(status: string) {
+  return status === "email_verified";
+}
+
 function statusBadgeVariant(status: string): "default" | "secondary" | "destructive" | "outline" {
   if (status === "onboarded") return "default";
   if (status === "declined") return "destructive";
-  if (status === "verified" || status === "contacted") return "secondary";
+  if (status === "email_verified" || status === "verified" || status === "contacted") return "secondary";
   return "outline";
 }
 
@@ -301,7 +310,7 @@ export function FoundingMerchantTab({ token }: FoundingMerchantTabProps) {
                           <Button variant="ghost" size="icon" onClick={() => openDetail(lead)}>
                             <Eye className="w-4 h-4" />
                           </Button>
-                          {lead.status !== "verified" && lead.status !== "onboarded" && lead.status !== "declined" ? (
+                          {canAdminApprove(lead.status) ? (
                             <Button variant="ghost" size="icon" onClick={() => setPendingAction({ type: "approve", lead })}>
                               <CheckCircle className="w-4 h-4 text-green-600" />
                             </Button>
@@ -366,17 +375,17 @@ export function FoundingMerchantTab({ token }: FoundingMerchantTabProps) {
                 <div><span className="text-muted-foreground">Source:</span> {selectedLead.source || "—"}</div>
               </div>
               <div className="flex flex-wrap gap-2 pt-2">
-                {selectedLead.status !== "verified" && selectedLead.status !== "onboarded" && selectedLead.status !== "declined" ? (
+                {canAdminApprove(selectedLead.status) ? (
                   <Button size="sm" onClick={() => setPendingAction({ type: "approve", lead: selectedLead })}>
                     <CheckCircle className="w-4 h-4 mr-1" /> Approve
                   </Button>
                 ) : null}
-                {selectedLead.status !== "contacted" && selectedLead.status !== "declined" ? (
+                {selectedLead.status !== "contacted" && !isApprovedStatus(selectedLead.status) && selectedLead.status !== "declined" ? (
                   <Button size="sm" variant="secondary" onClick={() => setPendingAction({ type: "contacted", lead: selectedLead })}>
                     Mark contacted
                   </Button>
                 ) : null}
-                {selectedLead.status !== "onboarded" && selectedLead.status !== "declined" ? (
+                {selectedLead.status !== "onboarded" && !isApprovedStatus(selectedLead.status) && selectedLead.status !== "declined" ? (
                   <Button size="sm" variant="secondary" onClick={() => setPendingAction({ type: "onboarded", lead: selectedLead })}>
                     Mark onboarded
                   </Button>

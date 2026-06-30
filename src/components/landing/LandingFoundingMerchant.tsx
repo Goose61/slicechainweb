@@ -73,12 +73,12 @@ export function LandingFoundingMerchant() {
           style={{ backgroundImage: `url(${foundingMerchantHeroImage})` }}
           aria-hidden="true"
         />
-        <div className="fm-hero-inner">
+        <div className="fm-hero-inner wrap">
           <div className="fm-hero-grid">
             <div className="fm-hero-copy" id="founding-merchant">
               {verifiedBanner && (
                 <div className="fm-verified-banner" role="status">
-                  Email verified — your Founding Merchant application is confirmed. Our team will be in touch soon.
+                  Email verified — your application is confirmed. Our team will review it and email you once approved.
                 </div>
               )}
               <div className="fm-eyebrow">
@@ -131,7 +131,7 @@ export function LandingFoundingMerchant() {
             />
           )}
 
-          <div className="fm-benefits">
+          <div className="fm-benefits wrap-inner">
             <div className="fm-benefits-head">
               <span className="eyebrow">Founding Merchant Program</span>
               <h2 className="display">Exclusive benefits for early partners</h2>
@@ -151,7 +151,7 @@ export function LandingFoundingMerchant() {
         onClose={() => setSignupOpen(false)}
         defaultVolume={volume}
         defaultTraditionalFee={traditionalFee}
-        initialError={verifyError ? "Verification link expired or invalid. Please submit your application again." : undefined}
+        initialError={verifyError ? "We could not confirm your email. Please open the link from your email and click Confirm, or submit your application again." : undefined}
       />
       <DemoVideoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
     </>

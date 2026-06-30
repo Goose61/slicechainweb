@@ -32,6 +32,7 @@ export function FoundingMerchantSignupModal({
   const [contactName, setContactName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [website, setWebsite] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
@@ -70,6 +71,16 @@ export function FoundingMerchantSignupModal({
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return "Enter a valid email address.";
     if (!businessType) return "Please select a business type.";
     if (!country.trim()) return "Country is required.";
+    if (website.trim()) {
+      try {
+        const candidate = /^https?:\/\//i.test(website.trim())
+          ? website.trim()
+          : `https://${website.trim()}`;
+        new URL(candidate);
+      } catch {
+        return "Enter a valid website URL.";
+      }
+    }
     if (!acceptTerms) return "Please accept the Terms and Privacy Policy to continue.";
     return null;
   }
@@ -91,6 +102,7 @@ export function FoundingMerchantSignupModal({
         contactName: contactName.trim(),
         email: email.trim(),
         phone: phone.trim() || undefined,
+        website: website.trim() || undefined,
         businessType,
         country: country.trim(),
         city: city.trim() || undefined,
@@ -186,6 +198,17 @@ export function FoundingMerchantSignupModal({
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+1 555 000 0000"
+                  />
+                </label>
+                <label>
+                  <span>Website</span>
+                  <input
+                    type="url"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                    placeholder="https://yourbusiness.com"
+                    inputMode="url"
+                    autoComplete="url"
                   />
                 </label>
                 <label>

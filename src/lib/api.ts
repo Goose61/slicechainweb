@@ -12,12 +12,16 @@ export function getApiBase(): string {
 
   const hostname = window.location.hostname;
 
+  // app.slicechain.io runs locally with Next.js /api rewrites to localhost:7000
+  if (hostname === "app.slicechain.io") {
+    return "/api";
+  }
+
+  // Static GitHub Pages + QR app call the API host directly
   if (
     hostname === "slicechain.io" ||
     hostname === "www.slicechain.io" ||
-    hostname === "app.slicechain.io" ||
-    hostname === "qr.slicechain.io" ||
-    (hostname.endsWith(".slicechain.io") && hostname !== "api.slicechain.io")
+    hostname === "qr.slicechain.io"
   ) {
     return `${PRODUCTION_API}/api`;
   }
@@ -100,6 +104,15 @@ export const businessApi = {
       method: "POST",
       body: JSON.stringify({ email, password, turnstileToken }),
     }),
+
+  demoLogin: () =>
+    apiFetch<{
+      token: string;
+      businessId: string;
+      businessType: string;
+      businessName: string;
+      demoMode: boolean;
+    }>("/business/demo-login", { method: "POST" }),
 
   signupRequest: (data: Record<string, unknown>, turnstileToken?: string) =>
     apiFetch("/business/signup-request", {
@@ -196,6 +209,48 @@ export const adminApi = {
   getTransactions: (token: string, params?: Record<string, string>) =>
     apiFetch<{ transactions: Transaction[]; total: number }>(`/admin/transactions?${new URLSearchParams(params)}`, { token }),
 
+  getUnreconciledDeposits: (token: string, params?: Record<string, string>) =>
+    apiFetch<{
+      deposits: UnreconciledDeposit[];
+      summary: { total: number; byStatus: Array<{ _id: string; count: number }> };
+      pagination: { currentPage: number; totalPages: number; totalCount: number };
+    }>(`/admin/deposits/unreconciled?${new URLSearchParams(params || {})}`, { token }),
+
+  getDepositDiagnostics: (token: string, depositId: string) =>
+    apiFetch<{ deposit: UnreconciledDeposit }>(`/admin/deposits/${depositId}`, { token }),
+
+  markDepositFailed: (token: string, depositId: string, data: { confirmationTxId: string; reason?: string }) =>
+    apiFetch<{ deposit: UnreconciledDeposit; message: string }>(`/admin/deposits/${depositId}/mark-failed`, {
+      method: "POST",
+      token,
+      body: JSON.stringify(data),
+    }),
+
+  cancelDeposit: (token: string, depositId: string, data: { confirmationTxId: string; reason?: string }) =>
+    apiFetch<{ deposit: UnreconciledDeposit; message: string }>(`/admin/deposits/${depositId}/cancel`, {
+      method: "POST",
+      token,
+      body: JSON.stringify(data),
+    }),
+
+  batchCancelDeposits: (token: string, data: { depositIds: string[]; confirmationPayload: string; reason?: string }) =>
+    apiFetch<{
+      message: string;
+      succeeded: string[];
+      failed: Array<{ id: string; error: string }>;
+      total: number;
+    }>("/admin/deposits/batch-cancel", {
+      method: "POST",
+      token,
+      body: JSON.stringify(data),
+    }),
+
+  getAuditLog: (token: string, params?: Record<string, string>) =>
+    apiFetch<{
+      logs: AdminAuditLogEntry[];
+      pagination: { currentPage: number; totalPages: number; totalCount: number };
+    }>(`/admin/audit-log?${new URLSearchParams(params || {})}`, { token }),
+
   getNewsletterSubscriberStats: (token: string) =>
     apiFetch<NewsletterSubscriberStats>("/admin/newsletter/subscriber-stats", { token }),
 
@@ -224,6 +279,12 @@ export const adminApi = {
       method: "POST",
       token,
       body: JSON.stringify({ actionPassword }),
+    }),
+
+  deleteNewsletterIssue: (token: string, issueId: string) =>
+    apiFetch<{ removed: boolean; message: string }>(`/admin/newsletter/issues/${issueId}`, {
+      method: "DELETE",
+      token,
     }),
 
   getFoundingMerchantStats: (token: string) =>
@@ -323,9 +384,10 @@ export interface BusinessProfile {
 export interface Transaction {
   _id: string;
   amount: number;
-  status: "completed" | "pending" | "failed";
+  status: "completed" | "confirmed" | "pending" | "processing" | "failed";
   createdAt: string;
   walletAddress?: string;
+  customerWallet?: string | null;
   inputToken?: { symbol: string };
   fees?: { platformFee: number; vaultContribution: number };
   rewards?: { pizzaTokensDistributed?: number; pizzarRewardsDistributed?: number };
@@ -380,6 +442,64 @@ export interface TransactionStats {
   failed: number;
 }
 
+export interface UnreconciledDeposit {
+  id: string;
+  businessId: string;
+  businessName: string;
+  businessWallet?: string | null;
+  chain: string;
+  chainLabel: string;
+  status: string;
+  expectedAmountUSD: number;
+  confirmedAmountUSD?: number;
+  swapMethod?: string | null;
+  depositAddress: string;
+  expiresAt: string;
+  createdAt: string;
+  updatedAt: string;
+  lastError?: string | null;
+  retryCount?: number;
+  transactionId?: string | null;
+  staleHours?: number | null;
+  issues: string[];
+  hints: string[];
+  txHashes: {
+    inbound?: string | null;
+    sweep?: string | null;
+    cctpBurn?: string | null;
+    cctpRedeem?: string | null;
+    swapOrder?: string | null;
+    swapDst?: string | null;
+    solanaSplit?: string | null;
+  };
+  bridgeRequirements: Array<{
+    type: string;
+    label: string;
+    amount?: string | null;
+    have?: string | null;
+    need?: string | null;
+    raw?: string | null;
+    note?: string | null;
+    treasuryAddress?: string | null;
+  }>;
+  pipeline?: Array<{ id: string; label: string; description: string; state: string }>;
+  treasuryGas?: Record<string, unknown> | null;
+}
+
+export interface AdminAuditLogEntry {
+  _id: string;
+  adminUsername: string;
+  adminEmail?: string | null;
+  action: string;
+  resourceType?: string | null;
+  resourceId?: string | null;
+  confirmationTxId?: string | null;
+  success: boolean;
+  errorMessage?: string | null;
+  details?: Record<string, unknown>;
+  createdAt: string;
+}
+
 export interface NewsletterSubscriberStats {
   totalSubscribers: number;
   activeSubscribers: number;
@@ -431,7 +551,7 @@ export interface FoundingMerchantLead {
   monthlyVolume?: number;
   traditionalFeeRate?: number;
   isEmailVerified: boolean;
-  status: "pending_verification" | "verified" | "contacted" | "onboarded" | "declined";
+  status: "pending_verification" | "email_verified" | "verified" | "contacted" | "onboarded" | "declined";
   source?: string;
   createdAt: string;
   updatedAt: string;
@@ -479,6 +599,181 @@ export interface PizzarBalance {
   canRedeem: boolean;
 }
 
+// ── Treasury types ────────────────────────────────────────────────────────────
+
+export interface TreasuryTokenInfo {
+  symbol: string;
+  address: string;
+  decimals: number;
+  stablecoin: boolean;
+  balance: string | null;
+  reserved: string | null;
+  sweepable: string | null;
+  sweepEligible: boolean;
+  manualSweepAvailable: boolean;
+}
+
+export interface TreasuryEvmChain {
+  chainKey: string;
+  name: string;
+  symbol: string;
+  chainId?: number;
+  cctpUsdc?: boolean;
+  treasuryAddress?: string | null;
+  balanceNative?: string | null;
+  minReserveNative?: string | null;
+  floorNative?: string;
+  deficitNative?: string;
+  sufficient?: boolean | null;
+  needsBootstrap?: boolean;
+  autoTopUpEnabled?: boolean;
+  postBridgeSweepEnabled?: boolean;
+  gasPriceGwei?: number | null;
+  tokens?: TreasuryTokenInfo[];
+  fundingInstruction?: string | null;
+  error?: string;
+}
+
+export interface TreasuryTronInfo {
+  configured: boolean;
+  address: string | null;
+  balanceTrx?: string;
+  energyAvailable?: number;
+  energyLimit?: number;
+  energyFloor?: number;
+  sufficient?: boolean;
+  liquidReserveTrx?: number;
+  autoStakeEnabled?: boolean;
+  note?: string;
+  error?: string;
+}
+
+export interface TreasurySolanaInfo {
+  configured: boolean;
+  address?: string;
+  balanceSol?: string;
+  note?: string;
+  error?: string;
+}
+
+export interface TreasuryConfig {
+  autoTopUpEnabled: boolean;
+  postBridgeSweepEnabled: boolean;
+  volatileSweepEnabled: boolean;
+  minDustNative: string;
+  minTopUpUsd: string;
+  postBridgeMinSwapUsd: string;
+  postBridgeMaxSwapUsd: string;
+  tokenTopUpOrder: string;
+  sharedTreasuryAddress: string | null;
+}
+
+export interface TreasuryOverview {
+  success: boolean;
+  summary: {
+    evmChainCount: number;
+    evmChainsFunded: number;
+    evmChainsNeedFunds: number;
+    evmChainsNeedBootstrap: number;
+    sharedTreasuryAddress: string | null;
+    tronSufficient: boolean | null;
+  };
+  evmChains: TreasuryEvmChain[];
+  tron: TreasuryTronInfo;
+  solana: TreasurySolanaInfo;
+  recentEvents: Record<string, unknown>[];
+  config: TreasuryConfig;
+}
+
+export interface TreasuryActionResult {
+  success: boolean;
+  alreadyFunded?: boolean;
+  message?: string;
+  chainKey?: string;
+  tokenSymbol?: string;
+  swapUsd?: number;
+  txHash?: string;
+  txId?: string;
+  nativeBalanceBefore?: string;
+  nativeBalanceAfter?: string;
+  stakedTrx?: string;
+}
+
+// ── Treasury API calls ────────────────────────────────────────────────────────
+
+export async function fetchTreasuryOverview(token: string): Promise<TreasuryOverview> {
+  const res = await fetch(`${API_BASE}/admin/treasury/overview`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Failed to load treasury overview");
+  return data;
+}
+
+export async function treasuryTopUpGas(
+  token: string,
+  chainKey: string,
+  confirmationPayload: string,
+  reason?: string
+): Promise<TreasuryActionResult> {
+  const res = await fetch(`${API_BASE}/admin/treasury/top-up-gas`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ chainKey, confirmationPayload, reason })
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Top-up failed");
+  return data;
+}
+
+export async function treasurySweepToken(
+  token: string,
+  chainKey: string,
+  tokenSymbol: string,
+  confirmationPayload: string,
+  opts?: { amountUsd?: number; reason?: string }
+): Promise<TreasuryActionResult> {
+  const res = await fetch(`${API_BASE}/admin/treasury/sweep-token`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ chainKey, tokenSymbol, confirmationPayload, ...opts })
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Sweep failed");
+  return data;
+}
+
+export async function treasurySweepChain(
+  token: string,
+  chainKey: string,
+  confirmationPayload: string,
+  reason?: string
+): Promise<TreasuryActionResult> {
+  const res = await fetch(`${API_BASE}/admin/treasury/sweep-chain`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ chainKey, confirmationPayload, reason })
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Sweep failed");
+  return data;
+}
+
+export async function treasuryStakeTron(
+  token: string,
+  confirmationPayload: string,
+  opts?: { amountTrx?: number; reason?: string }
+): Promise<TreasuryActionResult> {
+  const res = await fetch(`${API_BASE}/admin/treasury/tron/stake`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ confirmationPayload, ...opts })
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Stake failed");
+  return data;
+}
+
 // Analytics calculated from transactions
 export function calcAnalytics(transactions: Transaction[]) {
   const totalTransactions = transactions.length;
@@ -489,11 +784,16 @@ export function calcAnalytics(transactions: Transaction[]) {
   return { totalTransactions, totalAmount, totalRevenue, totalPlatformFees, totalVaultContribution };
 }
 
+export function formatCurrency(amount: number) {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
+}
+
 export interface FoundingMerchantSignupData {
   businessName: string;
   contactName: string;
   email: string;
   phone?: string;
+  website?: string;
   businessType: string;
   country: string;
   city?: string;
@@ -518,10 +818,6 @@ export const foundingMerchantApi = {
       signal: AbortSignal.timeout(20000),
     }),
 };
-
-export function formatCurrency(amount: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
-}
 
 export function shortAddress(addr: string) {
   if (!addr || addr.length < 12) return addr;

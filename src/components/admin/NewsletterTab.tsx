@@ -14,11 +14,12 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { AdminPasswordDialog } from "@/components/admin/AdminPasswordDialog";
-import { Loader2, Mail, Plus, RefreshCw, Save, Send } from "lucide-react";
+import { Loader2, Mail, Plus, RefreshCw, Save, Send, Trash2 } from "lucide-react";
 
 interface NewsletterTabProps {
   token: string;
@@ -40,7 +41,9 @@ export function NewsletterTab({ token }: NewsletterTabProps) {
   const [form, setForm] = useState(EMPTY_FORM);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [publishOpen, setPublishOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [publishing, setPublishing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const selectedIssue = issues.find((issue) => issue._id === selectedIssueId) || null;
   const isDraft = !selectedIssue || selectedIssue.status === "draft";
@@ -125,6 +128,24 @@ export function NewsletterTab({ token }: NewsletterTabProps) {
       toast.error(err instanceof Error ? err.message : "Failed to publish newsletter");
     } finally {
       setPublishing(false);
+    }
+  }
+
+  async function deleteDraft() {
+    if (!selectedIssueId || !isDraft) return;
+
+    setDeleting(true);
+    try {
+      await adminApi.deleteNewsletterIssue(token, selectedIssueId);
+      toast.success("Draft deleted");
+      setDeleteOpen(false);
+      setSelectedIssueId(null);
+      setForm(EMPTY_FORM);
+      await loadData();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed to delete draft");
+    } finally {
+      setDeleting(false);
     }
   }
 
@@ -315,6 +336,17 @@ export function NewsletterTab({ token }: NewsletterTabProps) {
                     {saving ? <Loader2 className="w-4 h-4 mr-1 animate-spin" /> : <Save className="w-4 h-4 mr-1" />}
                     Save draft
                   </Button>
+                  {selectedIssueId ? (
+                    <Button
+                      variant="outline"
+                      onClick={() => setDeleteOpen(true)}
+                      disabled={saving || deleting}
+                      className="text-destructive hover:text-destructive"
+                    >
+                      <Trash2 className="w-4 h-4 mr-1" />
+                      Delete draft
+                    </Button>
+                  ) : null}
                   <Button
                     variant="default"
                     onClick={() => setPublishOpen(true)}
@@ -337,9 +369,28 @@ export function NewsletterTab({ token }: NewsletterTabProps) {
             <DialogDescription>{form.preheader || "Preview of the email subscribers will receive"}</DialogDescription>
           </DialogHeader>
           <div
-            className="rounded-lg border p-6 bg-white"
+            className="rounded-lg border p-6 bg-white text-neutral-900 [&_*]:!text-neutral-900 [&_a]:!text-blue-700"
             dangerouslySetInnerHTML={{ __html: form.htmlBody }}
           />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={deleteOpen} onOpenChange={(open) => { if (!deleting) setDeleteOpen(open); }}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Delete draft?</DialogTitle>
+            <DialogDescription>
+              This permanently removes &ldquo;{selectedIssue?.subject || form.subject || "this draft"}&rdquo;. Published issues cannot be deleted.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteOpen(false)} disabled={deleting}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={() => void deleteDraft()} disabled={deleting}>
+              {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Delete draft"}
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
