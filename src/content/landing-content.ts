@@ -6,7 +6,7 @@ export const demoVideoPath = `${V}/slicepay-demo.mp4`;
 
 /** Platform login / signup entry (not the marketing home). */
 export const portalPath = "/portal";
-export const businessDemoPath = "/business/demo";
+export const businessDemoPath = "/business/demo/";
 export const businessLoginPath = "/business/login";
 export const businessSignupPath = "/business/signup";
 export const employeeLoginPath = "/employee/login";

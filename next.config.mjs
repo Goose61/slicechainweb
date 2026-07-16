@@ -53,6 +53,8 @@ const baseConfig = {
   env: {
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: turnstileSiteKey,
     NEXT_PUBLIC_MARKETING_SITE_URL: process.env.NEXT_PUBLIC_MARKETING_SITE_URL || "https://slicechain.io",
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || "https://app.slicechain.io",
+    NEXT_PUBLIC_GITHUB_PAGES: isGhPages ? "true" : "",
   },
   images: {
     unoptimized: true, // Always safe, essential for GitHub Pages static images

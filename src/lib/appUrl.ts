@@ -2,7 +2,8 @@
 export const MARKETING_SITE_ORIGIN = "https://slicechain.io";
 
 /** Live demo app — portals, logins, dashboards (self-hosted via Cloudflare tunnel). */
-export const DEMO_APP_ORIGIN = "https://app.slicechain.io";
+export const DEMO_APP_ORIGIN =
+  process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") || "https://app.slicechain.io";
 
 const MARKETING_HOSTS = new Set(["slicechain.io", "www.slicechain.io"]);
 
@@ -10,16 +11,22 @@ function isMarketingHost(hostname: string): boolean {
   return MARKETING_HOSTS.has(hostname);
 }
 
+function isGithubPagesBuild(): boolean {
+  // Client bundles only see NEXT_PUBLIC_* — also accept GITHUB_PAGES when inlined at build.
+  return (
+    process.env.NEXT_PUBLIC_GITHUB_PAGES === "true" ||
+    process.env.GITHUB_PAGES === "true"
+  );
+}
+
 /**
- * Resolve URL for app routes (portal, login, dashboards).
- * - GitHub Pages build → always app.slicechain.io
- * - slicechain.io / www at runtime → app.slicechain.io
- * - app.slicechain.io / localhost → same-origin relative path
+ * Resolve URL for app routes (portal, login, dashboards, Try Demo).
+ * Marketing / Pages builds must always deep-link to app.slicechain.io.
  */
 export function appUrl(path: string): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
 
-  if (process.env.GITHUB_PAGES === "true") {
+  if (isGithubPagesBuild()) {
     return `${DEMO_APP_ORIGIN}${normalized}`;
   }
 

@@ -1,6 +1,7 @@
 /**
  * API client — resolves backend URL from hostname.
- * Static hosts (slicechain.io on GitHub Pages) have no /api rewrite; call api.slicechain.io directly.
+ * Static hosts (slicechain.io on GitHub Pages) and app.slicechain.io must call
+ * api.slicechain.io directly — the Pages/static Next build has no /api rewrite.
  */
 
 const PRODUCTION_API = "https://api.slicechain.io";
@@ -12,22 +13,22 @@ export function getApiBase(): string {
 
   const hostname = window.location.hostname;
 
-  // app.slicechain.io runs locally with Next.js /api rewrites to localhost:7000
-  if (hostname === "app.slicechain.io") {
-    return "/api";
+  // Local Next.js with /api rewrites → backend :7000
+  if (hostname === "localhost" || hostname === "127.0.0.1") {
+    return "http://localhost:7000/api";
   }
 
-  // Static GitHub Pages + QR app call the API host directly
+  // All public SliceChain hosts: call API origin directly (CORS-enabled).
+  // Do NOT use same-origin /api on app.slicechain.io when it is serving a
+  // static export — that path returns Next.js HTML 404.
   if (
     hostname === "slicechain.io" ||
     hostname === "www.slicechain.io" ||
-    hostname === "qr.slicechain.io"
+    hostname === "app.slicechain.io" ||
+    hostname === "qr.slicechain.io" ||
+    hostname.endsWith(".slicechain.io")
   ) {
     return `${PRODUCTION_API}/api`;
-  }
-
-  if (hostname === "localhost" || hostname === "127.0.0.1") {
-    return "http://localhost:7000/api";
   }
 
   return "/api";

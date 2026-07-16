@@ -8,11 +8,10 @@ import { ContactLink } from "./ContactLink";
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [demoHref, setDemoHref] = useState(businessDemoPath);
-
-  useEffect(() => {
-    setDemoHref(appUrl(businessDemoPath));
-  }, []);
+  // Absolute app URL from first paint so static HTML / pre-hydration clicks
+  // never hit relative /business/demo on slicechain.io (which 404s the API).
+  const demoHref = appUrl(businessDemoPath);
+  const portalHref = appUrl(portalPath);
 
   useEffect(() => {
     let ticking = false;
@@ -119,7 +118,7 @@ export function LandingNav() {
           >
             Try Demo <span className="arrow">→</span>
           </a>
-          <a href={portalPath} className="btn btn-ghost" onClick={closeMenu}>
+          <a href={portalHref} className="btn btn-ghost" onClick={closeMenu}>
             Portal <span className="arrow">→</span>
           </a>
           <ContactLink className="btn btn-gold" onClick={closeMenu}>
