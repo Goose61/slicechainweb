@@ -71,6 +71,7 @@ const nextConfig = isGhPages
         const marketing = process.env.NEXT_PUBLIC_MARKETING_SITE_URL || "https://slicechain.io";
         const hostMatch = [{ type: "host", value: "app.slicechain.io" }];
         return [
+          { source: "/", destination: `${marketing}/`, permanent: false, has: hostMatch },
           { source: "/landing", destination: `${marketing}/`, permanent: false, has: hostMatch },
           { source: "/terms", destination: `${marketing}/terms/`, permanent: false, has: hostMatch },
           { source: "/privacy", destination: `${marketing}/privacy/`, permanent: false, has: hostMatch },
