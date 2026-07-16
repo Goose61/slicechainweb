@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { foundingMerchant } from "@/content/landing-content";
+import { useEffect, useRef } from "react";
+import { demoVideoPath, foundingMerchant } from "@/content/landing-content";
 
 interface Props {
   open: boolean;
@@ -9,6 +9,8 @@ interface Props {
 }
 
 export function DemoVideoModal({ open, onClose }: Props) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -16,9 +18,19 @@ export function DemoVideoModal({ open, onClose }: Props) {
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
+
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      void video.play().catch(() => {
+        /* Autoplay may be blocked; controls remain available. */
+      });
+    }
+
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
+      video?.pause();
     };
   }, [open, onClose]);
 
@@ -38,14 +50,23 @@ export function DemoVideoModal({ open, onClose }: Props) {
         </button>
 
         <div className="fm-demo-head">
-          <span className="eyebrow">Coming soon</span>
+          <span className="eyebrow">Product demo</span>
           <h2 id="fm-demo-title" className="display">{foundingMerchant.demoCta}</h2>
         </div>
 
-        <div className="fm-demo-placeholder" aria-label="Demo video placeholder">
-          <div className="fm-demo-play" aria-hidden="true">▶</div>
-          <p>Our 60-second product demo is on the way.</p>
-          <span className="mono">Video / GIF placeholder</span>
+        <div className="fm-demo-player">
+          <video
+            ref={videoRef}
+            className="fm-demo-video"
+            src={demoVideoPath}
+            controls
+            playsInline
+            preload="metadata"
+            aria-label="SlicePay 60-second product demo"
+          >
+            Your browser does not support embedded video.
+            <a href={demoVideoPath}>Download the demo</a>
+          </video>
         </div>
 
         <p className="fm-demo-copy">
