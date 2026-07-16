@@ -48,17 +48,25 @@ const securityHeaders = [
   },
 ];
 
+// Base configuration shared across BOTH development and production environments
+const baseConfig = {
+  env: {
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: turnstileSiteKey,
+    NEXT_PUBLIC_MARKETING_SITE_URL: process.env.NEXT_PUBLIC_MARKETING_SITE_URL || "https://slicechain.io",
+  },
+  images: {
+    unoptimized: true, // Always safe, essential for GitHub Pages static images
+  },
+};
+
 const nextConfig = isGhPages
   ? {
-      output: "export",
-      trailingSlash: true,
-      images: { unoptimized: true },
+      ...baseConfig,
+      output: "export",      // Required for static HTML export
+      trailingSlash: true,   // Essential for clean URL routing on GitHub Pages
     }
   : {
-      env: {
-        NEXT_PUBLIC_TURNSTILE_SITE_KEY: turnstileSiteKey,
-        NEXT_PUBLIC_MARKETING_SITE_URL: process.env.NEXT_PUBLIC_MARKETING_SITE_URL || "https://slicechain.io",
-      },
+      ...baseConfig,
       async redirects() {
         const marketing = process.env.NEXT_PUBLIC_MARKETING_SITE_URL || "https://slicechain.io";
         const hostMatch = [{ type: "host", value: "app.slicechain.io" }];
@@ -83,3 +91,4 @@ const nextConfig = isGhPages
     };
 
 export default nextConfig;
+
