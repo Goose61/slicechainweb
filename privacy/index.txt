@@ -1,4 +1,4 @@
-0:["jgujRtOyKDhi7Rc-Rl1rz",[[["",{"children":["(platform)",{"children":["privacy",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],"$L1",[[],"$L2"]]]]
+0:["a7uVMXOCYoRLm4BLKaswy",[[["",{"children":["(platform)",{"children":["privacy",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],"$L1",[[],"$L2"]]]]
 3:HL["/_next/static/css/750c38cbc95dcbeb.css","style",{"crossOrigin":""}]
 4:I[47760,["3185","static/chunks/app/layout-e46db6463ab972c9.js"],"GoogleAnalytics"]
 5:I[56954,[],""]
