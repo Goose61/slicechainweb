@@ -1,7 +1,10 @@
 import { brandMark, heroLead, heroSlides, heroStats, portalPath } from "@/content/landing-content";
+import { appUrl } from "@/lib/appUrl";
 import { ContactLink } from "./ContactLink";
 
 export function LandingHero() {
+  const portalHref = appUrl(portalPath);
+
   return (
     <section className="hero" id="home">
       <div className="hero-bg"></div>
@@ -64,7 +67,7 @@ export function LandingHero() {
           </div>
         </div>
         <div className="hero-cta" data-reveal style={{ ["--d" as string]: "800ms" }}>
-          <a href={portalPath} className="btn btn-gold">
+          <a href={portalHref} className="btn btn-gold">
             Open Portal <span className="arrow">→</span>
           </a>
           <a href="#marketing" className="btn btn-ghost">

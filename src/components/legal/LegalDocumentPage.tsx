@@ -79,10 +79,10 @@ export function LegalDocumentPage({
         </div>
 
         <div className="mt-8 flex flex-wrap gap-4 text-sm text-slate-400">
-          <Link href="/terms" className="hover:text-white transition-colors">
+          <Link href="/terms/" className="hover:text-white transition-colors">
             Terms and Conditions
           </Link>
-          <Link href="/privacy" className="hover:text-white transition-colors">
+          <Link href="/privacy/" className="hover:text-white transition-colors">
             Privacy Policy
           </Link>
           <a href={`mailto:${legalMeta.contactEmail}`} className="hover:text-white transition-colors">

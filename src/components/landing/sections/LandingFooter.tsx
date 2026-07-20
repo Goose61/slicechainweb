@@ -1,7 +1,23 @@
-import { brandMark, brandName, businessLoginPath, businessSignupPath, employeeLoginPath, footer, logo, navLinks, social } from "@/content/landing-content";
+import {
+  brandMark,
+  brandName,
+  businessLoginPath,
+  businessSignupPath,
+  employeeLoginPath,
+  footer,
+  logo,
+  navLinks,
+  privacyPath,
+  social,
+  termsPath,
+} from "@/content/landing-content";
+import { appUrl } from "@/lib/appUrl";
 import { ContactLink } from "../ContactLink";
 
 export function LandingFooter() {
+  const businessLoginHref = appUrl(businessLoginPath);
+  const employeeLoginHref = appUrl(employeeLoginPath);
+
   return (
     <footer className="foot" id="footer">
       <div className="foot-big">{brandMark}</div>
@@ -15,6 +31,11 @@ export function LandingFooter() {
               </span>
             </div>
             <p>{footer.address}</p>
+            <p className="foot-seo-blurb">
+              SlicePay is a multi-chain crypto payment gateway for restaurants, retailers, and service
+              businesses. Merchants accept wallet payments with QR checkout, settle in USDC, and keep more
+              of every sale with transparent 1.9% pricing—without replacing how their teams already work.
+            </p>
             <div className="foot-soc-links">
               <a href={social.twitter} target="_blank" rel="noopener noreferrer" title="X / Twitter" className="foot-soc-btn">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -32,7 +53,7 @@ export function LandingFooter() {
             </p>
           </div>
           <div className="foot-col">
-            <h5>Navigate</h5>
+            <p className="foot-col-title">Navigate</p>
             {navLinks.map((l) => (
               <a key={l.href} href={l.href}>
                 {l.label}
@@ -40,14 +61,14 @@ export function LandingFooter() {
             ))}
           </div>
           <div className="foot-col">
-            <h5>Portals</h5>
+            <p className="foot-col-title">Portals</p>
             <a href={businessSignupPath}>Business signup</a>
-            <a href={businessLoginPath}>Business login</a>
-            <a href={employeeLoginPath}>Employee login</a>
+            <a href={businessLoginHref}>Business login</a>
+            <a href={employeeLoginHref}>Employee login</a>
             <ContactLink>Support</ContactLink>
           </div>
           <div className="foot-col">
-            <h5>Platform</h5>
+            <p className="foot-col-title">Platform</p>
             <a href="#mission">Mission & Vision</a>
             <a href="#about">About</a>
             <a href="#team">Team</a>
@@ -60,11 +81,11 @@ export function LandingFooter() {
           <p className="foot-disclaimer">
             Payment platform · Not a bank or money transmitter
             <br />
-            <a href="/terms" style={{ color: "inherit", textDecoration: "underline" }}>
+            <a href={termsPath} style={{ color: "inherit", textDecoration: "underline" }}>
               Terms and Conditions
             </a>
             {" · "}
-            <a href="/privacy" style={{ color: "inherit", textDecoration: "underline" }}>
+            <a href={privacyPath} style={{ color: "inherit", textDecoration: "underline" }}>
               Privacy Policy
             </a>
           </p>

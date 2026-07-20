@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { privacyPath, termsPath } from "@/content/landing-content";
 
 type TermsConsentCheckboxProps = {
   checked: boolean;
@@ -10,8 +11,8 @@ type TermsConsentCheckboxProps = {
 export function TermsConsentCheckbox({
   checked,
   onChange,
-  className = "flex items-start gap-3 cursor-pointer",
-  labelClassName = "text-slate-300 text-sm leading-relaxed",
+  className = "terms-consent",
+  labelClassName = "terms-consent-label",
 }: TermsConsentCheckboxProps) {
   return (
     <label className={className}>
@@ -19,19 +20,19 @@ export function TermsConsentCheckbox({
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="mt-0.5 h-4 w-4 rounded border-white/20 bg-white/10 text-orange-500 focus:ring-orange-500"
+        className="terms-consent-input"
         required
       />
       <span className={labelClassName}>
         I understand the{" "}
-        <Link href="/terms" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:underline">
+        <Link href={termsPath} target="_blank" rel="noopener noreferrer" className="terms-consent-link">
           Terms and Conditions
         </Link>{" "}
         and{" "}
-        <Link href="/privacy" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:underline">
+        <Link href={privacyPath} target="_blank" rel="noopener noreferrer" className="terms-consent-link">
           Privacy Policy
         </Link>
-        . <span className="text-rose-400">*</span>
+        . <span className="terms-consent-required">*</span>
       </span>
     </label>
   );

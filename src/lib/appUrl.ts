@@ -22,9 +22,13 @@ function isGithubPagesBuild(): boolean {
 /**
  * Resolve URL for app routes (portal, login, dashboards, Try Demo).
  * Marketing / Pages builds must always deep-link to app.slicechain.io.
+ * Trailing slashes are stripped — the app server does not use trailingSlash.
  */
 export function appUrl(path: string): string {
-  const normalized = path.startsWith("/") ? path : `/${path}`;
+  let normalized = path.startsWith("/") ? path : `/${path}`;
+  if (normalized.length > 1 && normalized.endsWith("/")) {
+    normalized = normalized.slice(0, -1);
+  }
 
   if (isGithubPagesBuild()) {
     return `${DEMO_APP_ORIGIN}${normalized}`;
@@ -46,8 +50,16 @@ export function shouldRedirectToDemoApp(): boolean {
   return isMarketingHost(window.location.hostname);
 }
 
-/** Link to the public marketing site (slicechain.io on GitHub Pages). */
+/**
+ * Link to the public marketing site (slicechain.io on GitHub Pages).
+ * Adds a trailing slash for path pages so crawlers avoid 301 redirects
+ * from GitHub Pages `trailingSlash: true` exports.
+ */
 export function marketingUrl(path = ""): string {
-  const normalized = path ? (path.startsWith("/") ? path : `/${path}`) : "";
+  if (!path || path === "/") return `${MARKETING_SITE_ORIGIN}/`;
+  let normalized = path.startsWith("/") ? path : `/${path}`;
+  if (!normalized.includes("?") && !normalized.includes("#") && !normalized.endsWith("/")) {
+    normalized = `${normalized}/`;
+  }
   return `${MARKETING_SITE_ORIGIN}${normalized}`;
 }

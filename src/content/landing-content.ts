@@ -5,12 +5,15 @@ const V = "/landing-assets/videos";
 export const demoVideoPath = `${V}/slicepay-demo.mp4`;
 
 /** Platform login / signup entry (not the marketing home). */
-export const portalPath = "/portal";
+export const portalPath = "/portal/";
 export const businessDemoPath = "/business/demo/";
-export const businessLoginPath = "/business/login";
+export const businessLoginPath = "/business/login/";
 /** Founding merchant application (opens landing modal). */
 export const businessSignupPath = "/?founding-signup=1#founding-merchant";
-export const employeeLoginPath = "/employee/login";
+export const employeeLoginPath = "/employee/login/";
+/** Static legal pages — trailing slash avoids GitHub Pages 301 redirects. */
+export const termsPath = "/terms/";
+export const privacyPath = "/privacy/";
 
 export const stickyAnnouncement = {
   full: "Founding Merchant Program — limited to the first 500 businesses · 50% off platform fees for life",
@@ -26,9 +29,9 @@ export const navRegisterCta = "Register Now";
 export const navDemoCta = "Try Demo";
 
 export const landingMeta = {
-  title: "Slice Chain & SlicePay | Crypto Payment Gateway for Small Business",
+  title: "SlicePay | Crypto Payment Gateway for Business",
   description:
-    "Slice Chain powers SlicePay (Slice Pay) for crypto payments and multi chain payments. Accept crypto payments for businesses via QR codes, stablecoin settlement, and USDC payouts.",
+    "SlicePay by Slice Chain is a crypto payment gateway for small businesses. Accept crypto payments via QR checkout, settle in USDC, and keep more revenue with transparent 1.9% pricing.",
 };
 
 /** Keyword-rich hero intro (~100 words) — primary on-page content below H1. */
@@ -80,7 +83,7 @@ export const social = {
   emailDisplay: "slicepay@slicechain.io",
 };
 
-export const foundingMerchantHeroImage = `${A}/slicepay-merchant-hero.png`;
+export const foundingMerchantHeroImage = `${A}/slicepay-merchant-hero.webp`;
 
 export const foundingMerchant = {
   eyebrow: "Founding merchant enrollment is open",
@@ -98,7 +101,6 @@ export const foundingMerchant = {
     "Founding Merchant Badge",
     "Product roadmap influence",
     "Preferred pricing on future SliceChain products",
-    "Featured marketing opportunities",
   ],
   availabilityNote: "Limited availability: first 500 businesses only",
   cta: "Become a Founding Merchant",
@@ -275,14 +277,15 @@ export const team = {
       role: "Founder & CEO",
       photo: `${A}/ab-headshot.jpg`,
       photoPosition: "center center",
-      linkedin: "https://www.linkedin.com/in/aseemmba",
+      // Personal profile URL returns 4xx for crawlers; omit until a live URL is confirmed.
+      linkedin: "" as string,
     },
     {
       name: "Gustav Eigenhuis",
       role: "Co-Founder & CTO",
       photo: `${A}/gustav-headshot.jpg`,
       photoPosition: "center center",
-      linkedin: "https://www.linkedin.com/in/gustav-eigenhuis-b28a712a9",
+      linkedin: "https://www.linkedin.com/in/gustav-eigenhuis",
     },
   ],
 };
@@ -328,14 +331,14 @@ export const galleryImages = [
 
 export const communityCards = [
   { href: businessSignupPath, img: `${A}/event-1.jpg`, subtitle: "Business", title: "Register your business on SlicePay" },
-  { href: "/employee/login", img: `${A}/event-2.jpg`, subtitle: "Employee", title: "Staff: generate QR codes and earn commission" },
+  { href: employeeLoginPath, img: `${A}/event-2.jpg`, subtitle: "Employee", title: "Staff: generate QR codes and earn commission" },
   {
     href: businessSignupPath,
     img: `${A}/photo_2025-08-05_18-45-59.jpg`,
     subtitle: "Payments",
     title: "Start accepting wallet payments today",
   },
-  { href: "/business/login", img: `${A}/photo_2025-08-05_18-45-58.jpg`, subtitle: "Dashboard", title: "Open your business dashboard" },
+  { href: businessLoginPath, img: `${A}/photo_2025-08-05_18-45-58.jpg`, subtitle: "Dashboard", title: "Open your business dashboard" },
 ];
 
 export const businesses = {

@@ -1,6 +1,9 @@
-import { howSteps, slicePaySection } from "@/content/landing-content";
+import { howSteps, portalPath, slicePaySection } from "@/content/landing-content";
+import { appUrl } from "@/lib/appUrl";
 
 export function LandingHow() {
+  const portalHref = appUrl(portalPath);
+
   return (
     <section className="section how" id="marketing">
       <div className="wrap">
@@ -17,7 +20,7 @@ export function LandingHow() {
             <p className="serif" style={{ fontStyle: "italic" }}>
               {slicePaySection.text}
             </p>
-            <a href={slicePaySection.cta.href} className="btn btn-gold" style={{ marginTop: 8 }}>
+            <a href={portalHref} className="btn btn-gold" style={{ marginTop: 8 }}>
               {slicePaySection.cta.label} <span className="arrow">→</span>
             </a>
           </div>

@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const SITE_ORIGIN = "https://slicechain.io";
 
 export const SITE_TITLE_DEFAULT =
-  "Slice Chain & SlicePay | Crypto Payment Gateway for Small Business";
+  "SlicePay | Crypto Payment Gateway for Business";
 
-export const SITE_TITLE_TEMPLATE = "%s | Slice Chain · SlicePay";
+export const SITE_TITLE_TEMPLATE = "%s | SlicePay";
 
 export const SITE_DESCRIPTION =
-  "Slice Chain powers SlicePay (Slice Pay) for crypto payments and multi chain payments. Accept crypto payments for businesses via QR checkout, stablecoin settlement, and USDC payouts.";
+  "SlicePay by Slice Chain is a crypto payment gateway for small businesses. Accept crypto payments via QR checkout, settle in USDC, and keep more revenue with transparent 1.9% pricing.";
 
 export const SITE_KEYWORDS = [
   "Slice Chain",
@@ -77,12 +77,13 @@ function buildPageSeo(pageTitle: string, description: string): Metadata {
 
 export const pageSeo = {
   home: {
+    title: SITE_TITLE_DEFAULT,
     description: SITE_DESCRIPTION,
     openGraph: {
       title: SITE_TITLE_DEFAULT,
       description: SITE_DESCRIPTION,
       url: SITE_ORIGIN,
-      siteName: "Slice Chain · SlicePay",
+      siteName: "SlicePay",
       type: "website",
     },
     alternates: {

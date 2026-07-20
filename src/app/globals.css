@@ -83,3 +83,29 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Terms / Privacy consent — checkbox left of label text */
+.terms-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  cursor: pointer;
+  margin: 0.25rem 0 0;
+}
+.terms-consent-input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.2rem 0 0;
+  flex-shrink: 0;
+  accent-color: #3b9eff;
+}
+.terms-consent-label {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.terms-consent-link {
+  text-decoration: underline;
+}
+.terms-consent-required {
+  color: #e63946;
+}

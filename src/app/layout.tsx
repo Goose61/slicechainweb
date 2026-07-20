@@ -11,6 +11,21 @@ export const metadata: Metadata = {
   },
 };
 
+/** Non-blocking Google Fonts loader — keeps fonts off the critical render path. */
+const FONT_LOADER = `
+(function(){
+  var href=${JSON.stringify(
+    "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
+  )};
+  var l=document.createElement("link");
+  l.rel="stylesheet";
+  l.href=href;
+  l.media="print";
+  l.onload=function(){this.media="all"};
+  document.head.appendChild(l);
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,10 +36,13 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
+        <script dangerouslySetInnerHTML={{ __html: FONT_LOADER }} />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+          />
+        </noscript>
       </head>
       <body className="antialiased font-sans">
         <GoogleAnalytics />

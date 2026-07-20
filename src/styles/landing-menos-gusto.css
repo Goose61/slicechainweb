@@ -388,10 +388,11 @@ body::after{
 .foot-big{font-family:var(--display);font-size:clamp(80px,16vw,240px);line-height:.85;letter-spacing:-.03em;font-weight:700;white-space:nowrap;font-style:normal;color:var(--gold);opacity:.18;position:relative;overflow:hidden}
 .foot-big::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 20%, #080f1f 100%)}
 .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-top:48px;padding-top:48px;border-top:1px solid var(--line)}
-.foot-col h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:16px}
+.foot-col-title{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin:0 0 16px;font-weight:400}
 .foot-col a{display:block;padding:6px 0;color:var(--bone-dim);font-size:13.5px;transition:color .3s;letter-spacing:.01em}
 .foot-col a:hover{color:var(--bone)}
 .foot-col p{font-family:var(--sans);font-style:normal;color:var(--bone-dim);font-size:15px;line-height:1.55;max-width:380px}
+.foot-col p.foot-seo-blurb{margin-top:14px;font-size:14px;line-height:1.6;max-width:420px}
 .foot-bot{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--bone-soft)}
 .foot-bot .ca{color:var(--gold)}
 
@@ -728,6 +729,17 @@ body::after{
 .fm-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .fm-modal-form label{display:grid;gap:6px}
 .fm-modal-form label span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-soft)}
+.fm-modal-form label.fm-terms{
+  display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-top:4px;
+}
+.fm-modal-form label.fm-terms input[type="checkbox"]{
+  width:auto;min-width:16px;height:16px;margin:3px 0 0;flex-shrink:0;accent-color:var(--gold);
+}
+.fm-modal-form label.fm-terms .fm-terms-label,
+.fm-modal-form label.fm-terms span.fm-terms-label{
+  font-family:var(--sans);font-size:13px;letter-spacing:normal;text-transform:none;
+  line-height:1.5;color:var(--bone-dim);font-weight:400;
+}
 .fm-modal-form input,.fm-modal-form select{
   width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);
   background:rgba(241,245,249,.04);color:var(--bone);font:inherit;font-size:14px;
@@ -756,9 +768,11 @@ body::after{
 .fm-modal-success h2{font-size:clamp(28px,4vw,36px);font-weight:500}
 .fm-modal-success p{color:var(--bone-dim);line-height:1.55;font-size:15px}
 .fm-modal-hint{font-size:10.5px;color:var(--gold)}
-.fm-terms{display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-top:4px}
-.fm-terms-label{font-size:13px;line-height:1.5;color:var(--bone-dim)}
-.fm-terms-label a{color:var(--gold-hi);text-decoration:underline}
+.fm-terms,.terms-consent{display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-top:4px}
+.fm-terms-label,.terms-consent-label{font-size:13px;line-height:1.5;color:var(--bone-dim)}
+.fm-terms-label a,.terms-consent-link{color:var(--gold-hi);text-decoration:underline}
+.terms-consent-input{width:auto;min-width:16px;height:16px;margin:3px 0 0;flex-shrink:0;accent-color:var(--gold)}
+.terms-consent-required{color:var(--blood-bright)}
 
 .fm-demo-modal{text-align:center}
 .fm-demo-head h2{font-size:clamp(24px,3.5vw,32px);margin:10px 0 0;font-weight:500}

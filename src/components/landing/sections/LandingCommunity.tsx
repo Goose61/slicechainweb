@@ -1,7 +1,10 @@
 import { brandMark, businessSignupPath, employeeLoginPath } from "@/content/landing-content";
+import { appUrl } from "@/lib/appUrl";
 import { ContactLink } from "../ContactLink";
 
 export function LandingCommunity() {
+  const employeeLoginHref = appUrl(employeeLoginPath);
+
   return (
     <>
       <section className="crew" id="community">
@@ -21,7 +24,7 @@ export function LandingCommunity() {
                 <a href={businessSignupPath} className="btn btn-gold">
                   Business signup <span className="arrow">→</span>
                 </a>
-                <a href={employeeLoginPath} className="btn">
+                <a href={employeeLoginHref} className="btn">
                   Employee login <span className="arrow">→</span>
                 </a>
                 <ContactLink className="btn">
