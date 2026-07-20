@@ -8,7 +8,8 @@ export const demoVideoPath = `${V}/slicepay-demo.mp4`;
 export const portalPath = "/portal";
 export const businessDemoPath = "/business/demo/";
 export const businessLoginPath = "/business/login";
-export const businessSignupPath = "/business/signup";
+/** Founding merchant application (opens landing modal). */
+export const businessSignupPath = "/?founding-signup=1#founding-merchant";
 export const employeeLoginPath = "/employee/login";
 
 export const landingMeta = {
@@ -77,12 +78,9 @@ export const foundingMerchant = {
   benefits: [
     "Lifetime Founding Merchant Status",
     "50% off platform subscription fees for life",
-    "Locked-in 1.9% processing fee",
     "Zero setup and onboarding fees",
     "Priority support access",
-    "Double SLICE loyalty rewards during the first year",
     "Early access to new features",
-    "Merchant referral rewards",
     "Founding Merchant Badge",
     "Product roadmap influence",
     "Preferred pricing on future SliceChain products",
@@ -107,15 +105,14 @@ export const foundingMerchant = {
 
 export const navLinks = [
   { href: "#home", label: "Home", num: "01" },
-  { href: "#founding-merchant", label: "Founding Merchant", num: "02" },
-  { href: "#mission", label: "Mission & Vision", num: "03" },
-  { href: "#about", label: "About", num: "04" },
-  { href: "#team", label: "Team", num: "05" },
-  { href: "#marketing", label: "How It Works", num: "06" },
-  { href: "#businesses", label: "For Businesses", num: "07" },
-  { href: "#gallery", label: "Gallery", num: "08" },
-  { href: "#plan", label: "Roadmap", num: "09" },
-  { href: "#community", label: "Get Started", num: "10" },
+  { href: "#mission", label: "Mission & Vision", num: "02" },
+  { href: "#about", label: "About", num: "03" },
+  { href: "#team", label: "Team", num: "04" },
+  { href: "#marketing", label: "How It Works", num: "05" },
+  { href: "#businesses", label: "For Businesses", num: "06" },
+  { href: "#gallery", label: "Gallery", num: "07" },
+  { href: "#plan", label: "Roadmap", num: "08" },
+  { href: "#community", label: "Get Started", num: "09" },
 ];
 
 export const heroSlides = [
@@ -213,7 +210,7 @@ export const howSteps = [
     step: "Step 03 · Payout",
     title: "Stablecoin payouts",
     body: "Business owners and facilitating employees receive USDC and USDT payouts across supported chains. Total business fee is 1.9%, with 0.3% going to the employee who processed the sale.",
-    cta: { label: "Register Now", href: portalPath },
+    cta: { label: "Register Now", href: businessSignupPath },
   },
 ];
 
@@ -248,14 +245,14 @@ export const team = {
       name: "Aseem Bhardwaj",
       role: "Founder & CEO",
       photo: `${A}/ab-headshot.jpg`,
-      photoPosition: "center top",
+      photoPosition: "center center",
       linkedin: "https://www.linkedin.com/in/aseemmba",
     },
     {
       name: "Gustav Eigenhuis",
       role: "Co-Founder & CTO",
       photo: `${A}/gustav-headshot.jpg`,
-      photoPosition: "center top",
+      photoPosition: "center center",
       linkedin: "https://www.linkedin.com/in/gustav-eigenhuis-b28a712a9",
     },
   ],
@@ -301,10 +298,10 @@ export const galleryImages = [
 ];
 
 export const communityCards = [
-  { href: portalPath, img: `${A}/event-1.jpg`, subtitle: "Business", title: "Register your business on SlicePay" },
+  { href: businessSignupPath, img: `${A}/event-1.jpg`, subtitle: "Business", title: "Register your business on SlicePay" },
   { href: "/employee/login", img: `${A}/event-2.jpg`, subtitle: "Employee", title: "Staff: generate QR codes and earn commission" },
   {
-    href: portalPath,
+    href: businessSignupPath,
     img: `${A}/photo_2025-08-05_18-45-59.jpg`,
     subtitle: "Payments",
     title: "Start accepting wallet payments today",
@@ -315,7 +312,7 @@ export const communityCards = [
 export const businesses = {
   titleHtml: 'Accept payments with <span class="it">SlicePay®</span><br>Keep more <span class="it">margin</span>',
   lede: "SlicePay is the crypto payment gateway built for restaurants, food trucks, and retailers that need crypto payments for businesses. Let customers pay with crypto from any wallet on supported chains while you receive USDC payments for business with a simple 1.9% total fee and QR code crypto payments at the counter.",
-  cta: { label: "Register on SlicePay", href: portalPath },
+  cta: { label: "Register on SlicePay", href: businessSignupPath },
   rows: [
     { n: "01", t: "Multi chain payments", d: "Ethereum, Solana, Polygon, Base, Arbitrum, and more. Customers scan your QR and pay with crypto from any supported wallet.", tag: "Live" },
     { n: "02", t: "SLICE Loyalty", d: "Customers earn SLICE tokens for discounts on future purchases at your business.", tag: "Live" },

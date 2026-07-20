@@ -374,10 +374,11 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
 }
 .landing-page .team-card:hover{border-color:var(--gold-dim);box-shadow:0 12px 40px -16px rgba(59,158,255,0.25)}
 .landing-page .team-photo{
-  aspect-ratio:1/1;max-height:220px;overflow:hidden;background:var(--bg-3);
+  width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--bg-3);
+  display:flex;align-items:center;justify-content:center;
 }
 .landing-page .team-photo img{
-  width:100%;height:100%;object-fit:cover;object-position:center top;
+  width:100%;height:100%;object-fit:cover;object-position:center center;
   transition:transform .5s cubic-bezier(.2,.7,.2,1);
 }
 .landing-page .team-card:hover .team-photo img{transform:scale(1.03)}
@@ -517,7 +518,6 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
   .landing-page .cross-chain-visual{max-width:100%}
   .landing-page .chain-logo-item{width:92px;padding:12px 10px}
   .landing-page .chain-logo-item img{width:36px;height:36px}
-  .landing-page .team-photo{max-height:180px}
   .landing-page .team-grid{max-width:340px}
   .landing-page .community-grid{grid-template-columns:1fr}
   .landing-page .hero-bottom{gap:20px}

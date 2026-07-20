@@ -12,6 +12,7 @@ import {
   type EmployeeCommission,
 } from "@/lib/api";
 import { homeUrl } from "@/lib/siteUrl";
+import { businessSignupPath } from "@/content/landing-content";
 import { toast } from "sonner";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -110,6 +111,19 @@ export default function BusinessDashboard() {
     setToken(t);
   }, [router, demoMode]);
 
+  function clearBusinessSession() {
+    ["businessToken", "businessEmail", "businessType", "businessId", "demoMode"].forEach((k) => {
+      localStorage.removeItem(k);
+      sessionStorage.removeItem(k);
+    });
+  }
+
+  function isSessionExpiredError(err: unknown) {
+    const code = err && typeof err === "object" && "code" in err ? String((err as { code?: string }).code || "") : "";
+    const message = err instanceof Error ? err.message : "";
+    return code === "TOKEN_EXPIRED" || /session expired/i.test(message);
+  }
+
   const loadData = useCallback(async (t: string) => {
     try {
       setLoading(true);
@@ -129,11 +143,17 @@ export default function BusinessDashboard() {
         emailNotifications: profileRes.business.settings?.emailNotifications !== false,
       });
     } catch (err: unknown) {
+      if (isSessionExpiredError(err)) {
+        toast.error("Session expired. Please sign in again.");
+        clearBusinessSession();
+        router.replace(demoMode ? "/business/demo" : "/business/login");
+        return;
+      }
       toast.error(err instanceof Error ? err.message : "Failed to load dashboard");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [demoMode, router]);
 
   useEffect(() => {
     if (token) loadData(token);
@@ -146,12 +166,18 @@ export default function BusinessDashboard() {
       const data = await businessApi.getEmployeeCommissions(token);
       setEmployees(data.employees || []);
     } catch (err: unknown) {
+      if (isSessionExpiredError(err)) {
+        toast.error("Session expired. Please sign in again.");
+        clearBusinessSession();
+        router.replace(demoMode ? "/business/demo" : "/business/login");
+        return;
+      }
       toast.error(err instanceof Error ? err.message : "Failed to load employees");
       setEmployees([]);
     } finally {
       setEmployeesLoading(false);
     }
-  }, [token]);
+  }, [token, demoMode, router]);
 
   useEffect(() => {
     if (token && activeTab === "employees") loadEmployees();
@@ -217,10 +243,7 @@ export default function BusinessDashboard() {
   }
 
   function logout() {
-    ["businessToken", "businessEmail", "businessType", "businessId", "demoMode"].forEach((k) => {
-      localStorage.removeItem(k);
-      sessionStorage.removeItem(k);
-    });
+    clearBusinessSession();
     if (demoMode) {
       window.location.href = homeUrl();
       return;
@@ -277,7 +300,7 @@ export default function BusinessDashboard() {
           <div className="flex items-center gap-2">
             {demoMode && (
               <Button variant="outline" size="sm" asChild className="hidden sm:inline-flex">
-                <a href="/business/signup">Sign up</a>
+                <a href={businessSignupPath}>Sign up</a>
               </Button>
             )}
             <Button variant="ghost" size="sm" onClick={() => token && loadData(token)} title="Refresh">
@@ -299,7 +322,7 @@ export default function BusinessDashboard() {
               <strong>Demo mode.</strong> You&apos;re exploring the platform as{" "}
               <strong>Aseem&apos;s Dough Palooza</strong>. Generate QR codes and browse the dashboard -
               any real payments made from demo QR codes will not be settled.{" "}
-              <a href="/business/signup" className="underline font-medium hover:text-amber-950">
+              <a href={businessSignupPath} className="underline font-medium hover:text-amber-950">
                 Create your account
               </a>{" "}
               to accept live payments.

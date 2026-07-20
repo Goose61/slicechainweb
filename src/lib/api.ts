@@ -31,7 +31,8 @@ export function getApiBase(): string {
     return `${PRODUCTION_API}/api`;
   }
 
-  return "/api";
+  // Unknown host — never use same-origin /api (static hosts return HTML 404)
+  return `${PRODUCTION_API}/api`;
 }
 
 /** @deprecated Use getApiBase() — kept for any legacy imports */
@@ -78,17 +79,28 @@ export async function apiFetch<T = unknown>(
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${getApiBase()}${path}`, {
-    ...fetchOptions,
-    headers,
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${getApiBase()}${path}`, {
+      ...fetchOptions,
+      headers,
+    });
+  } catch {
+    throw new Error(
+      "Could not reach the server. Check your connection and try again."
+    );
+  }
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({ message: res.statusText }));
     const detailMsgs = Array.isArray(err.details)
       ? err.details.map((d: { msg?: string }) => d.msg).filter(Boolean).join("; ")
       : "";
-    throw new Error(detailMsgs || err.message || err.error || `Request failed: ${res.status}`);
+    const message = detailMsgs || err.message || err.error || `Request failed: ${res.status}`;
+    const error = new Error(message) as Error & { status?: number; code?: string };
+    error.status = res.status;
+    error.code = typeof err.code === "string" ? err.code : undefined;
+    throw error;
   }
 
   return res.json() as Promise<T>;
@@ -117,12 +129,6 @@ export const businessApi = {
       businessName: string;
       demoMode: boolean;
     }>("/business/demo-login", { method: "POST" }),
-
-  signupRequest: (data: Record<string, unknown>, turnstileToken?: string) =>
-    apiFetch("/business/signup-request", {
-      method: "POST",
-      body: JSON.stringify({ ...data, turnstileToken }),
-    }),
 
   getProfile: (token: string) =>
     apiFetch<{ business: BusinessProfile }>("/business/profile", { token }),
@@ -904,6 +910,49 @@ export interface FoundingMerchantSignupData {
   traditionalFeeRate?: number;
 }
 
+export interface FoundingMerchantOnboardingPrefill {
+  success: boolean;
+  email: string;
+  businessName: string;
+  ownerName: string;
+  businessEmail: string;
+  phone: string;
+  businessType: string;
+  city: string;
+  state: string;
+  country: string;
+  hasAccount: boolean;
+  onboardingCompleted: boolean;
+}
+
+export interface FoundingMerchantKycPayload {
+  token: string;
+  businessName: string;
+  ownerName: string;
+  businessEmail: string;
+  phone: string;
+  businessType: string;
+  city: string;
+  state: string;
+  taxId: string;
+  solanaWallet: string;
+  staffCount: number;
+  registeredAddress: {
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+  };
+  billingAddress: {
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+  };
+}
+
 export const foundingMerchantApi = {
   getAvailability: () =>
     apiFetch<{
@@ -918,6 +967,37 @@ export const foundingMerchantApi = {
       method: "POST",
       body: JSON.stringify(data),
       signal: AbortSignal.timeout(20000),
+    }),
+
+  getOnboarding: (token: string) =>
+    apiFetch<FoundingMerchantOnboardingPrefill>(
+      `/founding-merchant/onboarding/${encodeURIComponent(token)}`
+    ),
+
+  createOnboardingAccount: (token: string, password: string) =>
+    apiFetch<{
+      success: boolean;
+      token: string;
+      email: string;
+      hasAccount: boolean;
+      message: string;
+    }>("/founding-merchant/onboarding/create-account", {
+      method: "POST",
+      body: JSON.stringify({ token, password }),
+    }),
+
+  completeOnboardingKyc: (authToken: string, data: FoundingMerchantKycPayload) =>
+    apiFetch<{
+      success: boolean;
+      token: string;
+      businessId: string;
+      businessType: string;
+      businessName: string;
+      message: string;
+    }>("/founding-merchant/onboarding/complete-kyc", {
+      method: "POST",
+      token: authToken,
+      body: JSON.stringify(data),
     }),
 };
 

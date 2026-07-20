@@ -12,6 +12,7 @@ import { useTurnstile } from "@/hooks/useTurnstile";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { businessSignupPath } from "@/content/landing-content";
 
 export default function BusinessLoginPage() {
   const router = useRouter();
@@ -128,7 +129,7 @@ export default function BusinessLoginPage() {
         <div className="text-center space-y-2 pt-2">
           <p className="text-slate-400 text-sm">
             Don&apos;t have an account?{" "}
-            <Link href="/business/signup" className="text-blue-400 hover:text-blue-300 font-medium">
+            <Link href={businessSignupPath} className="text-blue-400 hover:text-blue-300 font-medium">
               Sign up
             </Link>
           </p>

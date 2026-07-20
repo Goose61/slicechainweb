@@ -54,6 +54,14 @@ export function LandingFoundingMerchant() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const verified = params.get("founding-verified");
+    const openSignupParam = params.get("founding-signup");
+
+    if (openSignupParam === "1" || window.location.hash === "#founding-merchant") {
+      if (openSignupParam === "1") {
+        openSignup();
+      }
+    }
+
     if (verified === "true") {
       setVerifiedBanner(true);
       refreshAvailability();
@@ -62,6 +70,8 @@ export function LandingFoundingMerchant() {
       setVerifyError(true);
       openSignup();
       window.history.replaceState({}, "", window.location.pathname + window.location.hash);
+    } else if (openSignupParam === "1") {
+      window.history.replaceState({}, "", `${window.location.pathname}#founding-merchant`);
     }
   }, [openSignup, refreshAvailability]);
 
@@ -78,7 +88,7 @@ export function LandingFoundingMerchant() {
             <div className="fm-hero-copy" id="founding-merchant">
               {verifiedBanner && (
                 <div className="fm-verified-banner" role="status">
-                  Email verified — your application is confirmed. Our team will review it and email you once approved.
+                  Email verified — continue creating your SlicePay account from the link in your confirmation email.
                 </div>
               )}
               <div className="fm-eyebrow">

@@ -23,7 +23,7 @@ export function LandingTeam() {
                   src={member.photo}
                   alt={`${member.name}, ${member.role} at SlicePay crypto payment gateway`}
                   loading="lazy"
-                  style={{ objectPosition: member.photoPosition || "center top" }}
+                  style={{ objectPosition: member.photoPosition || "center center" }}
                 />
               </div>
               <div className="team-info">

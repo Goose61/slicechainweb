@@ -1,4 +1,4 @@
-import { brandMark, brandName, businessLoginPath, employeeLoginPath, footer, logo, navLinks, portalPath, social } from "@/content/landing-content";
+import { brandMark, brandName, businessLoginPath, businessSignupPath, employeeLoginPath, footer, logo, navLinks, social } from "@/content/landing-content";
 import { ContactLink } from "../ContactLink";
 
 export function LandingFooter() {
@@ -41,7 +41,7 @@ export function LandingFooter() {
           </div>
           <div className="foot-col">
             <h5>Portals</h5>
-            <a href={portalPath}>Business signup</a>
+            <a href={businessSignupPath}>Business signup</a>
             <a href={businessLoginPath}>Business login</a>
             <a href={employeeLoginPath}>Employee login</a>
             <ContactLink>Support</ContactLink>

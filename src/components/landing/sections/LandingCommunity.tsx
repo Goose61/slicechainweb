@@ -1,4 +1,4 @@
-import { brandMark, employeeLoginPath, portalPath } from "@/content/landing-content";
+import { brandMark, businessSignupPath, employeeLoginPath } from "@/content/landing-content";
 import { ContactLink } from "../ContactLink";
 
 export function LandingCommunity() {
@@ -18,7 +18,7 @@ export function LandingCommunity() {
                 Register your business to accept cryptocurrency payments, onboard staff for QR code crypto payments, and open the portal to manage USDC payments for business.
               </p>
               <div className="crew-cta">
-                <a href={portalPath} className="btn btn-gold">
+                <a href={businessSignupPath} className="btn btn-gold">
                   Business signup <span className="arrow">→</span>
                 </a>
                 <a href={employeeLoginPath} className="btn">
