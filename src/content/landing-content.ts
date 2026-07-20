@@ -277,8 +277,7 @@ export const team = {
       role: "Founder & CEO",
       photo: `${A}/ab-headshot.jpg`,
       photoPosition: "center center",
-      // Personal profile URL returns 4xx for crawlers; omit until a live URL is confirmed.
-      linkedin: "" as string,
+      linkedin: "https://www.linkedin.com/in/aseemmba",
     },
     {
       name: "Gustav Eigenhuis",
