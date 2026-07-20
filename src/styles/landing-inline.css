@@ -1,4 +1,5 @@
 /* Landing page root — mimic body context from menos&gusto */
+html{scroll-padding-top:118px}
 .landing-page{
   background:var(--bg);
   color:var(--bone);
@@ -25,11 +26,49 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
 .landing-header{
   position:fixed;top:0;left:0;right:0;z-index:60;
 }
+.landing-header.sticky-top{display:flex;flex-direction:column}
+.fm-announce{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:42px;padding:8px var(--pad);
+  background:#2563eb;color:#fff;
+}
+.fm-announce-text{
+  margin:0;flex:1;min-width:0;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;line-height:1.35;
+}
+.fm-announce-short{display:none}
+.fm-announce-cta{
+  flex-shrink:0;display:inline-flex;align-items:center;
+  padding:8px 14px;border-radius:999px;background:#fff;color:#0b1428;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  white-space:nowrap;
+}
+.fm-announce-cta:hover{background:#f1f5f9}
 .landing-header .nav{
   position:relative;top:auto;left:auto;right:auto;
+  background:rgba(11,20,40,.94);backdrop-filter:blur(14px);
 }
 .landing-header .nav-left{z-index:2}
 .landing-header .nav-mid{position:relative;z-index:1}
+.nav-positioning{
+  margin:0;flex:1;text-align:center;color:var(--bone);
+  font-size:13px;line-height:1.3;font-weight:500;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.nav-top-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nav-register-btn{padding:10px 16px;font-size:10px;letter-spacing:.08em;white-space:nowrap}
+
+@media (max-width:900px){
+  .nav-positioning{display:none}
+  .fm-announce-full{display:none}
+  .fm-announce-short{display:inline}
+  html{scroll-padding-top:108px}
+}
+@media (max-width:640px){
+  .nav-demo-btn{display:none}
+  .nav-register-btn{padding:8px 12px;font-size:10px}
+  .fm-announce-cta{padding:7px 11px;font-size:9px}
+}
 
 /* Compressed header + side drawer menu */
 .nav-compact{padding:12px var(--pad)}

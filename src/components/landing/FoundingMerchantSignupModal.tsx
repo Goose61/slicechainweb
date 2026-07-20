@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { foundingMerchant } from "@/content/landing-content";
 import { foundingMerchantApi } from "@/lib/api";
+import { trackEvent } from "@/lib/gtag";
 import { TermsConsentCheckbox } from "@/components/legal/TermsConsentCheckbox";
 
 interface Props {
@@ -59,6 +60,7 @@ export function FoundingMerchantSignupModal({
     if (open) {
       setSubmitted(false);
       setError(initialError || "");
+      trackEvent("founding_form_start", { location: "modal" });
     }
   }, [open, initialError]);
 
@@ -109,6 +111,10 @@ export function FoundingMerchantSignupModal({
         state: state.trim() || undefined,
         monthlyVolume: defaultVolume,
         traditionalFeeRate: defaultTraditionalFee,
+      });
+      trackEvent("founding_form_complete", {
+        business_type: businessType,
+        monthly_volume: defaultVolume,
       });
       setSubmitted(true);
     } catch (err) {

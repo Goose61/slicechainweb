@@ -4,6 +4,11 @@ import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { foundingMerchant, foundingMerchantHeroImage } from "@/content/landing-content";
 import { foundingMerchantApi } from "@/lib/api";
+import {
+  FOUNDING_SIGNUP_EVENT,
+  buildFoundingSignupHref,
+} from "@/lib/foundingSignup";
+import { trackEvent } from "@/lib/gtag";
 import { FoundingMerchantSignupModal } from "./FoundingMerchantSignupModal";
 import { DemoVideoModal } from "./DemoVideoModal";
 import { FoundingSpotsBanner } from "./FoundingSpotsBanner";
@@ -16,8 +21,8 @@ const RoiCalculator = dynamic(
     loading: () => (
       <aside className="fm-calculator fm-calculator-skeleton" aria-label="Loading ROI calculator">
         <div className="fm-calc-top">
-          <p className="mono">SlicePay ROI Calculator</p>
-          <h2 className="display fm-calc-title">Payment fees, transparent at their purest form</h2>
+          <p className="mono">{foundingMerchant.calculator.eyebrow}</p>
+          <h2 className="display fm-calc-title">{foundingMerchant.calculator.title}</h2>
         </div>
         <div className="fm-calc-body fm-calc-body-skeleton" />
       </aside>
@@ -35,8 +40,17 @@ export function LandingFoundingMerchant() {
   const [verifiedBanner, setVerifiedBanner] = useState(false);
   const [verifyError, setVerifyError] = useState(false);
 
-  const openSignup = useCallback(() => setSignupOpen(true), []);
-  const openDemo = useCallback(() => setDemoOpen(true), []);
+  const openSignup = useCallback((source?: string) => {
+    if (source === "hero" || source === "calculator") {
+      trackEvent("hero_register_click", { location: source });
+    }
+    setSignupOpen(true);
+  }, []);
+
+  const openDemo = useCallback(() => {
+    trackEvent("hero_demo_click", { location: "hero" });
+    setDemoOpen(true);
+  }, []);
 
   const refreshAvailability = useCallback(() => {
     foundingMerchantApi.getAvailability().then((data) => {
@@ -52,13 +66,19 @@ export function LandingFoundingMerchant() {
   }, [refreshAvailability]);
 
   useEffect(() => {
+    const onOpen = () => openSignup("header");
+    window.addEventListener(FOUNDING_SIGNUP_EVENT, onOpen);
+    return () => window.removeEventListener(FOUNDING_SIGNUP_EVENT, onOpen);
+  }, [openSignup]);
+
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const verified = params.get("founding-verified");
     const openSignupParam = params.get("founding-signup");
 
     if (openSignupParam === "1" || window.location.hash === "#founding-merchant") {
       if (openSignupParam === "1") {
-        openSignup();
+        openSignup("deep_link");
       }
     }
 
@@ -68,10 +88,10 @@ export function LandingFoundingMerchant() {
       window.history.replaceState({}, "", window.location.pathname + window.location.hash);
     } else if (verified === "error") {
       setVerifyError(true);
-      openSignup();
+      openSignup("verify_error");
       window.history.replaceState({}, "", window.location.pathname + window.location.hash);
     } else if (openSignupParam === "1") {
-      window.history.replaceState({}, "", `${window.location.pathname}#founding-merchant`);
+      window.history.replaceState({}, "", buildFoundingSignupHref(params));
     }
   }, [openSignup, refreshAvailability]);
 
@@ -106,7 +126,11 @@ export function LandingFoundingMerchant() {
               </p>
 
               <div className="fm-actions">
-                <button type="button" className="btn btn-gold" onClick={openSignup}>
+                <button
+                  type="button"
+                  className="btn btn-gold"
+                  onClick={() => openSignup("hero")}
+                >
                   {foundingMerchant.cta} <span className="arrow">→</span>
                 </button>
                 <button type="button" className="btn btn-ghost" onClick={openDemo}>
@@ -114,18 +138,18 @@ export function LandingFoundingMerchant() {
                 </button>
               </div>
 
-              <div className="fm-trust">
-                {foundingMerchant.trustCards.map((card) => (
-                  <div key={card.value} className="fm-trust-card">
-                    <strong>{card.value}</strong>
-                    <span>{card.label}</span>
-                  </div>
+              <ul className="fm-risk-reducers">
+                {foundingMerchant.riskReducers.map((item) => (
+                  <li key={item}>
+                    <span className="fm-risk-check" aria-hidden="true">✓</span>
+                    {item}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
             <RoiCalculator
-              onBecomeMerchant={openSignup}
+              onBecomeMerchant={() => openSignup("calculator")}
               volume={volume}
               traditionalFee={traditionalFee}
               onVolumeChange={setVolume}

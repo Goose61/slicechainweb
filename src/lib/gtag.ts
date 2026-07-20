@@ -15,3 +15,12 @@ export function pageview(url: string) {
     page_path: url,
   });
 }
+
+/** Fire a GA4 custom event when gtag is available. */
+export function trackEvent(
+  eventName: string,
+  params?: Record<string, string | number | boolean | undefined>
+) {
+  if (typeof window === "undefined" || !window.gtag) return;
+  window.gtag("event", eventName, params);
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { foundingMerchant } from "@/content/landing-content";
 
 const SLICEPAY_FEE = 0.019;
@@ -39,7 +39,7 @@ export function RoiCalculator({
   onVolumeChange,
   onTraditionalFeeChange,
 }: RoiCalculatorProps) {
-  const { traditionalCost, sliceCost, monthlySavings, yearlySavings } = useMemo(() => {
+  const { traditionalCost, sliceCost, monthlySavings } = useMemo(() => {
     const traditional = volume * traditionalFee;
     const slice = volume * SLICEPAY_FEE;
     const monthly = traditional - slice;
@@ -47,23 +47,24 @@ export function RoiCalculator({
       traditionalCost: traditional,
       sliceCost: slice,
       monthlySavings: monthly,
-      yearlySavings: monthly * 12,
     };
   }, [volume, traditionalFee]);
 
+  const calc = foundingMerchant.calculator;
+
   return (
-    <aside className="fm-calculator" id="calculator" aria-label="SlicePay ROI calculator">
+    <aside className="fm-calculator" id="calculator" aria-label="SlicePay savings estimate">
       <div className="fm-calc-top">
-        <p className="mono">SlicePay ROI Calculator</p>
-        <h2 className="display fm-calc-title">Payment fees, transparent at their purest form</h2>
+        <p className="mono">{calc.eyebrow}</p>
+        <h2 className="display fm-calc-title">{calc.title}</h2>
       </div>
 
       <div className="fm-calc-body">
         <div className="fm-volume-field">
           <div className="fm-field-head">
-            <label htmlFor="fm-volume">You process</label>
+            <label htmlFor="fm-volume">{calc.volumeLabel}</label>
             <output id="fm-volume-output" htmlFor="fm-volume" className="fm-volume-value">
-              {dollars.format(volume)}<span className="fm-volume-period"> / month</span>
+              {dollars.format(volume)}
             </output>
           </div>
           <div className="fm-range-wrap">
@@ -110,14 +111,14 @@ export function RoiCalculator({
         <div className="fm-fee-table">
           <div className="fm-fee-row">
             <div className="fm-fee-row-copy">
-              <strong>Traditional fees</strong>
+              <strong>{calc.traditionalLabel}</strong>
               <span>{displayRate(traditionalFee)}</span>
             </div>
             <b className="fm-fee-amount">{dollars.format(traditionalCost)}</b>
           </div>
           <div className="fm-fee-row fm-fee-row-slice">
             <div className="fm-fee-row-copy">
-              <strong>SlicePay</strong>
+              <strong>{calc.sliceLabel}</strong>
               <span>1.9%</span>
             </div>
             <b className="fm-fee-amount">{dollars.format(sliceCost)}</b>
@@ -125,20 +126,14 @@ export function RoiCalculator({
         </div>
 
         <div className="fm-roi" aria-live="polite" aria-atomic="true">
-          <p className="fm-roi-title mono">Your savings estimate</p>
-          <div className="fm-roi-grid">
-            <div className="fm-roi-card">
-              <span className="mono">Monthly</span>
-              <strong>{dollars.format(monthlySavings)}</strong>
-            </div>
-            <div className="fm-roi-card">
-              <span className="mono">Yearly</span>
-              <strong>{dollars.format(yearlySavings)}</strong>
-            </div>
-          </div>
+          <p className="fm-roi-title">
+            {calc.savingsLabel}{" "}
+            <strong className="fm-roi-highlight">{dollars.format(monthlySavings)}</strong>
+          </p>
           <button type="button" className="fm-calc-cta btn btn-gold" onClick={onBecomeMerchant}>
             {foundingMerchant.cta} <span className="arrow">→</span>
           </button>
+          <p className="fm-calc-disclaimer">{calc.disclaimer}</p>
         </div>
       </div>
     </aside>

@@ -1,17 +1,35 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { brandMark, logo, navLinks, portalPath, businessDemoPath } from "@/content/landing-content";
+import { useEffect, useMemo, useState } from "react";
+import {
+  brandMark,
+  logo,
+  navDemoCta,
+  navLinks,
+  navPositioningLine,
+  navRegisterCta,
+  portalPath,
+  businessDemoPath,
+  stickyAnnouncement,
+} from "@/content/landing-content";
 import { appUrl } from "@/lib/appUrl";
+import {
+  buildFoundingSignupHref,
+  requestFoundingSignupOpen,
+} from "@/lib/foundingSignup";
+import { trackEvent } from "@/lib/gtag";
 import { ContactLink } from "./ContactLink";
 
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  // Absolute app URL from first paint so static HTML / pre-hydration clicks
-  // never hit relative /business/demo on slicechain.io (which 404s the API).
+  const [registerHref, setRegisterHref] = useState(buildFoundingSignupHref());
   const demoHref = appUrl(businessDemoPath);
   const portalHref = appUrl(portalPath);
+
+  useEffect(() => {
+    setRegisterHref(buildFoundingSignupHref());
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -37,9 +55,51 @@ export function LandingNav() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const handleRegisterClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    source: "founding_banner_click" | "nav_register_click"
+  ) => {
+    trackEvent(source, { location: "landing_header" });
+    // Same-page: open modal without full navigation.
+    if (
+      window.location.pathname === "/" ||
+      window.location.pathname === "" ||
+      window.location.pathname === "/landing"
+    ) {
+      e.preventDefault();
+      const href = buildFoundingSignupHref();
+      window.history.replaceState({}, "", href);
+      requestFoundingSignupOpen();
+      closeMenu();
+    }
+  };
+
+  const announceCtaLabel = useMemo(
+    () => `${stickyAnnouncement.cta} →`,
+    []
+  );
+
   return (
     <>
-      <header className={`landing-header${scrolled ? " is-scrolled" : ""}`} id="landing-header">
+      <header
+        className={`landing-header sticky-top${scrolled ? " is-scrolled" : ""}`}
+        id="landing-header"
+      >
+        <div className="fm-announce" role="region" aria-label="Founding Merchant Program">
+          <p className="fm-announce-text">
+            <span className="fm-announce-full">{stickyAnnouncement.full}</span>
+            <span className="fm-announce-short">{stickyAnnouncement.short}</span>
+          </p>
+          <a
+            href={registerHref}
+            className="fm-announce-cta"
+            aria-label={stickyAnnouncement.ctaAriaLabel}
+            onClick={(e) => handleRegisterClick(e, "founding_banner_click")}
+          >
+            {announceCtaLabel}
+          </a>
+        </div>
+
         <nav className={`nav nav-compact${scrolled ? " scrolled" : ""}`} id="nav">
           <div className="nav-top">
             <a href="#home" className="nav-left brand-link">
@@ -54,14 +114,27 @@ export function LandingNav() {
                 <span className="brand-wordmark">{brandMark}</span>
               </div>
             </a>
+
+            <p className="nav-positioning" aria-hidden="false">
+              {navPositioningLine}
+            </p>
+
             <div className="nav-top-actions">
               <a
                 href={demoHref}
-                className="btn btn-gold nav-demo-btn"
+                className="btn btn-ghost nav-demo-btn"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent("hero_demo_click", { location: "nav" })}
               >
-                Try Demo
+                {navDemoCta}
+              </a>
+              <a
+                href={registerHref}
+                className="btn btn-gold nav-register-btn"
+                onClick={(e) => handleRegisterClick(e, "nav_register_click")}
+              >
+                {navRegisterCta} <span className="arrow">→</span>
               </a>
               <button
                 type="button"
@@ -110,18 +183,28 @@ export function LandingNav() {
         </nav>
         <div className="nav-drawer-actions">
           <a
-            href={demoHref}
+            href={registerHref}
             className="btn btn-gold"
+            onClick={(e) => handleRegisterClick(e, "nav_register_click")}
+          >
+            {navRegisterCta} <span className="arrow">→</span>
+          </a>
+          <a
+            href={demoHref}
+            className="btn btn-ghost"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={closeMenu}
+            onClick={() => {
+              trackEvent("hero_demo_click", { location: "nav_drawer" });
+              closeMenu();
+            }}
           >
-            Try Demo <span className="arrow">→</span>
+            {navDemoCta} <span className="arrow">→</span>
           </a>
           <a href={portalHref} className="btn btn-ghost" onClick={closeMenu}>
             Portal <span className="arrow">→</span>
           </a>
-          <ContactLink className="btn btn-gold" onClick={closeMenu}>
+          <ContactLink className="btn btn-ghost" onClick={closeMenu}>
             Contact <span className="arrow">→</span>
           </ContactLink>
         </div>

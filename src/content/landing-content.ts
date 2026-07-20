@@ -12,6 +12,19 @@ export const businessLoginPath = "/business/login";
 export const businessSignupPath = "/?founding-signup=1#founding-merchant";
 export const employeeLoginPath = "/employee/login";
 
+export const stickyAnnouncement = {
+  full: "Founding Merchant Program — limited to the first 500 businesses · 50% off platform fees for life",
+  short: "Founding Merchant Program · First 500",
+  cta: "Claim Founding Benefits",
+  ctaAriaLabel: "Claim Founding Merchant benefits",
+};
+
+export const navPositioningLine =
+  "SlicePay: The Modern Alternative to Traditional Payment Rails";
+
+export const navRegisterCta = "Register Now";
+export const navDemoCta = "Try Demo";
+
 export const landingMeta = {
   title: "Slice Chain & SlicePay | Crypto Payment Gateway for Small Business",
   description:
@@ -70,10 +83,11 @@ export const social = {
 export const foundingMerchantHeroImage = `${A}/slicepay-merchant-hero.png`;
 
 export const foundingMerchant = {
-  eyebrow: "Founding merchant program now open",
+  eyebrow: "Founding merchant enrollment is open",
   titleHtml: 'Accept Crypto.<br>Keep More <span class="it">Revenue</span>.',
-  subhead: "Save up to 50%+ on payment processing fees while settling instantly in USDC.",
-  copy: "Built for restaurants, retailers, food trucks, service businesses, and merchants who want faster payments and higher margins.",
+  subhead:
+    "A modern payment rail for merchants—simple QR checkout, fast USDC settlement, and a transparent 1.9% fee.",
+  copy: "Built for restaurants, retailers, food trucks, and service businesses that want faster payments without replacing how they work.",
   maxSpots: 500,
   benefits: [
     "Lifetime Founding Merchant Status",
@@ -88,13 +102,28 @@ export const foundingMerchant = {
   ],
   availabilityNote: "Limited availability: first 500 businesses only",
   cta: "Become a Founding Merchant",
-  demoCta: "Watch 60 Second Demo",
+  demoCta: "See the 60-Second Demo",
   useSlicePayCta: "Use SlicePay now",
+  riskReducers: [
+    "No setup or onboarding fee",
+    "Priority support",
+    "Limited to 500 businesses",
+  ],
   trustCards: [
     { value: "1.9%", label: "Transparent SlicePay processing rate" },
     { value: "USDC", label: "Fast stablecoin settlement for merchants" },
     { value: "QR", label: "Simple checkout for in-person payments" },
   ],
+  calculator: {
+    eyebrow: "SlicePay Savings Estimate",
+    title: "See what traditional payment fees may be costing you.",
+    volumeLabel: "Monthly card volume",
+    traditionalLabel: "Traditional processing",
+    sliceLabel: "SlicePay",
+    savingsLabel: "Estimated monthly savings",
+    disclaimer:
+      "Illustrative estimate. Actual savings vary by provider and transaction mix.",
+  },
   merchantFit: [
     { title: "Restaurants", body: "Protect margins on dine-in, takeout, catering, and repeat customer volume." },
     { title: "Retailers", body: "Give crypto-ready customers a simple QR checkout while reducing card fee drag." },
