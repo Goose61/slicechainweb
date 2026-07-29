@@ -8,6 +8,11 @@ const LandingClientEffects = dynamic(
   { ssr: false, loading: () => null }
 );
 
+const AgentWebMcp = dynamic(
+  () => import("@/components/AgentWebMcp").then((mod) => mod.AgentWebMcp),
+  { ssr: false, loading: () => null }
+);
+
 export function LandingClientShell() {
   const [ready, setReady] = useState(false);
 
@@ -33,5 +38,10 @@ export function LandingClientShell() {
   }, []);
 
   if (!ready) return null;
-  return <LandingClientEffects />;
+  return (
+    <>
+      <AgentWebMcp />
+      <LandingClientEffects />
+    </>
+  );
 }

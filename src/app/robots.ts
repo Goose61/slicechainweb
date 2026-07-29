@@ -20,6 +20,10 @@ const PUBLIC_ALLOW = [
   "/terms/",
   "/privacy/",
   "/llms.txt",
+  "/auth.md",
+  "/index.md",
+  "/website-pay-widget.md",
+  "/.well-known/",
 ];
 
 export default function robots(): MetadataRoute.Robots {

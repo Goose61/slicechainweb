@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AgentDiscoveryHead } from "@/components/AgentDiscoveryHead";
 import { pageSeo } from "@/content/seo-metadata";
 import { SeoStructuredData } from "@/components/SeoStructuredData";
 import "@/styles/landing-menos-gusto.css";
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="landing-page" data-landing-root>
+      <AgentDiscoveryHead />
       <SeoStructuredData />
       {children}
     </div>

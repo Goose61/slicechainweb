@@ -3,6 +3,16 @@
 
 > SlicePay is a crypto payment gateway for small and medium businesses. Accept USDC and multi-chain crypto via QR checkout, in-person terminals, and a website pay widget for e-commerce.
 
+## Agent discovery (machine-readable)
+
+- API catalog (RFC 9727): https://slicechain.io/.well-known/api-catalog
+- OpenAPI (Gateway): https://slicechain.io/.well-known/openapi/gateway.json
+- Agent skills index: https://slicechain.io/.well-known/agent-skills/index.json
+- MCP server card: https://slicechain.io/.well-known/mcp/server-card.json
+- Authentication (auth.md): https://slicechain.io/auth.md
+- OAuth protected resource: https://slicechain.io/.well-known/oauth-protected-resource
+- Homepage markdown: https://slicechain.io/index.md
+
 ## Product
 
 - Marketing site: https://slicechain.io/
