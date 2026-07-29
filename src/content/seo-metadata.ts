@@ -8,7 +8,7 @@ export const SITE_TITLE_DEFAULT =
 export const SITE_TITLE_TEMPLATE = "%s | SlicePay";
 
 export const SITE_DESCRIPTION =
-  "SlicePay by Slice Chain is a crypto payment gateway for small businesses. Accept crypto payments via QR checkout, settle in USDC, and keep more revenue with transparent 1.9% pricing.";
+  "SlicePay is a crypto payment gateway for small businesses. Accept USDC via QR checkout and website pay widget with transparent 1.9% pricing.";
 
 export const SITE_KEYWORDS = [
   "Slice Chain",
@@ -38,6 +38,9 @@ export const SITE_KEYWORDS = [
   "USDC payments",
   "USDC payments for business",
   "wallet crypto payments",
+  "website pay widget",
+  "e-commerce crypto checkout",
+  "payment gateway embed",
 ];
 
 export const siteSeoBase: Metadata = {
@@ -54,6 +57,11 @@ export const siteSeoBase: Metadata = {
     url: SITE_ORIGIN,
     siteName: "Slice Chain · SlicePay",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE_DEFAULT,
+    description: SITE_DESCRIPTION,
   },
   alternates: {
     canonical: "/",
@@ -129,5 +137,29 @@ export const pageSeo = {
   vendorPayment: buildPageSeo(
     "QR Payment Generator",
     "Generate QR code payments for crypto checkout. Accept crypto payments and stablecoin payments from any supported wallet at your business.",
+  ),
+  websitePayWidget: {
+    ...buildPageSeo(
+      "Website Pay Widget Integration Guide",
+      "Embed SlicePay on any website: script tag, hosted checkout, server-side invoices, postMessage confirmation, and multi-chain USDC settlement.",
+    ),
+    alternates: {
+      canonical: "/website-pay-widget/",
+    },
+    openGraph: {
+      title: "Website Pay Widget Integration Guide | Slice Chain · SlicePay",
+      description:
+        "Embed SlicePay on any website: script tag, hosted checkout, server-side invoices, postMessage confirmation, and multi-chain USDC settlement.",
+      url: `${SITE_ORIGIN}/website-pay-widget/`,
+      siteName: "Slice Chain · SlicePay",
+      type: "article",
+      publishedTime: "2026-07-29",
+      modifiedTime: "2026-07-29",
+      authors: ["SlicePay Developer Relations"],
+    },
+  } satisfies Metadata,
+  contact: buildPageSeo(
+    "Contact",
+    "Contact SlicePay and Slice Chain for merchant support, website pay widget integration help, and crypto payment gateway questions.",
   ),
 };

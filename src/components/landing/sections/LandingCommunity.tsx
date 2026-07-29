@@ -10,7 +10,7 @@ export function LandingCommunity() {
       <section className="crew" id="community">
         <div className="wrap">
           <div className="section-num" data-reveal>
-            09 · Get Started
+            10 · Get Started
           </div>
           <div className="crew-wrap">
             <div data-reveal>

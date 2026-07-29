@@ -14,6 +14,9 @@ export const employeeLoginPath = "/employee/login/";
 /** Static legal pages — trailing slash avoids GitHub Pages 301 redirects. */
 export const termsPath = "/terms/";
 export const privacyPath = "/privacy/";
+/** Website Pay Widget integration guide */
+export const payWidgetGuidePath = "/website-pay-widget/";
+export const contactPath = "/contact/";
 
 export const stickyAnnouncement = {
   full: "Founding Merchant Program — limited to the first 500 businesses · 50% off platform fees for life",
@@ -31,7 +34,7 @@ export const navDemoCta = "Try Demo";
 export const landingMeta = {
   title: "SlicePay | Crypto Payment Gateway for Business",
   description:
-    "SlicePay by Slice Chain is a crypto payment gateway for small businesses. Accept crypto payments via QR checkout, settle in USDC, and keep more revenue with transparent 1.9% pricing.",
+    "SlicePay is a crypto payment gateway for small businesses. Accept USDC via QR checkout and website pay widget with transparent 1.9% pricing.",
 };
 
 /** Keyword-rich hero intro (~100 words) — primary on-page content below H1. */
@@ -141,9 +144,10 @@ export const navLinks = [
   { href: "#team", label: "Team", num: "04" },
   { href: "#marketing", label: "How It Works", num: "05" },
   { href: "#businesses", label: "For Businesses", num: "06" },
-  { href: "#gallery", label: "Gallery", num: "07" },
-  { href: "#plan", label: "Roadmap", num: "08" },
-  { href: "#community", label: "Get Started", num: "09" },
+  { href: "#pay-widget", label: "Pay Widget", num: "07" },
+  { href: "#gallery", label: "Gallery", num: "08" },
+  { href: "#plan", label: "Roadmap", num: "09" },
+  { href: "#community", label: "Get Started", num: "10" },
 ];
 
 export const heroSlides = [
@@ -186,6 +190,7 @@ export const marqueeItems = [
   "SLICE Loyalty Rewards",
   "1.9% Business Fee",
   "Employee Commissions",
+  "Website Pay Widget",
   "Built for SMB Retail",
 ];
 

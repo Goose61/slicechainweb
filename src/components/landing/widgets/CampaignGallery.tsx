@@ -23,7 +23,7 @@ export function CampaignGallery() {
   return (
     <section className="section memes gallery-section" id="gallery">
       <div className="wrap">
-        <div className="section-num">07 · {gallery.subtitle}</div>
+        <div className="section-num">08 · {gallery.subtitle}</div>
         <div className="memes-head">
           <h2>
             <span className="stroked">Campaign</span>

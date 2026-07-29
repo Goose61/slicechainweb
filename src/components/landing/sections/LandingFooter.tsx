@@ -3,10 +3,12 @@ import {
   brandName,
   businessLoginPath,
   businessSignupPath,
+  contactPath,
   employeeLoginPath,
   footer,
   logo,
   navLinks,
+  payWidgetGuidePath,
   privacyPath,
   social,
   termsPath,
@@ -66,6 +68,15 @@ export function LandingFooter() {
             <a href={businessLoginHref}>Business login</a>
             <a href={employeeLoginHref}>Employee login</a>
             <ContactLink>Support</ContactLink>
+          </div>
+          <div className="foot-col">
+            <p className="foot-col-title">Developers</p>
+            <a href={payWidgetGuidePath}>Website Pay Widget guide</a>
+            <a href="#pay-widget">Pay Widget overview</a>
+            <a href="https://pay.slicechain.io/test-embed.html" target="_blank" rel="noopener noreferrer">
+              Embed test page
+            </a>
+            <a href={contactPath}>Contact</a>
           </div>
           <div className="foot-col">
             <p className="foot-col-title">Platform</p>

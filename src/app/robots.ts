@@ -1,23 +1,52 @@
 import type { MetadataRoute } from "next";
+import { SITE_ORIGIN } from "@/content/seo-metadata";
 
-const BASE_URL = "https://app.slicechain.io";
+const AI_AGENTS = [
+  "GPTBot",
+  "ChatGPT-User",
+  "OAI-SearchBot",
+  "ClaudeBot",
+  "anthropic-ai",
+  "Google-Extended",
+  "PerplexityBot",
+  "Applebot-Extended",
+  "cohere-ai",
+];
+
+const PUBLIC_ALLOW = [
+  "/",
+  "/website-pay-widget/",
+  "/contact/",
+  "/terms/",
+  "/privacy/",
+  "/llms.txt",
+];
 
 export default function robots(): MetadataRoute.Robots {
+  const disallowPrivate = [
+    "/admin/",
+    "/business/dashboard/",
+    "/business/demo/",
+    "/customer/dashboard/",
+    "/employee/dashboard/",
+    "/transactions/",
+    "/vendor-payment/",
+  ];
+
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: [
-        "/admin/",
-        "/business/dashboard/",
-        "/business/demo/",
-        "/customer/dashboard/",
-        "/employee/dashboard/",
-        "/transactions/",
-        "/vendor-payment/",
-        "/portal/",
-      ],
-    },
-    sitemap: `${BASE_URL}/sitemap.xml`,
+    rules: [
+      {
+        userAgent: "*",
+        allow: PUBLIC_ALLOW,
+        disallow: disallowPrivate,
+      },
+      ...AI_AGENTS.map((agent) => ({
+        userAgent: agent,
+        allow: PUBLIC_ALLOW,
+        disallow: disallowPrivate,
+      })),
+    ],
+    sitemap: `${SITE_ORIGIN}/sitemap.xml`,
+    host: SITE_ORIGIN,
   };
 }

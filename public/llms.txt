@@ -1,0 +1,34 @@
+# SlicePay / Slice Chain — LLM & agent discovery
+# https://slicechain.io
+
+> SlicePay is a crypto payment gateway for small and medium businesses. Accept USDC and multi-chain crypto via QR checkout, in-person terminals, and a website pay widget for e-commerce.
+
+## Product
+
+- Marketing site: https://slicechain.io/
+- Hosted checkout: https://pay.slicechain.io/
+- Business app: https://app.slicechain.io/
+- API: https://api.slicechain.io/
+
+## Website Pay Widget (e-commerce integration)
+
+Developers can embed crypto checkout on any website without blockchain code:
+
+- Integration guide: https://slicechain.io/website-pay-widget/
+- Embed script: https://pay.slicechain.io/embed.js
+- Mock merchant test page: https://pay.slicechain.io/test-embed.html
+- Gateway API docs (create invoice): POST https://api.slicechain.io/api/gateway/create-invoice
+
+Parameters: merchantId, amountUsd, orderId, description (optional), redirectUrl (optional).
+
+## Contact
+
+- Email: slicepay@slicechain.io
+- Contact page: https://slicechain.io/contact/
+- X: https://x.com/slice__pay
+- Telegram: https://t.me/+PrL-wbxrW39kODBk
+
+## Legal
+
+- Terms: https://slicechain.io/terms/
+- Privacy: https://slicechain.io/privacy/

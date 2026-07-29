@@ -77,6 +77,8 @@ const nextConfig = isGhPages
           { source: "/landing", destination: `${marketing}/`, permanent: false, has: hostMatch },
           { source: "/terms", destination: `${marketing}/terms/`, permanent: false, has: hostMatch },
           { source: "/privacy", destination: `${marketing}/privacy/`, permanent: false, has: hostMatch },
+          { source: "/website-pay-widget", destination: `${marketing}/website-pay-widget/`, permanent: false, has: hostMatch },
+          { source: "/contact", destination: `${marketing}/contact/`, permanent: false, has: hostMatch },
         ];
       },
       async rewrites() {
