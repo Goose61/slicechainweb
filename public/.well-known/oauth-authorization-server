@@ -13,8 +13,9 @@
   ],
   "token_endpoint_auth_methods_supported": ["client_secret_post"],
   "agent_auth": {
-    "skill": "https://slicechain.io/.well-known/agent-skills/gateway-api/SKILL.md",
+    "skill": "https://slicechain.io/auth.md",
     "register_uri": "https://app.slicechain.io/business/onboarding/",
+    "claim_uri": "https://slicechain.io/auth.md#api-keys",
     "identity_types_supported": ["anonymous"],
     "anonymous": {
       "credential_types_supported": ["api_key"],
