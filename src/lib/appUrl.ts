@@ -1,7 +1,7 @@
 /** Marketing site on GitHub Pages. */
 export const MARKETING_SITE_ORIGIN = "https://slicechain.io";
 
-/** Live demo app — portals, logins, dashboards (self-hosted via Cloudflare tunnel). */
+/** Live demo app - portals, logins, dashboards (self-hosted via Cloudflare tunnel). */
 export const DEMO_APP_ORIGIN =
   process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") || "https://app.slicechain.io";
 
@@ -12,7 +12,7 @@ function isMarketingHost(hostname: string): boolean {
 }
 
 function isGithubPagesBuild(): boolean {
-  // Client bundles only see NEXT_PUBLIC_* — also accept GITHUB_PAGES when inlined at build.
+  // Client bundles only see NEXT_PUBLIC_* - also accept GITHUB_PAGES when inlined at build.
   return (
     process.env.NEXT_PUBLIC_GITHUB_PAGES === "true" ||
     process.env.GITHUB_PAGES === "true"
@@ -22,7 +22,7 @@ function isGithubPagesBuild(): boolean {
 /**
  * Resolve URL for app routes (portal, login, dashboards, Try Demo).
  * Marketing / Pages builds must always deep-link to app.slicechain.io.
- * Trailing slashes are stripped — the app server does not use trailingSlash.
+ * Trailing slashes are stripped - the app server does not use trailingSlash.
  */
 export function appUrl(path: string): string {
   let normalized = path.startsWith("/") ? path : `/${path}`;

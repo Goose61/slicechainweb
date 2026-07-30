@@ -29,7 +29,7 @@ const EMPTY_FORM = {
   title: "Weekly Newsletter",
   subject: "",
   preheader: "",
-  htmlBody: "<p>Hello,</p>\n<p>Your weekly SliceChain update goes here.</p>\n<p>— The SliceChain Team</p>",
+  htmlBody: "<p>Hello,</p>\n<p>Your weekly SliceChain update goes here.</p>\n<p>- The SliceChain Team</p>",
 };
 
 export function NewsletterTab({ token }: NewsletterTabProps) {
@@ -179,7 +179,7 @@ export function NewsletterTab({ token }: NewsletterTabProps) {
             <CardTitle className="text-sm">Active subscribers</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">{stats?.activeSubscribers ?? "—"}</p>
+            <p className="text-2xl font-bold">{stats?.activeSubscribers ?? "-"}</p>
             <p className="text-xs text-muted-foreground mt-1">
               {stats ? `${stats.totalSubscribers} total in database` : "Loading…"}
             </p>

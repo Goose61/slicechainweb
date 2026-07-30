@@ -4,7 +4,7 @@ export const payWidgetSection = {
   subtitle: "Website Pay Widget",
   titleHtml: 'Add crypto checkout to <span class="it">any website</span>',
   lede:
-    "SlicePay's hosted payment gateway lets e-commerce stores, SaaS billing pages, and custom checkout flows accept USDC and multi-chain crypto with one script tag or a server-created invoice — no iframe, no wallet SDK, and no blockchain code on your site.",
+    "SlicePay's hosted payment gateway lets e-commerce stores, SaaS billing pages, and custom checkout flows accept USDC and multi-chain crypto with one script tag or a server-created invoice - no iframe, no wallet SDK, and no blockchain code on your site.",
   cta: { label: "Integration guide", href: payWidgetPath },
   features: [
     {
@@ -47,7 +47,7 @@ export type GuideSection = {
 };
 
 export const payWidgetGuide = {
-  title: "Website Pay Widget — Integration Guide",
+  title: "Website Pay Widget - Integration Guide",
   lastUpdated: "2026-07-29",
   author: "SlicePay Developer Relations",
   description:
@@ -62,7 +62,7 @@ export const payWidgetGuide = {
         "Checkout host: https://pay.slicechain.io",
         "Embed script: https://pay.slicechain.io/embed.js",
         "Gateway API: https://api.slicechain.io/api/gateway",
-        "No iframe required — popup or full-page redirect",
+        "No iframe required - popup or full-page redirect",
       ],
     },
     {
@@ -77,7 +77,7 @@ export const payWidgetGuide = {
     },
     {
       id: "embed",
-      heading: "Option A — Embed script (minimal, no backend)",
+      heading: "Option A - Embed script (minimal, no backend)",
       body:
         "Add one script tag to your checkout or cart page. Replace `YOUR_MERCHANT_ID` with your business ID. Static amounts work for fixed-price products; use JavaScript for dynamic cart totals (see below).",
       code: `<script src="https://pay.slicechain.io/embed.js"
@@ -109,14 +109,14 @@ export const payWidgetGuide = {
     },
     {
       id: "hosted-url",
-      heading: "Option B — Direct hosted URL",
+      heading: "Option B - Direct hosted URL",
       body: "Link or redirect customers to:",
       code: `https://pay.slicechain.io/?merchantId=YOUR_MERCHANT_ID&amount=49.99&orderId=ORD-12345&description=Order+note&redirect=https://yourstore.com/thanks`,
       codeLang: "text",
     },
     {
       id: "server-invoice",
-      heading: "Option C — Server-side invoice (recommended for production)",
+      heading: "Option C - Server-side invoice (recommended for production)",
       body:
         "Create the invoice on your server so the amount cannot be tampered with in the browser. Then redirect the customer to the returned `invoiceId`.",
       code: `// POST https://api.slicechain.io/api/gateway/create-invoice
@@ -137,12 +137,12 @@ export const payWidgetGuide = {
       id: "parameters",
       heading: "Parameters reference",
       bullets: [
-        "merchantId — required; your SlicePay business ID",
-        "amount / amountUsd — checkout total in USD (min $0.01)",
-        "orderId — your order reference (1–128 characters)",
-        "description — optional note shown on receipt (max 500 characters)",
-        "redirect / redirectUrl — where the customer returns after paying",
-        "invoiceId — load an existing server-created invoice instead of URL params",
+        "merchantId - required; your SlicePay business ID",
+        "amount / amountUsd - checkout total in USD (min $0.01)",
+        "orderId - your order reference (1–128 characters)",
+        "description - optional note shown on receipt (max 500 characters)",
+        "redirect / redirectUrl - where the customer returns after paying",
+        "invoiceId - load an existing server-created invoice instead of URL params",
       ],
     },
     {

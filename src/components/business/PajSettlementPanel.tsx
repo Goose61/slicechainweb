@@ -120,7 +120,7 @@ export function PajSettlementPanel({
     try {
       const r = await pajApi.createOfframp(token, { amountUsd: usd });
       setOfframpResult(r);
-      toast.success("Off-ramp created — send USDC to deposit address");
+      toast.success("Off-ramp created - send USDC to deposit address");
       const hist = await pajApi.getOfframpHistory(token);
       setHistory(hist.orders || []);
     } catch (e) {
@@ -286,8 +286,8 @@ export function PajSettlementPanel({
                 {history.map((o) => (
                   <TableRow key={o._id}>
                     <TableCell className="text-xs">{new Date(o.createdAt).toLocaleDateString()}</TableCell>
-                    <TableCell>${o.amountUsd?.toFixed(2) ?? "—"}</TableCell>
-                    <TableCell>₦{o.fiatAmount ? Number(o.fiatAmount).toLocaleString() : "—"}</TableCell>
+                    <TableCell>${o.amountUsd?.toFixed(2) ?? "-"}</TableCell>
+                    <TableCell>₦{o.fiatAmount ? Number(o.fiatAmount).toLocaleString() : "-"}</TableCell>
                     <TableCell>
                       <span className={`text-xs px-2 py-0.5 rounded-full ${
                         o.status === "COMPLETED" ? "bg-green-100 text-green-700"

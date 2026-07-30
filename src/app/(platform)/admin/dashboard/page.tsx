@@ -156,7 +156,7 @@ export default function AdminDashboard() {
   const handleApiError = useCallback((err: unknown, label: string) => {
     const message = err instanceof Error ? err.message : `Failed to load ${label}`;
     if (/admin access required|invalid admin token|admin token required|token expired/i.test(message)) {
-      toast.error("Admin session expired — please log in again.");
+      toast.error("Admin session expired - please log in again.");
       logout();
       return;
     }
@@ -422,7 +422,7 @@ export default function AdminDashboard() {
             { label: "Completed", value: stats?.completed || 0, icon: CheckCircle, color: "from-emerald-500 to-green-600" },
             { label: "Pending", value: stats?.pending || 0, icon: Clock, color: "from-yellow-500 to-amber-500" },
             { label: "Failed", value: stats?.failed || 0, icon: AlertCircle, color: "from-red-500 to-rose-500" },
-            { label: "Unreconciled", value: depositSummary?.total ?? "—", icon: AlertTriangle, color: "from-orange-500 to-red-500" },
+            { label: "Unreconciled", value: depositSummary?.total ?? "-", icon: AlertTriangle, color: "from-orange-500 to-red-500" },
           ].map(({ label, value, icon: Icon, color }) => (
             <Card key={label}>
               <CardHeader className="pb-2">
@@ -571,10 +571,10 @@ export default function AdminDashboard() {
                         </TableCell>
                         <TableCell><DepositStatusBadge status={d.status} /></TableCell>
                         <TableCell className="font-mono text-[10px] max-w-[100px] truncate">
-                          {d.txHashes.inbound ? shortAddress(d.txHashes.inbound) : "—"}
+                          {d.txHashes.inbound ? shortAddress(d.txHashes.inbound) : "-"}
                         </TableCell>
                         <TableCell className="text-xs text-muted-foreground max-w-[180px] truncate" title={d.issues[0]}>
-                          {d.issues[0] || "—"}
+                          {d.issues[0] || "-"}
                         </TableCell>
                         <TableCell className="text-right">
                           <div className="flex justify-end gap-1">
@@ -710,11 +710,11 @@ export default function AdminDashboard() {
                         <TableCell className="text-sm">{log.adminUsername}</TableCell>
                         <TableCell><Badge variant="outline" className="font-mono text-[10px]">{log.action}</Badge></TableCell>
                         <TableCell className="text-xs">
-                          {log.resourceType ? `${log.resourceType}` : "—"}
+                          {log.resourceType ? `${log.resourceType}` : "-"}
                           {log.resourceId ? <div className="font-mono text-[10px] text-muted-foreground">{log.resourceId.slice(0, 12)}…</div> : null}
                         </TableCell>
                         <TableCell className="font-mono text-[10px] max-w-[120px] truncate">
-                          {log.confirmationTxId ? shortAddress(log.confirmationTxId) : "—"}
+                          {log.confirmationTxId ? shortAddress(log.confirmationTxId) : "-"}
                         </TableCell>
                         <TableCell>
                           {log.success ? (
@@ -848,7 +848,7 @@ export default function AdminDashboard() {
                               : <ChevronRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />}
                             <span className="font-semibold text-sm">{chain.name}</span>
                             <Badge variant={chain.sufficient ? "default" : "destructive"} className="text-xs">
-                              {chain.balanceNative ?? "—"} {chain.symbol}
+                              {chain.balanceNative ?? "-"} {chain.symbol}
                             </Badge>
                             {chain.needsBootstrap && (
                               <Badge variant="outline" className="text-orange-400 border-orange-400 text-xs">
@@ -908,10 +908,10 @@ export default function AdminDashboard() {
                             {chain.tokens!.map((token) => (
                               <div key={token.address} className="flex items-center gap-2 text-xs flex-wrap">
                                 <span className="w-14 font-mono font-semibold">{token.symbol}</span>
-                                <span className="text-muted-foreground w-24">{token.balance ?? "—"}</span>
-                                <span className="text-muted-foreground">reserved: {token.reserved ?? "—"}</span>
+                                <span className="text-muted-foreground w-24">{token.balance ?? "-"}</span>
+                                <span className="text-muted-foreground">reserved: {token.reserved ?? "-"}</span>
                                 <span className={parseFloat(token.sweepable || "0") > 0 ? "text-green-400" : "text-muted-foreground"}>
-                                  sweepable: {token.sweepable ?? "—"}
+                                  sweepable: {token.sweepable ?? "-"}
                                 </span>
                                 {!token.sweepEligible && (
                                   <Badge variant="secondary" className="text-xs">deBridge unsupported</Badge>
@@ -950,10 +950,10 @@ export default function AdminDashboard() {
                     <CardContent className="p-3 flex items-center gap-3 flex-wrap">
                       <span className="font-semibold text-sm">TRON</span>
                       <Badge variant={treasury.tron.sufficient ? "default" : "destructive"}>
-                        Energy: {treasury.tron.energyAvailable?.toLocaleString() ?? "—"} / {treasury.tron.energyFloor?.toLocaleString()}
+                        Energy: {treasury.tron.energyAvailable?.toLocaleString() ?? "-"} / {treasury.tron.energyFloor?.toLocaleString()}
                       </Badge>
                       <span className="text-xs text-muted-foreground">
-                        Balance: {treasury.tron.balanceTrx ?? "—"} TRX
+                        Balance: {treasury.tron.balanceTrx ?? "-"} TRX
                       </span>
                       {!treasury.tron.sufficient && (
                         <Button size="sm" variant="outline" className="h-7 text-xs ml-auto"
@@ -1014,9 +1014,9 @@ export default function AdminDashboard() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>
-              {treasuryActionType === "topup" && `Top up gas — ${treasuryActionChain?.name}`}
+              {treasuryActionType === "topup" && `Top up gas - ${treasuryActionChain?.name}`}
               {treasuryActionType === "sweep-token" && `Sweep ${treasuryActionToken?.symbol} → ${treasuryActionChain?.symbol}`}
-              {treasuryActionType === "sweep-chain" && `Sweep all tokens — ${treasuryActionChain?.name}`}
+              {treasuryActionType === "sweep-chain" && `Sweep all tokens - ${treasuryActionChain?.name}`}
               {treasuryActionType === "tron-stake" && "Stake TRX for energy"}
             </DialogTitle>
             <DialogDescription>
@@ -1077,7 +1077,7 @@ export default function AdminDashboard() {
                   if (treasuryActionType === "topup") {
                     result = await treasuryTopUpGas(token, treasuryActionChain!.chainKey, treasuryConfirmInput, reason);
                     if (result.alreadyFunded) {
-                      toast.success(result.message || `${treasuryActionChain!.name} already has sufficient native balance — no swap needed.`);
+                      toast.success(result.message || `${treasuryActionChain!.name} already has sufficient native balance - no swap needed.`);
                     } else {
                       toast.success(`Gas topped up on ${treasuryActionChain!.name}. New balance: ${result.nativeBalanceAfter} ${treasuryActionChain!.symbol}`);
                     }
@@ -1138,7 +1138,7 @@ export default function AdminDashboard() {
                     <div key={`${req.type}-${req.label}`} className="rounded border p-2">
                       <div className="flex justify-between gap-2">
                         <span>{req.label}</span>
-                        <span className={`font-medium ${req.amount === "Sufficient" ? "text-green-600" : "text-amber-700"}`}>{req.amount || "—"}</span>
+                        <span className={`font-medium ${req.amount === "Sufficient" ? "text-green-600" : "text-amber-700"}`}>{req.amount || "-"}</span>
                       </div>
                       {req.have != null && req.need != null ? (
                         <p className="text-xs text-muted-foreground mt-1">Have {req.have} · Need {req.need}</p>
@@ -1200,7 +1200,7 @@ export default function AdminDashboard() {
                 const deposit = deposits.find((d) => d.id === id);
                 return (
                   <div key={id} className="text-xs font-mono py-0.5">
-                    {deposit?.businessName || "—"} · {id}
+                    {deposit?.businessName || "-"} · {id}
                   </div>
                 );
               })}

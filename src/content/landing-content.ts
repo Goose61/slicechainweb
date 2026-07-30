@@ -11,7 +11,7 @@ export const businessLoginPath = "/business/login/";
 /** Founding merchant application (opens landing modal). */
 export const businessSignupPath = "/?founding-signup=1#founding-merchant";
 export const employeeLoginPath = "/employee/login/";
-/** Static legal pages — trailing slash avoids GitHub Pages 301 redirects. */
+/** Static legal pages - trailing slash avoids GitHub Pages 301 redirects. */
 export const termsPath = "/terms/";
 export const privacyPath = "/privacy/";
 /** Website Pay Widget integration guide */
@@ -19,7 +19,7 @@ export const payWidgetGuidePath = "/website-pay-widget/";
 export const contactPath = "/contact/";
 
 export const stickyAnnouncement = {
-  full: "Founding Merchant Program — limited to the first 500 businesses · 50% off platform fees for life",
+  full: "Founding Merchant Program - limited to the first 500 businesses · 50% off platform fees for life",
   short: "Founding Merchant Program · First 500",
   cta: "Claim Founding Benefits",
   ctaAriaLabel: "Claim Founding Merchant benefits",
@@ -34,18 +34,18 @@ export const navDemoCta = "Try Demo";
 export const landingMeta = {
   title: "SlicePay | Global Crypto Payments Provider & Processor",
   description:
-    "SlicePay is a global crypto payments provider and processor. In-store QR checkout, physical POS facilitation, and website pay widget — transparent pricing and USDC settlement.",
+    "SlicePay is a global crypto payments provider and processor. In-store QR checkout, physical POS facilitation, and website pay widget - transparent pricing and USDC settlement.",
 };
 
-/** Keyword-rich hero intro (~100 words) — primary on-page content below H1. */
+/** Keyword-rich hero intro (~100 words) - primary on-page content below H1. */
 export const heroLead =
-  "Slice Chain powers SlicePay (Slice Pay), a global crypto payments provider and processor for merchants worldwide. Our infrastructure handles in-store QR checkout, physical POS facilitation, and online checkout gateway rails — with USDC settlement, multi-chain support, and transparent 1.9% pricing. Whether you run restaurants, retail, e-commerce, or field service, SlicePay gives you one platform to accept crypto payments, pay staff fairly, and keep more margin on every sale.";
+  "Slice Chain powers SlicePay (Slice Pay), a global crypto payments provider and processor for merchants worldwide. Our infrastructure handles in-store QR checkout, physical POS facilitation, and online checkout gateway rails - with USDC settlement, multi-chain support, and transparent 1.9% pricing. Whether you run restaurants, retail, e-commerce, or field service, SlicePay gives you one platform to accept crypto payments, pay staff fairly, and keep more margin on every sale.";
 
-/** Compact hero callout — links to Website Pay Widget (section 07). */
+/** Compact hero callout - links to Website Pay Widget (section 07). */
 export const heroOnlineGateway = {
   eyebrow: "New · Online checkout",
   title: "Crypto e-commerce gateway",
-  body: "Add hosted checkout to any website — grow globally, cut margins, and accept crypto payments without blockchain code.",
+  body: "Add hosted checkout to any website - grow globally, cut margins, and accept crypto payments without blockchain code.",
   cta: "Website Pay Widget",
   href: "#pay-widget",
 };
@@ -101,7 +101,7 @@ export const foundingMerchant = {
   eyebrow: "Founding merchant enrollment is open",
   titleHtml: 'Accept Crypto.<br>Keep More <span class="it">Revenue</span>.',
   subhead:
-    "A global crypto payments provider and processor — in-store QR checkout, physical POS facilitation, and stablecoin settlement with transparent 1.9% pricing.",
+    "A global crypto payments provider and processor - in-store QR checkout, physical POS facilitation, and stablecoin settlement with transparent 1.9% pricing.",
   copy: "Built for merchants worldwide: restaurants, retailers, e-commerce stores, and service businesses that want faster payments, lower fees, and crypto-native checkout without replacing how they operate.",
   maxSpots: 500,
   benefits: [
@@ -163,7 +163,7 @@ export const heroSlides = [
   {
     subtitle: "Global payment processing",
     titleHtml: 'Accept <span class="it">cryptocurrency</span><br>payments in USDC',
-    text: "Crypto payment processing for in-store and online — QR checkout and hosted gateway let customers pay with crypto from any supported wallet.",
+    text: "Crypto payment processing for in-store and online - QR checkout and hosted gateway let customers pay with crypto from any supported wallet.",
     cta: { label: "Open Portal", href: portalPath },
     bg: `${A}/hero-slider-1.jpg`,
     bgAlt: "Restaurant accepting QR code crypto payments with SlicePay crypto payment gateway",
@@ -171,7 +171,7 @@ export const heroSlides = [
   {
     subtitle: "In-store & online",
     titleHtml: 'USDC payouts<br>for <span class="it">merchants</span>',
-    text: "1.9% total fee with automatic USDC and USDT payouts — QR, POS, and website checkout on one processor.",
+    text: "1.9% total fee with automatic USDC and USDT payouts - QR, POS, and website checkout on one processor.",
     bg: `${A}/hero-slider-2.jpg`,
     bgAlt: "Small business owner receiving USDC payments for business through SlicePay",
   },
@@ -265,7 +265,7 @@ export const mission = {
   blocks: [
     {
       title: "Our mission",
-      body: "Give merchants worldwide practical crypto payment processing — in-store, on the go, and online — with loyalty built in and fair staff payouts from every sale.",
+      body: "Give merchants worldwide practical crypto payment processing - in-store, on the go, and online - with loyalty built in and fair staff payouts from every sale.",
     },
     {
       title: "Our vision",
@@ -277,7 +277,7 @@ export const mission = {
 export const aboutSlicePay = {
   subtitle: "About SlicePay",
   title: "Built for businesses that want to move faster.",
-  text: "We created SlicePay — the Slice Chain flagship crypto payments processor from SliceChain Holdings — to help merchants accept cryptocurrency worldwide: QR and POS in person, hosted checkout online, and USDC settlement without replacing existing workflows.",
+  text: "We created SlicePay - the Slice Chain flagship crypto payments processor from SliceChain Holdings - to help merchants accept cryptocurrency worldwide: QR and POS in person, hosted checkout online, and USDC settlement without replacing existing workflows.",
   banner: `${A}/about-banner.webp`,
   bannerAlt: "Merchants using SlicePay crypto payment gateway to accept cryptocurrency payments at checkout",
 };
@@ -332,13 +332,13 @@ export const gallery = {
   title: "SlicePay Gallery",
 };
 
-/** Campaign gallery — images in public/landing-assets/images/ */
+/** Campaign gallery - images in public/landing-assets/images/ */
 export const galleryImages = [
-  { src: `${A}/bft.jpg`, alt: "BFT enters SlicePay — signed strategic partnership for payment utility and merchant rails" },
-  { src: `${A}/blockfest1.jpg`, alt: "SlicePay at Blockfest Africa Roadshow — Cape Town 2026" },
+  { src: `${A}/bft.jpg`, alt: "BFT enters SlicePay - signed strategic partnership for payment utility and merchant rails" },
+  { src: `${A}/blockfest1.jpg`, alt: "SlicePay at Blockfest Africa Roadshow - Cape Town 2026" },
   { src: `${A}/blockfest2.jpg`, alt: "SlicePay speaking at Blockfest Africa on crypto payments and merchant enablement" },
   { src: `${A}/steve.jpg`, alt: "SliceChain team representing SlicePay at a live merchant event" },
-  { src: `${A}/xeus.jpg`, alt: "SlicePay community at Blockfest Africa — Web3 payments in the field" },
+  { src: `${A}/xeus.jpg`, alt: "SlicePay community at Blockfest Africa - Web3 payments in the field" },
   { src: `${A}/stablecon.jpg`, alt: "SlicePay at Stablecon Salons Africa Series 2026" },
   { src: `${A}/pizza/campaign-gallery/photo_2026-07-30_22-02-38.jpg`, alt: "SliceChain at Startup Club ZA" },
 ];

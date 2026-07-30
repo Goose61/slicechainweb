@@ -70,7 +70,7 @@ export function DemoVideoModal({ open, onClose }: Props) {
         </div>
 
         <p className="fm-demo-copy">
-          See how customers scan, pay, and settle in USDC — and how merchants keep more revenue
+          See how customers scan, pay, and settle in USDC - and how merchants keep more revenue
           with SlicePay&apos;s 1.9% rate.
         </p>
 

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const isGhPages = process.env.GITHUB_PAGES === "true";
 
-// Public Turnstile site key — safe to embed at build time (secret stays server-side)
+// Public Turnstile site key - safe to embed at build time (secret stays server-side)
 const turnstileSiteKey =
   process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
   process.env.TURNSTILE_SITE_KEY ||

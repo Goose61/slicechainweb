@@ -1,4 +1,4 @@
-# Website Pay Widget — Integration Guide
+# Website Pay Widget - Integration Guide
 
 Step-by-step guide to embed the SlicePay crypto payment gateway on any website.
 
@@ -12,7 +12,7 @@ SlicePay uses a **hosted checkout** pattern (similar to Stripe Checkout redirect
 - Checkout host: https://pay.slicechain.io
 - Embed script: https://pay.slicechain.io/embed.js
 - Gateway API: https://api.slicechain.io/api/gateway
-- No iframe required — popup or full-page redirect
+- No iframe required - popup or full-page redirect
 
 ## Before you start
 
@@ -21,7 +21,7 @@ SlicePay uses a **hosted checkout** pattern (similar to Stripe Checkout redirect
 - HTTPS on your production store (recommended for checkout popups)
 - Optional: `apiKey` from Business settings for server-side invoice creation
 
-## Option A — Embed script (minimal, no backend)
+## Option A - Embed script (minimal, no backend)
 
 Add one script tag to your checkout or cart page. Replace `YOUR_MERCHANT_ID` with your business ID.
 
@@ -51,13 +51,13 @@ document.getElementById('pay-crypto').onclick = () => {
 };
 ```
 
-## Option B — Direct hosted URL
+## Option B - Direct hosted URL
 
 ```
 https://pay.slicechain.io/?merchantId=YOUR_MERCHANT_ID&amount=49.99&orderId=ORD-12345&description=Order+note&redirect=https://yourstore.com/thanks
 ```
 
-## Option C — Server-side invoice (recommended for production)
+## Option C - Server-side invoice (recommended for production)
 
 Create the invoice on your server so the amount cannot be tampered with in the browser.
 
@@ -77,12 +77,12 @@ Redirect customer to: `https://pay.slicechain.io/?invoiceId=PUBLIC_INVOICE_ID`
 
 ## Parameters reference
 
-- **merchantId** — required; your SlicePay business ID
-- **amount / amountUsd** — checkout total in USD (min $0.01)
-- **orderId** — your order reference (1–128 characters)
-- **description** — optional note shown on receipt (max 500 characters)
-- **redirect / redirectUrl** — where the customer returns after paying
-- **invoiceId** — load an existing server-created invoice instead of URL params
+- **merchantId** - required; your SlicePay business ID
+- **amount / amountUsd** - checkout total in USD (min $0.01)
+- **orderId** - your order reference (1–128 characters)
+- **description** - optional note shown on receipt (max 500 characters)
+- **redirect / redirectUrl** - where the customer returns after paying
+- **invoiceId** - load an existing server-created invoice instead of URL params
 
 ## Payment confirmation on your site
 

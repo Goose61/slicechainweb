@@ -1,6 +1,6 @@
 # SliceChain Web
 
-Marketing site for [SlicePay](https://slicechain.io) — built with Next.js.
+Marketing site for [SlicePay](https://slicechain.io) - built with Next.js.
 
 ## Development
 

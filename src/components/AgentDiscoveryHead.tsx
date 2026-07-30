@@ -1,6 +1,6 @@
 /**
  * RFC 8288 Link tags for agent discovery (HTML fallback when response headers
- * are not set by the origin — e.g. GitHub Pages). Cloudflare Transform Rules
+ * are not set by the origin - e.g. GitHub Pages). Cloudflare Transform Rules
  * or the slicechain-agent-discovery worker should also set Link headers.
  */
 export function AgentDiscoveryHead() {

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
 };
 
-/** Non-blocking Google Fonts loader — keeps fonts off the critical render path. */
+/** Non-blocking Google Fonts loader - keeps fonts off the critical render path. */
 const FONT_LOADER = `
 (function(){
   var href=${JSON.stringify(

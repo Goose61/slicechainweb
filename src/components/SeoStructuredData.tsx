@@ -39,7 +39,7 @@ const structuredData = {
     {
       "@type": "TechArticle",
       "@id": "https://slicechain.io/website-pay-widget/#article",
-      headline: "Website Pay Widget — Integration Guide",
+      headline: "Website Pay Widget - Integration Guide",
       description:
         "Embed SlicePay crypto checkout on any e-commerce website with embed.js, hosted checkout URLs, or server-side gateway invoices.",
       url: "https://slicechain.io/website-pay-widget/",

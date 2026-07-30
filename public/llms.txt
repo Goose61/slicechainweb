@@ -1,4 +1,4 @@
-# SlicePay / Slice Chain — LLM & agent discovery
+# SlicePay / Slice Chain - LLM & agent discovery
 # https://slicechain.io
 
 > SlicePay is a crypto payment gateway for small and medium businesses. Accept USDC and multi-chain crypto via QR checkout, in-person terminals, and a website pay widget for e-commerce.

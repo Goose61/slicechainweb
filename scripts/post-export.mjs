@@ -33,7 +33,7 @@ if (!fs.existsSync(indexHtml)) {
     fs.copyFileSync(source, indexHtml);
     console.log(`post-export: created index.html from ${path.basename(source)}`);
   } else {
-    console.warn("post-export: WARNING — no index.html in out/; GitHub Pages will 404 at /");
+    console.warn("post-export: WARNING - no index.html in out/; GitHub Pages will 404 at /");
   }
 }
 
@@ -49,7 +49,7 @@ function buildAgentSkillsIndex() {
   const skillDefs = [
     {
       name: "gateway-api",
-      description: "SlicePay Gateway REST API — invoices, payment status, hosted checkout",
+      description: "SlicePay Gateway REST API - invoices, payment status, hosted checkout",
       relPath: ".well-known/agent-skills/gateway-api/SKILL.md",
     },
     {

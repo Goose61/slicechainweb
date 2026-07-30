@@ -108,7 +108,7 @@ export function LandingFoundingMerchant() {
             <div className="fm-hero-copy" id="founding-merchant">
               {verifiedBanner && (
                 <div className="fm-verified-banner" role="status">
-                  Email verified — continue creating your SlicePay account from the link in your confirmation email.
+                  Email verified - continue creating your SlicePay account from the link in your confirmation email.
                 </div>
               )}
               <div className="fm-eyebrow">

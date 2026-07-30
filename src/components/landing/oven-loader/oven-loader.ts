@@ -1,4 +1,4 @@
-/* DO NOT MODIFY — copied verbatim from menos&gusto/Pizza.html loader IIFE */
+/* DO NOT MODIFY - copied verbatim from menos&gusto/Pizza.html loader IIFE */
 
 export function initOvenLoader(): void {
   (function () {

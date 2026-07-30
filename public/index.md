@@ -1,4 +1,4 @@
-# SlicePay — Crypto payment gateway for SMBs
+# SlicePay - Crypto payment gateway for SMBs
 
 > Accept USDC and multi-chain crypto via QR checkout, in-person terminals, and a website pay widget for e-commerce.
 

@@ -189,7 +189,7 @@ export default function EmployeeLoginPage() {
               ))}
             </div>
 
-            {/* Quick password field — shown only when an employee is selected */}
+            {/* Quick password field - shown only when an employee is selected */}
             {selectedQuickId && (
               <div className="space-y-2 pt-1">
                 <div className="relative">

@@ -1,4 +1,4 @@
-# auth.md — SlicePay agent authentication
+# auth.md - SlicePay agent authentication
 
 Machine clients integrating with SlicePay should use this document for registration and credential provisioning.
 
@@ -60,7 +60,7 @@ Generate or rotate API keys in Business dashboard → Settings → API Keys (whe
 
 ### Session JWT (business portal)
 
-Human operators use session-based login at `https://app.slicechain.io/business/login/`. Portal APIs accept session cookies or JWT from authenticated dashboard sessions — not intended for unattended agent use. Prefer gateway API keys for automation.
+Human operators use session-based login at `https://app.slicechain.io/business/login/`. Portal APIs accept session cookies or JWT from authenticated dashboard sessions - not intended for unattended agent use. Prefer gateway API keys for automation.
 
 ## Anonymous agent access
 

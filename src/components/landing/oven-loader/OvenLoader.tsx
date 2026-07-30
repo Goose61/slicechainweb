@@ -1,4 +1,4 @@
-/* DO NOT MODIFY — markup copied verbatim from menos&gusto/Pizza.html lines 96–191 */
+/* DO NOT MODIFY - markup copied verbatim from menos&gusto/Pizza.html lines 96–191 */
 
 "use client";
 

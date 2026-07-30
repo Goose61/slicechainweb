@@ -52,7 +52,7 @@ export default function OnboardingWizard() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  // From founding merchant application — not re-asked in KYC
+  // From founding merchant application - not re-asked in KYC
   const [businessName, setBusinessName] = useState("");
   const [ownerName, setOwnerName] = useState("");
   const [businessEmail, setBusinessEmail] = useState("");

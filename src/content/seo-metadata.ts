@@ -112,7 +112,7 @@ export const pageSeo = {
   ),
   businessLogin: buildPageSeo(
     "Business Login",
-    "Sign in to your SlicePay dashboard for crypto payments for businesses — track USDC settlements, accept crypto payments, and manage QR code checkout.",
+    "Sign in to your SlicePay dashboard for crypto payments for businesses - track USDC settlements, accept crypto payments, and manage QR code checkout.",
   ),
   businessSignup: buildPageSeo(
     "Business Sign Up",

@@ -8,7 +8,7 @@ Use this skill when integrating SlicePay into e-commerce stores, SaaS billing pa
 
 ## Integration options
 
-### Option A — Embed script (no backend)
+### Option A - Embed script (no backend)
 
 ```html
 <script src="https://pay.slicechain.io/embed.js"
@@ -20,13 +20,13 @@ Use this skill when integrating SlicePay into e-commerce stores, SaaS billing pa
   data-popup="true"></script>
 ```
 
-### Option B — Hosted checkout URL
+### Option B - Hosted checkout URL
 
 Redirect or link to:
 
 `https://pay.slicechain.io/?merchantId=YOUR_MERCHANT_ID&amount=49.99&orderId=ORD-12345`
 
-### Option C — Server-side invoice (recommended)
+### Option C - Server-side invoice (recommended)
 
 1. `POST https://api.slicechain.io/api/gateway/create-invoice` with merchantId, amountUsd, orderId.
 2. Redirect customer to `https://pay.slicechain.io/?invoiceId=PUBLIC_INVOICE_ID`.
