@@ -34,9 +34,9 @@ export function LandingFooter() {
             </div>
             <p>{footer.address}</p>
             <p className="foot-seo-blurb">
-              SlicePay is a multi-chain crypto payment gateway for restaurants, retailers, and service
-              businesses. Merchants accept wallet payments with QR checkout, settle in USDC, and keep more
-              of every sale with transparent 1.9% pricing—without replacing how their teams already work.
+              SlicePay is a global crypto payments provider and processor for restaurants, retailers,
+              e-commerce, and service businesses. Accept wallet payments in-store or online, settle in USDC,
+              and keep more of every sale with transparent 1.9% pricing.
             </p>
             <div className="foot-soc-links">
               <a href={social.twitter} target="_blank" rel="noopener noreferrer" title="X / Twitter" className="foot-soc-btn">

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { foundingMerchant, foundingMerchantHeroImage } from "@/content/landing-content";
+import { foundingMerchant, foundingMerchantHeroImage, heroOnlineGateway } from "@/content/landing-content";
 import { foundingMerchantApi } from "@/lib/api";
 import {
   FOUNDING_SIGNUP_EVENT,
@@ -124,6 +124,15 @@ export function LandingFoundingMerchant() {
               <p className="fm-copy">
                 {foundingMerchant.copy}
               </p>
+
+              <aside className="fm-gateway-callout" aria-label="Online checkout gateway">
+                <span className="fm-gateway-eyebrow">{heroOnlineGateway.eyebrow}</span>
+                <p className="fm-gateway-title">{heroOnlineGateway.title}</p>
+                <p className="fm-gateway-body">{heroOnlineGateway.body}</p>
+                <a href={heroOnlineGateway.href} className="btn btn-ghost fm-gateway-cta">
+                  {heroOnlineGateway.cta} <span className="arrow">→</span>
+                </a>
+              </aside>
 
               <div className="fm-actions">
                 <button

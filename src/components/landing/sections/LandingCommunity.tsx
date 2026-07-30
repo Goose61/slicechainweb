@@ -12,7 +12,7 @@ export function LandingCommunity() {
           <div className="section-num" data-reveal>
             10 · Get Started
           </div>
-          <div className="crew-wrap">
+          <div className="crew-wrap crew-wrap-single">
             <div data-reveal>
               <h2>
                 Start with <span className="it">{brandMark}</span>
@@ -30,39 +30,6 @@ export function LandingCommunity() {
                 <ContactLink className="btn">
                   Contact sales <span className="arrow">→</span>
                 </ContactLink>
-              </div>
-            </div>
-            <div className="crew-nums" data-reveal style={{ ["--d" as string]: "200ms" }}>
-              <div className="crew-num">
-                <div className="lbl">Transactions</div>
-                <div className="val" id="crew-stat-transactions">
-                  <em>...</em>
-                </div>
-                <div className="sub">Confirmed</div>
-              </div>
-              <div className="crew-num">
-                <div className="lbl">Active partners</div>
-                <div className="val" id="crew-stat-partners">
-                  <em>11</em>
-                </div>
-                <div className="sub">Merchants</div>
-              </div>
-              <div className="crew-num">
-                <div className="lbl">Business fee</div>
-                <div className="val">
-                  <em>
-                    1.9%
-                    <sup className="fee-asterisk">*</sup>
-                  </em>
-                </div>
-                <div className="sub">Fees subject to change</div>
-              </div>
-              <div className="crew-num">
-                <div className="lbl">Stablecoins</div>
-                <div className="val">
-                  <em>USDC</em>
-                </div>
-                <div className="sub">USDC & USDT</div>
               </div>
             </div>
           </div>

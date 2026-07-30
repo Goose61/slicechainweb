@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const SITE_ORIGIN = "https://slicechain.io";
 
 export const SITE_TITLE_DEFAULT =
-  "SlicePay | Crypto Payment Gateway for Business";
+  "SlicePay | Global Crypto Payments Provider & Processor";
 
 export const SITE_TITLE_TEMPLATE = "%s | SlicePay";
 
 export const SITE_DESCRIPTION =
-  "SlicePay is a crypto payment gateway for small businesses. Accept USDC via QR checkout and website pay widget with transparent 1.9% pricing.";
+  "SlicePay is a global crypto payments provider and processor. In-store QR checkout, physical POS facilitation, and website pay widget with transparent pricing.";
 
 export const SITE_KEYWORDS = [
   "Slice Chain",
