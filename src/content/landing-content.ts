@@ -229,6 +229,11 @@ export const platformPillars = [
     title: "Multi-chain support",
     body: "Accept payments across Ethereum, Solana, Monad, Stellar, Polygon, Avalanche, Arbitrum, Base, Optimism, HyperEVM, BNB Chain, and Linea from a single QR flow.",
   },
+  {
+    n: "VI.",
+    title: "Online checkout",
+    body: "Add hosted crypto checkout to any website with one embed script or API-created invoice. No iframe, no wallet SDK, and no blockchain code on your store.",
+  },
 ];
 
 export const slicePaySection = {
