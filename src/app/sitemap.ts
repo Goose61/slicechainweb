@@ -3,6 +3,7 @@ import { SITE_ORIGIN } from "@/content/seo-metadata";
 
 const publicPaths = [
   "",
+  "beyond-the-swipe/",
   "website-pay-widget/",
   "contact/",
   "terms/",

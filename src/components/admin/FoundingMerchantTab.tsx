@@ -21,10 +21,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { AdminPasswordDialog } from "@/components/admin/AdminPasswordDialog";
+import { FoundingMerchantEditDialog } from "@/components/admin/FoundingMerchantEditDialog";
 import {
+  CalendarClock,
   CheckCircle,
   Eye,
   Loader2,
+  Mail,
+  Pencil,
   RefreshCw,
   Search,
   Store,
@@ -45,7 +49,7 @@ type PendingAction =
 
 const STATUS_LABELS: Record<string, string> = {
   pending_verification: "Pending email confirmation",
-  email_verified: "Email confirmed — awaiting review",
+  email_verified: "Email confirmed - awaiting review",
   verified: "Approved",
   contacted: "Contacted",
   onboarded: "Onboarded",
@@ -79,6 +83,9 @@ export function FoundingMerchantTab({ token }: FoundingMerchantTabProps) {
   const [detailOpen, setDetailOpen] = useState(false);
   const [pendingAction, setPendingAction] = useState<PendingAction | null>(null);
   const [actionSubmitting, setActionSubmitting] = useState(false);
+  const [editLead, setEditLead] = useState<FoundingMerchantLead | null>(null);
+  const [editOpen, setEditOpen] = useState(false);
+  const [followUpSending, setFollowUpSending] = useState<"not_using" | "no_meeting" | null>(null);
 
   const loadData = useCallback(async (p = page, status = statusFilter, q = search) => {
     setLoading(true);
@@ -142,6 +149,31 @@ export function FoundingMerchantTab({ token }: FoundingMerchantTabProps) {
     setDetailOpen(true);
   }
 
+  function openEdit(lead: FoundingMerchantLead) {
+    setEditLead(lead);
+    setEditOpen(true);
+  }
+
+  async function sendFollowUp(lead: FoundingMerchantLead, variant: "not_using" | "no_meeting") {
+    setFollowUpSending(variant);
+    try {
+      const result = await adminApi.sendFoundingMerchantFollowUp(token, lead._id, variant);
+      toast.success(
+        variant === "not_using"
+          ? `Follow-up sent to ${lead.businessName} - not using SlicePay yet`
+          : `Follow-up sent to ${lead.businessName} - schedule meeting`
+      );
+      if (detailOpen && selectedLead?._id === lead._id && result.lead) {
+        setSelectedLead(result.lead);
+      }
+      await loadData();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed to send follow-up email");
+    } finally {
+      setFollowUpSending(null);
+    }
+  }
+
   const actionCopy = pendingAction
     ? {
         approve: {
@@ -183,7 +215,7 @@ export function FoundingMerchantTab({ token }: FoundingMerchantTabProps) {
             Founding Merchant Management
           </h2>
           <p className="text-sm text-muted-foreground">
-            Review applications and approve, decline, or remove founding merchants.
+            Review applications, edit merchant details, send follow-ups, and approve or remove founding merchants.
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={() => void loadData()} disabled={loading}>
@@ -195,15 +227,15 @@ export function FoundingMerchantTab({ token }: FoundingMerchantTabProps) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="pb-2"><CardTitle className="text-sm">Total applications</CardTitle></CardHeader>
-          <CardContent><p className="text-2xl font-bold">{stats?.total ?? "—"}</p></CardContent>
+          <CardContent><p className="text-2xl font-bold">{stats?.total ?? "-"}</p></CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2"><CardTitle className="text-sm">Active merchants</CardTitle></CardHeader>
-          <CardContent><p className="text-2xl font-bold">{stats?.activeCount ?? "—"}</p></CardContent>
+          <CardContent><p className="text-2xl font-bold">{stats?.activeCount ?? "-"}</p></CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2"><CardTitle className="text-sm">Spots remaining</CardTitle></CardHeader>
-          <CardContent><p className="text-2xl font-bold">{stats?.remainingSpots ?? "—"}</p></CardContent>
+          <CardContent><p className="text-2xl font-bold">{stats?.remainingSpots ?? "-"}</p></CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2"><CardTitle className="text-sm">Pending verification</CardTitle></CardHeader>
@@ -288,14 +320,14 @@ export function FoundingMerchantTab({ token }: FoundingMerchantTabProps) {
                     <TableRow key={lead._id}>
                       <TableCell>
                         <div className="font-medium">{lead.businessName}</div>
-                        <div className="text-xs text-muted-foreground">{lead.businessType || "—"}</div>
+                        <div className="text-xs text-muted-foreground">{lead.businessType || "-"}</div>
                       </TableCell>
                       <TableCell>
                         <div>{lead.contactName}</div>
                         <div className="text-xs text-muted-foreground">{lead.email}</div>
                       </TableCell>
                       <TableCell className="text-sm">
-                        {[lead.city, lead.state, lead.country].filter(Boolean).join(", ") || "—"}
+                        {[lead.city, lead.state, lead.country].filter(Boolean).join(", ") || "-"}
                       </TableCell>
                       <TableCell>
                         <Badge variant={statusBadgeVariant(lead.status)}>
@@ -307,8 +339,11 @@ export function FoundingMerchantTab({ token }: FoundingMerchantTabProps) {
                       </TableCell>
                       <TableCell>
                         <div className="flex justify-end gap-1">
-                          <Button variant="ghost" size="icon" onClick={() => openDetail(lead)}>
+                          <Button variant="ghost" size="icon" onClick={() => openDetail(lead)} title="View details">
                             <Eye className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="icon" onClick={() => openEdit(lead)} title="Edit merchant">
+                            <Pencil className="w-4 h-4" />
                           </Button>
                           {canAdminApprove(lead.status) ? (
                             <Button variant="ghost" size="icon" onClick={() => setPendingAction({ type: "approve", lead })}>
@@ -366,15 +401,68 @@ export function FoundingMerchantTab({ token }: FoundingMerchantTabProps) {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div><span className="text-muted-foreground">Contact:</span> {selectedLead.contactName}</div>
-                <div><span className="text-muted-foreground">Phone:</span> {selectedLead.phone || "—"}</div>
-                <div><span className="text-muted-foreground">Type:</span> {selectedLead.businessType || "—"}</div>
-                <div><span className="text-muted-foreground">Location:</span> {[selectedLead.city, selectedLead.state, selectedLead.country].filter(Boolean).join(", ") || "—"}</div>
-                <div><span className="text-muted-foreground">Monthly volume:</span> {selectedLead.monthlyVolume ? `$${selectedLead.monthlyVolume.toLocaleString()}` : "—"}</div>
-                <div><span className="text-muted-foreground">Compared fee:</span> {selectedLead.traditionalFeeRate != null ? `${(selectedLead.traditionalFeeRate * 100).toFixed(1)}%` : "—"}</div>
+                <div><span className="text-muted-foreground">Phone:</span> {selectedLead.phone || "-"}</div>
+                <div><span className="text-muted-foreground">Type:</span> {selectedLead.businessType || "-"}</div>
+                <div><span className="text-muted-foreground">Location:</span> {[selectedLead.city, selectedLead.state, selectedLead.country].filter(Boolean).join(", ") || "-"}</div>
+                <div><span className="text-muted-foreground">Monthly volume:</span> {selectedLead.monthlyVolume ? `$${selectedLead.monthlyVolume.toLocaleString()}` : "-"}</div>
+                <div><span className="text-muted-foreground">Compared fee:</span> {selectedLead.traditionalFeeRate != null ? `${(selectedLead.traditionalFeeRate * 100).toFixed(1)}%` : "-"}</div>
                 <div><span className="text-muted-foreground">Applied:</span> {new Date(selectedLead.createdAt).toLocaleString()}</div>
-                <div><span className="text-muted-foreground">Source:</span> {selectedLead.source || "—"}</div>
+                <div><span className="text-muted-foreground">Source:</span> {selectedLead.source || "-"}</div>
+                {selectedLead.businessId ? (
+                  <div><span className="text-muted-foreground">Business linked:</span> Yes</div>
+                ) : null}
+                {selectedLead.lastFollowUpEmailSentAt ? (
+                  <div className="sm:col-span-2">
+                    <span className="text-muted-foreground">Last follow-up:</span>{" "}
+                    {new Date(selectedLead.lastFollowUpEmailSentAt).toLocaleString()}
+                    {selectedLead.lastFollowUpEmailType === "not_using"
+                      ? " · Not using SlicePay"
+                      : selectedLead.lastFollowUpEmailType === "no_meeting"
+                        ? " · Schedule meeting"
+                        : ""}
+                  </div>
+                ) : null}
               </div>
+
+              <div className="space-y-2 pt-2 border-t">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Follow-up emails</p>
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    disabled={Boolean(followUpSending)}
+                    onClick={() => void sendFollowUp(selectedLead, "not_using")}
+                  >
+                    {followUpSending === "not_using" ? (
+                      <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                    ) : (
+                      <Mail className="w-4 h-4 mr-1" />
+                    )}
+                    Not using SlicePay yet
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    disabled={Boolean(followUpSending)}
+                    onClick={() => void sendFollowUp(selectedLead, "no_meeting")}
+                  >
+                    {followUpSending === "no_meeting" ? (
+                      <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                    ) : (
+                      <CalendarClock className="w-4 h-4 mr-1" />
+                    )}
+                    Schedule onboarding call
+                  </Button>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Includes a Google Calendar booking button when configured. Sent to {selectedLead.email}.
+                </p>
+              </div>
+
               <div className="flex flex-wrap gap-2 pt-2">
+                <Button size="sm" variant="outline" onClick={() => openEdit(selectedLead)}>
+                  <Pencil className="w-4 h-4 mr-1" /> Edit merchant
+                </Button>
                 {canAdminApprove(selectedLead.status) ? (
                   <Button size="sm" onClick={() => setPendingAction({ type: "approve", lead: selectedLead })}>
                     <CheckCircle className="w-4 h-4 mr-1" /> Approve
@@ -413,6 +501,14 @@ export function FoundingMerchantTab({ token }: FoundingMerchantTabProps) {
         destructive={actionCopy?.destructive}
         submitting={actionSubmitting}
         onConfirm={executeAction}
+      />
+
+      <FoundingMerchantEditDialog
+        token={token}
+        lead={editLead}
+        open={editOpen}
+        onOpenChange={setEditOpen}
+        onSaved={() => loadData()}
       />
     </div>
   );

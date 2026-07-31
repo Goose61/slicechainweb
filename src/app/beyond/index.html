@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#020817" />
+    <meta
+      name="description"
+      content="Request Beyond the Swipe, the Special Founder's Edition brief on merchant infrastructure for programmable commerce."
+    />
+    <meta property="og:title" content="Beyond the Swipe | SlicePay®" />
+    <meta
+      property="og:description"
+      content="The Merchant Infrastructure Race for Programmable Commerce."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Beyond the Swipe | SlicePay®" />
+    <meta
+      name="twitter:description"
+      content="The Merchant Infrastructure Race for Programmable Commerce."
+    />
+    <meta name="twitter:image" content="/og.png" />
+    <title>Beyond the Swipe | SlicePay® Founder’s Brief</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #020817;
+        --ink-raised: #071426;
+        --ink-soft: #0a1c34;
+        --line: rgba(132, 181, 255, 0.18);
+        --muted: #9eb0ca;
+        --white: #f8fbff;
+        --blue: #1685ff;
+        --blue-bright: #45a8ff;
+        --gold: #f0b319;
+        --success: #46ddb0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background:
+          radial-gradient(circle at 81% 8%, rgba(22, 133, 255, 0.2), transparent 29rem),
+          radial-gradient(circle at 14% 84%, rgba(6, 78, 168, 0.18), transparent 28rem),
+          linear-gradient(145deg, #010611 0%, var(--ink) 50%, #031126 100%);
+        color: var(--white);
+        font-family:
+          Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        content: "";
+        background-image:
+          linear-gradient(rgba(88, 157, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(88, 157, 255, 0.045) 1px, transparent 1px);
+        background-size: 68px 68px;
+        mask-image: linear-gradient(to bottom, black, transparent 88%);
+      }
+
+      body::after {
+        position: fixed;
+        top: -16rem;
+        right: -14rem;
+        width: 44rem;
+        height: 44rem;
+        z-index: -1;
+        content: "";
+        border: 1px solid rgba(93, 171, 255, 0.18);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 4rem rgba(41, 139, 255, 0.025),
+          0 0 0 9rem rgba(41, 139, 255, 0.018);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .site-shell {
+        width: min(1240px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 94px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 13px;
+        text-decoration: none;
+      }
+
+      .brand img {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+      }
+
+      .brand-lockup {
+        display: grid;
+        gap: 1px;
+      }
+
+      .brand-name {
+        font-size: 21px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .brand-company {
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .edition {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: #c8d7ec;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .edition::before {
+        width: 8px;
+        height: 8px;
+        content: "";
+        background: var(--gold);
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(240, 179, 25, 0.7);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(430px, 0.92fr);
+        gap: clamp(56px, 7vw, 110px);
+        align-items: center;
+        min-height: calc(100vh - 94px);
+        padding: 78px 0 88px;
+      }
+
+      .hero-copy {
+        position: relative;
+      }
+
+      .section-index {
+        margin: 0 0 30px;
+        color: var(--blue-bright);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 720px;
+        margin: 0;
+        font-size: clamp(64px, 7.2vw, 108px);
+        font-weight: 900;
+        letter-spacing: -0.067em;
+        line-height: 0.86;
+        text-transform: uppercase;
+      }
+
+      h1 span {
+        display: block;
+      }
+
+      .subtitle {
+        max-width: 670px;
+        margin: 32px 0 0;
+        color: var(--blue-bright);
+        font-size: clamp(23px, 2.2vw, 34px);
+        font-weight: 750;
+        letter-spacing: -0.035em;
+        line-height: 1.13;
+      }
+
+      .thesis {
+        max-width: 690px;
+        margin: 34px 0 0;
+        padding-left: 22px;
+        border-left: 3px solid var(--gold);
+        color: #d9e6f7;
+        font-size: 19px;
+        font-weight: 650;
+        line-height: 1.55;
+      }
+
+      .description {
+        max-width: 690px;
+        margin: 22px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.72;
+      }
+
+      .brief-inside {
+        margin-top: 38px;
+        padding-top: 30px;
+        border-top: 1px solid var(--line);
+      }
+
+      .brief-inside h2 {
+        margin: 0 0 22px;
+        color: #dce9f9;
+        font-size: 12px;
+        font-weight: 850;
+        letter-spacing: 0.17em;
+        text-transform: uppercase;
+      }
+
+      .brief-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 13px 28px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .brief-list li {
+        position: relative;
+        padding-left: 20px;
+        color: #b9c9dd;
+        font-size: 13px;
+        font-weight: 640;
+        line-height: 1.45;
+      }
+
+      .brief-list li::before {
+        position: absolute;
+        top: 0.52em;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        content: "";
+        background: var(--blue);
+        border-radius: 50%;
+        box-shadow: 0 0 13px rgba(22, 133, 255, 0.7);
+      }
+
+      .evidence-line {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        margin: 28px 0 0;
+        color: #d7e4f5;
+        font-size: 13px;
+        font-weight: 760;
+      }
+
+      .evidence-line::before {
+        width: 34px;
+        height: 1px;
+        content: "";
+        background: var(--gold);
+      }
+
+      .conversion-panel {
+        position: relative;
+        isolation: isolate;
+      }
+
+      .conversion-panel::before {
+        position: absolute;
+        inset: -70px -70px -90px;
+        z-index: -1;
+        content: "";
+        background: radial-gradient(circle, rgba(20, 128, 255, 0.19), transparent 65%);
+        filter: blur(18px);
+      }
+
+      .panel {
+        overflow: hidden;
+        border: 1px solid rgba(130, 185, 255, 0.22);
+        border-radius: 28px;
+        background: linear-gradient(155deg, rgba(11, 31, 57, 0.98), rgba(4, 15, 31, 0.97));
+        box-shadow:
+          0 34px 90px rgba(0, 0, 0, 0.46),
+          inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      }
+
+      .report-preview {
+        position: relative;
+        min-height: 235px;
+        padding: 31px 34px;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+        background:
+          radial-gradient(circle at 86% 18%, rgba(22, 133, 255, 0.34), transparent 12rem),
+          linear-gradient(135deg, #020918, #06182f);
+      }
+
+      .report-preview::after {
+        position: absolute;
+        right: -46px;
+        bottom: -112px;
+        width: 310px;
+        height: 310px;
+        content: "";
+        border: 1px solid rgba(70, 161, 255, 0.29);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 30px rgba(30, 132, 255, 0.035),
+          0 0 0 66px rgba(30, 132, 255, 0.025);
+      }
+
+      .preview-brand {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        color: white;
+        font-size: 14px;
+        font-weight: 820;
+      }
+
+      .preview-brand img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+      }
+
+      .preview-edition {
+        margin: 28px 0 12px;
+        color: var(--blue-bright);
+        font-size: 10px;
+        font-weight: 820;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .preview-title {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        font-size: 38px;
+        font-weight: 900;
+        letter-spacing: -0.055em;
+        line-height: 0.92;
+        text-transform: uppercase;
+      }
+
+      .preview-topic {
+        position: relative;
+        z-index: 1;
+        max-width: 295px;
+        margin: 17px 0 0;
+        color: var(--gold);
+        font-size: 13px;
+        font-weight: 750;
+        line-height: 1.35;
+      }
+
+      .form-wrap {
+        padding: 32px 34px 36px;
+      }
+
+      .form-heading {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 24px;
+      }
+
+      .form-heading h2 {
+        margin: 0;
+        font-size: 23px;
+        letter-spacing: -0.035em;
+      }
+
+      .free-badge {
+        padding: 7px 10px;
+        border: 1px solid rgba(70, 221, 176, 0.25);
+        border-radius: 999px;
+        color: var(--success);
+        font-size: 10px;
+        font-weight: 850;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        color: #c5d4e7;
+        font-size: 11px;
+        font-weight: 780;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      input,
+      select {
+        width: 100%;
+        min-height: 50px;
+        padding: 0 15px;
+        border: 1px solid rgba(133, 180, 243, 0.2);
+        border-radius: 11px;
+        outline: 0;
+        background: rgba(1, 8, 20, 0.7);
+        color: var(--white);
+        font: inherit;
+        font-size: 14px;
+        transition:
+          border-color 160ms ease,
+          box-shadow 160ms ease,
+          background 160ms ease;
+      }
+
+      input::placeholder {
+        color: #637690;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: rgba(69, 168, 255, 0.8);
+        background: rgba(2, 13, 30, 0.94);
+        box-shadow: 0 0 0 4px rgba(22, 133, 255, 0.12);
+      }
+
+      select {
+        appearance: none;
+        background-image:
+          linear-gradient(45deg, transparent 50%, #6aaef2 50%),
+          linear-gradient(135deg, #6aaef2 50%, transparent 50%);
+        background-position:
+          calc(100% - 19px) 21px,
+          calc(100% - 14px) 21px;
+        background-repeat: no-repeat;
+        background-size: 5px 5px;
+      }
+
+      .submit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 56px;
+        margin-top: 4px;
+        border: 0;
+        border-radius: 12px;
+        cursor: pointer;
+        background: linear-gradient(100deg, #0872f6, #1e91ff);
+        color: white;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+        box-shadow: 0 16px 40px rgba(8, 114, 246, 0.25);
+        transition:
+          transform 160ms ease,
+          box-shadow 160ms ease,
+          filter 160ms ease;
+      }
+
+      .submit:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.07);
+        box-shadow: 0 20px 50px rgba(8, 114, 246, 0.36);
+      }
+
+      .submit:focus-visible {
+        outline: 3px solid rgba(69, 168, 255, 0.5);
+        outline-offset: 3px;
+      }
+
+      .privacy {
+        margin: 16px 0 0;
+        color: #6f829b;
+        font-size: 11px;
+        line-height: 1.55;
+      }
+
+      .opt-in {
+        display: flex;
+        grid-template-columns: none;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 13px;
+        color: #8fa1b9;
+        font-size: 11px;
+        font-weight: 520;
+        letter-spacing: 0;
+        line-height: 1.45;
+        text-transform: none;
+      }
+
+      .opt-in input {
+        flex: 0 0 auto;
+        width: 16px;
+        min-height: 16px;
+        height: 16px;
+        margin: 1px 0 0;
+        accent-color: var(--blue);
+      }
+
+      .success {
+        display: none;
+        margin-top: 17px;
+        padding: 14px 15px;
+        border: 1px solid rgba(70, 221, 176, 0.22);
+        border-radius: 11px;
+        background: rgba(70, 221, 176, 0.07);
+        color: #a9f0d8;
+        font-size: 12px;
+        font-weight: 680;
+        line-height: 1.45;
+      }
+
+      .success[data-visible="true"] {
+        display: block;
+      }
+
+      .value-strip {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: rgba(3, 13, 29, 0.68);
+      }
+
+      .value-strip-inner {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .value-item {
+        padding: 27px 22px;
+        border-right: 1px solid var(--line);
+        text-align: center;
+      }
+
+      .value-item:last-child {
+        border-right: 0;
+      }
+
+      .value-item strong {
+        display: block;
+        color: var(--blue-bright);
+        font-size: 12px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .value-item span {
+        display: block;
+        margin-top: 5px;
+        color: #74869e;
+        font-size: 11px;
+      }
+
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        min-height: 108px;
+        color: #667b96;
+        font-size: 11px;
+      }
+
+      footer a {
+        color: #8fa6c2;
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: white;
+      }
+
+      @media (max-width: 980px) {
+        .hero {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+
+        .hero-copy {
+          max-width: 760px;
+        }
+
+        .conversion-panel {
+          width: min(100%, 630px);
+        }
+      }
+
+      @media (max-width: 650px) {
+        .site-shell {
+          width: min(100% - 28px, 1240px);
+        }
+
+        .site-header {
+          min-height: 80px;
+        }
+
+        .edition {
+          display: none;
+        }
+
+        .hero {
+          gap: 48px;
+          padding: 56px 0 64px;
+        }
+
+        h1 {
+          font-size: clamp(56px, 19vw, 82px);
+        }
+
+        .brief-list {
+          grid-template-columns: 1fr;
+        }
+
+        .form-wrap,
+        .report-preview {
+          padding-right: 24px;
+          padding-left: 24px;
+        }
+
+        .value-strip-inner {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .value-item:nth-child(2) {
+          border-right: 0;
+        }
+
+        .value-item:nth-child(-n + 2) {
+          border-bottom: 1px solid var(--line);
+        }
+
+        footer {
+          align-items: flex-start;
+          flex-direction: column;
+          justify-content: center;
+          padding: 26px 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          scroll-behavior: auto !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-shell site-header">
+      <a class="brand" href="https://slicechain.io" aria-label="Visit SliceChain">
+        <img src="data:image/png;base64,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" alt="" />
+        <span class="brand-lockup">
+          <span class="brand-name">SlicePay®</span>
+          <span class="brand-company">by SliceChain Holdings Inc.</span>
+        </span>
+      </a>
+      <span class="edition">Special Founder’s Edition</span>
+    </header>
+
+    <main>
+      <section class="site-shell hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="section-index">01 · Founder’s Brief</p>
+          <h1 id="page-title"><span>Beyond</span><span>the Swipe</span></h1>
+          <p class="subtitle">
+            The Merchant Infrastructure Race for Programmable Commerce
+          </p>
+          <p class="thesis">
+            Stablecoins solved digital value transfer. The merchant operating
+            layer remains fragmented.
+          </p>
+          <p class="description">
+            Discover why the next payment-infrastructure opportunity may not be
+            another wallet, token or gateway—but the operating layer connecting
+            checkout, stablecoin settlement, e-commerce, rewards and merchant
+            intelligence.
+          </p>
+
+          <div class="brief-inside">
+            <h2>Inside the Founder’s Brief</h2>
+            <ul class="brief-list">
+              <li>The global digital-commerce and stablecoin market architecture</li>
+              <li>Where SlicePay® fits within the emerging payment stack</li>
+              <li>How SlicePay differs from payment gateways and stablecoin APIs</li>
+              <li>Why Africa represents a compelling proving ground</li>
+              <li>Network effects, merchant economics and the institutional proof agenda</li>
+              <li>Analysis supported by 12 original sources</li>
+            </ul>
+            <p class="evidence-line">Global perspective. Evidence before hype.</p>
+          </div>
+        </div>
+
+        <aside class="conversion-panel" aria-label="Request the Founder’s Brief">
+          <div class="panel">
+            <div class="report-preview" aria-hidden="true">
+              <div class="preview-brand">
+                <img src="data:image/png;base64,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" alt="" />
+                <span>SlicePay®</span>
+              </div>
+              <p class="preview-edition">Special Founder’s Edition</p>
+              <p class="preview-title">Beyond<br />the Swipe</p>
+              <p class="preview-topic">
+                The Merchant Infrastructure Race for Programmable Commerce
+              </p>
+            </div>
+
+            <div class="form-wrap">
+              <div class="form-heading">
+                <h2>Get the full brief</h2>
+                <span class="free-badge">Complimentary</span>
+              </div>
+
+              <form id="brief-form">
+                <div class="form-grid">
+                  <label>
+                    First name
+                    <input
+                      type="text"
+                      name="firstName"
+                      autocomplete="given-name"
+                      placeholder="Your first name"
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    Email address
+                    <input
+                      type="email"
+                      name="email"
+                      autocomplete="email"
+                      placeholder="you@company.com"
+                      required
+                    />
+                  </label>
+
+                  <label>
+                    I’m interested as
+                    <select name="audience" required>
+                      <option value="" selected disabled>Select one</option>
+                      <option>Investor</option>
+                      <option>Merchant</option>
+                      <option>Partner</option>
+                      <option>Developer</option>
+                      <option>Media</option>
+                    </select>
+                  </label>
+
+                  <button class="submit" type="submit">
+                    Send me the Founder’s Brief&nbsp; →
+                  </button>
+                </div>
+
+                <p class="privacy">
+                  By requesting the report, you agree to receive the report by
+                  email.
+                </p>
+
+                <label class="opt-in">
+                  <input type="checkbox" name="updates" />
+                  <span>
+                    Also send me occasional SliceChain research and product
+                    updates.
+                  </span>
+                </label>
+
+                <p class="success" id="success-message" role="status">
+                  Thank you. This mockup is ready to connect to your CRM and
+                  automated report-delivery workflow.
+                </p>
+              </form>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="value-strip" aria-label="Brief themes">
+        <div class="site-shell value-strip-inner">
+          <div class="value-item">
+            <strong>Global architecture</strong>
+            <span>Commerce + settlement</span>
+          </div>
+          <div class="value-item">
+            <strong>SlicePay thesis</strong>
+            <span>Merchant operating layer</span>
+          </div>
+          <div class="value-item">
+            <strong>Africa</strong>
+            <span>Compelling proving ground</span>
+          </div>
+          <div class="value-item">
+            <strong>12 sources</strong>
+            <span>Evidence-led analysis</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-shell">
+      <span>© 2026 SliceChain Holdings Inc. All rights reserved.</span>
+      <span>
+        <a href="https://slicechain.io">slicechain.io</a>
+        &nbsp;·&nbsp; Research and market analysis
+      </span>
+    </footer>
+
+    <script>
+      const form = document.getElementById("brief-form");
+      const success = document.getElementById("success-message");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        success.dataset.visible = "true";
+        success.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    </script>
+  </body>
+</html>

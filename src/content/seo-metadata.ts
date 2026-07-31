@@ -162,4 +162,26 @@ export const pageSeo = {
     "Contact",
     "Contact SlicePay and Slice Chain for merchant support, website pay widget integration help, and crypto payment gateway questions.",
   ),
+  beyondTheSwipe: {
+    ...buildPageSeo(
+      "Beyond the Swipe",
+      "Request Beyond the Swipe, the Special Founder's Edition brief on merchant infrastructure for programmable commerce.",
+    ),
+    openGraph: {
+      title: "Beyond the Swipe | SlicePay®",
+      description:
+        "The Merchant Infrastructure Race for Programmable Commerce.",
+      url: `${SITE_ORIGIN}/beyond-the-swipe/`,
+      siteName: "Slice Chain · SlicePay",
+      type: "website",
+      images: [{ url: "/beyond-the-swipe/og.png", width: 1200, height: 630, alt: "Beyond the Swipe" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Beyond the Swipe | SlicePay®",
+      description:
+        "The Merchant Infrastructure Race for Programmable Commerce.",
+      images: ["/beyond-the-swipe/og.png"],
+    },
+  } satisfies Metadata,
 };

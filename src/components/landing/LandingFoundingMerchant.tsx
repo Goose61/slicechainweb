@@ -12,6 +12,7 @@ import { trackEvent } from "@/lib/gtag";
 import { FoundingMerchantSignupModal } from "./FoundingMerchantSignupModal";
 import { DemoVideoModal } from "./DemoVideoModal";
 import { FoundingSpotsBanner } from "./FoundingSpotsBanner";
+import { LandingBeyondPromo } from "@/components/beyond/LandingBeyondPromo";
 import { getDefaultRoiVolume, getDefaultTraditionalFee } from "./RoiCalculator";
 
 const RoiCalculator = dynamic(
@@ -164,6 +165,8 @@ export function LandingFoundingMerchant() {
               onVolumeChange={setVolume}
               onTraditionalFeeChange={setTraditionalFee}
             />
+
+            <LandingBeyondPromo />
           </div>
 
           {remainingSpots !== null && (

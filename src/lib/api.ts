@@ -1,7 +1,7 @@
 /**
- * API client — resolves backend URL from hostname.
+ * API client - resolves backend URL from hostname.
  * Static hosts (slicechain.io on GitHub Pages) and app.slicechain.io must call
- * api.slicechain.io directly — the Pages/static Next build has no /api rewrite.
+ * api.slicechain.io directly - the Pages/static Next build has no /api rewrite.
  */
 
 const PRODUCTION_API = "https://api.slicechain.io";
@@ -20,7 +20,7 @@ export function getApiBase(): string {
 
   // All public SliceChain hosts: call API origin directly (CORS-enabled).
   // Do NOT use same-origin /api on app.slicechain.io when it is serving a
-  // static export — that path returns Next.js HTML 404.
+  // static export - that path returns Next.js HTML 404.
   if (
     hostname === "slicechain.io" ||
     hostname === "www.slicechain.io" ||
@@ -31,11 +31,11 @@ export function getApiBase(): string {
     return `${PRODUCTION_API}/api`;
   }
 
-  // Unknown host — never use same-origin /api (static hosts return HTML 404)
+  // Unknown host - never use same-origin /api (static hosts return HTML 404)
   return `${PRODUCTION_API}/api`;
 }
 
-/** @deprecated Use getApiBase() — kept for any legacy imports */
+/** @deprecated Use getApiBase() - kept for any legacy imports */
 export const API_BASE = "/api";
 
 type TokenKey = "businessToken" | "employeeToken" | "adminToken" | "customerToken";
@@ -326,6 +326,45 @@ export const adminApi = {
       token,
       body: JSON.stringify({ actionPassword }),
     }),
+
+  getFoundingMerchantDetail: (token: string, leadId: string) =>
+    apiFetch<{ lead: FoundingMerchantLead; business: FoundingMerchantBusiness | null }>(
+      `/admin/founding-merchants/${leadId}`,
+      { token }
+    ),
+
+  updateFoundingMerchant: (
+    token: string,
+    leadId: string,
+    data: FoundingMerchantUpdatePayload,
+    actionPassword: string
+  ) =>
+    apiFetch<{ lead: FoundingMerchantLead; business: FoundingMerchantBusiness | null; message: string }>(
+      `/admin/founding-merchants/${leadId}`,
+      {
+        method: "PATCH",
+        token,
+        body: JSON.stringify({ ...data, actionPassword }),
+      }
+    ),
+
+  sendFoundingMerchantFollowUp: (
+    token: string,
+    leadId: string,
+    variant: FoundingMerchantFollowUpVariant
+  ) =>
+    apiFetch<{
+      sent: boolean;
+      variant: FoundingMerchantFollowUpVariant;
+      sentAt: string;
+      lead: FoundingMerchantLead;
+      message: string;
+    }>(`/admin/founding-merchants/${leadId}/follow-up-email`, {
+        method: "POST",
+        token,
+        body: JSON.stringify({ variant }),
+      }
+    ),
 };
 
 // Customer
@@ -652,6 +691,7 @@ export interface FoundingMerchantLead {
   contactName: string;
   email: string;
   phone?: string;
+  website?: string;
   businessType?: string;
   city?: string;
   state?: string;
@@ -661,8 +701,76 @@ export interface FoundingMerchantLead {
   isEmailVerified: boolean;
   status: "pending_verification" | "email_verified" | "verified" | "contacted" | "onboarded" | "declined";
   source?: string;
+  userId?: string;
+  businessId?: string;
+  onboardingCompletedAt?: string;
+  lastFollowUpEmailSentAt?: string;
+  lastFollowUpEmailType?: FoundingMerchantFollowUpVariant;
   createdAt: string;
   updatedAt: string;
+}
+
+export type FoundingMerchantFollowUpVariant = "not_using" | "no_meeting";
+
+export interface FoundingMerchantBusiness {
+  _id: string;
+  businessName: string;
+  businessType?: string;
+  businessCategory?: string;
+  taxId?: string;
+  contact?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    title?: string;
+  };
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    zipCode?: string;
+    country?: string;
+  };
+  billingAddress?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    zipCode?: string;
+    country?: string;
+  };
+  walletAddress?: string | null;
+  isFoundingMerchant?: boolean;
+  kycStatus?: string;
+}
+
+export interface FoundingMerchantUpdatePayload {
+  businessName?: string;
+  contactName?: string;
+  email?: string;
+  phone?: string;
+  website?: string;
+  businessType?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  monthlyVolume?: number | "";
+  traditionalFeeRate?: number | "";
+  walletAddress?: string;
+  taxId?: string;
+  businessCategory?: string;
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    zipCode?: string;
+    country?: string;
+  };
+  contact?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    title?: string;
+  };
 }
 
 export interface LoyaltyData {
@@ -998,6 +1106,23 @@ export const foundingMerchantApi = {
       method: "POST",
       token: authToken,
       body: JSON.stringify(data),
+    }),
+};
+
+export interface FoundersBriefRequestData {
+  firstName: string;
+  email: string;
+  audience: string;
+  marketingOptIn?: boolean;
+  source?: string;
+}
+
+export const foundersBriefApi = {
+  request: (data: FoundersBriefRequestData) =>
+    apiFetch<{ success: boolean; message: string; email: string }>("/founders-brief/request", {
+      method: "POST",
+      body: JSON.stringify(data),
+      signal: AbortSignal.timeout(20000),
     }),
 };
 

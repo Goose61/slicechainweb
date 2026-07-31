@@ -7,6 +7,7 @@ import {
   calcAnalytics,
   formatCurrency,
   shortAddress,
+  getApiBase,
   type BusinessProfile,
   type Transaction,
   type EmployeeCommission,
@@ -33,9 +34,10 @@ import {
 import {
   Pizza, LayoutDashboard, Receipt, Users, QrCode, Settings,
   LogOut, RefreshCw, Download, Eye, Wallet, DollarSign, Copy,
-  Building2, ExternalLink, Loader2, AlertTriangle,
+  Building2, ExternalLink, Loader2, AlertTriangle, Globe,
 } from "lucide-react";
 import { ClientErrorLogger } from "@/components/client-error-logger";
+import { PajSettlementPanel } from "@/components/business/PajSettlementPanel";
 
 function getCustomerWallet(tx: Transaction) {
   return tx.customerWallet || (tx.walletAddress && tx.walletAddress !== "external" ? tx.walletAddress : null);
@@ -99,6 +101,11 @@ export default function BusinessDashboard() {
   const [savingSettings, setSavingSettings] = useState(false);
   const [employeesLoading, setEmployeesLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
+  const [gatewayTestAmount, setGatewayTestAmount] = useState("25.00");
+  const [gatewayTestOrderId, setGatewayTestOrderId] = useState(
+    () => `TEST-${Math.random().toString(36).slice(2, 9).toUpperCase()}`
+  );
+  const [gatewayTestLoading, setGatewayTestLoading] = useState(false);
 
   useEffect(() => {
     const t = demoMode
@@ -242,6 +249,48 @@ export default function BusinessDashboard() {
     window.open(url, "_blank", "width=900,height=1000");
   }
 
+  function getPayCheckoutBase() {
+    if (typeof window === "undefined") return "https://pay.slicechain.io";
+    const h = window.location.hostname;
+    if (h === "app.slicechain.io" || h.endsWith(".slicechain.io")) return "https://pay.slicechain.io";
+    return "http://localhost:3003";
+  }
+
+  async function openGatewayTest() {
+    if (!business) { toast.error("Business profile not loaded"); return; }
+    const wallet = business.businessWallet?.publicKey || business.walletAddress;
+    if (!wallet) { toast.error("Set a wallet address in Settings first"); return; }
+    const amount = parseFloat(gatewayTestAmount);
+    if (!amount || amount < 1) { toast.error("Enter a valid amount (min $1)"); return; }
+    if (!token) return;
+    setGatewayTestLoading(true);
+    try {
+      const apiBase = getApiBase();
+      const res = await fetch(`${apiBase}/gateway/create-invoice`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({
+          merchantId: business._id,
+          amountUsd: amount,
+          orderId: gatewayTestOrderId,
+          description: "Test gateway payment",
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success || !data.invoiceId) {
+        throw new Error(data.error || data.message || "Failed to create invoice");
+      }
+      const url = `${getPayCheckoutBase()}/?invoiceId=${encodeURIComponent(data.invoiceId)}`;
+      window.open(url, "slicepay_test", "width=500,height=860,scrollbars=yes");
+      setGatewayTestOrderId(`TEST-${Math.random().toString(36).slice(2, 9).toUpperCase()}`);
+      toast.success("Test checkout opened in new window");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to launch test checkout");
+    } finally {
+      setGatewayTestLoading(false);
+    }
+  }
+
   function logout() {
     clearBusinessSession();
     if (demoMode) {
@@ -339,6 +388,7 @@ export default function BusinessDashboard() {
               { value: "transactions", icon: Receipt, label: "Transactions" },
               { value: "employees", icon: Users, label: "Employees" },
               { value: "payment", icon: QrCode, label: "Payment QR" },
+              { value: "ngn-settlement", icon: Building2, label: "NGN Settlement" },
               { value: "settings", icon: Settings, label: "Settings" },
             ].map(({ value, icon: Icon, label }) => (
               <TabsTrigger
@@ -552,8 +602,11 @@ export default function BusinessDashboard() {
           <TabsContent value="payment" className="space-y-4">
             <div>
               <h2 className="text-lg font-semibold">Payment QR</h2>
-              <p className="text-sm text-muted-foreground">Open the QR app to accept Solana and multichain payments</p>
+              <p className="text-sm text-muted-foreground">
+                Accept in-person and online payments with Solana and multichain support
+              </p>
             </div>
+
             <Card className="border-dashed">
               <CardContent className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
                 <div className="flex items-center gap-3">
@@ -561,7 +614,7 @@ export default function BusinessDashboard() {
                     <QrCode className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="font-medium">QR Payment Generator</p>
+                    <p className="font-medium">In-Person QR Generator</p>
                     <p className="text-sm text-muted-foreground">
                       Business wallet:{" "}
                       <span className="font-mono text-xs">
@@ -576,6 +629,78 @@ export default function BusinessDashboard() {
                 </Button>
               </CardContent>
             </Card>
+
+            <Card>
+              <CardHeader className="pb-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-blue-600 flex items-center justify-center">
+                      <Globe className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-base">Online Payment Gateway</CardTitle>
+                      <CardDescription>
+                        Test SlicePay checkout at pay.slicechain.io (1.6% fee)
+                      </CardDescription>
+                    </div>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Amount (USD)</Label>
+                    <div className="relative">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
+                      <Input
+                        type="number"
+                        min="1"
+                        step="0.01"
+                        value={gatewayTestAmount}
+                        onChange={(e) => setGatewayTestAmount(e.target.value)}
+                        className="pl-7"
+                        placeholder="25.00"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Order ID</Label>
+                    <Input
+                      value={gatewayTestOrderId}
+                      onChange={(e) => setGatewayTestOrderId(e.target.value)}
+                      className="font-mono text-xs"
+                      placeholder="TEST-ABC123"
+                    />
+                  </div>
+                </div>
+                <Button
+                  onClick={openGatewayTest}
+                  disabled={gatewayTestLoading || (!business?.businessWallet?.publicKey && !business?.walletAddress)}
+                  className="w-full bg-gradient-to-r from-violet-500 to-blue-600 text-white border-0"
+                >
+                  {gatewayTestLoading
+                    ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Opening checkout…</>
+                    : <><ExternalLink className="w-4 h-4 mr-2" />Launch Test Checkout</>
+                  }
+                </Button>
+                {!business?.businessWallet?.publicKey && !business?.walletAddress && (
+                  <p className="text-xs text-amber-600 flex items-center gap-1.5">
+                    <AlertTriangle className="w-3 h-3" />
+                    Set a wallet address in Settings to test the gateway.
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* NGN Settlement (PAJ) */}
+          <TabsContent value="ngn-settlement" className="space-y-4">
+            <PajSettlementPanel
+              token={token || ""}
+              business={business}
+              demoMode={demoMode}
+              onProfileRefresh={() => token && loadData(token)}
+            />
           </TabsContent>
 
           {/* Settings */}

@@ -1,0 +1,13 @@
+BEYOND THE SWIPE — LANDING-PAGE MOCKUP
+
+Included:
+- index.html — self-contained responsive landing page
+- Beyond_The_Swipe_Landing_Page_Preview.png — desktop visual preview
+- og.png — social-preview card for shared links
+
+The form interaction is currently a design mockup. Before public launch, connect
+the submission to the selected CRM or email platform and configure automated
+delivery of the Founder’s Brief.
+
+Recommended production path:
+slicechain.io/beyond-the-swipe
