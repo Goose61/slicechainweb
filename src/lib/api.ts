@@ -18,12 +18,13 @@ export function getApiBase(): string {
     return "http://localhost:7000/api";
   }
 
-  // All public SliceChain hosts: call API origin directly (CORS-enabled).
-  // Do NOT use same-origin /api on app.slicechain.io when it is serving a
-  // static export - that path returns Next.js HTML 404.
+  // Marketing site (GitHub Pages + Cloudflare worker): same-origin /api is proxied at the edge.
+  if (hostname === "slicechain.io" || hostname === "www.slicechain.io") {
+    return "/api";
+  }
+
+  // Other SliceChain hosts call the API subdomain directly when tunnel routing works.
   if (
-    hostname === "slicechain.io" ||
-    hostname === "www.slicechain.io" ||
     hostname === "app.slicechain.io" ||
     hostname === "qr.slicechain.io" ||
     hostname.endsWith(".slicechain.io")
