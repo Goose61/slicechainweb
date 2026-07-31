@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "gateway-api",
+      "type": "skill-md",
+      "description": "SlicePay Gateway REST API - invoices, payment status, hosted checkout",
+      "url": "https://slicechain.io/.well-known/agent-skills/gateway-api/SKILL.md",
+      "digest": "sha256:ea17233befe981136d32d77517f81836ffd678299abab822f3d4198030de18aa"
+    },
+    {
+      "name": "website-pay-widget",
+      "type": "skill-md",
+      "description": "Embed SlicePay crypto checkout on e-commerce sites via script tag or hosted URL",
+      "url": "https://slicechain.io/.well-known/agent-skills/website-pay-widget/SKILL.md",
+      "digest": "sha256:9e2df96371ad043b5ea50672c5d957e23671b59b1092191b86d1017c7580f12d"
+    }
+  ]
+}

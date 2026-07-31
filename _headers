@@ -1,11 +1,63 @@
+/*
+  Note: GitHub Pages ignores _headers. These apply when the static export
+  is served by Cloudflare Pages / Netlify. For slicechain.io on GH Pages,
+  use Cloudflare Transform Rules or workers/slicechain-agent-discovery.js.
+*/
+
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </.well-known/agent-skills/index.json>; rel="describedby", </llms.txt>; rel="service-doc", </auth.md>; rel="help"
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+  Cache-Control: public, max-age=86400
+
+/.well-known/oauth-protected-resource
+  Content-Type: application/json
+  Cache-Control: public, max-age=86400
+
+/.well-known/oauth-authorization-server
+  Content-Type: application/json
+  Cache-Control: public, max-age=86400
+
+/.well-known/mcp/server-card.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=86400
+
+/.well-known/agent-skills/index.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=86400
+
+/auth.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=86400
+
+/index.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=86400
+
+/website-pay-widget.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=86400
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400
+
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
 
 /landing-assets/*
-  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
 
-/
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/*.webp
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+/*.js
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/*.css
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400

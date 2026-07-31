@@ -1,0 +1,20 @@
+{
+  "serverInfo": {
+    "name": "SlicePay Gateway",
+    "version": "1.0.0",
+    "description": "REST gateway for hosted crypto checkout and invoice management"
+  },
+  "endpoint": "https://api.slicechain.io/api/gateway",
+  "transport": {
+    "type": "https",
+    "protocol": "rest"
+  },
+  "capabilities": {
+    "tools": false,
+    "resources": true,
+    "prompts": false
+  },
+  "documentation": "https://slicechain.io/website-pay-widget/",
+  "openapi": "https://slicechain.io/.well-known/openapi/gateway.json",
+  "apiCatalog": "https://slicechain.io/.well-known/api-catalog"
+}

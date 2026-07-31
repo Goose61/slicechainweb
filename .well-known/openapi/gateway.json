@@ -1,0 +1,165 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SlicePay Gateway API",
+    "version": "1.0.0",
+    "description": "Hosted crypto checkout gateway for e-commerce and custom integrations.",
+    "contact": {
+      "email": "slicepay@slicechain.io",
+      "url": "https://slicechain.io/contact/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.slicechain.io/api/gateway",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/create-invoice": {
+      "post": {
+        "summary": "Create a hosted checkout invoice",
+        "operationId": "createInvoice",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["merchantId", "amountUsd", "orderId"],
+                "properties": {
+                  "merchantId": { "type": "string", "description": "SlicePay business ID" },
+                  "amountUsd": { "type": "number", "minimum": 0.01 },
+                  "orderId": { "type": "string", "maxLength": 128 },
+                  "description": { "type": "string", "maxLength": 500 },
+                  "redirectUrl": { "type": "string", "format": "uri" },
+                  "apiKey": { "type": "string", "description": "Optional business API key" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Invoice created" },
+          "400": { "description": "Validation error" },
+          "404": { "description": "Merchant not found" }
+        }
+      }
+    },
+    "/invoice/{invoiceId}": {
+      "get": {
+        "summary": "Get invoice by public ID",
+        "operationId": "getInvoice",
+        "parameters": [
+          {
+            "name": "invoiceId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Invoice details" },
+          "404": { "description": "Invoice not found" }
+        }
+      }
+    },
+    "/quote": {
+      "post": {
+        "summary": "Get checkout quote for chain and token",
+        "operationId": "quote",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["invoiceId", "chainKey"],
+                "properties": {
+                  "invoiceId": { "type": "string" },
+                  "chainKey": { "type": "string" },
+                  "currency": { "type": "string" },
+                  "srcTokenSymbol": { "type": "string" },
+                  "tokenAddress": { "type": "string" },
+                  "tokenMint": { "type": "string" },
+                  "sliceAmount": { "type": "number" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Quote response" }
+        }
+      }
+    },
+    "/start-payment": {
+      "post": {
+        "summary": "Start a payment session for an invoice",
+        "operationId": "startPayment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["invoiceId", "chainKey"],
+                "properties": {
+                  "invoiceId": { "type": "string" },
+                  "chainKey": { "type": "string" },
+                  "customerEmail": { "type": "string", "format": "email" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Payment session started" }
+        }
+      }
+    },
+    "/payment-status/{invoiceId}": {
+      "get": {
+        "summary": "Poll payment status",
+        "operationId": "paymentStatus",
+        "parameters": [
+          {
+            "name": "invoiceId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Status: waiting, processing, paid, failed, expired" }
+        }
+      }
+    },
+    "/receipt/{invoiceId}": {
+      "get": {
+        "summary": "Get receipt for a paid invoice",
+        "operationId": "getReceipt",
+        "parameters": [
+          {
+            "name": "invoiceId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": { "type": "string", "enum": ["json", "html"] }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Receipt data" }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Website Pay Widget integration guide",
+    "url": "https://slicechain.io/website-pay-widget/"
+  }
+}
