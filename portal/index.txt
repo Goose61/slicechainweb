@@ -1,4 +1,4 @@
-0:["VgCm89TCPp-ByPjB2ZIt0",[[["",{"children":["(platform)",{"children":["portal",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],"$L1",[[],"$L2"]]]]
+0:["jDKSWY6kgTE0aCahn2Ea_",[[["",{"children":["(platform)",{"children":["portal",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],"$L1",[[],"$L2"]]]]
 3:HL["/_next/static/css/f20b2bc6c3ecc244.css","style",{"crossOrigin":""}]
 4:I[47760,["3185","static/chunks/app/layout-b6902b2680294a4c.js"],"GoogleAnalytics"]
 5:I[56954,[],""]
