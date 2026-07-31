@@ -272,6 +272,12 @@ export const adminApi = {
   getNewsletterSubscriberStats: (token: string) =>
     apiFetch<NewsletterSubscriberStats>("/admin/newsletter/subscriber-stats", { token }),
 
+  listEmailContacts: (token: string, params?: Record<string, string>) =>
+    apiFetch<{
+      subscribers: EmailContact[];
+      pagination: { currentPage: number; totalPages: number; totalCount: number };
+    }>(`/admin/newsletter/subscribers?${new URLSearchParams(params || {})}`, { token }),
+
   listNewsletterIssues: (token: string, params?: Record<string, string>) =>
     apiFetch<{
       issues: NewsletterIssue[];
@@ -651,7 +657,43 @@ export interface AdminAuditLogEntry {
 export interface NewsletterSubscriberStats {
   totalSubscribers: number;
   activeSubscribers: number;
+  marketingOptInCount: number;
+  marketingOptOutCount: number;
+  marketingUnknownCount: number;
 }
+
+export interface EmailContactCaptureEvent {
+  source: string;
+  marketingOptIn: boolean;
+  audience?: string;
+  firstName?: string;
+  capturedAt: string;
+}
+
+export interface EmailContactProfile {
+  profileType: string;
+  displayName?: string;
+  businessName?: string;
+  linkedAt?: string;
+}
+
+export interface EmailContact {
+  _id: string;
+  email: string;
+  firstName?: string;
+  audience?: string;
+  profileTypes: string[];
+  profiles?: EmailContactProfile[];
+  subscribed: boolean;
+  marketingOptIn: boolean | null;
+  emailVerified: boolean;
+  source?: string;
+  captureEvents?: EmailContactCaptureEvent[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type EmailContactStats = NewsletterSubscriberStats;
 
 export interface NewsletterIssueInput {
   title?: string;
@@ -1017,6 +1059,7 @@ export interface FoundingMerchantSignupData {
   state?: string;
   monthlyVolume?: number;
   traditionalFeeRate?: number;
+  marketingOptIn?: boolean;
 }
 
 export interface FoundingMerchantOnboardingPrefill {

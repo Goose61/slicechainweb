@@ -16,7 +16,7 @@ export function BeyondTheSwipePage() {
             <span className="bts-brand-company">by SliceChain Holdings Inc.</span>
           </span>
         </Link>
-        <span className="bts-edition">{beyondContent.edition}</span>
+        <span className="bts-edition">{beyondContent.pageTitle}</span>
       </header>
 
       <main>
@@ -76,10 +76,10 @@ export function BeyondTheSwipePage() {
       </main>
 
       <footer className="bts-shell bts-footer">
-        <span>© 2026 SliceChain Holdings Inc. All rights reserved.</span>
+        <span>{beyondContent.pageTitle}</span>
         <span>
           <Link href="/">slicechain.io</Link>
-          &nbsp;·&nbsp; Research and market analysis
+          &nbsp;·&nbsp; © 2026 SliceChain Holdings Inc.
         </span>
       </footer>
     </div>

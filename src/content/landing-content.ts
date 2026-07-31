@@ -115,6 +115,7 @@ export const foundingMerchant = {
     "Preferred pricing on future SliceChain products",
   ],
   availabilityNote: "Limited availability: first 500 businesses only",
+  updatesOptIn: "Also send me occasional SliceChain research and product updates.",
   cta: "Become a Founding Merchant",
   demoCta: "See the 60-Second Demo",
   useSlicePayCta: "Use SlicePay now",

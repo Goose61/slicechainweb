@@ -22,7 +22,7 @@ export function FoundersBriefForm({
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [audience, setAudience] = useState<BeyondAudience | "">("");
-  const [marketingOptIn, setMarketingOptIn] = useState(false);
+  const [marketingOptIn, setMarketingOptIn] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);

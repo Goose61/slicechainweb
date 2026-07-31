@@ -39,11 +39,12 @@ import {
 import {
   Shield, LogOut, RefreshCw, TrendingUp, DollarSign, Receipt, AlertCircle,
   CheckCircle, Clock, Loader2, Search, AlertTriangle, FileText, XCircle, Eye,
-  Coins, Zap, ChevronDown, ChevronRight, Info, TriangleAlert, Mail, Store,
+  Coins, Zap, ChevronDown, ChevronRight, Info, TriangleAlert, Mail, Store, Users,
 } from "lucide-react";
 import { ClientErrorLogger } from "@/components/client-error-logger";
 import { NewsletterTab } from "@/components/admin/NewsletterTab";
 import { FoundingMerchantTab } from "@/components/admin/FoundingMerchantTab";
+import { EmailContactsTab } from "@/components/admin/EmailContactsTab";
 
 function normalizeStatus(status: string) {
   if (status === "confirmed" || status === "completed") return "completed";
@@ -458,6 +459,7 @@ export default function AdminDashboard() {
             </TabsTrigger>
             <TabsTrigger value="audit" className="flex items-center gap-1.5"><FileText className="w-3.5 h-3.5" />Audit Log</TabsTrigger>
             <TabsTrigger value="analytics" className="flex items-center gap-1.5"><TrendingUp className="w-3.5 h-3.5" />Analytics</TabsTrigger>
+            <TabsTrigger value="email-contacts" className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5" />Email Contacts</TabsTrigger>
             <TabsTrigger value="newsletter" className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" />Newsletter</TabsTrigger>
             <TabsTrigger value="founding-merchants" className="flex items-center gap-1.5"><Store className="w-3.5 h-3.5" />Founding Merchants</TabsTrigger>
           </TabsList>
@@ -997,6 +999,9 @@ export default function AdminDashboard() {
 
           {token ? (
             <>
+              <TabsContent value="email-contacts">
+                <EmailContactsTab token={token} />
+              </TabsContent>
               <TabsContent value="newsletter">
                 <NewsletterTab token={token} />
               </TabsContent>

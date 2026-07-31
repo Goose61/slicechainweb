@@ -13,6 +13,7 @@ export const beyondAudiences = [
 export type BeyondAudience = (typeof beyondAudiences)[number];
 
 export const beyondContent = {
+  pageTitle: "BEYOND THE SWIPE - Founder's Edition Case Study",
   edition: "Special Founder's Edition",
   sectionIndex: "01 · Founder's Brief",
   titleLines: ["Beyond", "the Swipe"],

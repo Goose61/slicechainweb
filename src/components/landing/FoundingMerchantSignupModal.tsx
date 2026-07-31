@@ -39,6 +39,7 @@ export function FoundingMerchantSignupModal({
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [acceptTerms, setAcceptTerms] = useState(false);
+  const [marketingOptIn, setMarketingOptIn] = useState(true);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -111,6 +112,7 @@ export function FoundingMerchantSignupModal({
         state: state.trim() || undefined,
         monthlyVolume: defaultVolume,
         traditionalFeeRate: defaultTraditionalFee,
+        marketingOptIn,
       });
       trackEvent("founding_form_complete", {
         business_type: businessType,
@@ -267,6 +269,15 @@ export function FoundingMerchantSignupModal({
                 className="fm-terms"
                 labelClassName="fm-terms-label"
               />
+
+              <label className="fm-terms fm-terms-label">
+                <input
+                  type="checkbox"
+                  checked={marketingOptIn}
+                  onChange={(e) => setMarketingOptIn(e.target.checked)}
+                />
+                <span>{foundingMerchant.updatesOptIn}</span>
+              </label>
 
               {error && <p className="fm-form-error" role="alert">{error}</p>}
 
