@@ -52,10 +52,12 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
 .landing-header .nav-mid{position:relative;z-index:1}
 .nav-positioning{
   margin:0;flex:1;text-align:center;color:var(--bone);
-  font-size:13px;line-height:1.3;font-weight:500;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-size:11px;line-height:1.35;font-weight:500;
+  max-width:min(520px,42vw);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 .nav-top-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nav-case-study-btn{padding:10px 14px;font-size:10px;letter-spacing:.08em;white-space:nowrap}
 .nav-register-btn{padding:10px 16px;font-size:10px;letter-spacing:.08em;white-space:nowrap}
 
 @media (max-width:900px){

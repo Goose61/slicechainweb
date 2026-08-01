@@ -26,7 +26,9 @@ export const stickyAnnouncement = {
 };
 
 export const navPositioningLine =
-  "SlicePay: Global crypto payments provider & processor";
+  "SlicePay® by SliceChain Holdings - Building the Merchant Operating Layer for Programmable Commerce";
+
+export const navCaseStudyCta = "Case Study";
 
 export const navRegisterCta = "Register Now";
 export const navDemoCta = "Try Demo";

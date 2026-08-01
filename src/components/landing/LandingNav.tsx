@@ -5,6 +5,7 @@ import {
   brandMark,
   logo,
   navDemoCta,
+  navCaseStudyCta,
   navLinks,
   navPositioningLine,
   navRegisterCta,
@@ -12,6 +13,7 @@ import {
   businessDemoPath,
   stickyAnnouncement,
 } from "@/content/landing-content";
+import { beyondTheSwipePath } from "@/content/beyond-content";
 import { appUrl } from "@/lib/appUrl";
 import {
   buildFoundingSignupHref,
@@ -121,6 +123,13 @@ export function LandingNav() {
 
             <div className="nav-top-actions">
               <a
+                href={beyondTheSwipePath}
+                className="btn btn-ghost nav-case-study-btn"
+                onClick={() => trackEvent("case_study_click", { location: "nav" })}
+              >
+                {navCaseStudyCta} <span className="arrow">→</span>
+              </a>
+              <a
                 href={demoHref}
                 className="btn btn-ghost nav-demo-btn"
                 target="_blank"
@@ -182,6 +191,16 @@ export function LandingNav() {
           ))}
         </nav>
         <div className="nav-drawer-actions">
+          <a
+            href={beyondTheSwipePath}
+            className="btn btn-ghost"
+            onClick={() => {
+              trackEvent("case_study_click", { location: "nav_drawer" });
+              closeMenu();
+            }}
+          >
+            {navCaseStudyCta} <span className="arrow">→</span>
+          </a>
           <a
             href={registerHref}
             className="btn btn-gold"
