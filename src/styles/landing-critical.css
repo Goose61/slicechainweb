@@ -43,7 +43,7 @@ html{scroll-padding-top:118px}
 }
 .fm-announce-cta:hover{background:#f1f5f9}
 .landing-header .nav{position:relative;padding:12px var(--pad);display:flex;flex-direction:column;gap:0;border-bottom:1px solid transparent;background:rgba(11,20,40,.94);backdrop-filter:blur(14px)}
-.nav-top{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%}
+.nav-top{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-width:0}
 .nav-positioning{
   margin:0;flex:1;text-align:center;color:var(--bone);
   font-size:11px;line-height:1.35;font-weight:500;
@@ -86,15 +86,22 @@ html{scroll-padding-top:118px}
   .fm-announce-text{font-size:10px;letter-spacing:.08em}
   html{scroll-padding-top:108px}
   .fm-hero{padding:118px var(--pad) 48px}
+  .nav-top-actions{margin-left:auto;flex-shrink:0;gap:0}
+  .nav-top-actions > .btn{display:none}
+  .nav-left{min-width:0;flex:1}
 }
 @media (max-width:640px){
   .nav-demo-btn{display:none}
   .nav-register-btn{padding:8px 12px}
   .fm-announce-cta{padding:7px 11px;font-size:9px}
+  .brand-wordmark{font-size:15px}
   .fm-hero{padding:112px var(--pad) 32px;min-height:auto}
   .fm-actions{flex-direction:column;width:100%}
   .fm-actions .btn{width:100%;justify-content:center}
   .fm-risk-reducers{flex-direction:column;gap:10px}
+}
+@media (max-width:400px){
+  .brand-wordmark{display:none}
 }
 /* LCP: hero copy paints immediately without waiting for hydration */
 .fm-hero [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}

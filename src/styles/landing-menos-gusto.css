@@ -127,6 +127,9 @@ body::after{
   .nav-positioning{display:none}
   .fm-announce-full{display:none}
   .fm-announce-short{display:inline}
+  .nav-top-actions{margin-left:auto;flex-shrink:0;gap:0}
+  .nav-top-actions > .btn{display:none}
+  .nav-left{min-width:0;flex:1}
 }
 @media (max-width:640px){
   .nav-demo-btn{display:none}
@@ -134,6 +137,10 @@ body::after{
 }
 @media (max-width:480px){
   .nav-register-btn{padding:8px 10px;font-size:9px}
+  .brand-wordmark{font-size:15px}
+}
+@media (max-width:400px){
+  .brand-wordmark{display:none}
 }
 .nav-left,.nav-right{display:flex;align-items:center;gap:20px;flex-shrink:0}
 .nav-right{margin-left:auto}

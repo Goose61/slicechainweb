@@ -65,11 +65,18 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
   .fm-announce-full{display:none}
   .fm-announce-short{display:inline}
   html{scroll-padding-top:108px}
+  .nav-top-actions{margin-left:auto;flex-shrink:0;gap:0}
+  .nav-top-actions > .btn{display:none}
+  .nav-left{min-width:0;flex:1}
 }
 @media (max-width:640px){
   .nav-demo-btn{display:none}
   .nav-register-btn{padding:8px 12px;font-size:10px}
   .fm-announce-cta{padding:7px 11px;font-size:9px}
+  .brand-wordmark{font-size:15px}
+}
+@media (max-width:400px){
+  .brand-wordmark{display:none}
 }
 
 /* Compressed header + side drawer menu */
