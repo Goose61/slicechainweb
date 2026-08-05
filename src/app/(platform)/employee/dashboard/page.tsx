@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Pizza, Receipt, DollarSign, TrendingUp, QrCode, LogOut, RefreshCw, ExternalLink, Loader2, User } from "lucide-react";
+import { buildQrTerminalUrl } from "@/lib/qrTerminalUrl";
 import { ClientErrorLogger } from "@/components/client-error-logger";
 
 export default function EmployeeDashboard() {
@@ -64,11 +65,14 @@ export default function EmployeeDashboard() {
       }
       const employeeId = localStorage.getItem("employeeId") || "";
       const employeeName = localStorage.getItem("employeeFullName") || "";
-      const qrBase = typeof window !== "undefined" && window.location.hostname.endsWith("slicechain.io")
-        ? "https://qr.slicechain.io" : "http://localhost:3002";
-      let url = `${qrBase}?businessId=${encodeURIComponent(data.businessId)}&businessName=${encodeURIComponent(data.businessName)}&businessWallet=${encodeURIComponent(data.businessWallet)}&token=${encodeURIComponent(token)}`;
-      if (employeeId) url += `&employeeId=${encodeURIComponent(employeeId)}`;
-      if (employeeName) url += `&employeeName=${encodeURIComponent(employeeName)}`;
+      const url = buildQrTerminalUrl({
+        businessId: data.businessId,
+        businessName: data.businessName,
+        businessWallet: data.businessWallet,
+        token,
+        employeeId: employeeId || undefined,
+        employeeName: employeeName || undefined,
+      });
       if (employeeId) localStorage.setItem("qrEmployeeId", employeeId);
       window.open(url, "_blank", "width=900,height=1000");
     } catch (err: unknown) {

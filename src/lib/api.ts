@@ -132,7 +132,7 @@ export const businessApi = {
     }>("/business/demo-login", { method: "POST" }),
 
   getProfile: (token: string) =>
-    apiFetch<{ business: BusinessProfile }>("/business/profile", { token }),
+    apiFetch<{ business: BusinessProfile; fiatSettlement?: FiatSettlementConfig }>("/business/profile", { token }),
 
   getTransactions: (token: string) =>
     apiFetch<{ transactions: Transaction[] }>("/business/transactions", { token }),
@@ -190,6 +190,47 @@ export const businessApi = {
 
   getEmployeeCommissions: (token: string) =>
     apiFetch<{ employees: EmployeeCommission[] }>("/employee/business-commissions", { token }),
+
+  getAnalyticsMetrics: async (token: string, timeRange = "30d") => {
+    const res = await fetch(`${getApiBase()}/business/analytics/metrics?timeRange=${encodeURIComponent(timeRange)}`, {
+      credentials: "include",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) return { error: data.error || `Request failed: ${res.status}` };
+    return data;
+  },
+
+  getAnalyticsInsights: async (token: string, timeRange = "30d") => {
+    const res = await fetch(`${getApiBase()}/business/analytics/insights?timeRange=${encodeURIComponent(timeRange)}`, {
+      credentials: "include",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) return { error: data.error || `Request failed: ${res.status}` };
+    return data;
+  },
+
+  getAnalyticsRealtime: async (token: string) => {
+    const res = await fetch(`${getApiBase()}/business/analytics/realtime`, {
+      credentials: "include",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) return { error: data.error || `Request failed: ${res.status}` };
+    return data;
+  },
+
+  getAnalyticsReport: async (token: string, timeRange = "30d", options: Record<string, string> = {}) => {
+    const params = new URLSearchParams({ timeRange, ...options });
+    const res = await fetch(`${getApiBase()}/business/analytics/report?${params}`, {
+      credentials: "include",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) return { error: data.error || `Request failed: ${res.status}` };
+    return data;
+  },
 };
 
 // Employee
@@ -413,8 +454,10 @@ export const blockchainApi = {
       body: JSON.stringify(data),
     }),
 
-  checkPizzarBalance: (walletAddress: string) =>
-    apiFetch<PizzarBalance>(`/blockchain/check-pizzar-balance/${walletAddress}`),
+  // checkPizzarBalance: (walletAddress: string) =>
+  //   apiFetch<PizzarBalance>(`/blockchain/check-pizzar-balance/${walletAddress}`),
+  checkSliceBalance: (walletAddress: string) =>
+    apiFetch<SliceBalance>(`/blockchain/check-slice-balance/${walletAddress}`),
 };
 
 // Solana Pay Transaction QR
@@ -544,7 +587,12 @@ export interface Transaction {
   customerWallet?: string | null;
   inputToken?: { symbol: string };
   fees?: { platformFee: number; vaultContribution: number };
-  rewards?: { pizzaTokensDistributed?: number; pizzarRewardsDistributed?: number };
+  rewards?: {
+    pizzaTokensDistributed?: number;
+    /** @deprecated use sliceRewardsDistributed */
+    pizzarRewardsDistributed?: number;
+    sliceRewardsDistributed?: number;
+  };
 }
 
 export interface VaultStats {
@@ -851,9 +899,17 @@ export interface QRResult {
   businessWallet?: string;
 }
 
+/** @deprecated Use SliceBalance */
 export interface PizzarBalance {
   success: boolean;
   pizzarBalance: number;
+  redemptionValue: number;
+  canRedeem: boolean;
+}
+
+export interface SliceBalance {
+  success: boolean;
+  sliceBalance: number;
   redemptionValue: number;
   canRedeem: boolean;
 }

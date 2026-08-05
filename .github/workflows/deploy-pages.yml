@@ -32,6 +32,7 @@ jobs:
           GITHUB_PAGES: "true"
           NEXT_PUBLIC_GITHUB_PAGES: "true"
           NEXT_PUBLIC_APP_URL: "https://app.slicechain.io"
+          NEXT_PUBLIC_QR_GENERATOR_URL: "https://qr.slicechain.io"
           NODE_ENV: production
 
       - uses: actions/upload-pages-artifact@v3

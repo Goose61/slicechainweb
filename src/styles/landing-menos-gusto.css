@@ -127,8 +127,9 @@ body::after{
   .nav-positioning{display:none}
   .fm-announce-full{display:none}
   .fm-announce-short{display:inline}
-  .nav-top-actions{margin-left:auto;flex-shrink:0;gap:0}
-  .nav-top-actions > .btn{display:none}
+  .nav-top-actions{margin-left:auto;flex-shrink:0;gap:8px}
+  .nav-top-actions > .nav-case-study-btn,
+  .nav-top-actions > .nav-demo-btn{display:none}
   .nav-left{min-width:0;flex:1}
 }
 @media (max-width:640px){

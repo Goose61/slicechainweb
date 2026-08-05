@@ -13,6 +13,7 @@ import {
   type EmployeeCommission,
 } from "@/lib/api";
 import { homeUrl } from "@/lib/siteUrl";
+import { buildQrTerminalUrl } from "@/lib/qrTerminalUrl";
 import { businessSignupPath } from "@/content/landing-content";
 import { toast } from "sonner";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,10 +35,11 @@ import {
 import {
   Pizza, LayoutDashboard, Receipt, Users, QrCode, Settings,
   LogOut, RefreshCw, Download, Eye, Wallet, DollarSign, Copy,
-  Building2, ExternalLink, Loader2, AlertTriangle, Globe,
+  Building2, ExternalLink, Loader2, AlertTriangle, Globe, BarChart3,
 } from "lucide-react";
 import { ClientErrorLogger } from "@/components/client-error-logger";
 import { PajSettlementPanel } from "@/components/business/PajSettlementPanel";
+import { AnalyticsPanel } from "@/components/business/AnalyticsPanel";
 
 function getCustomerWallet(tx: Transaction) {
   return tx.customerWallet || (tx.walletAddress && tx.walletAddress !== "external" ? tx.walletAddress : null);
@@ -138,7 +140,7 @@ export default function BusinessDashboard() {
         businessApi.getProfile(t),
         businessApi.getTransactions(t),
       ]);
-      setBusiness(profileRes.business);
+      setBusiness({ ...profileRes.business, fiatSettlement: profileRes.fiatSettlement });
       const txs = txRes.transactions;
       setTransactions(txs);
       setAnalytics(calcAnalytics(txs));
@@ -242,10 +244,13 @@ export default function BusinessDashboard() {
     const wallet = business.businessWallet?.publicKey || business.walletAddress;
     if (!wallet) { toast.error("Set a wallet address first."); return; }
     const t = token || "";
-    const qrBase = typeof window !== "undefined" && window.location.hostname.endsWith("slicechain.io")
-      ? "https://qr.slicechain.io"
-      : "http://localhost:3002";
-    const url = `${qrBase}?businessId=${business._id}&businessName=${encodeURIComponent(business.businessName)}&businessWallet=${encodeURIComponent(wallet)}&token=${encodeURIComponent(t)}${demoMode ? "&demo=true" : ""}`;
+    const url = buildQrTerminalUrl({
+      businessId: business._id,
+      businessName: business.businessName,
+      businessWallet: wallet,
+      token: t || undefined,
+      demo: demoMode,
+    });
     window.open(url, "_blank", "width=900,height=1000");
   }
 
@@ -381,10 +386,11 @@ export default function BusinessDashboard() {
       )}
 
       <div className="container mx-auto px-4 py-6">
-        <Tabs defaultValue="overview" className="space-y-6" onValueChange={setActiveTab}>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="flex-wrap h-auto gap-1 bg-muted/50 p-1">
             {[
               { value: "overview", icon: LayoutDashboard, label: "Overview" },
+              { value: "analytics", icon: BarChart3, label: "Analytics" },
               { value: "transactions", icon: Receipt, label: "Transactions" },
               { value: "employees", icon: Users, label: "Employees" },
               { value: "payment", icon: QrCode, label: "Payment QR" },
@@ -693,13 +699,21 @@ export default function BusinessDashboard() {
             </Card>
           </TabsContent>
 
+          {/* Analytics */}
+          <TabsContent value="analytics" className="space-y-6">
+            <AnalyticsPanel businessId={business?._id || ""} token={token || ""} demoMode={demoMode} />
+          </TabsContent>
+
           {/* NGN Settlement (PAJ) */}
           <TabsContent value="ngn-settlement" className="space-y-4">
             <PajSettlementPanel
               token={token || ""}
               business={business}
               demoMode={demoMode}
-              onProfileRefresh={() => token && loadData(token)}
+              onProfileRefresh={() => {
+                setActiveTab("ngn-settlement");
+                if (token) loadData(token);
+              }}
             />
           </TabsContent>
 
