@@ -5,6 +5,7 @@ const publicPaths = [
   "",
   "beyond-the-swipe/",
   "greener/",
+  "case-studies/",
   "website-pay-widget/",
   "contact/",
   "terms/",

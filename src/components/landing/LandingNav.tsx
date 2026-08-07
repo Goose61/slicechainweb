@@ -5,15 +5,15 @@ import {
   brandMark,
   logo,
   navDemoCta,
-  navCaseStudyCta,
+  navCaseStudiesCta,
   navLinks,
   navPositioningLine,
   navRegisterCta,
   portalPath,
+  caseStudiesPath,
   businessDemoPath,
   stickyAnnouncement,
 } from "@/content/landing-content";
-import { beyondTheSwipePath } from "@/content/beyond-content";
 import { appUrl } from "@/lib/appUrl";
 import {
   buildFoundingSignupHref,
@@ -123,11 +123,11 @@ export function LandingNav() {
 
             <div className="nav-top-actions">
               <a
-                href={beyondTheSwipePath}
+                href={caseStudiesPath}
                 className="btn btn-ghost nav-case-study-btn"
-                onClick={() => trackEvent("case_study_click", { location: "nav" })}
+                onClick={() => trackEvent("case_studies_click", { location: "nav" })}
               >
-                {navCaseStudyCta} <span className="arrow">→</span>
+                {navCaseStudiesCta} <span className="arrow">→</span>
               </a>
               <a
                 href={demoHref}
@@ -192,14 +192,14 @@ export function LandingNav() {
         </nav>
         <div className="nav-drawer-actions">
           <a
-            href={beyondTheSwipePath}
+            href={caseStudiesPath}
             className="btn btn-ghost"
             onClick={() => {
-              trackEvent("case_study_click", { location: "nav_drawer" });
+              trackEvent("case_studies_click", { location: "nav_drawer" });
               closeMenu();
             }}
           >
-            {navCaseStudyCta} <span className="arrow">→</span>
+            {navCaseStudiesCta} <span className="arrow">→</span>
           </a>
           <a
             href={registerHref}

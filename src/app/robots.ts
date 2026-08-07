@@ -17,6 +17,7 @@ const PUBLIC_ALLOW = [
   "/",
   "/beyond-the-swipe/",
   "/greener/",
+  "/case-studies/",
   "/website-pay-widget/",
   "/contact/",
   "/terms/",

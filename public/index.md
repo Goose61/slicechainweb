@@ -16,6 +16,7 @@ SlicePay (Slice Chain) is a crypto payment gateway for small and medium business
 
 ## Case studies
 
+- **Directory:** https://slicechain.io/case-studies/
 - **Beyond the Swipe:** https://slicechain.io/beyond-the-swipe/
 - **The Greener Checkout:** https://slicechain.io/greener/
 

@@ -33,6 +33,7 @@ Parameters: merchantId, amountUsd, orderId, description (optional), redirectUrl 
 
 ## Case studies & research
 
+- Case studies directory: https://slicechain.io/case-studies/
 - Beyond the Swipe (Founder's Edition): https://slicechain.io/beyond-the-swipe/
 - The Greener Checkout (Green Initiative): https://slicechain.io/greener/
 

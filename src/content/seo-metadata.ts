@@ -219,4 +219,27 @@ export const pageSeo = {
         "The Hidden Receipt — making the environmental footprint of commerce visible, measurable and improvable.",
     },
   } satisfies Metadata,
+  caseStudies: {
+    ...buildPageSeo(
+      "Case Studies",
+      "Browse SlicePay research briefs and initiative reports — Beyond the Swipe on merchant infrastructure and The Greener Checkout on payment environmental footprint.",
+    ),
+    alternates: {
+      canonical: "/case-studies/",
+    },
+    openGraph: {
+      title: "Case Studies | SlicePay® Research",
+      description:
+        "Evidence-led briefs on programmable commerce, stablecoin settlement, and greener checkout.",
+      url: `${SITE_ORIGIN}/case-studies/`,
+      siteName: "Slice Chain · SlicePay",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Case Studies | SlicePay®",
+      description:
+        "Explore Beyond the Swipe and The Greener Checkout — complimentary SliceChain research PDFs.",
+    },
+  } satisfies Metadata,
 };

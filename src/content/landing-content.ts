@@ -28,7 +28,8 @@ export const stickyAnnouncement = {
 export const navPositioningLine =
   "SlicePay® by SliceChain Holdings - Building the Merchant Operating Layer for Programmable Commerce";
 
-export const navCaseStudyCta = "Case Study";
+export const navCaseStudiesCta = "Case Studies";
+export const caseStudiesPath = "/case-studies/";
 
 export const navRegisterCta = "Register Now";
 export const navDemoCta = "Try Demo";
