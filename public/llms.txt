@@ -31,6 +31,11 @@ Developers can embed crypto checkout on any website without blockchain code:
 
 Parameters: merchantId, amountUsd, orderId, description (optional), redirectUrl (optional).
 
+## Case studies & research
+
+- Beyond the Swipe (Founder's Edition): https://slicechain.io/beyond-the-swipe/
+- The Greener Checkout (Green Initiative): https://slicechain.io/greener/
+
 ## Contact
 
 - Email: slicepay@slicechain.io

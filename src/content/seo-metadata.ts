@@ -167,6 +167,9 @@ export const pageSeo = {
       "Beyond the Swipe",
       "Request Beyond the Swipe, the Special Founder's Edition brief on merchant infrastructure for programmable commerce.",
     ),
+    alternates: {
+      canonical: "/beyond-the-swipe/",
+    },
     openGraph: {
       title: "Beyond the Swipe | SlicePay®",
       description:
@@ -182,6 +185,38 @@ export const pageSeo = {
       description:
         "The Merchant Infrastructure Race for Programmable Commerce.",
       images: ["/beyond-the-swipe/og.png"],
+    },
+  } satisfies Metadata,
+  greenerCaseStudy: {
+    ...buildPageSeo(
+      "The Greener Checkout",
+      "Request the Green Initiative case study on payment environmental footprint, stablecoin settlement efficiency, and SlicePay's greener checkout vision.",
+    ),
+    keywords: [
+      ...SITE_KEYWORDS,
+      "green payments",
+      "sustainable payments",
+      "payment carbon footprint",
+      "Solana energy efficiency",
+      "stablecoin checkout",
+      "environmental receipt",
+    ],
+    alternates: {
+      canonical: "/greener/",
+    },
+    openGraph: {
+      title: "The Greener Checkout | SlicePay® Green Initiative",
+      description:
+        "Every payment leaves a financial receipt — and an environmental one. Read the Green Initiative case study.",
+      url: `${SITE_ORIGIN}/greener/`,
+      siteName: "Slice Chain · SlicePay",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "The Greener Checkout | SlicePay®",
+      description:
+        "The Hidden Receipt — making the environmental footprint of commerce visible, measurable and improvable.",
     },
   } satisfies Metadata,
 };

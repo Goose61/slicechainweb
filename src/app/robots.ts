@@ -15,6 +15,8 @@ const AI_AGENTS = [
 
 const PUBLIC_ALLOW = [
   "/",
+  "/beyond-the-swipe/",
+  "/greener/",
   "/website-pay-widget/",
   "/contact/",
   "/terms/",

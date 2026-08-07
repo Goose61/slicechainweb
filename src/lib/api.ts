@@ -1209,11 +1209,14 @@ export const foundingMerchantApi = {
     }),
 };
 
+export type CaseStudyBriefType = "beyond_the_swipe" | "green_initiative";
+
 export interface FoundersBriefRequestData {
   firstName: string;
   email: string;
   audience: string;
   marketingOptIn?: boolean;
+  briefType?: CaseStudyBriefType;
   source?: string;
 }
 

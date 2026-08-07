@@ -1,27 +1,37 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import {
-  beyondAudiences,
-  beyondContent,
-  type BeyondAudience,
-} from "@/content/beyond-content";
-import { foundersBriefApi } from "@/lib/api";
+import { foundersBriefApi, type CaseStudyBriefType } from "@/lib/api";
+
+export interface CaseStudyFormContent {
+  formTitle: string;
+  formBadge: string;
+  submitLabel: string;
+  privacyNote: string;
+  updatesOptIn: string;
+  successMessage: string;
+}
 
 interface Props {
+  audiences: readonly string[];
+  content: CaseStudyFormContent;
+  briefType: CaseStudyBriefType;
   source?: string;
   showHeading?: boolean;
   onSuccess?: () => void;
 }
 
-export function FoundersBriefForm({
-  source = "beyond_the_swipe",
+export function CaseStudyLeadForm({
+  audiences,
+  content,
+  briefType,
+  source,
   showHeading = true,
   onSuccess,
 }: Props) {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [audience, setAudience] = useState<BeyondAudience | "">("");
+  const [audience, setAudience] = useState("");
   const [marketingOptIn, setMarketingOptIn] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -51,7 +61,7 @@ export function FoundersBriefForm({
         email: email.trim(),
         audience,
         marketingOptIn,
-        briefType: "beyond_the_swipe",
+        briefType,
         source,
       });
       setSuccess(true);
@@ -67,7 +77,7 @@ export function FoundersBriefForm({
     return (
       <div className="bts-form-wrap">
         <p className="bts-success" role="status">
-          {beyondContent.successMessage}
+          {content.successMessage}
         </p>
       </div>
     );
@@ -77,8 +87,8 @@ export function FoundersBriefForm({
     <div className="bts-form-wrap">
       {showHeading && (
         <div className="bts-form-heading">
-          <h2>{beyondContent.formTitle}</h2>
-          <span className="bts-free-badge">{beyondContent.formBadge}</span>
+          <h2>{content.formTitle}</h2>
+          <span className="bts-free-badge">{content.formBadge}</span>
         </div>
       )}
 
@@ -115,13 +125,13 @@ export function FoundersBriefForm({
             <select
               name="audience"
               value={audience}
-              onChange={(e) => setAudience(e.target.value as BeyondAudience)}
+              onChange={(e) => setAudience(e.target.value)}
               required
             >
               <option value="" disabled>
                 Select one
               </option>
-              {beyondAudiences.map((option) => (
+              {audiences.map((option) => (
                 <option key={option} value={option}>
                   {option}
                 </option>
@@ -130,11 +140,11 @@ export function FoundersBriefForm({
           </label>
 
           <button className="bts-submit" type="submit" disabled={loading}>
-            {loading ? "Sending…" : `${beyondContent.submitLabel} →`}
+            {loading ? "Sending…" : `${content.submitLabel} →`}
           </button>
         </div>
 
-        <p className="bts-privacy">{beyondContent.privacyNote}</p>
+        <p className="bts-privacy">{content.privacyNote}</p>
 
         <label className="bts-opt-in">
           <input
@@ -143,7 +153,7 @@ export function FoundersBriefForm({
             checked={marketingOptIn}
             onChange={(e) => setMarketingOptIn(e.target.checked)}
           />
-          <span>{beyondContent.updatesOptIn}</span>
+          <span>{content.updatesOptIn}</span>
         </label>
 
         {error && <p className="bts-form-error" role="alert">{error}</p>}

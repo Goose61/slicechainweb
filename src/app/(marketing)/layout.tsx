@@ -5,6 +5,7 @@ import { SeoStructuredData } from "@/components/SeoStructuredData";
 import "@/styles/landing-menos-gusto.css";
 import "@/styles/landing-inline.css";
 import "@/styles/beyond-the-swipe.css";
+import "@/styles/greener-case-study.css";
 
 export const metadata: Metadata = {
   ...pageSeo.home,
