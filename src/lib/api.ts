@@ -191,6 +191,12 @@ export const businessApi = {
   getEmployeeCommissions: (token: string) =>
     apiFetch<{ employees: EmployeeCommission[] }>("/employee/business-commissions", { token }),
 
+  getStaticStablecoinQrs: (token: string) =>
+    apiFetch<{ success: boolean; businessWallet?: string; qrs: StaticStablecoinQr[]; message?: string }>(
+      "/business/static-stablecoin-qrs",
+      { token }
+    ),
+
   getAnalyticsMetrics: async (token: string, timeRange = "30d") => {
     const res = await fetch(`${getApiBase()}/business/analytics/metrics?timeRange=${encodeURIComponent(timeRange)}`, {
       credentials: "include",
@@ -545,6 +551,21 @@ export interface FiatSettlementConfig {
     accountName?: string;
     updatedAt?: string;
   };
+}
+
+export interface StaticStablecoinQr {
+  id: string;
+  chainKey: string;
+  chainName: string;
+  symbol: string;
+  name: string;
+  businessWallet: string;
+  checkoutUrl: string;
+  paymentUrl: string;
+  qrDataUrl: string;
+  settlementTime?: string | null;
+  offlineBackup: boolean;
+  routesThroughSlicePay: boolean;
 }
 
 export interface PajBank {

@@ -40,6 +40,7 @@ import {
 import { ClientErrorLogger } from "@/components/client-error-logger";
 import { PajSettlementPanel } from "@/components/business/PajSettlementPanel";
 import { AnalyticsPanel } from "@/components/business/AnalyticsPanel";
+import { StaticStablecoinQrList } from "@/components/business/StaticStablecoinQrList";
 
 function getCustomerWallet(tx: Transaction) {
   return tx.customerWallet || (tx.walletAddress && tx.walletAddress !== "external" ? tx.walletAddress : null);
@@ -697,6 +698,14 @@ export default function BusinessDashboard() {
                 )}
               </CardContent>
             </Card>
+
+            <StaticStablecoinQrList
+              token={token || ""}
+              businessId={business?._id}
+              businessWallet={
+                business?.businessWallet?.publicKey || business?.walletAddress || undefined
+              }
+            />
           </TabsContent>
 
           {/* Analytics */}
