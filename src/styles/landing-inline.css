@@ -291,7 +291,7 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
 }
 
 .landing-page section[id]{
-  scroll-margin-top:92px;
+  scroll-margin-top:clamp(120px,12vh,168px);
 }
 
 /* Defer rendering of below-the-fold sections on mobile */

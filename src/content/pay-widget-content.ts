@@ -1,5 +1,8 @@
 export const payWidgetPath = "/website-pay-widget/";
 
+/** Landing page section 07 anchor */
+export const payWidgetSectionAnchor = "#pay-widget";
+
 export const payWidgetSection = {
   subtitle: "Website Pay Widget",
   titleHtml: 'Add crypto checkout to <span class="it">any website</span>',

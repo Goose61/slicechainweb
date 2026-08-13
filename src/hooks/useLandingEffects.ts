@@ -2,6 +2,21 @@
 
 import { useEffect } from "react";
 
+function getStickyHeaderOffset() {
+  const header = document.getElementById("landing-header");
+  return (header?.offsetHeight ?? 0) + 12;
+}
+
+function scrollToSection(target: Element) {
+  if (target instanceof HTMLElement) {
+    target.style.contentVisibility = "visible";
+  }
+
+  const offset = getStickyHeaderOffset();
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+}
+
 export function useLandingEffects() {
   useEffect(() => {
     const root = document.querySelector("[data-landing-root]");
@@ -60,17 +75,30 @@ export function useLandingEffects() {
     headlineSlot?.addEventListener("touchstart", onTouchStart as EventListener, { passive: true });
     headlineSlot?.addEventListener("touchend", onTouchEnd as EventListener, { passive: true });
 
-    root.querySelectorAll('a[href^="#"]').forEach((a) => {
-      a.addEventListener("click", (e) => {
-        const href = a.getAttribute("href");
-        if (!href || href === "#") return;
-        const target = root.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      });
-    });
+    const onAnchorClick = (e: Event) => {
+      const a = e.currentTarget as HTMLAnchorElement;
+      const href = a.getAttribute("href");
+      if (!href || href === "#") return;
+      const target = root.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      scrollToSection(target);
+      window.history.replaceState(null, "", href);
+    };
+
+    const anchorLinks = root.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach((a) => a.addEventListener("click", onAnchorClick));
+
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (!hash || hash === "#") return;
+      const target = root.querySelector(hash);
+      if (target) {
+        requestAnimationFrame(() => scrollToSection(target));
+      }
+    };
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
 
     return () => {
       revealObs.disconnect();
@@ -78,6 +106,8 @@ export function useLandingEffects() {
       clearInterval(cycle);
       headlineSlot?.removeEventListener("touchstart", onTouchStart as EventListener);
       headlineSlot?.removeEventListener("touchend", onTouchEnd as EventListener);
+      anchorLinks.forEach((a) => a.removeEventListener("click", onAnchorClick));
+      window.removeEventListener("hashchange", scrollToHash);
     };
   }, []);
 }

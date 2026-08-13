@@ -1,3 +1,5 @@
+import { payWidgetSectionAnchor } from "./pay-widget-content";
+
 const A = "/landing-assets/images";
 const V = "/landing-assets/videos";
 
@@ -50,7 +52,7 @@ export const heroOnlineGateway = {
   title: "Crypto e-commerce gateway",
   body: "Add hosted checkout to any website - grow globally, cut margins, and accept crypto payments without blockchain code.",
   cta: "Website Pay Widget",
-  href: "#pay-widget",
+  href: payWidgetSectionAnchor,
 };
 
 export const supportedChainLogos = [
@@ -157,7 +159,7 @@ export const navLinks = [
   { href: "#team", label: "Team", num: "04" },
   { href: "#marketing", label: "How It Works", num: "05" },
   { href: "#businesses", label: "For Businesses", num: "06" },
-  { href: "#pay-widget", label: "Pay Widget", num: "07" },
+  { href: payWidgetSectionAnchor, label: "Pay Widget", num: "07" },
   { href: "#gallery", label: "Gallery", num: "08" },
   { href: "#plan", label: "Roadmap", num: "09" },
   { href: "#community", label: "Get Started", num: "10" },
