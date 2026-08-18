@@ -171,7 +171,7 @@ export const pageSeo = {
       canonical: "/beyond-the-swipe/",
     },
     openGraph: {
-      title: "Beyond the Swipe | SlicePay®",
+      title: "Beyond the Swipe | SlicePay™",
       description:
         "The Merchant Infrastructure Race for Programmable Commerce.",
       url: `${SITE_ORIGIN}/beyond-the-swipe/`,
@@ -181,7 +181,7 @@ export const pageSeo = {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Beyond the Swipe | SlicePay®",
+      title: "Beyond the Swipe | SlicePay™",
       description:
         "The Merchant Infrastructure Race for Programmable Commerce.",
       images: ["/beyond-the-swipe/og.png"],
@@ -205,7 +205,7 @@ export const pageSeo = {
       canonical: "/greener/",
     },
     openGraph: {
-      title: "The Greener Checkout | SlicePay® Green Initiative",
+      title: "The Greener Checkout | SlicePay™ Green Initiative",
       description:
         "Every payment leaves a financial receipt — and an environmental one. Read the Green Initiative case study.",
       url: `${SITE_ORIGIN}/greener/`,
@@ -214,7 +214,7 @@ export const pageSeo = {
     },
     twitter: {
       card: "summary_large_image",
-      title: "The Greener Checkout | SlicePay®",
+      title: "The Greener Checkout | SlicePay™",
       description:
         "The Hidden Receipt — making the environmental footprint of commerce visible, measurable and improvable.",
     },
@@ -228,7 +228,7 @@ export const pageSeo = {
       canonical: "/case-studies/",
     },
     openGraph: {
-      title: "Case Studies | SlicePay® Research",
+      title: "Case Studies | SlicePay™ Research",
       description:
         "Evidence-led briefs on programmable commerce, stablecoin settlement, and greener checkout.",
       url: `${SITE_ORIGIN}/case-studies/`,
@@ -237,7 +237,7 @@ export const pageSeo = {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Case Studies | SlicePay®",
+      title: "Case Studies | SlicePay™",
       description:
         "Explore Beyond the Swipe and The Greener Checkout — complimentary SliceChain research PDFs.",
     },

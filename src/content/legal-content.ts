@@ -1,6 +1,6 @@
 export const legalMeta = {
   company: "SliceChain Holdings Inc.",
-  product: "SlicePay®",
+  product: "SlicePay™",
   contactEmail: "slicepay@slicechain.io",
   effectiveDate: "June 7, 2026",
   website: "slicechain.io",

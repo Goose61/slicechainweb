@@ -28,7 +28,7 @@ export const stickyAnnouncement = {
 };
 
 export const navPositioningLine =
-  "SlicePay® by SliceChain Holdings - Building the Merchant Operating Layer for Programmable Commerce";
+  "SlicePay™ by SliceChain Holdings - Building the Merchant Operating Layer for Programmable Commerce";
 
 export const navCaseStudiesCta = "Case Studies";
 export const caseStudiesPath = "/case-studies/";
@@ -85,7 +85,7 @@ export const crossChain = {
 };
 
 export const brandName = "SlicePay";
-export const brandMark = "SlicePay®";
+export const brandMark = "SlicePay™";
 export const logo = `${A}/pizza/pizzaimages/main_logo.webp`;
 
 export const social = {
@@ -367,7 +367,7 @@ export const communityCards = [
 ];
 
 export const businesses = {
-  titleHtml: 'Accept payments with <span class="it">SlicePay®</span><br>Keep more <span class="it">margin</span>',
+  titleHtml: 'Accept payments with <span class="it">SlicePay™</span><br>Keep more <span class="it">margin</span>',
   lede: "SlicePay is global crypto payment processing for restaurants, retailers, e-commerce, and field merchants. Accept wallet payments in-store or online while you receive USDC settlement with transparent 1.9% pricing and optional employee commissions.",
   cta: { label: "Register on SlicePay", href: businessSignupPath },
   rows: [
@@ -413,6 +413,6 @@ export const roadmap = {
 };
 
 export const footer = {
-  address: "SlicePay® · Global crypto payments provider & processor",
+  address: "SlicePay™ · Global crypto payments provider & processor",
   copyright: "© 2025 SliceChain Holdings Inc. All rights reserved.",
 };

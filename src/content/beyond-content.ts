@@ -25,7 +25,7 @@ export const beyondContent = {
   briefInsideTitle: "Inside the Founder's Brief",
   briefItems: [
     "The global digital-commerce and stablecoin market architecture",
-    "Where SlicePay® fits within the emerging payment stack",
+    "Where SlicePay™ fits within the emerging payment stack",
     "How SlicePay differs from payment gateways and stablecoin APIs",
     "Why Africa represents a compelling proving ground",
     "Network effects, merchant economics and the institutional proof agenda",
