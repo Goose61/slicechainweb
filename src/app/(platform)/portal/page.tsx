@@ -1,8 +1,6 @@
-"use client";
-
 import Image from "next/image";
+import Link from "next/link";
 import { brandMark } from "@/content/landing-content";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,41 +9,40 @@ import { homeUrl } from "@/lib/siteUrl";
 
 const LOGO = "/landing-assets/images/pizza/pizzaimages/main_logo.png";
 
-export default function PortalIndex() {
-  const router = useRouter();
+const portals = [
+  {
+    id: "employee",
+    icon: IdCard,
+    title: "Employee Portal",
+    description: "Log in as a business employee to generate Solana Pay QR codes and track your USDC commission.",
+    features: [
+      "One-tap QR code generator",
+      "0.3% commission on each payment",
+      "Instant USDC payout to your wallet",
+    ],
+    gradient: "from-sky-500 to-blue-700",
+    badgeText: "For Staff",
+    href: "/employee/login/",
+    buttonText: "Enter Employee Portal",
+  },
+  {
+    id: "business",
+    icon: Building2,
+    title: "Business Dashboard",
+    description: "Crypto-native businesses accepting Solana Pay USDC payments with automated employee commissions and analytics.",
+    features: [
+      "USDC payment acceptance via Solana Pay",
+      "1.9% business fee (0.3% employee commission)",
+      "Analytics & employee commission management",
+    ],
+    gradient: "from-blue-600 to-indigo-800",
+    badgeText: "CN Business",
+    href: "/business/login/",
+    buttonText: "Enter Business Dashboard",
+  },
+] as const;
 
-  const portals = [
-    {
-      id: "employee",
-      icon: IdCard,
-      title: "Employee Portal",
-      description: "Log in as a business employee to generate Solana Pay QR codes and track your USDC commission.",
-      features: [
-        "One-tap QR code generator",
-        "0.3% commission on each payment",
-        "Instant USDC payout to your wallet",
-      ],
-      gradient: "from-sky-500 to-blue-700",
-      badgeText: "For Staff",
-      action: () => router.push("/employee/login"),
-      buttonText: "Enter Employee Portal",
-    },
-    {
-      id: "business",
-      icon: Building2,
-      title: "Business Dashboard",
-      description: "Crypto-native businesses accepting Solana Pay USDC payments with automated employee commissions and analytics.",
-      features: [
-        "USDC payment acceptance via Solana Pay",
-        "1.9% business fee (0.3% employee commission)",
-        "Analytics & employee commission management",
-      ],
-      gradient: "from-blue-600 to-indigo-800",
-      badgeText: "CN Business",
-      action: () => router.push("/business/login"),
-      buttonText: "Enter Business Dashboard",
-    },
-  ];
+export default function PortalIndex() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0b1428] via-[#101d3d] to-[#0b1428] flex flex-col items-center justify-center p-6">
@@ -100,11 +97,13 @@ export default function PortalIndex() {
               </CardContent>
               <CardFooter>
                 <Button
-                  className={`w-full bg-gradient-to-r ${portal.gradient} hover:opacity-90 text-white border-0 shadow-lg group-hover:shadow-xl transition-all`}
-                  onClick={portal.action}
+                  asChild
+                  className={`w-full bg-gradient-to-r ${portal.gradient} hover:opacity-90 text-white border-0 shadow-lg group-hover:shadow-xl transition-all touch-manipulation`}
                 >
-                  {portal.buttonText}
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <Link href={portal.href}>
+                    {portal.buttonText}
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </Button>
               </CardFooter>
             </Card>
