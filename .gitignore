@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# Platform monorepo lives here on the server — not part of the GitHub Pages site
+/app/
+
 # production
 /build
 
