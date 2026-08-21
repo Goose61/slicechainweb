@@ -90,6 +90,7 @@ export const logo = `${A}/pizza/pizzaimages/main_logo.webp`;
 
 export const social = {
   telegram: "https://t.me/+PrL-wbxrW39kODBk",
+  linkedin: "https://www.linkedin.com/company/slicepay-io",
   twitter: "https://x.com/slice__pay",
   // Split into parts so the literal address never appears in the static HTML.
   // This stops Cloudflare Email Obfuscation from injecting email-decode.min.js
@@ -309,7 +310,7 @@ export const team = {
       role: "Co-Founder & CTO",
       photo: `${A}/gustav-headshot.jpg`,
       photoPosition: "center center",
-      linkedin: "https://www.linkedin.com/in/gustav-eigenhuis",
+      linkedin: "https://www.linkedin.com/in/gustav-eigenhuis-b28a712a9",
     },
   ],
 };
