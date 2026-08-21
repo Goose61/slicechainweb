@@ -1,0 +1,33 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://api.slicechain.io/api/gateway",
+      "service-desc": [
+        {
+          "href": "https://slicechain.io/.well-known/openapi/gateway.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://slicechain.io/website-pay-widget/",
+          "type": "text/html"
+        },
+        {
+          "href": "https://slicechain.io/website-pay-widget.md",
+          "type": "text/markdown"
+        },
+        {
+          "href": "https://slicechain.io/llms.txt",
+          "type": "text/plain"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://api.slicechain.io/api/health",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

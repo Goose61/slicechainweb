@@ -1,0 +1,11 @@
+{
+  "resource": "https://api.slicechain.io/",
+  "authorization_servers": ["https://slicechain.io"],
+  "bearer_methods_supported": ["header"],
+  "scopes_supported": [
+    "gateway:invoice:create",
+    "gateway:invoice:read",
+    "gateway:payment:read"
+  ],
+  "resource_documentation": "https://slicechain.io/auth.md"
+}
