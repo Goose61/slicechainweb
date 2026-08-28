@@ -271,7 +271,7 @@ export function PajSettlementPanel({
   async function handleVerifySession() {
     setLoading(true);
     try {
-      await pajApi.verifyBusinessSession(token, recipient, otp);
+      await pajApi.verifyBusinessSession(token, recipient, otp, 'email');
       setSessionStep("email");
       setOtp("");
       setPendingSession(true);   // optimistic: keep on bank step while profile refreshes

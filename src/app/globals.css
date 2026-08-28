@@ -109,3 +109,21 @@
 .terms-consent-required {
   color: #e63946;
 }
+
+/* Static stablecoin QR preview — print guide + code from dashboard dialog */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-guide-root,
+  .print-guide-root * {
+    visibility: visible;
+  }
+  .print-guide-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+}

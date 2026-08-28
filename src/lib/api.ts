@@ -490,11 +490,11 @@ export const pajApi = {
       body: JSON.stringify(data),
     }),
 
-  verifyBusinessSession: (token: string, recipient: string, otp: string) =>
+  verifyBusinessSession: (token: string, recipient: string, otp: string, channel: 'email' | 'phone' = 'email') =>
     apiFetch<{ recipient: string; expiresAt: string }>("/paj/business/session/verify", {
       method: "POST",
       token,
-      body: JSON.stringify({ recipient, otp }),
+      body: JSON.stringify({ recipient, otp: otp.replace(/\s/g, ''), channel }),
     }),
 
   getBanks: (token: string) =>
@@ -566,6 +566,10 @@ export interface StaticStablecoinQr {
   settlementTime?: string | null;
   offlineBackup: boolean;
   routesThroughSlicePay: boolean;
+  scanHint?: string;
+  scanWith?: string;
+  merchantOnlineRequired?: boolean;
+  customerOnlineRequired?: boolean;
 }
 
 export interface PajBank {

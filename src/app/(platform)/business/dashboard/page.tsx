@@ -702,6 +702,7 @@ export default function BusinessDashboard() {
             <StaticStablecoinQrList
               token={token || ""}
               businessId={business?._id}
+              businessName={business?.businessName}
               businessWallet={
                 business?.businessWallet?.publicKey || business?.walletAddress || undefined
               }
