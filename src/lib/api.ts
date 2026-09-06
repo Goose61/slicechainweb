@@ -451,7 +451,7 @@ export const customerApi = {
     }),
 
   forgotPassword: (email: string) =>
-    apiFetch("/customer/forgot-password", {
+    apiFetch<{ success: boolean; message: string }>("/customer/forgot-password", {
       method: "POST",
       body: JSON.stringify({ email }),
     }),
