@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { normalizeTaxId } from "@/lib/normalizeTaxId";
 import {
   adminApi,
   type FoundingMerchantBusiness,
@@ -141,7 +142,7 @@ function buildPayload(form: FormState): FoundingMerchantUpdatePayload {
     monthlyVolume,
     traditionalFeeRate,
     walletAddress: form.walletAddress.trim(),
-    taxId: form.taxId.trim(),
+    taxId: normalizeTaxId(form.taxId),
     businessCategory: form.businessCategory.trim(),
     address: {
       street: form.street.trim(),

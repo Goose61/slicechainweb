@@ -20,6 +20,13 @@ export const privacyPath = "/privacy/";
 export const payWidgetGuidePath = "/website-pay-widget/";
 export const contactPath = "/contact/";
 
+/** F6S startup ranking badge — links to SliceChain Holdings profile. */
+export const f6sAward = {
+  href: "https://www.f6s.com/slicechain-holdings-inc",
+  image: `${A}/f6s-badge.png`,
+  alt: "F6S #29 Top Company in FinTech — SliceChain Holdings ranked among 2 million startups",
+};
+
 export const stickyAnnouncement = {
   full: "Founding Merchant Program - limited to the first 500 businesses · 50% off platform fees for life",
   short: "Founding Merchant Program · First 500",

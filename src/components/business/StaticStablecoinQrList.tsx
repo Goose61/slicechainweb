@@ -84,7 +84,7 @@ export function StaticStablecoinQrList({ token, businessWallet }: Props) {
             <div>
               <CardTitle className="text-base">Static Stablecoin QR Codes</CardTitle>
               <CardDescription>
-                Offline backup — print and keep at the counter. Stablecoins only; payments route through SlicePay checkout.
+                Offline backup — print and keep at the counter. Merchant can be offline; customer pays online via SlicePay checkout.
               </CardDescription>
             </div>
           </div>
@@ -96,7 +96,7 @@ export function StaticStablecoinQrList({ token, businessWallet }: Props) {
           Merchant wallet:{" "}
           <span className="font-mono">{shortAddress(businessWallet)}</span>
           {" · "}
-          Each QR encodes your wallet and a SlicePay payment link — customers enter the amount when they scan.
+          Each QR opens SlicePay checkout on the customer&apos;s phone — scan with the <strong>camera app</strong>, not the wallet QR scanner.
         </p>
 
         {error && (
@@ -132,6 +132,11 @@ export function StaticStablecoinQrList({ token, businessWallet }: Props) {
                 <p className="text-[10px] text-muted-foreground text-center line-clamp-2 break-all px-1">
                   {qr.checkoutUrl}
                 </p>
+                {qr.scanHint && (
+                  <p className="text-[10px] text-muted-foreground text-center leading-snug px-1">
+                    {qr.scanHint}
+                  </p>
+                )}
                 <Button
                   type="button"
                   variant="outline"

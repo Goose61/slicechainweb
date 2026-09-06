@@ -114,12 +114,27 @@ export const configApi = {
     apiFetch<{ siteKey: string }>("/config/turnstile"),
 };
 
+// Auth (password reset — shared across portals)
+export const authApi = {
+  resetPassword: (token: string, newPassword: string) =>
+    apiFetch<{ message: string }>("/reset-password/confirm", {
+      method: "POST",
+      body: JSON.stringify({ token, newPassword }),
+    }),
+};
+
 // Business
 export const businessApi = {
   login: (email: string, password: string, turnstileToken?: string) =>
     apiFetch<{ token: string; business: BusinessProfile }>("/business/login", {
       method: "POST",
       body: JSON.stringify({ email, password, turnstileToken }),
+    }),
+
+  forgotPassword: (email: string) =>
+    apiFetch<{ success: boolean; message: string }>("/business/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
     }),
 
   demoLogin: () =>
@@ -245,6 +260,12 @@ export const employeeApi = {
     apiFetch<{ token: string; employee: Employee; business?: { businessName: string } }>("/employee/login", {
       method: "POST",
       body: JSON.stringify({ employeeId, password }),
+    }),
+
+  forgotPassword: (email: string) =>
+    apiFetch<{ success: boolean; message: string }>("/employee/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
     }),
 
   register: (data: Record<string, unknown>) =>

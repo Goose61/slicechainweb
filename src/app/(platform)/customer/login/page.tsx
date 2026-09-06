@@ -53,8 +53,8 @@ export default function CustomerLoginPage() {
     if (!email) { toast.error("Please enter your email."); return; }
     setForgotLoading(true);
     try {
-      await customerApi.forgotPassword(email);
-      toast.success("Password reset email sent! Check your inbox.");
+      const data = await customerApi.forgotPassword(email);
+      toast.success(data.message || "If an account exists, a reset email has been sent.");
       setForgotMode(false);
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : "Failed to send reset email.");

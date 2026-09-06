@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { foundingMerchantApi } from "@/lib/api";
+import { normalizeTaxId } from "@/lib/normalizeTaxId";
 import { businessSignupPath } from "@/content/landing-content";
 
 const TOTAL_STEPS = 2;
@@ -175,7 +176,7 @@ export default function OnboardingWizard() {
         ? "Enter a valid phone number."
         : "A phone number is required. Please add one below.";
     }
-    if (!taxId.trim()) return "Business tax or registration ID is required.";
+    if (!normalizeTaxId(taxId)) return "Business tax or registration ID is required.";
     if (!SOLANA_WALLET_RE.test(solanaWallet.trim())) {
       return "Enter a valid Solana wallet address (32–44 base58 characters).";
     }
@@ -223,7 +224,7 @@ export default function OnboardingWizard() {
         businessType: businessType || "Other",
         city: registeredAddress.city.trim(),
         state: registeredAddress.state.trim(),
-        taxId: taxId.trim(),
+        taxId: normalizeTaxId(taxId),
         solanaWallet: solanaWallet.trim(),
         staffCount: Number(staffCount),
         registeredAddress: {
@@ -351,8 +352,14 @@ export default function OnboardingWizard() {
                     <label htmlFor="ob-tax">Business tax or registration ID</label>
                     <input
                       id="ob-tax"
+                      type="text"
                       value={taxId}
                       onChange={(e) => setTaxId(e.target.value)}
+                      onBlur={(e) => setTaxId(normalizeTaxId(e.target.value))}
+                      placeholder="EIN, VAT, TIN, or local registration number"
+                      autoComplete="off"
+                      spellCheck={false}
+                      maxLength={100}
                       required
                     />
                   </div>

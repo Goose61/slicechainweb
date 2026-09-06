@@ -499,6 +499,37 @@ body::after{
   background:linear-gradient(0deg,var(--bg),transparent);
 }
 .fm-hero-inner{position:relative;z-index:1}
+
+/* F6S award badge — below hero */
+.fm-f6s-badge{
+  position:relative;
+  padding:28px var(--pad) 36px;
+  background:var(--bg);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.fm-f6s-badge-inner{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.fm-f6s-badge a{
+  display:inline-block;
+  border-radius:12px;
+  padding:10px 16px;
+  background:rgba(255,255,255,.97);
+  box-shadow:0 8px 32px rgba(0,0,0,.25);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.fm-f6s-badge a:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 40px rgba(0,0,0,.32);
+}
+.fm-f6s-badge img{
+  display:block;
+  width:min(100%,380px);
+  height:auto;
+}
+
 .fm-hero-grid{
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(320px,.85fr);

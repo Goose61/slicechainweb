@@ -3,6 +3,7 @@ import { LandingClientShell } from "./LandingClientShell";
 import { LandingGallery } from "./LandingGallery";
 import { LandingNav } from "./LandingNav";
 import { LandingFoundingMerchant } from "./LandingFoundingMerchant";
+import { LandingF6SBadge } from "./LandingF6SBadge";
 import { LandingMarquee } from "./sections/LandingMarquee";
 import { LandingManifesto } from "./sections/LandingManifesto";
 import { LandingTeam } from "./sections/LandingTeam";
@@ -21,6 +22,7 @@ export function LandingPage() {
       <LandingClientShell />
       <LandingNav />
       <LandingFoundingMerchant />
+      <LandingF6SBadge />
       <LandingMarquee />
       <LandingManifesto />
       <LandingTeam />
