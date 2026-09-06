@@ -310,7 +310,7 @@ export default function EmployeeLoginPage() {
               <button
                 type="button"
                 onClick={() => setForgotMode(true)}
-                className="text-xs text-slate-400 hover:text-orange-400 transition-colors"
+                className="text-sm font-medium text-orange-400 hover:text-orange-300 underline underline-offset-2"
               >
                 Forgot password?
               </button>
@@ -355,6 +355,14 @@ export default function EmployeeLoginPage() {
           >
             {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Signing in...</> : "Sign In"}
           </Button>
+
+          <button
+            type="button"
+            onClick={() => setForgotMode(true)}
+            className="w-full text-center text-sm font-medium text-orange-400 hover:text-orange-300 py-1"
+          >
+            Forgot your password?
+          </button>
 
           <div className="text-center pt-2">
             <p className="text-slate-400 text-sm">

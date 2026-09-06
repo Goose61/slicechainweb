@@ -90,7 +90,7 @@ export default function CustomerLoginPage() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <Label htmlFor="password" className="text-white">Password</Label>
-              <button type="button" onClick={() => setForgotMode(true)} className="text-xs text-slate-400 hover:text-orange-400 transition-colors">Forgot password?</button>
+              <button type="button" onClick={() => setForgotMode(true)} className="text-sm font-medium text-orange-400 hover:text-orange-300 underline underline-offset-2">Forgot password?</button>
             </div>
             <div className="relative">
               <Input id="password" type={showPw ? "text" : "password"} placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 pr-10 focus:border-orange-400" autoComplete="current-password" />
@@ -109,6 +109,13 @@ export default function CustomerLoginPage() {
           <Button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-orange-500 to-rose-500 hover:opacity-90 text-white border-0">
             {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Signing in…</> : "Sign In"}
           </Button>
+          <button
+            type="button"
+            onClick={() => setForgotMode(true)}
+            className="w-full text-center text-sm font-medium text-orange-400 hover:text-orange-300 py-1"
+          >
+            Forgot your password?
+          </button>
           <div className="text-center pt-2">
             <p className="text-slate-400 text-sm">
               New customer?{" "}
