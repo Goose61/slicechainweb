@@ -55,6 +55,9 @@ export default function EmployeeLoginPage() {
   const [showPw, setShowPw] = useState(false);
   const [remember, setRemember] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [forgotMode, setForgotMode] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotLoading, setForgotLoading] = useState(false);
 
   // Quick login state
   const [savedEmployees, setSavedEmployeesState] = useState<SavedEmployee[]>([]);
@@ -113,6 +116,24 @@ export default function EmployeeLoginPage() {
     }
   }
 
+  async function handleForgotPassword(e: React.FormEvent) {
+    e.preventDefault();
+    if (!forgotEmail) {
+      toast.error("Please enter the email on your employee account.");
+      return;
+    }
+    setForgotLoading(true);
+    try {
+      const data = await employeeApi.forgotPassword(forgotEmail);
+      toast.success(data.message || "If an account exists, a reset email has been sent.");
+      setForgotMode(false);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to send reset email.");
+    } finally {
+      setForgotLoading(false);
+    }
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!employeeId || !password) {
@@ -142,11 +163,43 @@ export default function EmployeeLoginPage() {
 
   return (
     <AuthCard
-      title="Employee Login"
-      description="Sign in to access your dashboard and QR generator"
+      title={forgotMode ? "Reset Password" : "Employee Login"}
+      description={forgotMode ? "Enter your registered email to receive a reset link" : "Sign in to access your dashboard and QR generator"}
       gradient="from-orange-500 to-rose-500"
-      backHref="/"
+      backHref="/portal"
+      backLabel="← Back to portal"
     >
+      {forgotMode ? (
+        <form onSubmit={handleForgotPassword} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="forgot-email" className="text-white">Email address</Label>
+            <Input
+              id="forgot-email"
+              type="email"
+              placeholder="you@example.com"
+              value={forgotEmail}
+              onChange={(e) => setForgotEmail(e.target.value)}
+              className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:border-orange-400"
+              required
+            />
+            <p className="text-xs text-slate-400">Use the email you registered with, not your Employee ID.</p>
+          </div>
+          <Button
+            type="submit"
+            disabled={forgotLoading}
+            className="w-full bg-gradient-to-r from-orange-500 to-rose-500 text-white border-0"
+          >
+            {forgotLoading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Sending…</> : "Send reset email"}
+          </Button>
+          <button
+            type="button"
+            onClick={() => setForgotMode(false)}
+            className="w-full text-slate-400 hover:text-white text-sm"
+          >
+            ← Back to login
+          </button>
+        </form>
+      ) : (
       <div className="space-y-5">
         {/* ── Quick Login section (only shown when saved employees exist) ── */}
         {savedEmployees.length > 0 && (
@@ -252,7 +305,16 @@ export default function EmployeeLoginPage() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-white">Password</Label>
+            <div className="flex justify-between items-center">
+              <Label htmlFor="password" className="text-white">Password</Label>
+              <button
+                type="button"
+                onClick={() => setForgotMode(true)}
+                className="text-xs text-slate-400 hover:text-orange-400 transition-colors"
+              >
+                Forgot password?
+              </button>
+            </div>
             <div className="relative">
               <Input
                 id="password"
@@ -304,6 +366,7 @@ export default function EmployeeLoginPage() {
           </div>
         </form>
       </div>
+      )}
     </AuthCard>
   );
 }

@@ -21,7 +21,27 @@ export default function BusinessLoginPage() {
   const [showPw, setShowPw] = useState(false);
   const [remember, setRemember] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [forgotMode, setForgotMode] = useState(false);
+  const [forgotLoading, setForgotLoading] = useState(false);
   const { siteKey, loading: turnstileLoading, loadError, turnstileRequired, widgetRef, getToken, onVerify, onExpire, onError, resetToken } = useTurnstile();
+
+  async function handleForgotPassword(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your business email.");
+      return;
+    }
+    setForgotLoading(true);
+    try {
+      const data = await businessApi.forgotPassword(email);
+      toast.success(data.message || "If an account exists, a reset email has been sent.");
+      setForgotMode(false);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to send reset email.");
+    } finally {
+      setForgotLoading(false);
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -56,11 +76,42 @@ export default function BusinessLoginPage() {
 
   return (
     <AuthCard
-      title="Business Login"
-      description="Sign in to your CN business dashboard"
+      title={forgotMode ? "Reset Password" : "Business Login"}
+      description={forgotMode ? "Enter your business email to receive a reset link" : "Sign in to your CN business dashboard"}
       gradient="from-blue-500 to-violet-600"
-      backHref="/"
+      backHref="/portal"
+      backLabel="← Back to portal"
     >
+      {forgotMode ? (
+        <form onSubmit={handleForgotPassword} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="email-forgot" className="text-white">Business email</Label>
+            <Input
+              id="email-forgot"
+              type="email"
+              placeholder="business@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:border-blue-400"
+              required
+            />
+          </div>
+          <Button
+            type="submit"
+            disabled={forgotLoading}
+            className="w-full bg-gradient-to-r from-blue-500 to-violet-600 text-white border-0"
+          >
+            {forgotLoading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Sending…</> : "Send reset email"}
+          </Button>
+          <button
+            type="button"
+            onClick={() => setForgotMode(false)}
+            className="w-full text-slate-400 hover:text-white text-sm"
+          >
+            ← Back to login
+          </button>
+        </form>
+      ) : (
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="email" className="text-white">Business Email</Label>
@@ -76,7 +127,16 @@ export default function BusinessLoginPage() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="password" className="text-white">Password</Label>
+          <div className="flex justify-between items-center">
+            <Label htmlFor="password" className="text-white">Password</Label>
+            <button
+              type="button"
+              onClick={() => setForgotMode(true)}
+              className="text-xs text-slate-400 hover:text-blue-400 transition-colors"
+            >
+              Forgot password?
+            </button>
+          </div>
           <div className="relative">
             <Input
               id="password"
@@ -135,6 +195,7 @@ export default function BusinessLoginPage() {
           </p>
         </div>
       </form>
+      )}
     </AuthCard>
   );
 }
