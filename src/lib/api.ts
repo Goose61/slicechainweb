@@ -585,6 +585,7 @@ export interface StaticStablecoinQr {
   paymentUrl: string;
   qrDataUrl: string;
   settlementTime?: string | null;
+  scanHint?: string;
   offlineBackup: boolean;
   routesThroughSlicePay: boolean;
 }
