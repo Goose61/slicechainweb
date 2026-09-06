@@ -588,7 +588,6 @@ export interface StaticStablecoinQr {
   scanHint?: string;
   offlineBackup: boolean;
   routesThroughSlicePay: boolean;
-  scanHint?: string;
   scanWith?: string;
   merchantOnlineRequired?: boolean;
   customerOnlineRequired?: boolean;
