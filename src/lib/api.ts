@@ -18,13 +18,11 @@ export function getApiBase(): string {
     return "http://localhost:7000/api";
   }
 
-  // Marketing site (GitHub Pages + Cloudflare worker): same-origin /api is proxied at the edge.
-  if (hostname === "slicechain.io" || hostname === "www.slicechain.io") {
-    return "/api";
-  }
-
-  // Other SliceChain hosts call the API subdomain directly when tunnel routing works.
+  // Marketing site is static (GitHub Pages). POST to same-origin /api returns 405 from Pages.
+  // Call the API subdomain directly — backend CORS allows slicechain.io origins.
   if (
+    hostname === "slicechain.io" ||
+    hostname === "www.slicechain.io" ||
     hostname === "app.slicechain.io" ||
     hostname === "qr.slicechain.io" ||
     hostname.endsWith(".slicechain.io")
