@@ -22,10 +22,12 @@ const PUBLIC_ALLOW = [
   "/contact/",
   "/terms/",
   "/privacy/",
+  "/security/",
   "/llms.txt",
   "/auth.md",
   "/index.md",
   "/website-pay-widget.md",
+  "/security.md",
   "/.well-known/",
 ];
 

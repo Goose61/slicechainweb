@@ -16,6 +16,10 @@ export const employeeLoginPath = "/employee/login/";
 /** Static legal pages - trailing slash avoids GitHub Pages 301 redirects. */
 export const termsPath = "/terms/";
 export const privacyPath = "/privacy/";
+/** Gateway security recheck — full page plus downloadable PDF. */
+export const securityReportPath = "/security/";
+export const securityReportPdfPath = "/slicepay-gateway-security-recheck.pdf";
+export const securityReportMarkdownPath = "/security.md";
 /** Website Pay Widget integration guide */
 export const payWidgetGuidePath = "/website-pay-widget/";
 export const contactPath = "/contact/";
@@ -168,10 +172,28 @@ export const navLinks = [
   { href: "#marketing", label: "How It Works", num: "05" },
   { href: "#businesses", label: "For Businesses", num: "06" },
   { href: payWidgetSectionAnchor, label: "Pay Widget", num: "07" },
-  { href: "#gallery", label: "Gallery", num: "08" },
-  { href: "#plan", label: "Roadmap", num: "09" },
-  { href: "#community", label: "Get Started", num: "10" },
+  { href: "#security", label: "Security", num: "08" },
+  { href: "#gallery", label: "Gallery", num: "09" },
+  { href: "#plan", label: "Roadmap", num: "10" },
+  { href: "#community", label: "Get Started", num: "11" },
 ];
+
+export const securitySection = {
+  subtitle: "Security",
+  titleLead: "Safe to",
+  titleEm: "check out",
+  lede:
+    "SlicePay checkout is safe to use. The order amount is locked when the invoice is created, so a payment link cannot change what the shopper pays. Merchant API keys stay on your server when you create invoices there.",
+  points: [
+    "Hosted checkout accepts an invoice id only. Amounts in the URL are ignored.",
+    "Normal orders require your merchant API key. Fulfillment can succeed only once.",
+    "Payment webhooks are signed so your store can verify they came from SlicePay.",
+  ],
+  reportHref: "/security/",
+  reportLabel: "Read the security report",
+  downloadHref: "/slicepay-gateway-security-recheck.pdf",
+  downloadLabel: "Download PDF",
+};
 
 export const heroSlides = [
   {

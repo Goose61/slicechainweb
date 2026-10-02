@@ -73,6 +73,8 @@ export function LandingFooter() {
             <p className="foot-col-title">Developers</p>
             <a href={payWidgetGuidePath}>Website Pay Widget guide</a>
             <a href="#pay-widget">Pay Widget overview</a>
+            <a href="#security">Security</a>
+            <a href="/security/">Security report</a>
             <a href="https://pay.slicechain.io/test-embed.html" target="_blank" rel="noopener noreferrer">
               Embed test page
             </a>

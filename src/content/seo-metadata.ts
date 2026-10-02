@@ -219,6 +219,23 @@ export const pageSeo = {
         "The Hidden Receipt — making the environmental footprint of commerce visible, measurable and improvable.",
     },
   } satisfies Metadata,
+  security: {
+    ...buildPageSeo(
+      "Security report",
+      "SlicePay gateway security recheck: locked invoice amounts, signed webhooks, and the residual issues that remain.",
+    ),
+    alternates: {
+      canonical: "/security/",
+    },
+    openGraph: {
+      title: "Security report | SlicePay",
+      description:
+        "Source review of SlicePay checkout and gateway invoice controls, including what holds and what is still open.",
+      url: `${SITE_ORIGIN}/security/`,
+      siteName: "Slice Chain · SlicePay",
+      type: "article",
+    },
+  } satisfies Metadata,
   caseStudies: {
     ...buildPageSeo(
       "Case Studies",

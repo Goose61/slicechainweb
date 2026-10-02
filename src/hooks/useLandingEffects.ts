@@ -7,14 +7,31 @@ function getStickyHeaderOffset() {
   return (header?.offsetHeight ?? 0) + 12;
 }
 
-function scrollToSection(target: Element) {
-  if (target instanceof HTMLElement) {
-    target.style.contentVisibility = "visible";
-  }
+function revealLandingLayout(root: Element) {
+  root.querySelectorAll("section, .crew, .foot").forEach((el) => {
+    if (el instanceof HTMLElement) {
+      el.style.contentVisibility = "visible";
+    }
+  });
+}
+
+function scrollToSection(root: Element, target: HTMLElement) {
+  revealLandingLayout(root);
+  // Read layout after skipped sections have a real height.
+  void target.offsetHeight;
 
   const offset = getStickyHeaderOffset();
   const top = target.getBoundingClientRect().top + window.scrollY - offset;
-  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+  window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+}
+
+function sectionIdFromHref(href: string) {
+  if (!href.startsWith("#") || href === "#") return "";
+  try {
+    return decodeURIComponent(href.slice(1));
+  } catch {
+    return "";
+  }
 }
 
 export function useLandingEffects() {
@@ -76,25 +93,27 @@ export function useLandingEffects() {
     headlineSlot?.addEventListener("touchend", onTouchEnd as EventListener, { passive: true });
 
     const onAnchorClick = (e: Event) => {
-      const a = e.currentTarget as HTMLAnchorElement;
-      const href = a.getAttribute("href");
-      if (!href || href === "#") return;
-      const target = root.querySelector(href);
-      if (!target) return;
+      const targetEl = e.target;
+      if (!(targetEl instanceof Element)) return;
+      const a = targetEl.closest('a[href^="#"]');
+      if (!a || !root.contains(a)) return;
+      const id = sectionIdFromHref(a.getAttribute("href") || "");
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (!(target instanceof HTMLElement) || !root.contains(target)) return;
       e.preventDefault();
-      scrollToSection(target);
-      window.history.replaceState(null, "", href);
+      scrollToSection(root, target);
+      window.history.replaceState(null, "", `#${id}`);
     };
 
-    const anchorLinks = root.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach((a) => a.addEventListener("click", onAnchorClick));
+    root.addEventListener("click", onAnchorClick);
 
     const scrollToHash = () => {
-      const hash = window.location.hash;
-      if (!hash || hash === "#") return;
-      const target = root.querySelector(hash);
-      if (target) {
-        requestAnimationFrame(() => scrollToSection(target));
+      const id = sectionIdFromHref(window.location.hash);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (target instanceof HTMLElement && root.contains(target)) {
+        requestAnimationFrame(() => scrollToSection(root, target));
       }
     };
     scrollToHash();
@@ -106,7 +125,7 @@ export function useLandingEffects() {
       clearInterval(cycle);
       headlineSlot?.removeEventListener("touchstart", onTouchStart as EventListener);
       headlineSlot?.removeEventListener("touchend", onTouchEnd as EventListener);
-      anchorLinks.forEach((a) => a.removeEventListener("click", onAnchorClick));
+      root.removeEventListener("click", onAnchorClick);
       window.removeEventListener("hashchange", scrollToHash);
     };
   }, []);

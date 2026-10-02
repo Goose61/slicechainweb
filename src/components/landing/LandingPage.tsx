@@ -11,6 +11,7 @@ import { LandingHow } from "./sections/LandingHow";
 import { LandingMultiChain } from "./sections/LandingMultiChain";
 import { LandingBusinesses } from "./sections/LandingBusinesses";
 import { LandingPayWidget } from "./sections/LandingPayWidget";
+import { LandingSecurity } from "./sections/LandingSecurity";
 import { LandingRoadmap } from "./sections/LandingRoadmap";
 import { LandingCommunity } from "./sections/LandingCommunity";
 import { LandingFooter } from "./sections/LandingFooter";
@@ -30,6 +31,7 @@ export function LandingPage() {
       <LandingMultiChain />
       <LandingBusinesses />
       <LandingPayWidget />
+      <LandingSecurity />
       <LandingGallery />
       <LandingRoadmap />
       <LandingCommunity />

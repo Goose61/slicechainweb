@@ -294,14 +294,27 @@ body.landing-active{background:var(--bg)!important;color:var(--bone)!important;}
   scroll-margin-top:clamp(120px,12vh,168px);
 }
 
-/* Defer rendering of below-the-fold sections on mobile */
-@media(max-width:768px){
-  .landing-page .section:not(.hero),
-  .landing-page .crew,
-  .landing-page .foot{
-    content-visibility:auto;
-    contain-intrinsic-size:auto 720px;
-  }
+.landing-page .security-points{
+  margin:18px 0 22px;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.landing-page .security-points li{
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.5;
+  color:var(--bone);
+  padding-left:14px;
+  border-left:2px solid var(--gold);
+}
+.landing-page .security-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
 }
 
 /* Pizza legacy widgets scoped to landing */

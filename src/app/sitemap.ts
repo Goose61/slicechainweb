@@ -10,6 +10,7 @@ const publicPaths = [
   "contact/",
   "terms/",
   "privacy/",
+  "security/",
   "portal/",
 ];
 

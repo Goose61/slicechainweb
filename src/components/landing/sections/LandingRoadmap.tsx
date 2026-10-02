@@ -7,7 +7,7 @@ export function LandingRoadmap() {
         <div className="section-head">
           <div>
             <div className="section-num" data-reveal>
-              09 · The Plan
+              10 · The Plan
             </div>
             <h2 className="title" data-reveal style={{ ["--d" as string]: "100ms" }}>
               The <span className="it">Platform</span>
