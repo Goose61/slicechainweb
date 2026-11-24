@@ -5,6 +5,8 @@ import { foundingMerchant } from "@/content/landing-content";
 import { foundingMerchantApi } from "@/lib/api";
 import { trackEvent } from "@/lib/gtag";
 import { TermsConsentCheckbox } from "@/components/legal/TermsConsentCheckbox";
+import { TurnstileWidget } from "@/components/turnstile-widget";
+import { useTurnstile } from "@/hooks/useTurnstile";
 
 interface Props {
   open: boolean;
@@ -43,6 +45,16 @@ export function FoundingMerchantSignupModal({
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const {
+    siteKey,
+    turnstileRequired,
+    widgetRef,
+    getToken,
+    onVerify,
+    onExpire,
+    onError,
+    resetToken,
+  } = useTurnstile();
 
   useEffect(() => {
     if (!open) return;
@@ -98,6 +110,12 @@ export function FoundingMerchantSignupModal({
       return;
     }
 
+    const turnstileToken = getToken();
+    if (turnstileRequired && !turnstileToken) {
+      setError("Complete the security check before submitting.");
+      return;
+    }
+
     setLoading(true);
     try {
       await foundingMerchantApi.signup({
@@ -113,6 +131,7 @@ export function FoundingMerchantSignupModal({
         monthlyVolume: defaultVolume,
         traditionalFeeRate: defaultTraditionalFee,
         marketingOptIn,
+        turnstileToken: turnstileToken || undefined,
       });
       trackEvent("founding_form_complete", {
         business_type: businessType,
@@ -121,6 +140,7 @@ export function FoundingMerchantSignupModal({
       setSubmitted(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Submission failed. Please try again.");
+      resetToken();
     } finally {
       setLoading(false);
     }
@@ -278,6 +298,16 @@ export function FoundingMerchantSignupModal({
                 />
                 <span>{foundingMerchant.updatesOptIn}</span>
               </label>
+
+              {siteKey ? (
+                <TurnstileWidget
+                  ref={widgetRef}
+                  siteKey={siteKey}
+                  onVerify={onVerify}
+                  onExpire={onExpire}
+                  onError={onError}
+                />
+              ) : null}
 
               {error && <p className="fm-form-error" role="alert">{error}</p>}
 

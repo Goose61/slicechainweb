@@ -43,6 +43,7 @@
     "slicechainweb",
     "crust",
     "programs",
-    "scripts/node_modules"
+    "scripts/node_modules",
+    "**/frontend-next/.next/**"
   ]
 }

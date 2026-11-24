@@ -1160,6 +1160,7 @@ export interface FoundingMerchantSignupData {
   monthlyVolume?: number;
   traditionalFeeRate?: number;
   marketingOptIn?: boolean;
+  turnstileToken?: string;
 }
 
 export interface FoundingMerchantOnboardingPrefill {
