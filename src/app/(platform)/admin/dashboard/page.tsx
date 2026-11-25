@@ -44,6 +44,7 @@ import {
 import { ClientErrorLogger } from "@/components/client-error-logger";
 import { NewsletterTab } from "@/components/admin/NewsletterTab";
 import { FoundingMerchantTab } from "@/components/admin/FoundingMerchantTab";
+import { ComplianceTab } from "@/components/admin/ComplianceTab";
 import { EmailContactsTab } from "@/components/admin/EmailContactsTab";
 
 function normalizeStatus(status: string) {
@@ -462,6 +463,7 @@ export default function AdminDashboard() {
             <TabsTrigger value="email-contacts" className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5" />Email Contacts</TabsTrigger>
             <TabsTrigger value="newsletter" className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" />Newsletter</TabsTrigger>
             <TabsTrigger value="founding-merchants" className="flex items-center gap-1.5"><Store className="w-3.5 h-3.5" />Founding Merchants</TabsTrigger>
+            <TabsTrigger value="compliance" className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5" />Compliance</TabsTrigger>
           </TabsList>
 
           {/* Unreconciled deposits */}
@@ -1007,6 +1009,9 @@ export default function AdminDashboard() {
               </TabsContent>
               <TabsContent value="founding-merchants">
                 <FoundingMerchantTab token={token} />
+              </TabsContent>
+              <TabsContent value="compliance">
+                <ComplianceTab />
               </TabsContent>
             </>
           ) : null}

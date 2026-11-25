@@ -34,6 +34,12 @@ By registering for or using SlicePay, you acknowledge this Privacy Policy. If yo
 **Verification and compliance information**
 - Business verification documents you upload (for example, business license or tax documentation)
 - Identity verification data when required for regulated features such as investment token conversion, which may be collected through third-party KYC providers
+- **Travel Rule (crypto asset transfers):** Where enabled by law (for example South Africa FIC Directive 9), we collect originator details for paying customers, including full legal name, wallet or distributed-ledger address, South African identity number or passport and date of birth (as applicable), residential address or country of birth, and a unique transaction reference. We store this data securely, retain it according to our compliance programme, and may transmit required originator and beneficiary information to recipient crypto asset service providers and regulators as required by law.
+
+**Travel Rule and POPIA (South Africa)**
+- When you pay a merchant where Travel Rule applies, you must not pay anonymously. We process your personal information under legal obligation (FIC Act) and, where applicable, contract and consent shown at checkout.
+- We may share Travel Rule data with recipient CASPs, the Financial Intelligence Centre, and professional advisors under confidentiality obligations. We do not sell this information.
+- You may exercise POPIA rights (access, correction, deletion where lawful) by contacting slicepay@slicechain.io.
 
 **Technical and security information**
 - IP address, browser type, device information, and user agent string
